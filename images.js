@@ -1,0 +1,23 @@
+export const images = {
+  appleSlice: "https://www.inspiredtaste.net/wp-content/uploads/2019/10/Homemade-Apple-Pie-Recipe-9-1200.jpg",
+  cherrySlice: "https://tse2.mm.bing.net/th?id=OIP.KF9Nf268-r2auTRM5-91OwHaFp&pid=Api&P=0",
+  blueberrySlice: "https://tse3.mm.bing.net/th?id=OIP.ZUb2vGrbTyurAuXCG7b62gHaE8&pid=Api&P=0",
+  pumpkinSlice: "https://tse2.mm.bing.net/th?id=OIP.nscRAx26o_cvn4cHvqsK-gHaE7&pid=Api&P=0",
+  pecanSlice: "https://images-gmi-pmc.edge-generalmills.com/43d60fb7-4b62-4136-abe3-178663aac1a3.jpg",
+  chocolateCreamSlice: "https://tse4.mm.bing.net/th?id=OIP.pIy-9jlq_BoDMehMdTLF-wHaFz&pid=Api&P=0",
+  keyLimeSlice: "https://tse1.mm.bing.net/th?id=OIP.MJr91z4Vzmw00BWvlIW2OgHaE8&pid=Api&P=0",
+  bananaCreamSlice: "https://tse2.mm.bing.net/th?id=OIP.rIjZvfC-58BoAmpmFaVz_AHaFW&pid=Api&P=0",
+  coconutCreamSlice: "https://tse2.mm.bing.net/th?id=OIP.DMxkzAVQJqZGGHR9Cae-CQHaEK&pid=Api&P=0",
+  peachSlice: "https://www.thecreativebite.com/wp-content/uploads/2019/08/Homemade-Peach-Pie-Photos-copy.jpg",
+
+  appleWhole: "https://easykitchen.com/wp-content/uploads/2013/07/usapple_all-american-apple-pie.jpg",
+  cherryWhole: "https://tse1.mm.bing.net/th?id=OIP.IAPHI7fTJc5z6upfspNhvAHaFn&pid=Api&P=0",
+  blueberryWhole: "https://tse3.mm.bing.net/th?id=OIP.A3bg9iQybkquvECSA5wiMAHaEK&pid=Api&P=0",
+  pumpkinWhole: "https://tse2.mm.bing.net/th?id=OIP.NwnHA7rA_2JTrtJ0wga2DwHaE8&pid=Api&P=0",
+  pecanWhole: "https://tse1.mm.bing.net/th?id=OIP.lJm1-Kg_d1yyL9Yct1DFMQHaFj&pid=Api&P=0",
+  chocolateCreamWhole: "https://tse1.mm.bing.net/th?id=OIP.jn4CnK3ZLk977z4_dICvjQHaFL&pid=Api&P=0",
+  keyLimeWhole: "https://tse4.mm.bing.net/th?id=OIP.jq2GdjhC9d1TnC4Vp0qyXAHaE8&pid=Api&P=0",
+  bananaCreamWhole: "https://tse3.mm.bing.net/th?id=OIP.2KvCfxxupQAuzJ4a0GfbwgHaE8&pid=Api&P=0",
+  coconutCreamWhole: "https://tse3.mm.bing.net/th?id=OIP.9K9yvuUGyCZ1l_zrbAciGwHaE8&pid=Api&P=0",
+  peachWhole: "https://i.pinimg.com/736x/01/82/ed/0182edd0e04c68c825822fe4581d294a.jpg",
+};

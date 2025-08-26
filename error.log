@@ -1,0 +1,611 @@
+2025-08-24T22:14:08.246Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:20:19.738Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:20:54.410Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:24:06.025Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:28:49.600Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:32:30.475Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T22:34:53.336Z [ERROR]: error: relation "tokenblacklist" does not exist
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:22:22)
+2025-08-24T23:03:40.107Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-24T23:22:29.790Z [ERROR]: Error: data and salt arguments required
+    at Object.hash (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\bcrypt.js:133:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\promises.js:17:12)
+    at Object.hash (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\bcrypt.js:129:25)
+    at C:\Users\Goku\Yummy-Pies\routes\users.js:46:41
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+2025-08-24T23:24:16.499Z [ERROR]: Error: No token provided
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:15:19)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:664:3)
+2025-08-24T23:25:58.885Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-24T23:30:08.006Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-24T23:30:38.236Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-24T23:48:33.502Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-24T23:49:15.593Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T00:24:09.189Z [ERROR]: TokenExpiredError: jwt expired
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T03:24:10.338Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T04:52:51.953Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T04:53:04.167Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T05:15:34.526Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T05:36:31.118Z [ERROR]: error: invalid input syntax for type integer: "abc"
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\Goku\Yummy-Pies\routes\products.js:42:22
+2025-08-25T05:48:36.801Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T05:49:44.493Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T05:50:12.201Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\Goku\Yummy-Pies\routes\products.js:76:22
+2025-08-25T05:51:33.915Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T19:22:16.520Z [ERROR]: error: invalid input syntax for type integer: "abc"
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\Goku\Yummy-Pies\routes\products.js:42:22
+2025-08-25T19:35:29.713Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T19:37:24.489Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T19:38:48.377Z [ERROR]: JsonWebTokenError: invalid signature
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-08-25T19:39:06.485Z [ERROR]: JsonWebTokenError: invalid signature
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-08-25T19:53:13.673Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:01:30.278Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:03:15.248Z [ERROR]: TypeError: Cannot destructure property 'name' of 'req.body' as it is undefined.
+    at C:\Users\Goku\Yummy-Pies\routes\products.js:70:11
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:19:5)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-08-25T20:03:41.749Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\Goku\Yummy-Pies\routes\products.js:72:22
+2025-08-25T20:17:51.474Z [ERROR]: Error: data and salt arguments required
+    at Object.hash (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\bcrypt.js:133:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\promises.js:17:12)
+    at Object.hash (C:\Users\Goku\Yummy-Pies\node_modules\bcrypt\bcrypt.js:129:25)
+    at C:\Users\Goku\Yummy-Pies\routes\users.js:46:41
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+2025-08-25T20:21:35.428Z [ERROR]: JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:30:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T20:21:57.688Z [ERROR]: Error: No token provided
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:15:19)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:664:3)
+2025-08-25T20:35:08.662Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T20:38:17.357Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:17.542Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:17.546Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:38:17.729Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:17.735Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:38:18.601Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:18.766Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:52.687Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T20:38:52.986Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:53.166Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:53.170Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:38:53.334Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:53.338Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:38:54.207Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:38:54.373Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:41:06.056Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T20:41:06.390Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:41:06.576Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:41:06.582Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:41:06.745Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:41:06.751Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T20:41:07.643Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:41:07.811Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T20:50:47.977Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T20:56:33.904Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:12:43.726Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:12:44.015Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:12:44.201Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:12:44.205Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T21:12:44.371Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:12:44.376Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:600:14)
+    at param (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:610:14)
+2025-08-25T21:12:45.263Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:12:45.436Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:18:47.525Z [ERROR]: JsonWebTokenError: jwt malformed
+    at Object.module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticateAdmin (C:\Users\Goku\Yummy-Pies\routes\products.js:13:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-08-25T21:18:47.550Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at C:\Users\Goku\Yummy-Pies\routes\products.js:72:22
+2025-08-25T21:18:47.677Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:25:36.392Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at C:\Users\Goku\Yummy-Pies\routes\products.js:76:22
+2025-08-25T21:25:36.515Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:29:23.964Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:31:32.575Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at C:\Users\Goku\Yummy-Pies\routes\products.js:76:22
+2025-08-25T21:31:32.733Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-25T21:32:58.059Z [ERROR]: error: null value in column "name" of relation "products" violates not-null constraint
+    at C:\Users\Goku\Yummy-Pies\node_modules\pg-pool\index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at C:\Users\Goku\Yummy-Pies\routes\products.js:76:22
+2025-08-25T21:32:58.306Z [ERROR]: Error: Token has been invalidated
+    at authenticateToken (C:\Users\Goku\Yummy-Pies\routes\users.js:24:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)

@@ -1,0 +1,41 @@
+{
+  "name": "yummy-pies",
+  "version": "1.0.0",
+  "description": "Inserts initial data into Yummy Pies PostgreSQL database",
+  "main": "db/seed.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "vitest",
+    "seed": "node db/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mario-Barrera/Yummy-Pies.git"
+  },
+  "keywords": [
+    "postgresql",
+    "seed",
+    "ecommerce",
+    "database",
+    "yummy-pies"
+  ],
+  "author": "Mario B.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mario-Barrera/Yummy-Pies/issues"
+  },
+  "homepage": "https://github.com/Mario-Barrera/Yummy-Pies#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}
