@@ -1,126 +1,136 @@
 const express = require('express');
-const pool = require('../db/client');
-const authenticateToken = require('../middleware/authenticateToken');
-
 const router = express.Router();
+const client = require('../db/client');
+const { authenticateToken } = require('../middleware/auth');
 
-// POST /review-comments - create a new comment on a review
-router.post('/', authenticateToken, async (req, res) => {
-  const { review_id, comment } = req.body;
-  const user_id = req.user.user_id;
-
-  if (!review_id || !comment) {
-    return res.status(400).json({ error: 'Missing required fields: review_id and comment' });
-  }
-
-  try {
-    const { rows } = await pool.query(
-      `INSERT INTO Review_Comments (review_id, user_id, comment)
-       VALUES ($1, $2, $3)
-       RETURNING *`,
-      [review_id, user_id, comment]
-    );
-
-    res.status(201).json(rows[0]);
-  } catch (err) {
-    console.error('Error creating comment:', err);
-    res.status(500).json({ error: 'Failed to create comment' });
-  }
-});
-
-// GET /review-comments/review/:review_id - get all comments for a review
-router.get('/review/:review_id', async (req, res) => {
+// USER ROUTES
+// GET all comments for a specific review (user)
+router.get('/review/:review_id', authenticateToken, async (req, res) => {
   const { review_id } = req.params;
-
   try {
-    const { rows } = await pool.query(
-      `SELECT rc.*, u.name AS username
-       FROM Review_Comments rc
-       JOIN Users u ON rc.user_id = u.user_id
+    const result = await client.query(
+      `SELECT rc.comment_id, rc.comment, rc.created_at, u.user_id, u.name AS user_name
+       FROM review_comments rc
+       JOIN users u ON rc.user_id = u.user_id
        WHERE rc.review_id = $1
        ORDER BY rc.created_at ASC`,
       [review_id]
     );
-
-    res.json(rows);
+    res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching comments:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to fetch comments' });
   }
 });
 
-// GET /review-comments/:id - get a single comment by id
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
+// POST a new comment for a review (user)
+router.post('/review/:review_id', authenticateToken, async (req, res) => {
+  const { review_id } = req.params;
+  const user_id = req.user.user_id;
+  const { comment } = req.body;
+
+  if (!comment) return res.status(400).json({ error: 'Comment cannot be empty' });
 
   try {
-    const { rows } = await pool.query(
-      `SELECT rc.*, u.name AS username
-       FROM Review_Comments rc
-       JOIN Users u ON rc.user_id = u.user_id
-       WHERE rc.comment_id = $1`,
-      [id]
+    const result = await client.query(
+      `INSERT INTO review_comments (review_id, user_id, comment)
+       VALUES ($1, $2, $3)
+       RETURNING *`,
+      [review_id, user_id, comment]
     );
-
-    if (rows.length === 0) return res.status(404).json({ error: 'Comment not found' });
-
-    res.json(rows[0]);
+    res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error('Error fetching comment:', err);
-    res.status(500).json({ error: 'Failed to fetch comment' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create comment' });
   }
 });
 
-// PUT /review-comments/:id - update a comment (admin only)
-router.put('/:id', authenticateToken, async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-
-  const { id } = req.params;
+// PUT update a comment (user can only update their own)
+router.put('/:comment_id', authenticateToken, async (req, res) => {
+  const { comment_id } = req.params;
+  const user_id = req.user.user_id;
   const { comment } = req.body;
 
-  if (!comment) {
-    return res.status(400).json({ error: 'Comment text is required' });
-  }
+  if (!comment) return res.status(400).json({ error: 'Comment cannot be empty' });
 
   try {
-    const { rows } = await pool.query(
-      `UPDATE Review_Comments
-       SET comment = $1
-       WHERE comment_id = $2
-       RETURNING *`,
-      [comment, id]
+    const check = await client.query(
+      `SELECT user_id FROM review_comments WHERE comment_id = $1`,
+      [comment_id]
     );
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Comment not found' });
+    if (check.rows[0].user_id !== user_id && req.user.role !== 'admin')
+      return res.status(403).json({ error: 'Access denied' });
 
-    if (rows.length === 0) return res.status(404).json({ error: 'Comment not found' });
-
-    res.json(rows[0]);
+    const result = await client.query(
+      `UPDATE review_comments SET comment = $1 WHERE comment_id = $2 RETURNING *`,
+      [comment, comment_id]
+    );
+    res.json(result.rows[0]);
   } catch (err) {
-    console.error('Error updating comment:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to update comment' });
   }
 });
 
-// DELETE /review-comments/:id - delete a comment (admin only)
-router.delete('/:id', authenticateToken, async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-
-  const { id } = req.params;
+// DELETE a comment (user can only delete their own)
+router.delete('/:comment_id', authenticateToken, async (req, res) => {
+  const { comment_id } = req.params;
+  const user_id = req.user.user_id;
 
   try {
-    const { rowCount } = await pool.query(
-      `DELETE FROM Review_Comments WHERE comment_id = $1`,
-      [id]
+    const check = await client.query(
+      `SELECT user_id FROM review_comments WHERE comment_id = $1`,
+      [comment_id]
     );
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Comment not found' });
+    if (check.rows[0].user_id !== user_id && req.user.role !== 'admin')
+      return res.status(403).json({ error: 'Access denied' });
 
-    if (rowCount === 0) return res.status(404).json({ error: 'Comment not found' });
-
+    await client.query(`DELETE FROM review_comments WHERE comment_id = $1`, [comment_id]);
     res.json({ message: 'Comment deleted successfully' });
   } catch (err) {
-    console.error('Error deleting comment:', err);
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete comment' });
+  }
+});
+
+// ADMIN ROUTES
+// GET all review comments (admin only)
+router.get('/admin', authenticateToken, async (req, res) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Access denied' });
+
+  try {
+    const result = await client.query(
+      `SELECT rc.comment_id, rc.comment, rc.created_at, rc.review_id, u.user_id, u.name AS user_name
+       FROM review_comments rc
+       JOIN users u ON rc.user_id = u.user_id
+       ORDER BY rc.created_at ASC`
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch comments' });
+  }
+});
+
+// DELETE any comment (admin only)
+router.delete('/admin/:comment_id', authenticateToken, async (req, res) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Access denied' });
+
+  const { comment_id } = req.params;
+
+  try {
+    const check = await client.query(
+      `SELECT * FROM review_comments WHERE comment_id = $1`,
+      [comment_id]
+    );
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Comment not found' });
+
+    await client.query(`DELETE FROM review_comments WHERE comment_id = $1`, [comment_id]);
+    res.json({ message: 'Comment deleted successfully by admin' });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to delete comment' });
   }
 });

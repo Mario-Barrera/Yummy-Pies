@@ -12,6 +12,8 @@ const ordersRoutes = require('./routes/orders');     // uncomment when ready
 const orderItemsRouter = require('./routes/order-Items');
 const cartItemsRouter = require('./routes/cart-Items');
 const paymentsRouter = require('./routes/payments');
+const reviewsRouter = require('./routes/reviews');
+const reviewCommentsRouter = require('./routes/reviewComments');
 
 
 // Mount routes
@@ -21,6 +23,8 @@ app.use('/orders', ordersRoutes);
 app.use('/order-items', orderItemsRouter);
 app.use('/cart-items', cartItemsRouter);
 app.use('/payments', paymentsRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/review-comments', reviewCommentsRouter);
 
 
 // Health check route
