@@ -47,7 +47,7 @@ router.post('/', authenticateUser, async (req, res) => {
 
     const currentPrice = productRows[0].price;
 
-    // 2. Insert or update the cart item with price_at_purchase
+    // Insert or update the cart item with price_at_purchase
     await client.query(
       `INSERT INTO Cart_Items (user_id, product_id, quantity, price_at_purchase)
        VALUES ($1, $2, $3, $4)
@@ -58,7 +58,7 @@ router.post('/', authenticateUser, async (req, res) => {
       [req.user.user_id, product_id, quantity, currentPrice]
     );
 
-    // 3. Fetch the updated full cart with product info
+    // Fetch the updated full cart with product info
     const { rows } = await client.query(
       `SELECT ci.cart_item_id, ci.user_id, ci.product_id, ci.quantity, ci.added_at,
           p.name, ci.price_at_purchase
@@ -86,7 +86,7 @@ router.get('/', authenticateUser, async (req, res) => {
   try {
     const { rows } = await pool.query(
       `SELECT ci.cart_item_id, ci.user_id, ci.product_id, ci.quantity, ci.added_at,
-              p.name, p.price
+              p.name, ci.price_at_purchase
        FROM Cart_Items ci
        JOIN Products p ON ci.product_id = p.product_id
        WHERE ci.user_id = $1`,

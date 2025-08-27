@@ -291,7 +291,7 @@ async function seed() {
     }
 
     await client.query('COMMIT');
-    console.log('Seed successful!');
+    console.log('🌱 Seed successful!');
 
   } catch (error) {
     await client.query('ROLLBACK');
