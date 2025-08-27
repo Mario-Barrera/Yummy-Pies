@@ -1,101 +1,158 @@
 const express = require('express');
-const pool = require('../db/client');
-const jwt = require('jsonwebtoken');
-
 const router = express.Router();
+const client = require('../db/client');
+const { requireAuth, requireAdmin } = require('../middleware/auth'); // use requireAuth for users
 
-
-// Authenticate any logged-in user
-const authenticateUser = (req, res, next) => {
+// User Routes
+// GET all cart items for the logged-in user
+router.get('/', requireAuth, async (req, res) => {
   try {
-    const token = req.headers['authorization']?.split(' ')[1];
-    if (!token) return res.status(401).json({ error: 'No token provided' });
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-    next(err);
-  }
-};
-
-
-router.post('/', authenticateUser, async (req, res) => {
-  const { product_id, quantity } = req.body;
-  
-  if (!product_id || !quantity || quantity <= 0) {
-  return res.status(400).json({ error: 'Missing or invalid product_id or quantity' });
-  }
-
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-
-    // 1. Fetch the current price of the product
-    const { rows: productRows } = await client.query(
-      `SELECT price FROM Products WHERE product_id = $1`,
-      [product_id]
-    );
-
-    if (productRows.length === 0) {
-      await client.query('ROLLBACK');
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    const currentPrice = productRows[0].price;
-
-    // Insert or update the cart item with price_at_purchase
-    await client.query(
-      `INSERT INTO Cart_Items (user_id, product_id, quantity, price_at_purchase)
-       VALUES ($1, $2, $3, $4)
-       ON CONFLICT (user_id, product_id)
-       DO UPDATE SET 
-         quantity = Cart_Items.quantity + EXCLUDED.quantity,
-         price_at_purchase = EXCLUDED.price_at_purchase`,
-      [req.user.user_id, product_id, quantity, currentPrice]
-    );
-
-    // Fetch the updated full cart with product info
     const { rows } = await client.query(
-      `SELECT ci.cart_item_id, ci.user_id, ci.product_id, ci.quantity, ci.added_at,
-          p.name, ci.price_at_purchase
-      FROM Cart_Items ci
-      JOIN Products p ON ci.product_id = p.product_id
-      WHERE ci.user_id = $1`,
-  [req.user.user_id]
-);
-
-
-    await client.query('COMMIT');
-    res.status(201).json(rows);
-  } catch (err) {
-    await client.query('ROLLBACK');
-    console.error(err);
-    res.status(500).json({ error: 'Failed to add to cart' });
-  } finally {
-    client.release();
-  }
-});
-
-
-// Get current user's cart
-router.get('/', authenticateUser, async (req, res) => {
-  try {
-    const { rows } = await pool.query(
-      `SELECT ci.cart_item_id, ci.user_id, ci.product_id, ci.quantity, ci.added_at,
-              p.name, ci.price_at_purchase
-       FROM Cart_Items ci
-       JOIN Products p ON ci.product_id = p.product_id
+      `SELECT ci.cart_item_id, ci.product_id, p.name, ci.quantity, p.price
+       FROM cart_items ci
+       JOIN products p ON ci.product_id = p.product_id
        WHERE ci.user_id = $1`,
       [req.user.user_id]
     );
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch cart' });
+    res.status(500).json({ error: 'Failed to fetch cart items' });
+  }
+});
+
+// POST add an item to cart
+router.post('/', requireAuth, async (req, res) => {
+  const { product_id, quantity } = req.body;
+
+  if (!Number.isInteger(quantity) || quantity <= 0) {
+    return res.status(400).json({ error: 'Quantity must be a positive integer' });
+  }
+
+  try {
+    const { rows } = await client.query(
+      `INSERT INTO cart_items (user_id, product_id, quantity)
+       VALUES ($1, $2, $3)
+       RETURNING *`,
+      [req.user.user_id, product_id, quantity]
+    );
+    res.status(201).json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to add item to cart' });
+  }
+});
+
+// PUT update quantity of a cart item
+router.put('/:cartItemId', requireAuth, async (req, res) => {
+  const { cartItemId } = req.params;
+  const { quantity } = req.body;
+
+  if (!Number.isInteger(quantity) || quantity <= 0) {
+    return res.status(400).json({ error: 'Quantity must be a positive integer' });
+  }
+
+  try {
+    const { rows } = await client.query(
+      `UPDATE cart_items
+       SET quantity=$1
+       WHERE cart_item_id=$2 AND user_id=$3
+       RETURNING *`,
+      [quantity, cartItemId, req.user.user_id]
+    );
+
+    if (!rows.length) return res.status(403).json({ error: 'Access denied or item not found' });
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update cart item' });
+  }
+});
+
+// DELETE a cart item
+router.delete('/:cartItemId', requireAuth, async (req, res) => {
+  const { cartItemId } = req.params;
+
+  try {
+    const { rows } = await client.query(
+      `DELETE FROM cart_items
+       WHERE cart_item_id=$1 AND user_id=$2
+       RETURNING *`,
+      [cartItemId, req.user.user_id]
+    );
+
+    if (!rows.length) return res.status(403).json({ error: 'Access denied or item not found' });
+
+    res.json({ message: 'Cart item removed successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete cart item' });
+  }
+});
+
+// Admin Routes
+// GET all cart items for all users
+router.get('/admin', requireAdmin, async (req, res) => {
+  try {
+    const { rows } = await client.query(
+      `SELECT ci.*, u.name AS user_name, u.email AS user_email, p.name AS product_name
+       FROM cart_items ci
+       JOIN users u ON ci.user_id = u.user_id
+       JOIN products p ON ci.product_id = p.product_id`
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch all cart items' });
+  }
+});
+
+// PUT update any cart item (admin)
+router.put('/admin/:cartItemId', requireAdmin, async (req, res) => {
+  const { cartItemId } = req.params;
+  const { quantity } = req.body;
+
+  if (!Number.isInteger(quantity) || quantity <= 0) {
+    return res.status(400).json({ error: 'Quantity must be a positive integer' });
+  }
+
+  try {
+    const { rows } = await client.query(
+      `UPDATE cart_items
+       SET quantity=$1
+       WHERE cart_item_id=$2
+       RETURNING *`,
+      [quantity, cartItemId]
+    );
+
+    if (!rows.length) return res.status(404).json({ error: 'Cart item not found' });
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update cart item' });
+  }
+});
+
+// DELETE any cart item (admin)
+router.delete('/admin/:cartItemId', requireAdmin, async (req, res) => {
+  const { cartItemId } = req.params;
+
+  try {
+    const { rows } = await client.query(
+      `DELETE FROM cart_items
+       WHERE cart_item_id=$1
+       RETURNING *`,
+      [cartItemId]
+    );
+
+    if (!rows.length) return res.status(404).json({ error: 'Cart item not found' });
+
+    res.json({ message: 'Cart item deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete cart item' });
   }
 });
 

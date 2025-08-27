@@ -1,131 +1,138 @@
 const express = require('express');
-const pool = require('../db/client');
-const authenticateToken = require('../middleware/authenticateToken');
+const client = require('../db/client');
+const { requireAuth, requireAdmin } = require('../middleware/auth');
+
 const router = express.Router();
 
-// Middleware: authenticate admin user only
-const authenticateAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin access required' });
-  }
-  next();
-};
-
-// GET /order-items/order/:order_id - get all items for a specific order
-router.get('/order/:order_id', authenticateToken, async (req, res) => {
+// GET all items for a specific order
+router.get('/order/:order_id', requireAuth, async (req, res) => {
   const { order_id } = req.params;
-
   try {
-    // Check if order exists and get its user_id
-    const { rows: orderRows } = await pool.query(
-      'SELECT user_id FROM Orders WHERE order_id = $1',
-      [order_id]
-    );
+    const orderCheck = await client.query('SELECT user_id FROM orders WHERE order_id=$1', [order_id]);
+    if (!orderCheck.rows[0]) return res.status(404).json({ error: 'Order not found' });
 
-    if (orderRows.length === 0) {
-      return res.status(404).json({ error: 'Order not found' });
-    }
-
-    const orderUserId = orderRows[0].user_id;
-
-    // Allow access only if admin or order owner
-    if (req.user.role !== 'admin' && req.user.user_id !== orderUserId) {
+    if (req.user.role !== 'admin' && orderCheck.rows[0].user_id !== req.user.user_id) {
       return res.status(403).json({ error: 'Access denied' });
     }
 
-    const { rows } = await pool.query(
-      `SELECT oi.*, p.name AS product_name
-       FROM Order_Items oi
-       JOIN Products p ON oi.product_id = p.product_id
-       WHERE oi.order_id = $1`,
-      [order_id]
-    );
-
+    const { rows } = await client.query('SELECT * FROM order_items WHERE order_id=$1', [order_id]);
     res.json(rows);
   } catch (err) {
-    console.error('Error fetching order items:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to fetch order items' });
   }
 });
 
-// POST /order-items - add a new item to an order (admin only)
-router.post('/', authenticateToken, authenticateAdmin, async (req, res) => {
-  const { order_id, product_id, quantity, price_at_purchase } = req.body;
-
-  if (!order_id || !product_id || !quantity || price_at_purchase === undefined) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  if (quantity <= 0 || price_at_purchase < 0) {
-    return res.status(400).json({ error: 'Invalid quantity or price' });
-  }
-
+// GET single order item by ID
+router.get('/:id', requireAuth, async (req, res) => {
+  const { id } = req.params;
   try {
-    // Ensure order exists
-    const { rows: orderRows } = await pool.query(
-      'SELECT * FROM Orders WHERE order_id = $1',
-      [order_id]
-    );
-    if (orderRows.length === 0) {
-      return res.status(404).json({ error: 'Order not found' });
+    const { rows } = await client.query('SELECT * FROM order_items WHERE order_item_id=$1', [id]);
+    if (rows.length === 0) return res.status(404).json({ error: 'Order item not found' });
+
+    const item = rows[0];
+    if (req.user.role !== 'admin') {
+      const orderCheck = await client.query('SELECT user_id FROM orders WHERE order_id=$1', [item.order_id]);
+      if (orderCheck.rows[0].user_id !== req.user.user_id) {
+        return res.status(403).json({ error: 'Access denied' });
+      }
     }
 
-    const { rows } = await pool.query(
-      `INSERT INTO Order_Items (order_id, product_id, quantity, price_at_purchase)
+    res.json(item);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch order item' });
+  }
+});
+
+// GET all items for a specific order (admin only)
+router.get('/order/:orderId/admin', requireAdmin, async (req, res) => {
+  const { orderId } = req.params;
+  try {
+    const { rows } = await client.query(
+      'SELECT * FROM order_items WHERE order_id=$1',
+      [orderId]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch order items' });
+  }
+});
+
+// POST add an item to an order
+router.post('/', requireAuth, async (req, res) => {
+  const { order_id, product_id, quantity, price_at_purchase } = req.body;
+  try {
+    const orderCheck = await client.query('SELECT user_id FROM orders WHERE order_id=$1', [order_id]);
+    if (!orderCheck.rows[0]) return res.status(404).json({ error: 'Order not found' });
+
+    if (req.user.role !== 'admin' && orderCheck.rows[0].user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    const { rows } = await client.query(
+      `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
        VALUES ($1, $2, $3, $4) RETURNING *`,
       [order_id, product_id, quantity, price_at_purchase]
     );
 
     res.status(201).json(rows[0]);
   } catch (err) {
-    console.error('Error adding order item:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to add order item' });
   }
 });
 
-// PUT /order-items/:id - update an order item (admin only)
-router.put('/:id', authenticateToken, authenticateAdmin, async (req, res) => {
+// PUT update an order item
+router.put('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
   const { quantity, price_at_purchase } = req.body;
 
-  if ((quantity !== undefined && quantity <= 0) || (price_at_purchase !== undefined && price_at_purchase < 0)) {
-    return res.status(400).json({ error: 'Invalid quantity or price' });
-  }
-
   try {
-    const { rows } = await pool.query(
-      `UPDATE Order_Items
-       SET quantity = COALESCE($1, quantity),
-           price_at_purchase = COALESCE($2, price_at_purchase)
-       WHERE order_item_id = $3
-       RETURNING *`,
-      [quantity, price_at_purchase, id]
-    );
-
+    const { rows } = await client.query('SELECT * FROM order_items WHERE order_item_id=$1', [id]);
     if (rows.length === 0) return res.status(404).json({ error: 'Order item not found' });
 
-    res.json(rows[0]);
+    const item = rows[0];
+    if (req.user.role !== 'admin') {
+      const orderCheck = await client.query('SELECT user_id FROM orders WHERE order_id=$1', [item.order_id]);
+      if (orderCheck.rows[0].user_id !== req.user.user_id) {
+        return res.status(403).json({ error: 'Access denied' });
+      }
+    }
+
+    const updated = await client.query(
+      'UPDATE order_items SET quantity=$1, price_at_purchase=$2 WHERE order_item_id=$3 RETURNING *',
+      [quantity || item.quantity, price_at_purchase || item.price_at_purchase, id]
+    );
+
+    res.json(updated.rows[0]);
   } catch (err) {
-    console.error('Error updating order item:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to update order item' });
   }
 });
 
-// DELETE /order-items/:id - delete an order item (admin only)
-router.delete('/:id', authenticateToken, authenticateAdmin, async (req, res) => {
+// DELETE an order item
+router.delete('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
 
   try {
-    const { rowCount } = await pool.query(
-      'DELETE FROM Order_Items WHERE order_item_id = $1',
-      [id]
-    );
+    const { rows } = await client.query('SELECT * FROM order_items WHERE order_item_id=$1', [id]);
+    if (rows.length === 0) return res.status(404).json({ error: 'Order item not found' });
 
-    if (rowCount === 0) return res.status(404).json({ error: 'Order item not found' });
+    const item = rows[0];
+    if (req.user.role !== 'admin') {
+      const orderCheck = await client.query('SELECT user_id FROM orders WHERE order_id=$1', [item.order_id]);
+      if (orderCheck.rows[0].user_id !== req.user.user_id) {
+        return res.status(403).json({ error: 'Access denied' });
+      }
+    }
 
+    await client.query('DELETE FROM order_items WHERE order_item_id=$1', [id]);
     res.json({ message: 'Order item deleted successfully' });
   } catch (err) {
-    console.error('Error deleting order item:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to delete order item' });
   }
 });

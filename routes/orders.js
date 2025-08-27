@@ -1,101 +1,19 @@
+// routes/orders.js
 const express = require('express');
-const pool = require('../db/client.js');
-const jwt = require('jsonwebtoken');
+const client = require('../db/client');
+const { requireAuth, requireAdmin } = require('../middleware/auth');
+
 const router = express.Router();
 
-// Authenticate any logged-in user
-const authenticateUser = (req, res, next) => {
+// GET all orders (admin only)
+router.get('/', requireAdmin, async (req, res) => {
   try {
-    const token = req.headers['authorization']?.split(' ')[1];
-    console.log('Token received:', token);  // log the token
-    if (!token) return res.status(401).json({ error: 'No token provided' });
-
-    console.log('JWT_SECRET:', process.env.JWT_SECRET); // log secret to check it's loaded
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token:', decoded); // log decoded payload
-    req.user = decoded;
-    next();
-  } catch (err) {
-    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-    next(err);
-  }
-};
-
-// Authenticate admin users
-const authenticateAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin access required' });
-  }
-  next();
-};
-
-// Checkout: create an order from user's cart
-router.post('/checkout', authenticateUser, async (req, res) => {
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-
-    // Get user's cart items
-    const { rows: cartItems } = await client.query(
-      'SELECT * FROM Cart_Items WHERE user_id = $1',
-      [req.user.user_id]
-    );
-
-    if (cartItems.length === 0) {
-      return res.status(400).json({ error: 'Cart is empty' });
-    }
-
-    // Calculate total
-    const totalAmount = cartItems.reduce(
-      (sum, item) => sum + item.quantity * (item.price_at_purchase || 0),
-      0
-    );
-
-    // Insert order
-    const { rows } = await client.query(
-      `INSERT INTO Orders (user_id, status, total_amount, fulfillment_method)
-       VALUES ($1, 'Pending', $2, $3) RETURNING order_id`,
-      [req.user.user_id, totalAmount, req.body.fulfillment_method]
-    );
-
-    const orderId = rows[0].order_id;
-
-    // Insert order items
-    await Promise.all(
-      cartItems.map(item =>
-        client.query(
-          `INSERT INTO Order_Items (order_id, product_id, quantity, price_at_purchase)
-           VALUES ($1, $2, $3, $4)`,
-          [orderId, item.product_id, item.quantity, item.price_at_purchase || 0]
-        )
-      )
-    );
-
-    // Clear user's cart
-    await client.query('DELETE FROM Cart_Items WHERE user_id = $1', [req.user.user_id]);
-
-    await client.query('COMMIT');
-    res.status(201).json({ message: 'Order created', order_id: orderId });
-  } catch (err) {
-    await client.query('ROLLBACK');
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create order' });
-  } finally {
-    client.release();
-  }
-});
-
-// Get orders for logged-in user
-router.get('/', authenticateUser, async (req, res) => {
-  try {
-    const { rows } = await pool.query(
-      'SELECT * FROM Orders WHERE user_id = $1 ORDER BY order_date DESC',
-      [req.user.user_id]
-    );
-    console.log('Orders fetched:', rows);   // testing purposes
+    const { rows } = await client.query(`
+      SELECT o.*, u.name AS customer_name, u.email AS customer_email
+      FROM orders o
+      JOIN users u ON o.user_id = u.user_id
+      ORDER BY o.order_id
+    `);
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -103,47 +21,95 @@ router.get('/', authenticateUser, async (req, res) => {
   }
 });
 
-// Admin: update order status
-router.put('/:order_id/status', authenticateUser, authenticateAdmin, async (req, res) => {
-  const { order_id } = req.params;
-  const { status, delivery_status, delivery_partner } = req.body;
+// GET orders for the logged-in user
+router.get('/my', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await client.query(
+      'SELECT * FROM orders WHERE user_id=$1 ORDER BY order_id',
+      [req.user.user_id]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch your orders' });
+  }
+});
+
+// GET single order by ID (admin or owner)
+router.get('/:id', requireAuth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { rows } = await client.query('SELECT * FROM orders WHERE order_id=$1', [id]);
+    if (rows.length === 0) return res.status(404).json({ error: 'Order not found' });
+
+    const order = rows[0];
+    if (req.user.role !== 'admin' && order.user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    res.json(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
+
+// POST create a new order
+router.post('/', requireAuth, async (req, res) => {
+  const { items, fulfillment_method, delivery_partner } = req.body; 
+  // items = [{ product_id, quantity, price_at_purchase }]
 
   try {
-    const { rowCount } = await pool.query(
-      `UPDATE Orders
-       SET status = $1, delivery_status = $2, delivery_partner = $3
-       WHERE order_id = $4`,
-      [status, delivery_status, delivery_partner, order_id]
+    // Insert into orders table
+    const { rows: orderRows } = await client.query(
+      `INSERT INTO orders (user_id, status, fulfillment_method, delivery_partner, total_amount)
+       VALUES ($1, 'Pending', $2, $3, $4) RETURNING *`,
+      [req.user.user_id, fulfillment_method, delivery_partner || null, 0] // total_amount updated later
+    );
+    const order = orderRows[0];
+
+    // Insert into order_items table
+    let totalAmount = 0;
+    for (const item of items) {
+      const { product_id, quantity, price_at_purchase } = item;
+      totalAmount += price_at_purchase * quantity;
+
+      await client.query(
+        `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
+         VALUES ($1, $2, $3, $4)`,
+        [order.order_id, product_id, quantity, price_at_purchase]
+      );
+    }
+
+    // Update order total_amount
+    const { rows: updatedRows } = await client.query(
+      'UPDATE orders SET total_amount=$1 WHERE order_id=$2 RETURNING *',
+      [totalAmount, order.order_id]
+    );
+
+    res.status(201).json(updatedRows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create order' });
+  }
+});
+
+// PUT update order status (admin only)
+router.put('/:id/status', requireAdmin, async (req, res) => {
+  const { id } = req.params;
+  const { status, delivery_status } = req.body;
+
+  try {
+    const { rowCount, rows } = await client.query(
+      'UPDATE orders SET status=$1, delivery_status=$2 WHERE order_id=$3 RETURNING *',
+      [status, delivery_status || null, id]
     );
 
     if (rowCount === 0) return res.status(404).json({ error: 'Order not found' });
-    res.json({ message: 'Order updated' });
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to update order' });
-  }
-});
-
-// Admin: get all orders (with optional filters)
-router.get('/admin/all', authenticateUser, authenticateAdmin, async (req, res) => {
-  const { user_id, status } = req.query;
-  const filters = [];
-  const values = [];
-
-  if (user_id) { values.push(user_id); filters.push(`user_id = $${values.length}`); }
-  if (status) { values.push(status); filters.push(`status = $${values.length}`); }
-
-  const whereClause = filters.length ? `WHERE ${filters.join(' AND ')}` : '';
-
-  try {
-    const { rows } = await pool.query(
-      `SELECT * FROM Orders ${whereClause} ORDER BY order_date DESC`,
-      values
-    );
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
 

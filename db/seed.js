@@ -19,21 +19,18 @@ async function seed() {
     // Clear all tables before seeding
     await client.query(`
       TRUNCATE TABLE
-        Review_Comments,
-        Reviews,
-        Order_Items,
-        Payments,
-        Cart_Items,
-        Orders,
-        Products,
-        Users,
-        TokenBlacklist
+        review_comments,
+        reviews,
+        order_items,
+        payments,
+        cart_items,
+        orders,
+        products,
+        users
       RESTART IDENTITY CASCADE;
-    `);
+    `)
 
-    await client.query(`ALTER SEQUENCE custom_user_id_seq RESTART WITH 1;`);
-
-
+    
     // Pre-hash passwords
     const plainPasswords = [
       'password1','password2','password3','password4','password5',
@@ -72,13 +69,14 @@ async function seed() {
     const productIds = [];
     for (const p of products) {
       const { rows } = await client.query(
-        `INSERT INTO Products (name, price, stock_quantity, category, image_key, star_rating)
+        `INSERT INTO products (name, price, stock_quantity, category, image_key, star_rating)
          VALUES ($1,$2,$3,$4,$5,$6)
          RETURNING product_id`,
         p
       );
       productIds.push(rows[0].product_id);
     }
+    console.log(`✅ Inserted ${productIds.length} products`);
 
     // Insert users
     const users = [
@@ -103,38 +101,39 @@ async function seed() {
     const userIds = [];
     for (const u of users) {
       const { rows } = await client.query(
-        `INSERT INTO Users (name, email, password, address, phone, role)
+        `INSERT INTO users (name, email, password, address, phone, role)
          VALUES ($1,$2,$3,$4,$5,$6)
          RETURNING user_id`,
         u
       );
       userIds.push(rows[0].user_id);
     }
+    console.log(`✅ Inserted ${userIds.length} users`);
 
     function daysFromNow(days) {
       const d = new Date();
       d.setDate(d.getDate() + days);
-      return d;
+      return d.toISOString();
     }
 
     // Orders data
     const ordersData = [
-      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'Uber Eats', 'UE123456789', 'Delivered', daysFromNow(-28)],
+      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'UberEats', 'UE123456789', 'Delivered', daysFromNow(-28)],
       [userIds[4], daysFromNow(-45), 'Completed', 11.97, 'Pickup', null, null, 'Not applicable', daysFromNow(-43)],
       [userIds[5], daysFromNow(-60), 'Cancelled', 0.00, 'Delivery', 'DoorDash', 'DD0987654321', 'Cancelled', daysFromNow(-58)],
-      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'Uber Eats', 'UE654321987', 'Delivered', daysFromNow(-13)],
+      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'UberEats', 'UE654321987', 'Delivered', daysFromNow(-13)],
       [userIds[7], daysFromNow(-25), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-23)],         
       [userIds[8], daysFromNow(-5), 'Completed', 4.29, 'Delivery', 'Grubhub', 'GH1122334455', 'Delivered', daysFromNow(-3)], 
       [userIds[9], daysFromNow(-3), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-1)],             
       [userIds[0], daysFromNow(-10), 'Completed', 33.97, 'Delivery', 'DoorDash', 'DD5566778899', 'Delivered', daysFromNow(-8)],
       [userIds[1], daysFromNow(-20), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-18)],
-      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'Uber Eats', 'UE9988776655', 'Cancelled', daysFromNow(-6)],
+      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE9988776655', 'Cancelled', daysFromNow(-6)],
       [userIds[3], daysFromNow(-13), 'Completed', 29.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-11)],
       [userIds[4], daysFromNow(-35), 'Completed', 16.99, 'Delivery', 'Grubhub', 'GH2233445566', 'Delivered', daysFromNow(-33)],
       [userIds[5], daysFromNow(-22), 'Cancelled', 0.00, 'Pickup', null, null, 'Not applicable', daysFromNow(-20)],
       [userIds[6], daysFromNow(-18), 'Completed', 33.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-16)],
       [userIds[7], daysFromNow(-11), 'Completed', 16.99, 'Delivery', 'DoorDash', 'DD3344556677', 'Delivered', daysFromNow(-9)],
-      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'Uber Eats', 'UE4455667788', 'Cancelled', daysFromNow(-2)],
+      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE4455667788', 'Cancelled', daysFromNow(-2)],
       [userIds[9], daysFromNow(-2), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-1)],
       [userIds[2], daysFromNow(-7), 'Completed', 7.98, 'Delivery', 'Grubhub', 'GH7788990011', 'Delivered', daysFromNow(-5)],
     ];
@@ -143,7 +142,7 @@ async function seed() {
     const orderIds = [];
     for (const o of ordersData) {
       const { rows } = await client.query(
-        `INSERT INTO Orders (user_id,order_date,status,total_amount,fulfillment_method,
+        `INSERT INTO orders (user_id,order_date,status,total_amount,fulfillment_method,
           delivery_partner,delivery_reference,delivery_status,estimated_delivery)
          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
          RETURNING order_id`,
@@ -151,6 +150,7 @@ async function seed() {
       );
       orderIds.push(rows[0].order_id);
     }
+    console.log(`✅ Inserted ${orderIds.length} orders`);
 
     // Payments
     const payments = [
@@ -176,11 +176,12 @@ async function seed() {
 
     for (const pay of payments) {
       await client.query(
-        `INSERT INTO Payments (order_id,transaction_id,amount,status,method)
+        `INSERT INTO payments (order_id,transaction_id,amount,status,method)
          VALUES ($1,$2,$3,$4,$5)`,
         pay
       );
     }
+    console.log(`✅ Inserted ${payments.length} payments`);
 
     // Order Items - use productIds for product references
     const orderItems = [
@@ -210,11 +211,12 @@ async function seed() {
 
     for (const oi of orderItems) {
       await client.query(
-        `INSERT INTO Order_Items (order_id, product_id, quantity, price_at_purchase)
+        `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
          VALUES ($1,$2,$3,$4)`,
         oi
       );
     }
+    console.log(`✅ Inserted ${orderItems.length} order items`);
 
     // Cart items
     const cartItems = [
@@ -232,11 +234,12 @@ async function seed() {
 
     for (const ci of cartItems) {
       await client.query(
-        `INSERT INTO Cart_Items (user_id, product_id, quantity, price_at_purchase)
+        `INSERT INTO cart_items (user_id, product_id, quantity, price_at_purchase)
         VALUES ($1, $2, $3, $4)`,
         ci
       );
     }
+    console.log(`✅ Inserted ${cartItems.length} cart items`);
 
 
     // Reviews - use userIds and productIds
@@ -265,13 +268,14 @@ async function seed() {
     const reviewIds = [];
     for (const r of reviews) {
       const { rows } = await client.query(
-        `INSERT INTO Reviews (user_id, product_id, rating, comment)
+        `INSERT INTO reviews (user_id, product_id, rating, comment)
          VALUES ($1,$2,$3,$4)
          RETURNING review_id`,
         r
       );
       reviewIds.push(rows[0].review_id);
     }
+    console.log(`✅ Inserted ${reviewIds.length} reviews`);
 
     // Review comments
     const reviewComments = [
@@ -284,11 +288,12 @@ async function seed() {
 
     for (const rc of reviewComments) {
       await client.query(
-        `INSERT INTO Review_Comments (review_id, user_id, comment)
+        `INSERT INTO review_comments (review_id, user_id, comment)
          VALUES ($1,$2,$3)`,
         rc
       );
     }
+    console.log(`✅ Inserted ${reviewComments.length} review comments`);
 
     await client.query('COMMIT');
     console.log('🌱 Seed successful!');

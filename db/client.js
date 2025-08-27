@@ -1,21 +1,19 @@
-const { Pool } = require('pg');
+// Important tips for me to remember:
+// client.js just connects to the database; it doesn’t define tables.
+
+const { Client } = require('pg');
 require('dotenv').config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
+const client = new Client({
+  host: process.env.DB_HOST,     // e.g., 'localhost'
+  port: process.env.DB_PORT,     // e.g., 5432
+  database: process.env.DB_NAME, // 'yummy_pies'
+  user: process.env.DB_USER,     // e.g., 'postgres'
   password: process.env.DB_PASSWORD
 });
 
+client.connect()
+  .then(() => console.log('Connected to DB'))
+  .catch(err => console.error('Connection error', err.stack));
 
-// Test connection once at startup
-pool.connect()
-  .then(client => {
-    console.log('Connected to DB');
-    client.release(); // release the client back to the pool
-  })
-  .catch(err => console.error('DB connection error:', err));
-
-module.exports = pool;
+module.exports = client;
