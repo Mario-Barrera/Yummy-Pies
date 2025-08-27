@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const client = require('../db/client');
-const { authenticateToken } = require('../middleware/auth');
+const { requireAuth, requireAdmin } = require('../middleware/auth');
 
 // USER ROUTES
 // GET all comments for a specific review (user)
-router.get('/review/:review_id', authenticateToken, async (req, res) => {
+router.get('/review/:review_id', requireAuth, async (req, res) => {
   const { review_id } = req.params;
   try {
     const result = await client.query(
@@ -24,7 +24,7 @@ router.get('/review/:review_id', authenticateToken, async (req, res) => {
 });
 
 // POST a new comment for a review (user)
-router.post('/review/:review_id', authenticateToken, async (req, res) => {
+router.post('/review/:review_id', requireAuth, async (req, res) => {
   const { review_id } = req.params;
   const user_id = req.user.user_id;
   const { comment } = req.body;
@@ -46,7 +46,7 @@ router.post('/review/:review_id', authenticateToken, async (req, res) => {
 });
 
 // PUT update a comment (user can only update their own)
-router.put('/:comment_id', authenticateToken, async (req, res) => {
+router.put('/:comment_id', requireAuth, async (req, res) => {
   const { comment_id } = req.params;
   const user_id = req.user.user_id;
   const { comment } = req.body;
@@ -74,7 +74,7 @@ router.put('/:comment_id', authenticateToken, async (req, res) => {
 });
 
 // DELETE a comment (user can only delete their own)
-router.delete('/:comment_id', authenticateToken, async (req, res) => {
+router.delete('/:comment_id', requireAuth, async (req, res) => {
   const { comment_id } = req.params;
   const user_id = req.user.user_id;
 
@@ -97,7 +97,7 @@ router.delete('/:comment_id', authenticateToken, async (req, res) => {
 
 // ADMIN ROUTES
 // GET all review comments (admin only)
-router.get('/admin', authenticateToken, async (req, res) => {
+router.get('/admin', requireAuth, async (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Access denied' });
 
   try {
@@ -115,7 +115,7 @@ router.get('/admin', authenticateToken, async (req, res) => {
 });
 
 // DELETE any comment (admin only)
-router.delete('/admin/:comment_id', authenticateToken, async (req, res) => {
+router.delete('/admin/:comment_id', requireAuth, async (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Access denied' });
 
   const { comment_id } = req.params;
