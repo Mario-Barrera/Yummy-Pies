@@ -142,37 +142,4 @@ body {
   transition: transform 0.3s;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1024px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 5px;
-  }
 
-  .home-img1, .home-img2, .home-img3 {
-    grid-column: auto;
-    grid-row: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .layout {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .grid-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  .home-img1, .home-img2, .home-img3 {
-    height: 300px;
-  }
-}
