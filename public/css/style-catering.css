@@ -221,6 +221,13 @@ button.back-btn {
   margin-left: 30px;
 }
 
+button[type="button"]:hover,
+button[type="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    transform: scale(1.05);
+}
+
 /* ------ FOOTER ------  */
 .footer {
   width: 100%;

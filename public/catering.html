@@ -113,6 +113,9 @@
                 <!-- Multi-Step Form Section -->
                 <section class="form-container" aria-label="Catering Request Form">
                     <form action="https://formsubmit.co/yummy-pies1@outlook.com" method="POST">
+
+                        <!-- Step Indicator -->
+                        <div id="step-indicator">Step 1 of 6</div>
                         
                         <!-- Step 1: Event Type -->
                         <fieldset class="event-section" id="step1">
@@ -197,7 +200,7 @@
                             <input type="email" id="email" name="email" required>
 
                             <button type="button" onclick="goToStep('step5')">Back</button>
-                            <input type="submit" value="Submit">
+                            <input type="submit" value="Submit" onclick="validateStep6(event)">
                         </fieldset>
                     </form>
                 </section>
