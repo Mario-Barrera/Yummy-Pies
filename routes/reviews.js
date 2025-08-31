@@ -100,6 +100,24 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
   }
 });
 
+// GET all reviews (public)
+router.get('/all', async (req, res) => {
+  try {
+    const { rows } = await client.query(`
+      SELECT r.*, u.name AS user_name, p.name AS product_name
+      FROM reviews r
+      JOIN users u ON r.user_id = u.user_id
+      JOIN products p ON r.product_id = p.product_id
+      ORDER BY r.created_at DESC
+    `);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch reviews' });
+  }
+});
+
+
 // ADMIN ROUTES
 // GET all reviews (admin only)
 router.get('/admin', requireAdmin, async (req, res) => {

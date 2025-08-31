@@ -5,6 +5,9 @@ const app = express();
 // Middleware
 app.use(express.json()); // parse JSON bodies
 
+// Serve static files from "public" BEFORE routes
+app.use(express.static('public'));
+
 // Import routes
 const authRoutes = require('./routes/auth');
 const productsRoutes = require('./routes/products');

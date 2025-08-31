@@ -116,75 +116,88 @@ html, body {
   margin-bottom: 20px;
   text-align: center;
   color: rgb(85, 65, 52);
-  margin-left: 160px;
+  text-align: center;
 }
 
-/* ------ ACCORDION ------ */
-
-/* Accordion Container */
-.accordion-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  align-items: center;   			/* centers child accordion boxes horizontally */
-  margin-left: 160px;
+/* ------ Main container and its content ------ */
+.main-container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* Accordion Box */
-.accordion {
-  border: 1px solid #f0a500;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff8f0;
-  width: 600px;         			
-  max-width: 90%;       		/* ensures responsiveness on smaller screens */
-  margin-bottom: 20px;
+.main-content {
+    font-size: 1rem;
+    color: rgb(60, 60, 60);
 }
 
-.accordion-header {
-  width: 100%;
-  text-align: left;
-  padding: 15px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #fff3e6;
-  border: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.2s ease;
+.review-paragraph, 
+.accountLinks {
+    margin-bottom: 18px;
+    text-align: center;
 }
 
-.accordion-header:hover,
-.accordion-header:focus {
-  background-color: #ffe6cc;
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
+/* Single review card */
+.review {
+    background-color: #fff8f0;
+    border: 1px solid #f0e6de;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.accordion-header[aria-expanded="true"] .toggle-icon {
-  transform: rotate(45deg);
+.review-header {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
 }
 
-.accordion-content {
-  padding: 15px 20px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  background-color: #fff8f0;
-  border-top: 1px solid #f0a500;
-  display: none;                            /* hidden by default, will show via JS */
+/* Stars and comments container */
+.review-stars-comments {
+    display: flex;
+    justify-content: space-between;  /* push stars left, link right */
+    align-items: center;              /* vertical align */
 }
 
-.accordion-content[hidden] {
-  display: none;
+.comments-link a {
+    color: inherit;                 /* Make the link take the color of its parent */
+    text-decoration: none;          /* Remove the underline */
 }
 
-.accordion-content:not([hidden]) {
-  display: block;
+a:focus,
+a:hover {
+    color: #ff6600;      
+    text-decoration: underline; 
+}
+
+/* Spacing for comment icon */
+.review-stars-comments i {
+    margin-left: 5px; 
+}
+
+.stars {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.review-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    margin-left: 0.5rem;
+    margin-bottom: 30px;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #999;
 }
 
 /* ------ FOOTER ------  */
