@@ -1,0 +1,345 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  background-color: #fff;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar & Logo */
+.sidebar {
+  width: 100%;
+  max-width: 225px;
+  height: 100vh;
+  border-right: 1px solid #a19d9d;
+  background-color: beige;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  padding-bottom: 20px;
+}
+
+/* Navigation Links */
+.nav-links {
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.nav-links li {
+  list-style: none;
+  margin: 15px 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  padding-left: 10px;
+  color: rgb(246, 160, 48);
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links li a:focus {
+  color: #f0a500;
+  text-decoration: underline;
+}
+
+.nav-links li i {
+  margin-right: 10px;
+  color: rgb(85, 65, 52);
+}
+
+/* Connect / Social Links */
+.connect {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.connect p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.social-links {
+  padding-left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-links li {
+  list-style: none;
+}
+
+.social-links i {
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+
+.social-links i:hover {
+  transform: scale(1.2);
+}
+
+/* Social Icon Colors */
+.fa-facebook { color: #4066b1; }
+.fa-instagram { color: #ea4490; }
+.fa-twitter { color: #029ef5; }
+.fa-pinterest { color: #cb1f27; }
+
+/* Layout */
+.layout {
+  flex: 1;
+  display: flex;
+}
+
+.img-logo {
+  display: block;
+  max-height: 120px;
+  width: auto;
+  margin: 10px auto;
+}
+
+/* ------ MAIN CONTENT ------ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff6f0; 
+    display: flex;
+    justify-content: center;                /* center login form horizontally */
+    align-items: center;                    /* center login form vertically */
+    min-height: calc(100vh - 40px);         /* ensures vertical centering on tall screens */
+}
+
+.login-section {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-title {
+    font-size: 2rem;
+    color: rgb(246, 160, 48); 
+    margin-bottom: 20px;
+    font-family: 'Pacifico';
+}
+
+/* Login Instruction Text */
+.login-section p {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: rgb(246, 160, 48);
+    box-shadow: 0 0 5px rgba(246, 160, 48, 0.5);
+    outline: none;
+}
+
+button[type="submit"] {
+    background-color: rgb(246, 160, 48);
+    color: #fff;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: #f0a500;
+    transform: translateY(-2px);
+}
+
+form p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+form p a {
+    color: rgb(246, 160, 48);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+form p a:hover,
+form p a:focus {
+    text-decoration: underline;
+    color: #f0a500;
+}
+
+/* Accessibility helper */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* ------ FOOTER ------  */
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;       /* centers children horizontally */
+  align-items: center;           /* centers children vertically */
+  flex-wrap: wrap;               /* wraps items on smaller screens */
+  gap: 13.75rem;                     /* spacing between form and links */
+  padding: 30px;
+  background-color: rgb(236, 239, 246);
+  border-top: 1px solid #ccc;
+}
+
+/* Footer Form */
+footer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* center form elements horizontally */
+  flex: 0 1 auto;                /* form won’t grow too large */
+}
+
+footer form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+footer form legend {     
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+footer form label {
+  display: none;                /* visually hidden for screen readers */
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 6px 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.fa-circle-info { 
+    color: #f0a500; 
+}
+
+#footer-email {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;             
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: rgb(246, 160, 48);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background-color: #f0a500;
+  transform: scale(1.05);
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* center links horizontally */
+  gap: 6px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: rgb(85, 65, 52);
+  margin: 6px 0;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+  color: #f0a500;
+  text-decoration: underline;
+}
+

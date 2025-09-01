@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Login to your Yummy Pies account to view orders, track deliveries, leave reviews, and manage your profile.">
+    <meta name="keywords" content="Yummy Pies login, account login, view orders, track deliveries, leave reviews, manage profile, user account, bakery account, pie orders">
+
+    <meta property="og:title" content="Yummy Pies - Account Login">
+    <meta property="og:site_name" content="Yummy Pies">
+    <meta property="og:description" content="Access your Yummy Pies account to manage orders, track deliveries, and leave reviews.">
+    <meta property="og:url" content="https://www.yummypies.com/account-login.html">
+    <meta property="og:image" content="https://www.yummypies.com/images/account-login.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yummy Pies - Account Login">
+    <meta name="twitter:description" content="Log in to your Yummy Pies account to manage orders, track deliveries, and leave reviews.">
+    <meta name="twitter:image" content="https://www.yummypies.com/images/account-login.jpg">
+    <meta name="twitter:site" content="@YummyPies1">
+
+    <title>Yummy Pies | Account Login Page</title>
+
+    <link rel="canonical" href="https://www.yummypies.com/account-login.html">
+    <link rel="stylesheet" type="text/css" href="css/style-account-login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="js/script-account-login.js" defer></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <img class="img-logo" src="images/YummyPies_Color2.png" alt="Yummy Pies logo">
+
+            <ul class="nav-links" aria-label="Main navigation">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+                <li><a href="order.html"><i class="fa-solid fa-cart-shopping"></i>Order Online</a></li>
+                <li><a href="catering.html"><i class="fa-solid fa-utensils"></i>Catering</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                <li><a href="faq.html"><i class="fa-solid fa-question"></i>FAQs</a></li>
+                <li><a href="deliveryPolicy.html"><i class="fa-solid fa-truck"></i>Delivery Policy</a></li>
+                <li><a href="store-locator.html"><i class="fa-solid fa-map-location-dot"></i>Store Locator</a></li>
+                <li><a href="account-login.html"><i class="fa-solid fa-circle-user"></i>Account / Login</a></li>
+                <li><a href="reviews.html"><i class="fa-solid fa-star"></i>Customer Reviews</a></li> 
+            </ul>
+
+            <div class="connect">
+                <p>Connect with us</p>
+                <ul class="social-links">
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61575033907078" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            aria-label="Visit Yummy Pies on Facebook">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.instagram.com/yummypies1" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            aria-label="Visit Yummy Pies on Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://twitter.com/YummyPies1" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            aria-label="Visit Yummy Pies on Twitter">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://pin.it/1QToiyfc0" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            aria-label="Visit Yummy Pies on Pinterest">
+                            <i class="fa-brands fa-pinterest"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content" role="main">
+            <section class="login-section">
+                <h1 class="login-title">Login</h1>
+                <p class="login-instruction">Enter your email and password to access your account:</p>
+
+                <form id="login-form" class="login-form" novalidate>
+                    <!-- Email field -->
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="E-mail" 
+                            autocomplete="email" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Password field -->
+                    <div class="form-group">
+                        <label for="password" class="visually-hidden">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Password" 
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-login">Login</button>
+
+                    <!-- Signup link -->
+                    <p class="signup-prompt">
+                        Don't have an account? <a href="register.html">Sign Up</a>
+                    </p>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <form action="https://formsubmit.co/yummy-pies1@outlook.com" method="POST">
+            <fieldset>
+                <legend>
+                    Join our mailing list:
+                    <i class="fa-solid fa-circle-info" title="Sign up to receive exclusive discounts, recipes, and free treats!"></i>
+                </legend>
+                <label for="footer-email" class="visually-hidden">Email address</label>
+                <input type="email" id="footer-email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </fieldset>
+        </form>
+
+        <nav class="footer-links">
+            <a href="faq.html">FAQs</a>
+            <a href="deliveryPolicy.html">Delivery Policy</a>
+        </nav>
+    </footer>
+</body>
+</html>
+
+
+
+
