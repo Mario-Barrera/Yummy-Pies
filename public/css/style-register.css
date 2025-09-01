@@ -116,75 +116,125 @@ html, body {
   margin-bottom: 20px;
   text-align: center;
   color: rgb(85, 65, 52);
-  margin-left: 160px;
+  text-align: center;
 }
 
-/* ------ ACCORDION ------ */
-
-/* Accordion Container */
-.accordion-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  align-items: center;   			/* centers child accordion boxes horizontally */
-  margin-left: 160px;
+/* ------ MAIN CONTENT ------ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff6f0; 
+    display: flex;
+    justify-content: center;                /* center login form horizontally */
+    align-items: center;                    /* center login form vertically */
+    min-height: calc(100vh - 40px);         /* ensures vertical centering on tall screens */
 }
 
-/* Accordion Box */
-.accordion {
-  border: 1px solid #f0a500;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff8f0;
-  width: 600px;         			
-  max-width: 90%;       		/* ensures responsiveness on smaller screens */
-  margin-bottom: 20px;
+.register-section {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.accordion-header {
-  width: 100%;
-  text-align: left;
-  padding: 15px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #fff3e6;
-  border: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.2s ease;
+.register-title {
+    font-size: 2rem;
+    color: rgb(246, 160, 48); 
+    margin-bottom: 20px;
 }
 
-.accordion-header:hover,
-.accordion-header:focus {
-  background-color: #ffe6cc;
+/* Login Instruction Text */
+.register-section p {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1rem;
 }
 
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.accordion-header[aria-expanded="true"] .toggle-icon {
-  transform: rotate(45deg);
+.form-group {
+    display: flex;
+    flex-direction: column;
 }
 
-.accordion-content {
-  padding: 15px 20px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  background-color: #fff8f0;
-  border-top: 1px solid #f0a500;
-  display: none;                            /* hidden by default, will show via JS */
+#first-name,
+#last-name,
+#email,
+#password,
+#confirm-password {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.accordion-content[hidden] {
-  display: none;
+#first-name:focus,
+#last-name:focus,
+#email:focus,
+#password:focus,
+#confirm-password:focus {
+    border-color: rgb(246, 160, 48);
+    box-shadow: 0 0 5px rgba(246, 160, 48, 0.5);
+    outline: none;
 }
 
-.accordion-content:not([hidden]) {
-  display: block;
+button[type="submit"] {
+    background-color: rgb(246, 160, 48);
+    color: #fff;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: #f0a500;
+    transform: translateY(-2px);
+}
+
+form p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+form p a {
+    color: rgb(246, 160, 48);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+form p a:hover,
+form p a:focus {
+    text-decoration: underline;
+    color: #f0a500;
+}
+
+/* Accessibility helper */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 /* ------ FOOTER ------  */

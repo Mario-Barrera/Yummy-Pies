@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Read real customer reviews of Yummy Pies. Discover why people love our fresh, homemade pies and see what customers are saying about their favorite sweet and savory flavors.">
-    <meta name="keywords" content="Yummy Pies, customer reviews, pie ratings, homemade pies, sweet pies, savory pies">
-    <meta name="author" content="Yummy Pies">
 
-    <title>Yummy Pies | Customer Reviews</title>
-    <meta property="og:title" content="Customer Reviews | Yummy Pies">
-    <meta property="og:description" content="See what customers are saying about Yummy Pies. Read real reviews of our fresh, homemade pies and discover why people keep coming back for more.">
+    <meta name="description" content="Create your Yummy Pies account to place orders, track deliveries, save favorites, and leave reviews.">
+    <meta name="keywords" content="Yummy Pies register, create account, sign up, order pies, track deliveries, leave reviews, bakery signup, pie orders">
 
-    <meta property="og:image" content="https://www.yummypies.com/images/og-reviews.jpg">
-    <meta property="og:url" content="https://www.yummypies.com/reviews.html">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="Yummy Pies - Create Account">
     <meta property="og:site_name" content="Yummy Pies">
+    <meta property="og:description" content="Sign up for your Yummy Pies account to order pies, track deliveries, and leave reviews.">
+    <meta property="og:url" content="https://www.yummypies.com/register.html">
+    <meta property="og:image" content="https://www.yummypies.com/images/register.jpg">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Customer Reviews | Yummy Pies">
-    <meta name="twitter:description" content="See what customers are saying about Yummy Pies. Read real reviews of our fresh, homemade pies and discover why people keep coming back for more.">
-    <meta name="twitter:image" content="https://www.yummypies.com/images/og-reviews.jpg">
+    <meta name="twitter:title" content="Yummy Pies - Create Account">
+    <meta name="twitter:description" content="Register for your Yummy Pies account to manage orders, track deliveries, and save favorites.">
+    <meta name="twitter:image" content="https://www.yummypies.com/images/register.jpg">
     <meta name="twitter:site" content="@YummyPies1">
 
-    <link rel="canonical" href="https://www.yummypies.com/reviews.html">
-    <link rel="stylesheet" type="text/css" href="css/style-reviews.css">
+    <title>Yummy Pies | Register Account</title>
+
+    <link rel="canonical" href="https://www.yummypies.com/register.html">
+
+    <link rel="stylesheet" type="text/css" href="css/style-register.css">
     <link rel="stylesheet" type="text/css" href="css/style-user-greeting.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-     <script src="js/script-reviews.js" defer></script>
-     <script src="js/user-greeting.js" defer></script>
+    <script src="js/script-register.js" defer></script>
+    <script src="js/user-greeting.js" defer></script>
 </head>
 <body>
     <div class="layout">
@@ -100,26 +99,79 @@
             </div>
         </aside>
 
-        <main class="main-container"> 
-            <section class="main-content">
-                <h1 class="heading">Customer Reviews</h1>
+        <main class="main-content" role="main">
+            <section class="register-section">
+                <h1 class="register-title">Create Your Yummy Pies Account</h1>
+                
+                <form id="register-form" class="register-form" novalidate>
+    
+                    <div class="form-group">
+                        <label for="first-name" class="visually-hidden">First Name</label>
+                        <input 
+                            type="text" 
+                            id="first-name" 
+                            name="first-name" 
+                            placeholder="First Name" 
+                            autocomplete="name" 
+                            required
+                        >
+                    </div>
 
-                <p class="review-paragraph"> 
-                    We value our customers’ feedback. Read what they have to say about our products and services. If you’re a registered user, feel free to share your own experience.
-                </p>
+	                <div class="form-group">
+                        <label for="last-name" class="visually-hidden">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="last-name" 
+                            name="last-name" 
+                            placeholder="Last Name" 
+                            autocomplete="name" 
+                            required
+                        >
+                    </div>
+	
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="E-mail" 
+                            autocomplete="email" 
+                            required
+                        >
+                    </div>
 
-                <p class="accountLinks">
-    		        Please <a href="account-login.html">log in or create an account</a> to submit a customer review and comment.
-                </p>
+                    <div class="form-group">
+                        <label for="password" class="visually-hidden">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Password" 
+                            autocomplete="new-password" 
+                            required
+                        >
+                    </div>
 
-                <div class="reviews-list">
-                    <!-- Reviews will be injected here by JavaScript -->
-                </div>
+                    <div class="form-group">
+                        <label for="confirm-password" class="visually-hidden">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            id="confirm-password" 
+                            name="confirm-password" 
+                            placeholder="Confirm Password" 
+                            autocomplete="new-password" 
+                            required
+                        >
+                    </div>
 
-                <div>
-                    
-                </div>
-            </section> 
+                    <button type="submit" class="btn-register">Register</button>
+
+                    <p class="register-prompt">
+                        Already have an account? <a href="account-login.html">Login</a>
+                    </p>
+                </form>
+            </section>
         </main>
     </div>
 
@@ -143,5 +195,3 @@
     </footer>
 </body>
 </html>
-
-

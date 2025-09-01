@@ -26,9 +26,11 @@
   
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="css/style-index.css">
+  <link rel="stylesheet" type="text/css" href="css/style-user-greeting.css">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   
+  <script src="js/user-greeting.js" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -175,6 +177,15 @@
     <aside class="sidebar">
       <img class="img-logo" src="images/YummyPies_Color2.png" alt="Yummy Pies logo">
 
+      <!-- User Greeting for logged-in users -->
+      <div id="user-greeting" class="user-greeting">
+        <span class="user-name"></span>
+        <div class="user-links">
+          <a href="account-profile.html" id="profile-link">view profile</a>
+          <a href="index.html" id="logout">Logout</a>
+        </div>
+      </div>
+
       <ul class="nav-links" aria-label="Main navigation">
         <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
         <li><a href="order.html"><i class="fa-solid fa-cart-shopping"></i>Order Online</a></li>
@@ -194,7 +205,7 @@
             <a href="https://www.facebook.com/profile.php?id=61575033907078" 
               target="_blank" 
               rel="noopener noreferrer"
-              aria-label="Visit Yummy Pies on Facebook>
+              aria-label="Visit Yummy Pies on Facebook">
               <i class="fa-brands fa-facebook"></i>
             </a>
           </li>
@@ -203,7 +214,7 @@
             <a href="https://www.instagram.com/yummypies1" 
               target="_blank" 
               rel="noopener noreferrer"
-              aria-label="Visit Yummy Pies on Instagram>
+              aria-label="Visit Yummy Pies on Instagram">
               <i class="fa-brands fa-instagram"></i>
             </a>
           </li>

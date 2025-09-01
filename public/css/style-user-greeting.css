@@ -1,0 +1,48 @@
+/* User greeting container */
+#user-greeting {
+    display: flex;
+    flex-direction: column;       /* stack name and links */
+    align-items: flex-start;      
+    font-size: 1.3rem;            /* slightly larger for visibility */
+    color: #553e34;               /* warm chocolate tone */
+    font-weight: 600;             /* slightly bolder */
+}
+
+/* Profile link styling */
+#profile-link {
+    display: inline-block;
+    font-size: 0.95rem;          
+    color: blueviolet;
+    margin-bottom: 4px;           
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+#profile-link:hover,
+#profile-link:focus {
+    color: black;       
+    text-decoration: underline;
+}
+
+/* Logout button styling */
+#logout {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    background-color: rgb(246, 160, 48);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#logout:hover,
+#logout:focus {
+    background-color: #f0a500;                  
+    transform: translateY(-2px) scale(1.05);    
+    box-shadow: 0 4px 10px rgba(240, 165, 0, 0.4); 
+    outline: none;
+}
+
