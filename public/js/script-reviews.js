@@ -1,17 +1,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const reviewsContainer = document.querySelector('.reviews-list');
+    const reviewsContainer = document.querySelector('.reviews-list'); // adjust selector as needed
 
     try {
-        // Fetch all reviews from the public route
-        const response = await fetch('/reviews/all');
-        if (!response.ok) throw new Error('Failed to fetch reviews');
-
+        const response = await fetch('/reviews/all'); // or your endpoint to fetch all reviews
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const reviews = await response.json();
-
-        if (reviews.length === 0) {
-            reviewsContainer.innerHTML = '<p>No reviews yet.</p>';
-            return;
-        }
 
         reviewsContainer.innerHTML = reviews.map(review => {
             // Generate star rating
@@ -27,7 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="review-stars-comments">
                         <div class="stars">${stars}</div>
                         <div class="comments-link">
-                            <a href="review-comments.html">View all comments<i class="fa-solid fa-comment-dots"></i></a>
+                            <a href="review-comments.html?reviewId=${review.review_id}">
+                                View all comments
+                            </a>
                         </div>
                     </div>
 

@@ -279,20 +279,86 @@ async function seed() {
 
     // Review comments
     const reviewComments = [
-      [reviewIds[0], userIds[0], 'Totally agree!'],
-      [reviewIds[1], userIds[1], 'Yum, I want to try that one!'],
-      [reviewIds[2], userIds[2], 'I felt the same way!'],
-      [reviewIds[3], userIds[3], 'Good point.'],
-      [reviewIds[4], userIds[4], 'Definitely.'],
+      [reviewIds[0], userIds[1], 'Totally agree!'],
+      [reviewIds[0], userIds[2], 'Loved this review!'],
+      
+      [reviewIds[1], userIds[2], 'Yum, I want to try that one!'],
+      [reviewIds[1], userIds[3], 'Interesting perspective.'],
+      [reviewIds[1], userIds[0], 'Couldn’t have said it better.'],
+      [reviewIds[1], userIds[4], 'Helpful review, much appreciated.'],
+
+      [reviewIds[2], userIds[3], 'I felt the same way!'],
+      
+      [reviewIds[3], userIds[4], 'Good point.'],
+      [reviewIds[3], userIds[2], 'Totally agree!'],
+      [reviewIds[3], userIds[0], 'Loved this review!'],
+      
+      [reviewIds[4], userIds[5], 'Definitely.'],
+      [reviewIds[4], userIds[3], 'Couldn’t have said it better.'],
+      
+      [reviewIds[5], userIds[0], 'I agree completely!'],
+      [reviewIds[5], userIds[2], 'Absolutely right.'],
+      [reviewIds[5], userIds[3], 'Nice explanation!'],
+      [reviewIds[5], userIds[4], 'Well said!'],
+
+      [reviewIds[6], userIds[1], 'Yum! Must try.'],
+      [reviewIds[6], userIds[3], 'Sounds delicious.'],
+      [reviewIds[6], userIds[4], 'I want one too!'],
+      [reviewIds[6], userIds[0], 'Perfectly described.'],
+
+      [reviewIds[7], userIds[4], 'Couldn’t have said it better.'],
+      
+      [reviewIds[8], userIds[5], 'So true, very helpful.'],
+      [reviewIds[8], userIds[0], 'Well explained!'],
+      [reviewIds[8], userIds[3], 'Absolutely right.'],
+      [reviewIds[8], userIds[1], 'Nice perspective.'],
+
+      [reviewIds[9], userIds[6], 'Absolutely loved this!'],
+      [reviewIds[9], userIds[2], 'Very informative.'],
+      [reviewIds[9], userIds[4], 'Helpful review!'],
+      
+      [reviewIds[10], userIds[7], 'Good insight, thanks for sharing.'],
+      [reviewIds[10], userIds[1], 'Really helpful!'],
+      [reviewIds[10], userIds[3], 'Well explained.'],
+      [reviewIds[10], userIds[2], 'Nice review.'],
+
+      [reviewIds[11], userIds[8], 'Nice review, informative.'],
+      [reviewIds[11], userIds[0], 'Excellent comment!'],
+      
+      [reviewIds[12], userIds[1], 'Exactly what I thought too.'],
+      [reviewIds[12], userIds[3], 'Great perspective!'],
+      [reviewIds[12], userIds[6], 'Totally agree!'],
+      [reviewIds[12], userIds[2], 'Helpful review.'],
+
+      [reviewIds[13], userIds[3], 'Helpful review, much appreciated.'],
+  
+      [reviewIds[14], userIds[0], 'I learned a lot from this comment.'],
+      [reviewIds[14], userIds[2], 'Great explanation!'],
+      [reviewIds[14], userIds[3], 'Well put!'],
+      [reviewIds[14], userIds[4], 'Informative and helpful.'],
+
+      [reviewIds[15], userIds[2], 'Perfectly said!'],
+      [reviewIds[15], userIds[1], 'I completely agree!'],
+  
+      [reviewIds[16], userIds[4], 'Totally agree with your thoughts.'],
+      [reviewIds[16], userIds[0], 'Helpful comment!'],
+      [reviewIds[16], userIds[2], 'Great perspective.'],
+      [reviewIds[16], userIds[3], 'Nice insight.'],
+
+      [reviewIds[17], userIds[5], 'Couldn’t have put it better myself.'],
+      [reviewIds[17], userIds[1], 'Very helpful!'],
+      [reviewIds[17], userIds[0], 'Absolutely agree.'],
+      [reviewIds[17], userIds[2], 'Nice comment!'],
     ];
 
     for (const rc of reviewComments) {
       await client.query(
         `INSERT INTO review_comments (review_id, user_id, comment)
-         VALUES ($1,$2,$3)`,
+        VALUES ($1, $2, $3)`,
         rc
-      );
+      );  
     }
+    
     console.log(`✅ Inserted ${reviewComments.length} review comments`);
 
     await client.query('COMMIT');

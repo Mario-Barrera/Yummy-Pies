@@ -3,8 +3,8 @@ const router = express.Router();
 const client = require('../db/client');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 
-// USER ROUTES
-// GET all comments for a specific review (user)
+
+// GET all comments for a specific review (authenticated users)
 router.get('/review/:review_id', requireAuth, async (req, res) => {
   const { review_id } = req.params;
   try {
@@ -23,7 +23,8 @@ router.get('/review/:review_id', requireAuth, async (req, res) => {
   }
 });
 
-// POST a new comment for a review (user)
+
+// POST a new comment for a review (authenticated users)
 router.post('/review/:review_id', requireAuth, async (req, res) => {
   const { review_id } = req.params;
   const user_id = req.user.user_id;
@@ -44,6 +45,7 @@ router.post('/review/:review_id', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to create comment' });
   }
 });
+
 
 // PUT update a comment (user can only update their own)
 router.put('/:comment_id', requireAuth, async (req, res) => {
@@ -73,6 +75,7 @@ router.put('/:comment_id', requireAuth, async (req, res) => {
   }
 });
 
+
 // DELETE a comment (user can only delete their own)
 router.delete('/:comment_id', requireAuth, async (req, res) => {
   const { comment_id } = req.params;
@@ -95,7 +98,7 @@ router.delete('/:comment_id', requireAuth, async (req, res) => {
   }
 });
 
-// ADMIN ROUTES
+
 // GET all review comments (admin only)
 router.get('/admin', requireAuth, async (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Access denied' });
@@ -113,6 +116,7 @@ router.get('/admin', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch comments' });
   }
 });
+
 
 // DELETE any comment (admin only)
 router.delete('/admin/:comment_id', requireAuth, async (req, res) => {
@@ -132,6 +136,44 @@ router.delete('/admin/:comment_id', requireAuth, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to delete comment' });
+  }
+});
+
+
+// GET all review comments (public)
+router.get('/all', async (req, res) => {
+  try {
+    const result = await client.query(`
+      SELECT rc.comment_id, rc.comment, rc.created_at, rc.review_id,
+             u.user_id, u.name AS user_name
+      FROM review_comments rc
+      JOIN users u ON rc.user_id = u.user_id
+      ORDER BY rc.created_at ASC
+    `);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch review comments' });
+  }
+});
+
+
+// GET comments for a specific review (public)
+router.get('/public/:review_id', async (req, res) => {
+  const { review_id } = req.params;
+  try {
+    const result = await client.query(
+      `SELECT rc.comment_id, rc.comment, rc.created_at, u.user_id, u.name AS user_name
+       FROM review_comments rc
+       JOIN users u ON rc.user_id = u.user_id
+       WHERE rc.review_id = $1
+       ORDER BY rc.created_at ASC`,
+      [review_id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch comments' });
   }
 });
 
