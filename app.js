@@ -17,6 +17,7 @@ const cartItemsRouter = require('./routes/cart-Items');
 const paymentsRouter = require('./routes/payments');
 const reviewsRouter = require('./routes/reviews');
 const reviewCommentsRouter = require('./routes/reviewComments');
+const resetPasswordRouter = require('./routes/reset-password');
 
 
 // Mount routes
@@ -28,6 +29,7 @@ app.use('/cart-items', cartItemsRouter);
 app.use('/payments', paymentsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/review-comments', reviewCommentsRouter);
+app.use('/reset-password', resetPasswordRouter);
 
 
 // Health check route
