@@ -4,6 +4,68 @@ const client = require('../db/client');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 
 
+// GET comments for the logged-in user
+router.get('/user/:userId', requireAuth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (parseInt(userId) !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    const { rows } = await client.query(
+      'SELECT comment_id AS id, review_id, content, created_at FROM review_comments WHERE user_id=$1 ORDER BY created_at DESC',
+      [userId]
+    );
+
+    res.json(rows);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch comments' });
+  }
+});
+
+// PATCH a comment
+router.patch('/:commentId', requireAuth, async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    const { content } = req.body;
+
+    const { rows } = await client.query('SELECT * FROM review_comments WHERE comment_id=$1', [commentId]);
+    if (!rows.length || rows[0].user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    await client.query('UPDATE review_comments SET content=$1 WHERE comment_id=$2', [content, commentId]);
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update comment' });
+  }
+});
+
+// DELETE a comment
+router.delete('/:commentId', requireAuth, async (req, res) => {
+  try {
+    const { commentId } = req.params;
+
+    const { rows } = await client.query('SELECT * FROM review_comments WHERE comment_id=$1', [commentId]);
+    if (!rows.length || rows[0].user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    await client.query('DELETE FROM review_comments WHERE comment_id=$1', [commentId]);
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete comment' });
+  }
+});
+
+
 // GET all comments for a specific review (authenticated users)
 router.get('/review/:review_id', requireAuth, async (req, res) => {
   const { review_id } = req.params;

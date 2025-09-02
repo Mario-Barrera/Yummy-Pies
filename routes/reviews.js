@@ -3,6 +3,72 @@ const router = express.Router();
 const client = require('../db/client');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 
+
+// GET reviews for the logged-in user
+router.get('/user/:userId', requireAuth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Ensure the requested userId matches the logged-in user
+    if (parseInt(userId) !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    const { rows } = await client.query(
+      'SELECT review_id AS id, product_id, content, rating, created_at FROM reviews WHERE user_id=$1 ORDER BY created_at DESC',
+      [userId]
+    );
+
+    res.json(rows);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch reviews' });
+  }
+});
+
+// PATCH a review (edit)
+router.patch('/:reviewId', requireAuth, async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+    const { content } = req.body;
+
+    // Check if review belongs to user
+    const { rows } = await client.query('SELECT * FROM reviews WHERE review_id=$1', [reviewId]);
+    if (!rows.length || rows[0].user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    await client.query('UPDATE reviews SET content=$1 WHERE review_id=$2', [content, reviewId]);
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update review' });
+  }
+});
+
+// DELETE a review
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+
+    // Check if review belongs to user
+    const { rows } = await client.query('SELECT * FROM reviews WHERE review_id=$1', [reviewId]);
+    if (!rows.length || rows[0].user_id !== req.user.user_id) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    await client.query('DELETE FROM reviews WHERE review_id=$1', [reviewId]);
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete review' });
+  }
+});
+
+
 // USER ROUTES
 // GET all reviews for a specific product
 router.get('/product/:productId', async (req, res) => {
