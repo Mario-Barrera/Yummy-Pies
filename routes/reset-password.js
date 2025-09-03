@@ -1,9 +1,8 @@
-
 const express = require('express');
 const router = express.Router();
-const client = require('../db/client'); // your database client
-const crypto = require('crypto');       // to generate secure tokens
-const sendEmail = require('../utils/sendEmail'); // your email helper
+const client = require('../db/client');
+const crypto = require('crypto');                         // to generate secure tokens
+const sendEmail = require('../utils/sendEmail');          // your email helper
 
 // POST /reset-password
 router.post('/', async (req, res) => {
@@ -18,7 +17,7 @@ router.post('/', async (req, res) => {
 
     // 2. Generate a secure token
     const token = crypto.randomBytes(32).toString('hex');
-    const expires = new Date(Date.now() + 15 * 60 * 1000); // 15 min
+    const expires = new Date(Date.now() + 15 * 60 * 1000);        // 15 min
 
     // 3. Store token in DB
     await client.query(

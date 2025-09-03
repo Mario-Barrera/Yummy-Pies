@@ -143,25 +143,25 @@ html, body {
 }
 
 /* ------ Orders, Reviews, Comments ------ */
-.profile-orders,
+#order-history-section,
 .profile-reviews,
 .profile-comments {
     margin-top: 30px;
 }
 
-#orders-list,
-#reviews-list,
+.orders-list,
+.reviews-list,
 #comments-list {
     list-style: none;
 }
 
-#orders-list,
-#reviews-list,
+.orders-list,
+.reviews-list,
 #comments-list {
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 15px;
+    padding: 20px;
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between;

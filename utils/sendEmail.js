@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-async function sendEmail(to, subject, text) {
+async function sendEmail(to, subject, text, html) {
   try {
     // Create a transporter
     const transporter = nodemailer.createTransport({
@@ -19,8 +19,8 @@ async function sendEmail(to, subject, text) {
       from: `"Yummy Pies" <${process.env.EMAIL_USER}>`,
       to,
       subject,
-      text,      // fallback plain text
-      html: `<p>Click <a href="${text}">here</a> to reset your password</p>` // HTML version
+      text,
+      html
     });
 
     console.log('Email sent:', info.messageId);

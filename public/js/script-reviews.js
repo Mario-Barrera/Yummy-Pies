@@ -1,48 +1,55 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const reviewsContainer = document.querySelector('.reviews-list'); // adjust selector as needed
+async function loadUserReviews() {
+    const container = document.getElementById('user-reviews');
+
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        container.innerHTML = '<p class="error">You are not logged in. Please log in to see your reviews.</p>';
+        return;
+    }
 
     try {
-        const response = await fetch('/reviews/all'); // or your endpoint to fetch all reviews
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch('/reviews/user', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.status === 401) {
+          container.innerHTML = '<p class="error">Session expired or unauthorized. Please log in again.</p>';
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+
         const reviews = await response.json();
 
-        reviewsContainer.innerHTML = reviews.map(review => {
-            // Generate star rating
-            const maxStars = 5;
-            const stars = '★'.repeat(review.rating) + '☆'.repeat(maxStars - review.rating);
+        if (reviews.length === 0) {
+          container.textContent = 'No reviews found.';
+          return;
+        }
 
-            return `
-                <div class="review">
-                    <div class="review-header">
-                        <strong>${review.user_name}</strong>
-                    </div>
+        container.innerHTML = ''; // Clear loading text
 
-                    <div class="review-stars-comments">
-                        <div class="stars">${stars}</div>
-                        <div class="comments-link">
-                            <a href="review-comments.html?reviewId=${review.review_id}">
-                                View all comments
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="review-product">
-                        <em>${review.product_name.replace(/\b(slice|whole)\b/gi, '').trim()} Pie</em>
-                    </div>
-                
-                    <p class="review-text">
-                        ${review.comment || ''}
-                    </p>
-
-                    <div class="review-date">
-                        ${new Date(review.created_at).toLocaleDateString()}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-    } catch (err) {
-        reviewsContainer.innerHTML = `<p>Error loading reviews: ${err.message}</p>`;
-        console.error(err);
+        reviews.forEach(review => {
+          const reviewDiv = document.createElement('div');
+          reviewDiv.className = 'review';
+          reviewDiv.innerHTML = `
+            <h4>Product ID: ${review.product_id}</h4>
+            <p>Rating: ${review.rating}</p>
+            <p>Comment: ${review.comment || 'No comment'}</p>
+            <p>Date: ${new Date(review.created_at).toLocaleDateString()}</p>
+          `;
+          container.appendChild(reviewDiv);
+        });
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p class="error">Error loading reviews. Please try again later.</p>';
     }
-});
+}
+
+// Call function on page load
+loadUserReviews();

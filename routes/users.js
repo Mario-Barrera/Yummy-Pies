@@ -1,114 +1,17 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const pool = require('../db/client');
-const authenticateToken = require('../middleware/authenticateToken');
+const { requireAuth, requireAdmin } = require('../middleware/auth');
+const validatePassword = require('../utils/passwordValidator');
 const router = express.Router();
 
-require('dotenv').config();
-
-// Password validation function example
-function validatePassword(password) {
-  const minLength = 8;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasDigit = /\d/.test(password);
-  const hasSpecialChar = /[\W_]/.test(password); // non-word character or underscore
-
-  if (password.length < minLength) {
-    return `Password must be at least ${minLength} characters long.`;
-  }
-  if (!hasUpperCase) {
-    return 'Password must contain at least one uppercase letter.';
-  }
-  if (!hasLowerCase) {
-    return 'Password must contain at least one lowercase letter.';
-  }
-  if (!hasDigit) {
-    return 'Password must contain at least one digit.';
-  }
-  if (!hasSpecialChar) {
-    return 'Password must contain at least one special character.';
-  }
-
-  return null; // valid password
-}
-
-// Register a new user
-router.post('/register', async (req, res, next) => {
-  let { name, email, password, address, phone } = req.body;
-  email = email.toLowerCase().trim(); // normalize email and remove surrounding whitespace
-
-  const passwordError = validatePassword(password);
-  if (passwordError) {
-    return res.status(400).json({ error: passwordError });
-  }
-
+// Get logged-in user's profile
+router.get('/me', requireAuth, async (req, res, next) => {
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      `INSERT INTO Users (name, email, password, address, phone)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING user_id, name, email, role`,
-      [name, email, hashedPassword, address, phone]
-    );
+    const userId = req.user.user_id;
 
-    res.status(201).json(result.rows[0]);
-  } catch (err) {
-    if (err.code === '23505') {
-      res.status(400).json({ error: 'Email already registered' });
-    } else {
-      next(err);
-    }
-  }
-});
-
-// Login users
-router.post('/login', async (req, res, next) => {
-  let { email, password } = req.body;
-  email = email.toLowerCase().trim(); // normalize email and remove surrounding whitespace
-
-  try {
     const { rows } = await pool.query(
-      `SELECT * FROM Users WHERE email = $1`,
-      [email]
-    );
-
-    if (rows.length === 0)
-      return res.status(400).json({ error: 'Invalid email or password' });
-
-    const user = rows[0];
-    const match = await bcrypt.compare(password, user.password);
-
-    if (!match)
-      return res.status(400).json({ error: 'Invalid email or password' });
-
-    // Create JWT
-    const token = jwt.sign(
-      { user_id: user.user_id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' }
-    );
-
-    res.json({ token, user: { user_id: user.user_id, name: user.name, email: user.email, role: user.role } });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// Get user profile by ID (protected route)
-router.get('/:id', authenticateToken, async (req, res, next) => {
-  const userId = req.params.id;
-
-  // Restrict users from fetching other users’ profiles
-  if (req.user.user_id !== parseInt(userId) && req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-
-  try {
-    const { rows } = await pool.query(
-      `SELECT user_id, name, email, address, phone, role, created_at
-       FROM Users
+      `SELECT user_id AS id, name, email, address, phone, role
+       FROM users
        WHERE user_id = $1`,
       [userId]
     );
@@ -120,18 +23,109 @@ router.get('/:id', authenticateToken, async (req, res, next) => {
   }
 });
 
-// Logout with blacklist
-router.post('/logout', async (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+// Get user profile by ID (admin or owner only)
+router.get('/:id', requireAuth, async (req, res, next) => {
+  const userId = req.params.id;
 
-  if (!token) return res.status(401).json({ error: 'No token provided' });
+  // Only allow if admin or the user themselves
+  if (req.user.user_id !== parseInt(userId) && req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
 
   try {
-    await pool.query(`INSERT INTO tokenblacklist (token) VALUES ($1) ON CONFLICT DO NOTHING`, [token]);
-    res.json({ message: 'Logged out successfully (token invalidated)' });
+    const { rows } = await pool.query(
+      `SELECT user_id, name, email, address, phone, role, created_at
+       FROM users
+       WHERE user_id = $1`,
+      [userId]
+    );
+
+    if (rows.length === 0) return res.status(404).json({ error: 'User not found' });
+    res.json(rows[0]);
   } catch (err) {
     next(err);
   }
 });
+
+
+const bcrypt = require('bcrypt');
+
+router.put('/me', requireAuth, async (req, res, next) => {
+  const userId = req.user.user_id;
+  const { name, email, address, phone, password } = req.body;
+
+  // Build dynamic update query
+  const updates = [];
+  const values = [];
+  let idx = 1;
+
+  try {
+    if (name) {
+      if (typeof name !== 'string' || name.length < 4 || name.length > 100) {
+        return res.status(400).json({ error: 'Name must be between 4 and 100 characters.' });
+}
+      updates.push(`name = $${idx++}`);
+      values.push(name);
+    }
+
+    if (email) {
+      if (typeof email !== 'string' || email.length > 150) {
+        return res.status(400).json({ error: 'Email must be up to 150 characters long' });
+      }
+      updates.push(`email = $${idx++}`);
+      values.push(email.toLowerCase().trim());
+    }
+
+    if (address) {
+      if (typeof address !== 'string' || address.length > 100) {
+        return res.status(400).json({ error: 'Address must be up to 100 characters long' });
+      }
+      updates.push(`address = $${idx++}`);
+      values.push(address);
+    }
+
+    if (phone) {
+      if (typeof phone !== 'string' || phone.length > 20) {
+        return res.status(400).json({ error: 'Phone must be up to 20 characters long' });
+      }
+      updates.push(`phone = $${idx++}`);
+      values.push(phone);
+    }
+
+    if (password) {
+      const passwordError = validatePassword(password);
+    if (passwordError) {
+      return res.status(400).json({ error: passwordError });
+    }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updates.push(`password = $${idx++}`);
+      values.push(hashedPassword);  
+    }
+
+    if (updates.length === 0) {
+      return res.status(400).json({ error: 'No valid fields to update' });
+    }
+
+    values.push(userId); // For WHERE clause
+
+    const query = `
+      UPDATE users 
+      SET ${updates.join(', ')}
+      WHERE user_id = $${idx}
+      RETURNING user_id, name, email, address, phone, role
+    `;
+
+    const { rows } = await pool.query(query, values);
+    res.json({ user: rows[0] });
+
+  } catch (err) {
+    if (err.code === '23505') {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+    next(err);
+  }
+});
+
 
 module.exports = router;

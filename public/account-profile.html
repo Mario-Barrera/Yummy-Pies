@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <script src="js/account-profile.js" defer></script>
+    <script src="js/script-orders.js" defer></script>   <!--contians frontend js code-->
     <script src="js/user-greeting.js" defer></script>
 </head>
 <body>
@@ -108,23 +108,25 @@
                 <p><strong>Address:</strong> <span id="profile-address"></span></p>
             </section>
 
-            <section class="profile-orders">
-                <h2 class="heading">Orders</h2>
-                <ul id="orders-list">
-                    <!-- Orders will be populated dynamically by account-profile.js -->
-                </ul>
+            <!-- Make sure the HTML element IDs or class names match those used in the frontend JS file -->
+            <section id="order-history-section">
+                <h2 class="heading">My Order History</h2>
+                <div id="order-history" class="order-list">
+                    <!-- Orders will be dynamically loaded here -->
+                </div>
             </section>
 
             <section class="profile-reviews">
                 <h2 class="heading">Reviews</h2>
-                <ul id="reviews-list">
+                <ul id="user-reviews" class="reviews-list">
                     <!-- Reviews will be populated dynamically by account-profile.js -->
                 </ul>
             </section>
 
+            <!--still need to changes these two after completing backend and frontend js-->
             <section class="profile-comments">
                 <h2 class="heading">Comments</h2>
-                <ul id="comments-list">
+                <ul id="comments-list" class="user-comments-list">
                     <!-- Comments will be populated dynamically by account-profile.js -->
                 </ul>
             </section>

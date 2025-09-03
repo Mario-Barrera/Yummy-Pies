@@ -1,4 +1,4 @@
-const winston = require('winston');
+const winston = require('winston');     // the winston logger library
 
 const logger = winston.createLogger({
   level: 'info',

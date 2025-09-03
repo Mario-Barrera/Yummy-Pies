@@ -157,3 +157,82 @@ router.delete('/admin/:cartItemId', requireAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+// new code, not sure if I am going to use it
+const express = require('express');
+const router = express.Router();
+const db = require('../db'); // your database client/connection
+const authenticateUser = require('../middleware/authenticateUser'); // your auth middleware
+
+// Get all cart items for logged-in user
+router.get('/', authenticateUser, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+    const result = await db.query(
+      `SELECT ci.cart_item_id, ci.product_id, p.name, p.price, ci.quantity, ci.price_at_purchase
+       FROM cart_items ci
+       JOIN products p ON ci.product_id = p.product_id
+       WHERE ci.user_id = $1`,
+      [userId]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error fetching cart items' });
+  }
+});
+
+// Add or update cart item for logged-in user
+router.post('/', authenticateUser, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+    const { product_id, quantity, price_at_purchase } = req.body;
+
+    // Check if item already exists in cart
+    const existing = await db.query(
+      `SELECT quantity FROM cart_items WHERE user_id = $1 AND product_id = $2`,
+      [userId, product_id]
+    );
+
+    if (existing.rows.length > 0) {
+      // Update quantity
+      const newQuantity = existing.rows[0].quantity + quantity;
+      await db.query(
+        `UPDATE cart_items SET quantity = $1 WHERE user_id = $2 AND product_id = $3`,
+        [newQuantity, userId, product_id]
+      );
+    } else {
+      // Insert new cart item
+      await db.query(
+        `INSERT INTO cart_items (user_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)`,
+        [userId, product_id, quantity, price_at_purchase]
+      );
+    }
+    res.json({ message: 'Cart updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error updating cart' });
+  }
+});
+
+// Remove cart item by cart_item_id for logged-in user
+router.delete('/:cart_item_id', authenticateUser, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+    const cartItemId = req.params.cart_item_id;
+
+    await db.query(
+      `DELETE FROM cart_items WHERE cart_item_id = $1 AND user_id = $2`,
+      [cartItemId, userId]
+    );
+
+    res.json({ message: 'Cart item removed' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error removing cart item' });
+  }
+});
+
+module.exports = router;

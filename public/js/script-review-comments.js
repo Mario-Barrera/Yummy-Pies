@@ -42,3 +42,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(err);
     }
 });
+
+
+
+// addition code I might need to add
+fetch('/api/review-comments/my-comments')  // custom endpoint for current user
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to fetch review comments');
+    return res.json();
+  })
+  .then(comments => {
+    renderUserReviewComments(comments);  // render in the DOM
+  })
+  .catch(err => {
+    console.error('Error loading review comments:', err);
+  });
+
+
+  function renderUserReviewComments(comments) {
+  const container = document.getElementById('user-review-comments-list');
+  container.innerHTML = '';
+
+  if (comments.length === 0) {
+    container.innerHTML = '<p>You have not posted any review comments.</p>';
+    return;
+  }
+
+  comments.forEach(comment => {
+    const div = document.createElement('div');
+    div.classList.add('user-comment');
+    div.innerHTML = `
+      <h4>Comment on Review #${comment.review_id}</h4>
+      <p>${comment.comment}</p>
+      <small>Posted on: ${new Date(comment.created_at).toLocaleString()}</small>
+    `;
+    container.appendChild(div);
+  });
+}

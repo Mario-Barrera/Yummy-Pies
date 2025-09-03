@@ -1,7 +1,9 @@
 -- Users table (registered accounts)
+-- 255 is standard for storing hashed passwords (like bcrypt hashes)
+-- Make sure your backend logic clears expired tokens and validates expiration correctly
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL CHECK (char_length(name) BETWEEN 4 AND 100),
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     address VARCHAR(100),
@@ -13,6 +15,8 @@ CREATE TABLE users (
 );
 
 -- Products table
+-- line code 26, will store average rating
+-- storing might need updates when reviews change
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -25,6 +29,7 @@ CREATE TABLE products (
 );
 
 -- Orders table
+-- since there is statuses for Cancelled and Refunded, ensure your backend logic updates related fields properly
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -43,6 +48,10 @@ CREATE TABLE orders (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Create index on user_id to speed up queries filtering by user
+CREATE INDEX idx_orders_user_id ON orders(user_id);
+
 -- Order items table
 CREATE TABLE order_items (
     order_item_id SERIAL PRIMARY KEY,
@@ -53,6 +62,12 @@ CREATE TABLE order_items (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create index to speed up queries fetching all items in a specific order
+-- Create index to improve performance when querying by product (e.g., sales stats or inventory tracking)
+CREATE INDEX idx_order_items_order_id ON order_items(order_id);
+CREATE INDEX idx_order_items_product_id ON order_items(product_id);
+
+
 -- Reviews table
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
@@ -61,6 +76,7 @@ CREATE TABLE reviews (
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    UNIQUE (user_id, product_id) -- One review per user per product
 );
 
 -- Review comments table
@@ -70,7 +86,16 @@ CREATE TABLE review_comments (
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    UNIQUE (user_id, review_id)  -- One review comment per user per product
+
 );
+
+-- To fetch all comments for a specific review
+CREATE INDEX idx_review_comments_review_id ON review_comments(review_id);
+
+-- To fetch all comments made by a specific user (e.g., user profile)
+CREATE INDEX idx_review_comments_user_id ON review_comments(user_id);
+
 
 -- Cart items table
 CREATE TABLE cart_items (
@@ -83,7 +108,8 @@ CREATE TABLE cart_items (
     UNIQUE(user_id, product_id)
 );
 
--- Payments table
+
+-- Payments table: stores payment details for each order
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
     order_id INT NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
@@ -94,7 +120,7 @@ CREATE TABLE payments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Token blacklist table
+-- Token blacklist table: stores revoked JWT tokens to prevent reuse
 CREATE TABLE IF NOT EXISTS token_blacklist (
     id SERIAL PRIMARY KEY,
     token TEXT UNIQUE NOT NULL,

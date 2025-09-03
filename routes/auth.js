@@ -1,44 +1,36 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const client = require('../db/client');
+const pool = require('../db/client');                 // Use 'pool' consistently
+const { requireAuth } = require('../middleware/auth');
+const validatePassword = require('../utils/passwordValidator');  // Import validator
 
 const router = express.Router();
 
-// Register new user
-router.post('/register', async (req, res) => {
-  const { name, email, password, address, phone } = req.body;
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const { rows } = await client.query(
-      `INSERT INTO users (name, email, password, address, phone) 
-       VALUES ($1, $2, $3, $4, $5) RETURNING user_id, name, email, role`,
-      [name, email, hashedPassword, address, phone]
-    );
-    res.status(201).json({ user: rows[0] });
-  } catch (err) {
-    // Handle duplicate email
-    if (err.code === '23505') { // Postgres unique violation
-      return res.status(400).json({ error: 'Email already registered' });
-    }
-
-    console.error(err);
-    res.status(500).json({ error: 'Registration failed' });
+// POST /login
+router.post('/login', async (req, res, next) => {
+  let { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password required' });
   }
-});
 
-// Login user
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  email = email.toLowerCase().trim();
 
   try {
-    const { rows } = await client.query('SELECT * FROM users WHERE email=$1', [email]);
-    if (rows.length === 0) return res.status(401).json({ error: 'Invalid email or password' });
+    const { rows } = await pool.query(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
 
     const user = rows[0];
     const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) return res.status(401).json({ error: 'Invalid email or password' });
+    if (!validPassword) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
 
     const token = jwt.sign(
       { user_id: user.user_id, email: user.email, role: user.role },
@@ -46,14 +38,86 @@ router.post('/login', async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.json({ 
-      token, 
-      user: { id: user.user_id, name: user.name, email: user.email, role: user.role } 
+    res.json({
+      token,
+      user: {
+        user_id: user.user_id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
     });
-
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Login failed' });
+    next(err);
+  }
+});
+
+// POST /register
+router.post('/register', async (req, res, next) => {
+  let { name, email, password, address, phone } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'Name, email, and password are required' });
+  }
+
+  email = email.toLowerCase().trim();
+
+  // Password validation
+  const passwordError = validatePassword(password);
+  if (passwordError) {
+    return res.status(400).json({ error: passwordError });
+  }
+
+  // Field length validations
+  if (typeof name !== 'string' || name.length < 4 || name.length > 100) {
+    return res.status(400).json({ error: 'Name must be between 4 and 100 characters.' });
+  }
+
+  if (typeof email !== 'string' || email.length === 0 || email.length > 150) {
+    return res.status(400).json({ error: 'Email must be 1-150 characters long.' });
+  }
+
+  if (address && (typeof address !== 'string' || address.length > 100)) {
+    return res.status(400).json({ error: 'Address can be up to 100 characters long.' });
+  }
+
+  if (phone && (typeof phone !== 'string' || phone.length > 20)) {
+    return res.status(400).json({ error: 'Phone can be up to 20 characters long.' });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const { rows } = await pool.query(
+      `INSERT INTO users (name, email, password, address, phone)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING user_id, name, email, role`,
+      [name, email, hashedPassword, address, phone]
+    );
+
+    res.status(201).json({ user: rows[0] });
+  } catch (err) {
+    if (err.code === '23505') { // unique violation (email)
+      return res.status(400).json({ error: 'Email already registered' });
+    }
+    next(err);
+  }
+});
+
+// POST /logout (invalidate token)
+router.post('/logout', requireAuth, async (req, res, next) => {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+    await pool.query(
+      `INSERT INTO token_blacklist (token) VALUES ($1) ON CONFLICT DO NOTHING`,
+      [token]
+    );
+    res.json({ message: 'Logged out successfully (token invalidated)' });
+  } catch (err) {
+    next(err);
   }
 });
 

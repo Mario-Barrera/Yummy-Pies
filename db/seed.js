@@ -101,8 +101,8 @@ async function seed() {
     const userIds = [];
     for (const u of users) {
       const { rows } = await client.query(
-        `INSERT INTO users (name, email, password, address, phone, role)
-         VALUES ($1,$2,$3,$4,$5,$6)
+        `INSERT INTO users (name, email, password, address, phone, role, reset_token, reset_expires)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
          RETURNING user_id`,
         u
       );
@@ -369,6 +369,7 @@ async function seed() {
     console.error('Seed failed:', error);
   } finally {
     await client.end();
+    console.log('🔌 Disconnected from DB');
   }
 }
 
