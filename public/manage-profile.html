@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Deliciously fresh, homemade pies baked daily with the finest ingredients. Explore our variety of sweet and savory pies, perfect for any occasion.">
-    <meta name="author" content="Yummy Pies">
 
-    <meta property="og:title" content="About Yummy Pies | Homemade Pies with Heart">
-    <meta property="og:description" content="Learn about Yummy Pies — founded by Mario Barrera, crafted fresh daily, with quality you can taste in every bite.">
-    <meta property="og:image" content="https://www.yummypies.com/images/og-yummypies.jpg">
-    <meta property="og:url" content="https://www.yummypies.com/about.html">
-    <meta property="og:type" content="website">
+    <meta name="description" content="Update your Yummy Pies profile including name, email, password, and contact preferences.">
+    <meta name="keywords" content="Yummy Pies, manage profile, update account, change email, change password, user settings">
+
+    <meta property="og:title" content="Yummy Pies - Manage Profile">
     <meta property="og:site_name" content="Yummy Pies">
+    <meta property="og:description" content="Easily update your Yummy Pies account details including name, email, password, and preferences.">
+    <meta property="og:url" content="https://www.yummypies.com/manage-profile.html">
+    <meta property="og:image" content="https://www.yummypies.com/images/manage-profile.jpg">
 
-    <title>Yummy Pies | About Page</title>
-  
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About Yummy Pies | Homemade Pies with Heart">
-    <meta name="twitter:description" content="Discover the story behind Yummy Pies — baked fresh daily with care and the finest ingredients.">
-    <meta name="twitter:image" content="https://www.yummypies.com/images/og-yummypies.jpg">
+    <meta name="twitter:title" content="Yummy Pies - Manage Profile">
+    <meta name="twitter:description" content="Securely manage your Yummy Pies profile details and preferences.">
+    <meta name="twitter:image" content="https://www.yummypies.com/images/manage-profile.jpg">
     <meta name="twitter:site" content="@YummyPies1">
-  
-    <link rel="canonical" href="https://www.yummypies.com/about.html">
-  
-    <link rel="stylesheet" type="text/css" href="css/style-about.css">
+
+    <title>Yummy Pies | Manage Profile</title>
+
+    <link rel="canonical" href="https://www.yummypies.com/manage-profile.html">
+    <link rel="stylesheet" type="text/css" href="css/style-manage-profile.css">
     <link rel="stylesheet" type="text/css" href="css/style-user-greeting.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <script src="js/script-manage-profile.js" defer></script>
     <script src="/js/script-nav.js" defer></script> 
-    <script src="/js/script-cart-items.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
+    <script src="/js/script-cart-items.js" defer></script>
 </head>
 <body>
     <div class="layout">
@@ -102,35 +101,47 @@
             </div>
         </aside>
 
-        <main class="main-container">
-            <div class="about-image">
-                <img src="images/pieShell-about.png" alt="Pie dough with a rolling pin">
-            </div>
+        <main class="manage-profile-main">
+            <section class="manage-profile-section">
+                <h2 class="heading">Update Your Profile</h2>
 
-            <div class="main-content">
-                <h1 class="heading">About Yummy Pies</h1>
+                <form class="manage-profile-form" id="manageProfileForm" novalidate>
+                    <div class="form-group">
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
 
-                <p class="about-paragraph">
-                    Welcome to Yummy Pies — where pie isn’t just dessert, it’s a full-blown flavor celebration.
-                </p>
+                    <div class="form-group">
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
 
-                <p>
-                    Founded in 2021 by Mario Barrera, a graduate of The Art Institute of Austin, Yummy Pies was born from a lifelong passion for baking. Mario’s love for pies began at age 10, baking alongside his mom in the family kitchen. What started as a cherished tradition quickly became a mission: to create pies that leave a lasting impression from the very first bite.
-                </p>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
 
-                <p>
-                    What’s our secret? The crust. Flaky, tender, and irresistibly buttery — it’s the foundation of every unforgettable pie. We pour love and precision into each golden layer, because without the perfect crust, the pie just isn’t complete. And that’s just the beginning. Our fillings burst with bold, fresh flavors from comforting classics to daring seasonal creations.
-                </p>
+                    <div class="form-group">
+                        <label for="password">Password (leave blank to keep current):</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
 
-                <p>
-                    At Yummy Pies, we’re not just baking — we’re creating moments. Moments of joy, comfort, and just the right amount of indulgence. Ready to find your new favorite slice? Let the pie adventure begin.
-                </p>
+                    <input type="hidden" name="name" id="name">
 
-                <p class="signature">
-                    — Mario Barrera
-                </p>
-            </div>
+                    <button type="submit" class="btn-link">Update Profile</button>
+                </form>
+            </section>
         </main>
+
+        <script>
+            const form = document.getElementById('manageProfileForm');
+            form.addEventListener('submit', (e) => {
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+                const fullName = `${firstName} ${lastName}`.trim();
+                document.getElementById('name').value = fullName;
+            });
+        </script>
     </div>
 
     <footer class="footer">
@@ -153,3 +164,7 @@
     </footer>
 </body>
 </html>
+
+
+
+
