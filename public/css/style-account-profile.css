@@ -131,6 +131,29 @@ html, body {
     margin-bottom: 10px;
 }
 
+/* ------ Navigation links ------ */
+.profile-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin: 20px 0 0 170px;                     /* your left margin */
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #f6a030;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  background-color: #cfaa77;
+}
+
 /* ------ Profile Info ------ */
 .profile-info p {
     font-size: 1rem;
@@ -143,7 +166,7 @@ html, body {
 }
 
 /* ------ Orders, Reviews, Comments ------ */
-#order-history-section,
+.profile-orders,
 .profile-reviews,
 .profile-comments {
     margin-top: 30px;
@@ -151,13 +174,13 @@ html, body {
 
 .orders-list,
 .reviews-list,
-#comments-list {
+.comments-list {
     list-style: none;
 }
 
 .orders-list,
 .reviews-list,
-#comments-list {
+.comments-list {
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 8px;

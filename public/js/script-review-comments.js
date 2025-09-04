@@ -1,81 +1,82 @@
-// script-review-comments.js
+async function loadReviewComments() {
+  const container = document.getElementById('review-comments');
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const commentsContainer = document.querySelector('.review-comments-list');
-
-    // Get the reviewId from the URL query parameter
-    const params = new URLSearchParams(window.location.search);
-    const reviewId = params.get('reviewId');
-
-    if (!reviewId) {
-        commentsContainer.innerHTML = `<p>No review ID provided in the URL.</p>`;
-        return;
-    }
-
-    try {
-        // Fetch comments for this specific review
-        const response = await fetch(`/review-comments/public/${reviewId}`);
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const comments = await response.json();
-
-        if (comments.length === 0) {
-            commentsContainer.innerHTML = `<p>No comments yet for this review.</p>`;
-            return;
-        }
-
-        // Display each comment
-        commentsContainer.innerHTML = comments.map(comment => `
-            <div class="review-comment">
-                <div class="comment-header">
-                    <strong>${comment.user_name}</strong> 
-                    <p class="comment-text">
-                        ${comment.comment}
-                    </p>
-                </div>
-                <span class="comment-date">${new Date(comment.created_at).toLocaleDateString()}</span>
-            </div>
-        `).join('');
-
-    } catch (err) {
-        commentsContainer.innerHTML = `<p>Error loading comments: ${err.message}</p>`;
-        console.error(err);
-    }
-});
-
-
-
-// addition code I might need to add
-fetch('/api/review-comments/my-comments')  // custom endpoint for current user
-  .then(res => {
-    if (!res.ok) throw new Error('Failed to fetch review comments');
-    return res.json();
-  })
-  .then(comments => {
-    renderUserReviewComments(comments);  // render in the DOM
-  })
-  .catch(err => {
-    console.error('Error loading review comments:', err);
-  });
-
-
-  function renderUserReviewComments(comments) {
-  const container = document.getElementById('user-review-comments-list');
-  container.innerHTML = '';
-
-  if (comments.length === 0) {
-    container.innerHTML = '<p>You have not posted any review comments.</p>';
+  const token = localStorage.getItem('token');
+  
+  if (!token) {
+    container.innerHTML = '<p class="error">You are not logged in. Please log in to see your comments.</p>';
     return;
   }
 
-  comments.forEach(comment => {
-    const div = document.createElement('div');
-    div.classList.add('user-comment');
-    div.innerHTML = `
-      <h4>Comment on Review #${comment.review_id}</h4>
-      <p>${comment.comment}</p>
-      <small>Posted on: ${new Date(comment.created_at).toLocaleString()}</small>
-    `;
-    container.appendChild(div);
-  });
+  try {
+    // Fetch user info (to check role)
+    const userResponse = await fetch('/auth/me', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!userResponse.ok) {
+      throw new Error('Failed to fetch user info');
+    }
+
+    const user = await userResponse.json();
+    const isAdmin = user.role === 'admin';
+
+    // Fetch comments depending on role
+    const commentsResponse = await fetch(isAdmin ? '/review-comments' : '/review-comments/user', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (commentsResponse.status === 401) {
+      container.innerHTML = '<p class="error">Session expired or unauthorized. Please log in again.</p>';
+      return;
+    }
+
+    if (!commentsResponse.ok) {
+      throw new Error('Failed to fetch comments');
+    }
+
+    const comments = await commentsResponse.json();
+
+    if (comments.length === 0) {
+      container.textContent = 'No comments found.';
+      return;
+    }
+
+    container.innerHTML = '';
+
+    comments.forEach(comment => {
+      const canModify = isAdmin || comment.user_id === user.user_id;
+
+      const commentDiv = document.createElement('div');
+      commentDiv.className = 'comment';
+      commentDiv.dataset.commentId = comment.comment_id;
+
+      commentDiv.innerHTML = `
+        <p><strong>${comment.user_name || 'User'}:</strong></p>
+        <p class="comment-text">${escapeHtml(comment.comment)}</p>
+        <p><small>Posted on: ${new Date(comment.created_at).toLocaleString()}</small></p>
+        ${canModify ? `
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        ` : ''}
+      `;
+
+      container.appendChild(commentDiv);
+    });
+
+    // Attach event listeners for edit and delete
+    container.querySelectorAll('.edit-btn').forEach(button => {
+      button.addEventListener('click', onEditComment);
+    });
+
+    container.querySelectorAll('.delete-btn').forEach(button => {
+      button.addEventListener('click', onDeleteComment);
+    });
+
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="error">Error loading comments. Please try again later.</p>';
+  }
 }
+
+loadReviewComments();
