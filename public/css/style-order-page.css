@@ -302,53 +302,6 @@ body {
   background-color: #ffc107;
 }
 
-/* ------ Event Form Section ------ */
-.event-section {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.section-heading {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-label {
-  display: block;
-  margin: 0.5rem 0;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="email"],
-select {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Step Navigation Buttons */
-[id^="go-button-step"],
-[id^="back-button-step"],
-#startNew-order-btn {
-  border: 1px solid black;
-  padding: 5px;
-  margin: 20px 10px;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-[id^="go-button-step"]:hover,
-[id^="back-button-step"]:hover,
-#startNew-order-btn:hover {
-  background-color: #d1cfcf;
-}
-
 /* ------ Footer ------ */
 .footer {
   width: 100%;

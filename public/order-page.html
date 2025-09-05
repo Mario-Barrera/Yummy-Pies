@@ -31,6 +31,7 @@
     <script src="/js/script-nav.js" defer></script> 
     <script src="/js/script-order-page.js" defer></script>
     <script src="/js/script-cart-items.js" defer></script>
+    <script src="/js/script-order-validation.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
 </head>
 <body>
@@ -235,13 +236,13 @@
         </main>
 
        <aside class="order-form-panel">
-            <form>       
+            <form id="order-form">       
                 <h2 class="order-title">Place an Order</h2>
 
                 <div class="event-section event-section1" id="step1">
                     <div class="orderNow-container">
                         <p class="empty-message">Add items to start your order.</p>
-                        <!-- Selected pies are dynamically inserted here -->
+                        <!-- JavaScript inserts selected pies here -->
                     </div>
                 </div>
                 <button type="button" id="go-button-step1" onclick="validateStep1('continue')">Continue</button>
