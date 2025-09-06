@@ -14,3 +14,18 @@ async function updateCartCount() {
 }
 
 document.addEventListener('DOMContentLoaded', updateCartCount);
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('/api/user-status');
+    const data = await res.json();
+
+    const accountLink = document.querySelector('#account-login-link'); // your link needs an ID or class
+    if (accountLink && data.loggedIn) {
+      accountLink.href = '/account/profile';
+      accountLink.textContent = 'My Profile';
+    }
+  } catch (error) {
+    console.error('Error checking login status:', error);
+  }
+});

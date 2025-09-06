@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+const pool = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
@@ -12,12 +12,12 @@ const client = new Client({
 
 async function seed() {
   try {
-    await client.connect();
-    await client.query('BEGIN');
+    await pool.connect();
+    await pool.query('BEGIN');
     console.log('Connected to DB');
 
     // Clear all tables before seeding
-    await client.query(`
+    await pool.query(`
       TRUNCATE TABLE
         review_comments,
         reviews,
@@ -68,7 +68,7 @@ async function seed() {
 
     const productIds = [];
     for (const p of products) {
-      const { rows } = await client.query(
+      const { rows } = await pool.query(
         `INSERT INTO products (name, price, stock_quantity, category, image_key, star_rating)
          VALUES ($1,$2,$3,$4,$5,$6)
          RETURNING product_id`,
@@ -77,30 +77,31 @@ async function seed() {
       productIds.push(rows[0].product_id);
     }
     console.log(`✅ Inserted ${productIds.length} products`);
-
+    
+    
     // Insert users
     const users = [
-      ['Alice Smith','alice@example.com',hashedPasswords[0],'123 Apple St','512-555-1234','customer'],
-      ['Bob Johnson','bob@example.com',hashedPasswords[1],'456 Orange Ave','512-555-5678','customer'],
-      ['Charlie Brown','charlie.brown@example.com',hashedPasswords[2],'789 Peach Blvd','512-555-2345','customer'],
-      ['Dana White','dana.white@example.com',hashedPasswords[3],'1010 Grape St','512-555-3456','customer'],
-      ['Evelyn King','evelyn.king@example.com',hashedPasswords[4],'2020 Banana Rd','512-555-4567','customer'],
-      ['Frank Castle','frank.castle@example.com',hashedPasswords[5],'3030 Cherry Ln','512-555-5678','customer'],
-      ['Grace Lee','grace.lee@example.com',hashedPasswords[6],'4040 Blueberry Dr','512-555-6789','customer'],
-      ['Henry Ford','henry.ford@example.com',hashedPasswords[7],'5050 Pumpkin Way','512-555-7890','customer'],
-      ['Ivy Green','ivy.green@example.com',hashedPasswords[8],'6060 Lemon Ct','512-555-8901','customer'],
-      ['Jack Black','jack.black@example.com',hashedPasswords[9],'7070 Pear Pkwy','512-555-9012','customer'],
-      ['Karen White','karen.white@example.com',hashedPasswords[10],'8080 Plum Ave','512-555-0123','customer'],
-      ['Leo King','leo.king@example.com',hashedPasswords[11],'9090 Peach Blvd','512-555-1235','customer'],
-      ['Mona Lisa','mona.lisa@example.com',hashedPasswords[12],'1111 Apple Rd','512-555-2346','customer'],
-      ['Nina Simone','nina.simone@example.com',hashedPasswords[13],'1212 Cherry Ln','512-555-3457','customer'],
-      ['Admin User','admin@example.com',hashedPasswords[14],'999 Admin Rd','512-555-9999','admin']
+      ['Alice Smith','alice@example.com',hashedPasswords[0],'123 Apple St','512-555-1234','customer', null, null],
+      ['Bob Johnson','bob@example.com',hashedPasswords[1],'456 Orange Ave','512-555-5678','customer', null, null],
+      ['Charlie Brown','charlie.brown@example.com',hashedPasswords[2],'789 Peach Blvd','512-555-2345','customer', null, null],
+      ['Dana White','dana.white@example.com',hashedPasswords[3],'1010 Grape St','512-555-3456','customer', null, null],
+      ['Evelyn King','evelyn.king@example.com',hashedPasswords[4],'2020 Banana Rd','512-555-4567','customer', null, null],
+      ['Frank Castle','frank.castle@example.com',hashedPasswords[5],'3030 Cherry Ln','512-555-5678','customer', null, null],
+      ['Grace Lee','grace.lee@example.com',hashedPasswords[6],'4040 Blueberry Dr','512-555-6789','customer', null, null],
+      ['Henry Ford','henry.ford@example.com',hashedPasswords[7],'5050 Pumpkin Way','512-555-7890','customer', null, null],
+      ['Ivy Green','ivy.green@example.com',hashedPasswords[8],'6060 Lemon Ct','512-555-8901','customer', null, null],
+      ['Jack Black','jack.black@example.com',hashedPasswords[9],'7070 Pear Pkwy','512-555-9012','customer', null, null],
+      ['Karen White','karen.white@example.com',hashedPasswords[10],'8080 Plum Ave','512-555-0123','customer', null, null],
+      ['Leo King','leo.king@example.com',hashedPasswords[11],'9090 Peach Blvd','512-555-1235','customer', null, null],
+      ['Mona Lisa','mona.lisa@example.com',hashedPasswords[12],'1111 Apple Rd','512-555-2346','customer', null, null],
+      ['Nina Simone','nina.simone@example.com',hashedPasswords[13],'1212 Cherry Ln','512-555-3457','customer', null, null],
+      ['Admin User','admin@example.com',hashedPasswords[14],'999 Admin Rd','512-555-9999','admin', null, null]
 
     ];
 
     const userIds = [];
     for (const u of users) {
-      const { rows } = await client.query(
+      const { rows } = await pool.query(
         `INSERT INTO users (name, email, password, address, phone, role, reset_token, reset_expires)
          VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
          RETURNING user_id`,
@@ -141,7 +142,7 @@ async function seed() {
 
     const orderIds = [];
     for (const o of ordersData) {
-      const { rows } = await client.query(
+      const { rows } = await pool.query(
         `INSERT INTO orders (user_id,order_date,status,total_amount,fulfillment_method,
           delivery_partner,delivery_reference,delivery_status,estimated_delivery)
          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
@@ -175,7 +176,7 @@ async function seed() {
     ];
 
     for (const pay of payments) {
-      await client.query(
+      await pool.query(
         `INSERT INTO payments (order_id,transaction_id,amount,status,method)
          VALUES ($1,$2,$3,$4,$5)`,
         pay
@@ -210,7 +211,7 @@ async function seed() {
     ];
 
     for (const oi of orderItems) {
-      await client.query(
+      await pool.query(
         `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
          VALUES ($1,$2,$3,$4)`,
         oi
@@ -233,7 +234,7 @@ async function seed() {
     ];
 
     for (const ci of cartItems) {
-      await client.query(
+      await pool.query(
         `INSERT INTO cart_items (user_id, product_id, quantity, price_at_purchase)
         VALUES ($1, $2, $3, $4)`,
         ci
@@ -267,7 +268,7 @@ async function seed() {
 
     const reviewIds = [];
     for (const r of reviews) {
-      const { rows } = await client.query(
+      const { rows } = await pool.query(
         `INSERT INTO reviews (user_id, product_id, rating, comment)
          VALUES ($1,$2,$3,$4)
          RETURNING review_id`,
@@ -352,7 +353,7 @@ async function seed() {
     ];
 
     for (const rc of reviewComments) {
-      await client.query(
+      await pool.query(
         `INSERT INTO review_comments (review_id, user_id, comment)
         VALUES ($1, $2, $3)`,
         rc
@@ -361,14 +362,14 @@ async function seed() {
     
     console.log(`✅ Inserted ${reviewComments.length} review comments`);
 
-    await client.query('COMMIT');
+    await pool.query('COMMIT');
     console.log('🌱 Seed successful!');
 
   } catch (error) {
-    await client.query('ROLLBACK');
+    await pool.query('ROLLBACK');
     console.error('Seed failed:', error);
   } finally {
-    await client.end();
+    await pool.end();
     console.log('🔌 Disconnected from DB');
   }
 }

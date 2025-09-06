@@ -1,4 +1,6 @@
-// Fetch & render cart items (fetchCartItems + renderCartItems)
+
+// Cart system, used to fetch and display the user's cart items.
+// // Fetch & render cart items (fetchCartItems + renderCartItems)
 async function fetchCartItems() {
   try {
     const response = await fetch('/api/cart-items', {

@@ -1,5 +1,6 @@
 require('dotenv').config();             // Loads environment variables from .env
 const express = require('express');     // Loads the Express library
+const session = require('express-session');
 const app = express();                  // Initializes an Express application
 
 // Middleware to parse JSON request bodies
@@ -7,6 +8,15 @@ app.use(express.json());
 
 // Serve static files from "public" BEFORE routes
 app.use(express.static('public'));
+
+// Add session middleware here BEFORE routes
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}));
+
 
 // Import routes
 // Must exactly match the file path and file name
@@ -21,6 +31,7 @@ const reviewCommentsRouter = require('./routes/reviewComments');
 const resetPasswordRouter = require('./routes/reset-password');
 const userRoutes = require('./routes/users');
 const errorHandler = require('./middleware/errorHandler');
+const cateringRoutes = require('./routes/catering');
 
 // Mount routes
 // api/ prefix (optional, but recommended)
@@ -35,8 +46,16 @@ app.use('/api/reviews', reviewsRouter);
 app.use('/api/review-comments', reviewCommentsRouter);
 app.use('/api/reset-password', resetPasswordRouter);
 app.use('/api/users', userRoutes);
-app.use('/cart-items', cartItemsRouter);
+app.use('/api', cateringRoutes);
 
+// Your user status route:
+app.get('/api/user-status', (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, user: req.session.user });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
 
 
 // Health check route

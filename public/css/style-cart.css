@@ -17,7 +17,6 @@ html, body {
   flex-direction: column;
 }
 
-/* Sidebar & Logo */
 .sidebar {
   width: 100%;
   max-width: 225px;
@@ -30,7 +29,6 @@ html, body {
   padding-bottom: 20px;
 }
 
-/* Navigation Links */
 .nav-links {
   padding-left: 0;
   margin-top: 20px;
@@ -61,7 +59,6 @@ html, body {
   color: rgb(85, 65, 52);
 }
 
-/* Connect / Social Links */
 .connect {
   margin-top: 10px;
   text-align: center;
@@ -98,7 +95,6 @@ html, body {
 .fa-twitter { color: #029ef5; }
 .fa-pinterest { color: #cb1f27; }
 
-/* Layout */
 .layout {
   flex: 1;
   display: flex;
@@ -112,50 +108,168 @@ html, body {
 }
 
 /* ------ Event Form Section ------ */
+.order-form-panel {
+  max-width: 900px;
+  padding: 20px;
+  margin-left: 20px;
+}
+
 .event-section {
   margin-bottom: 2rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.section-heading {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-label {
-  display: block;
-  margin: 0.5rem 0;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="email"],
-select {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Step Navigation Buttons */
-[id^="go-button-step"],
-[id^="back-button-step"],
-#startNew-order-btn {
   border: 1px solid black;
-  padding: 5px;
-  margin: 20px 10px;
-  cursor: pointer;
-  background-color: transparent;
+  background-color: #EBEBE7;
 }
 
-[id^="go-button-step"]:hover,
-[id^="back-button-step"]:hover,
-#startNew-order-btn:hover {
-  background-color: #d1cfcf;
+.order-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#order-summary {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.section-heading,
+.paymentInfo-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+label[for="pickup"] {
+  display: block;
+  margin-right: 0.75rem;
+  margin-bottom: 4px;
+  margin-left: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+label[for="delivery"] {
+  display: block;
+  margin-right: 0.75rem;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+label[for="burnet"],
+label[for="n-lamar"],
+label[for="6-st"] {
+  display: block;
+  margin-right: 0.75rem;
+  margin-bottom: 4px;
+  margin-left: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+label[for="s-lamar"],
+label[for="pickup-date"],
+label[for="pickup-time"] {
+  display: block;
+  margin-right: 0.75rem;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#pickup-date,
+#delivery-date,
+#delivery-time {
+  width: 150px;           
+  font-size: 16px;    
+}
+
+label[for="delivery-address"],
+label[for="delivery-date"],
+label[for="delivery-time"] {
+  display: block;
+  margin-right: 0.75rem;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#delivery-address {
+  width: 480px;
+}
+
+#pickup-time,
+#delivery-time {
+  width: 150px;           
+  font-size: 16px;    
+  margin-bottom: 15px;
+}
+
+label[for="pickup"]:hover,
+label[for="delivery"]:hover,
+label[for="burnet"]:hover,
+label[for="n-lamar"]:hover,
+label[for="6-st"]:hover,
+label[for="s-lamar"]:hover {
+  transform: scale(1.01);     				        /* slight enlargement */
+  transition: transform 0.2s ease-in-out; 	  /* smooth effect */
+}
+
+.form-group {
+  margin: 0 0 15px 8px; 
+}
+
+#address1 {
+  width: 410px;
+}
+
+#state,
+#cc-type,
+#cc-number,
+#exp-month,
+#exp-year,
+#ccv {
+  font-size: 16px;
+}
+
+.order-total {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#go-button-step1,
+#go-button-step2,
+#go-button-step3,
+#go-button-step4,
+#back-button-step2,
+#back-button-step3,
+#back-button-step4,
+#startNew-order-btn {
+  padding: 4px;
+}
+
+#back-button-step2,
+#back-button-step3,
+#back-button-step4 {
+  margin-right: 10px;
+}
+
+#go-button-step1:is(:hover, :focus),
+#go-button-step2:is(:hover, :focus),
+#go-button-step3:is(:hover, :focus),
+#go-button-step4:is(:hover, :focus),
+#back-button-step2:is(:hover, :focus),
+#back-button-step3:is(:hover, :focus),
+#back-button-step4:is(:hover, :focus),
+#startNew-order-btn:is(:hover, :focus) {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* ------ FOOTER ------  */

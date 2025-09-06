@@ -23,6 +23,7 @@ router.get('/me', requireAuth, async (req, res, next) => {
   }
 });
 
+
 // Get user profile by ID (admin or owner only)
 router.get('/:id', requireAuth, async (req, res, next) => {
   const userId = req.params.id;

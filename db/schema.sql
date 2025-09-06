@@ -108,6 +108,20 @@ CREATE TABLE cart_items (
     UNIQUE(user_id, product_id)
 );
 
+CREATE TABLE catering_requests (
+    request_id SERIAL PRIMARY KEY,
+    event_type VARCHAR(50),
+    pie_types TEXT[], -- use array to store multiple pie types
+    guest_count VARCHAR(50),
+    signage_idea VARCHAR(10),
+    event_date DATE,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    phone VARCHAR(20),
+    email VARCHAR(150),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 -- Payments table: stores payment details for each order
 CREATE TABLE payments (

@@ -98,8 +98,8 @@ function validateStep5() {
 }
 
 /* --- Step 6 / Form Submission --- */
-function validateStep6(event) {
-    event.preventDefault(); // prevent default submit
+async function validateStep6(event) {
+    event.preventDefault();
 
     const firstName = document.getElementById('first-name');
     const lastName = document.getElementById('last-name');
@@ -127,7 +127,6 @@ function validateStep6(event) {
         return;
     }
 
-    // Simple email format check
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value)) {
         alert('Please enter a valid email address.');
@@ -135,6 +134,36 @@ function validateStep6(event) {
         return;
     }
 
-    // If all validations pass, submit the form
-    document.querySelector('.form-container form').submit();
+    // Collect all form data including previous steps (adjust selectors as needed)
+    const formData = {
+        'event-type': document.querySelector('input[name="event-type"]:checked')?.value,
+        'pie-types': Array.from(document.querySelectorAll('input[name="pie-types"]:checked')).map(el => el.value),
+        'guest-count': document.querySelector('input[name="guest-count"]:checked')?.value,
+        'signage-idea': document.querySelector('input[name="signage-idea"]:checked')?.value,
+        'event-date': document.getElementById('event-date').value,
+        'first-name': firstName.value.trim(),
+        'last-name': lastName.value.trim(),
+        phone: phone.value.trim(),
+        email: email.value.trim()
+    };
+
+    try {
+        const response = await fetch('/api/catering', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to submit form');
+        }
+
+        const result = await response.json();
+        alert(result.message || 'Form submitted successfully!');
+
+        // Optionally, redirect or reset form here
+    } catch (error) {
+        alert('There was an error submitting the form. Please try again.');
+        console.error(error);
+    }
 }
