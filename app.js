@@ -9,7 +9,7 @@ app.use(express.json());
 // Serve static files from "public" BEFORE routes
 app.use(express.static('public'));
 
-// Add session middleware here BEFORE routes
+// This sets up the session middleware properly
 app.use(session({
   secret: process.env.SESSION_SECRET || 'keyboard cat',
   resave: false,
@@ -48,15 +48,16 @@ app.use('/api/reset-password', resetPasswordRouter);
 app.use('/api/users', userRoutes);
 app.use('/api', cateringRoutes);
 
-// Your user status route:
+
+// Route to check session status
+// But does not create or set a session
 app.get('/api/user-status', (req, res) => {
-  if (req.session.user) {
+  if (req.session && req.session.user) {
     res.json({ loggedIn: true, user: req.session.user });
   } else {
     res.json({ loggedIn: false });
   }
 });
-
 
 // Health check route
 // Verifies that your backend server is running and reachable

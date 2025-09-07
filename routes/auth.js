@@ -32,6 +32,14 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
+    // Save user info in session
+    req.session.user = {
+      user_id: user.user_id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    };
+
     const token = jwt.sign(
       { user_id: user.user_id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
@@ -102,6 +110,20 @@ router.post('/register', async (req, res, next) => {
     next(err);
   }
 });
+
+// POST /logout
+router.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Session destruction error:', err);
+      return res.status(500).json({ error: 'Logout failed' });
+    }
+
+    res.clearCookie('connect.sid'); // Optional, but clears the session cookie
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
 
 // POST /logout (invalidate token)
 router.post('/logout', requireAuth, async (req, res, next) => {

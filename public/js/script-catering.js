@@ -159,10 +159,13 @@ async function validateStep6(event) {
         }
 
         const result = await response.json();
-        alert(result.message || 'Form submitted successfully!');
+        alert(`✅ ${result.message || 'Form submitted successfully!'}`);
 
-        // Optionally, redirect or reset form here
-    } catch (error) {
+        // ✅ Reload the page after 1.5 seconds
+        setTimeout(() => {
+        window.location.href = 'catering.html';
+        }, 1500);
+      } catch (error) {
         alert('There was an error submitting the form. Please try again.');
         console.error(error);
     }
