@@ -174,24 +174,22 @@ body {
   text-align: center;
 }
 
+.order-page-placeholder {
+  font-size: 16px;
+  margin: 0 0 1rem 20px;
+}
+
 .order-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: space-evenly;
+  gap: 2px;
   font-size: 14px;
-  max-width: 400px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
   background: #fff;
   margin-bottom: 8px;
-}
-
-.order-top {
-  white-space: nowrap;
-  overflow: hidden;
-  margin-bottom: 6px;
 }
 
 .order-img-small {
@@ -201,16 +199,15 @@ body {
   object-fit: cover;
   border-radius: 4px;
   vertical-align: middle;
-  margin-right: 8px;
 }
 
 .pie-name {
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: break-word;
-  margin-right: 8px;
+  max-width: 100px;
 }
 
 .pie-price {
@@ -231,7 +228,7 @@ body {
 .qty-control {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .qty-label,
@@ -241,7 +238,6 @@ body {
 .remove-item {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 8px;
 }
 
 .qty-minus,
@@ -276,7 +272,6 @@ body {
   border: none;
   color: #900;
   cursor: pointer;
-  margin-right: 0;
   transition: color 0.2s ease;
 }
 
@@ -300,6 +295,18 @@ body {
 
 .order-btn:hover {
   background-color: #ffc107;
+}
+
+#go-button-step1 {
+  padding: 4px;
+  width: 90%;
+  margin: 20px auto 0 auto;           /* top 10px, left/right auto centers it */
+  display: block;                     /* required for auto-centering */
+}
+
+#go-button-step1:is(:hover, :focus) {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* ------ Footer ------ */

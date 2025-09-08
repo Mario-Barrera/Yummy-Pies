@@ -114,7 +114,7 @@ async function addItemToCart(productId, quantity) {
       return;
     }
 
-    if (!res.ok) throw new Error('Failed to add item');
+    if (!res.ok) throw new Error('Failed to add item. Please log in or create a new account.  It free to sign-up');
 
     alert('Item added to cart!');
     fetchCartItems();

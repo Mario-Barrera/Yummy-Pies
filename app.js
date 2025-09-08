@@ -1,7 +1,10 @@
-require('dotenv').config();             // Loads environment variables from .env
-const express = require('express');     // Loads the Express library
+require('dotenv').config();                                // Loads environment variables from .env
+const express = require('express');                        // Loads the Express library
 const session = require('express-session');
-const app = express();                  // Initializes an Express application
+const cookieParser = require('cookie-parser');
+const app = express();                                    // Initializes an Express application
+
+app.use(cookieParser());  // <-- This enables req.cookies
 
 // Middleware to parse JSON request bodies
 app.use(express.json());

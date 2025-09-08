@@ -30,13 +30,16 @@ async function updateUserUI() {
 
       const userGreeting = document.getElementById('user-greeting');
       const userNameSpan = userGreeting.querySelector('.user-name');
+      const reviewGuidance = document.getElementById('review-guidance')
 
       // Make sure userNameSpan exists before accessing
       if (userNameSpan) {
-        userNameSpan.textContent = data.user.name || 'User'; // adjust this if your user object has a different field
+        userNameSpan.textContent = data.user.name || 'User';
       }
 
       if (userGreeting) userGreeting.style.display = 'block';
+
+      if (reviewGuidance) reviewGuidance.style.display = 'block';
 
       // Hide login message
       const loginMessage = document.getElementById('login-message');
@@ -51,6 +54,9 @@ async function updateUserUI() {
     // Hide greeting UI
     const userGreeting = document.getElementById('user-greeting');
     if (userGreeting) userGreeting.style.display = 'none';
+
+    const reviewGuidance = document.getElementById('review-guidance');
+    if (reviewGuidance) reviewGuidance.style.display = 'none';
 
     // Show login message
     const loginMessage = document.getElementById('login-message');
