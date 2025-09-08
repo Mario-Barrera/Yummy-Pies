@@ -57,26 +57,23 @@ router.get('/user', requireAuth, async (req, res, next) => {
 
 // GET all comments for a specific review
 router.get('/:reviewId', async (req, res, next) => {
-    const { reviewId } = req.params;
-
-    try {
-        const { rows } = await pool.query(
-            `SELECT c.*, u.name AS user_name
-             FROM review_comments c
-             JOIN users u ON c.user_id = u.user_id
-             WHERE c.review_id = $1
-             ORDER BY c.created_at DESC`,
-            [reviewId]
-        );
-
-        res.json(rows);
-    } catch (err) {
-        logger.error(`Failed to fetch comments for review ${reviewId}: ${err.message || err}`);
-        const error = new Error('Failed to fetch comments');
-        error.status = 500;
-        return next(error);
-    }
+  const { reviewId } = req.params;
+  try {
+    const { rows } = await pool.query(
+      `SELECT c.comment, c.created_at, u.name AS user_name
+       FROM review_comments c
+       JOIN users u ON c.user_id = u.user_id
+       WHERE c.review_id = $1
+       ORDER BY c.created_at`, 
+      [reviewId]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error('Error fetching comments for review:', err);
+    res.status(500).json({ error: 'Failed to fetch comments' });
+  }
 });
+
 
 
 // Get all comments (admin only)

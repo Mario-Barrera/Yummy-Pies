@@ -174,6 +174,60 @@ router.get('/all', async (req, res) => {
 });
 
 
+// GET all reviews with their comments (public)
+// Corrected version of the route
+router.get('/with-comments', async (req, res, next) => {
+  try {
+    const { rows } = await pool.query(`
+      SELECT 
+        r.review_id,
+        r.product_id,
+        r.rating,
+        r.comment AS review_text,
+        r.created_at AS review_date,
+        u1.name AS review_author,
+        c.comment AS comment_text,
+        c.created_at AS comment_date,
+        u2.name AS comment_author
+      FROM reviews r
+      JOIN users u1 ON r.user_id = u1.user_id
+      LEFT JOIN review_comments c ON r.review_id = c.review_id
+      LEFT JOIN users u2 ON c.user_id = u2.user_id
+      ORDER BY r.review_id, c.created_at;
+    `);
+
+    const reviewsMap = new Map();
+
+    for (const row of rows) {
+      if (!reviewsMap.has(row.review_id)) {
+        reviewsMap.set(row.review_id, {
+          review_id: row.review_id,
+          product_id: row.product_id,
+          rating: row.rating,
+          comment: row.review_text,
+          created_at: row.review_date,
+          user_name: row.review_author,
+          comments: []
+        });
+      }
+
+      if (row.comment_text) {
+        reviewsMap.get(row.review_id).comments.push({
+          comment: row.comment_text,
+          created_at: row.comment_date,
+          user_name: row.comment_author
+        });
+      }
+    }
+
+    res.json(Array.from(reviewsMap.values()));
+  } catch (err) {
+    console.error('Error fetching reviews with comments:', err);
+    res.status(500).json({ error: 'Failed to fetch reviews with comments' });
+  }
+});
+
+
 // ADMIN ROUTES
 // GET all reviews (admin only)
 router.get('/admin', requireAdmin, async (req, res) => {

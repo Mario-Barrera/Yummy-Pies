@@ -24,13 +24,13 @@
     <meta name="twitter:site" content="@YummyPies1">
 
     <link rel="canonical" href="https://www.yummypies.com/review-comments.html">
-    <link rel="stylesheet" type="text/css" href="css/style-review-comments.css">
+    <link rel="stylesheet" type="text/css" href="css/style-public-reviews-comments.css">
     <link rel="stylesheet" type="text/css" href="css/style-user-greeting.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style-review-comments.css">
 
-    <script src="js/script-review-comments.js" defer></script>
+    <script src="js/script-public-reviews-comments.js" defer></script>
     <script src="js/script-nav.js" defer></script> 
     <script src="js/script-user-status.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
@@ -112,11 +112,15 @@
                     Explore detailed comments left by our customers on their favorite Yummy Pies. Read feedback on sweet and savory flavors and see what people are saying about their experiences.
                 </p>
 
-                <p class="accountLinks">
-                    Please <a href="account-login.html">log in or create an account</a> to submit a comment on a review.
+                <p id="login-message" class="accountLinks">
+                    Please <a href="account-login.html">log in or create an account</a> to submit a customer review and comment.
                 </p>
 
-                <div class="review-comments-list">
+                <p class="user-guidance">
+                    To create, edit, or delete customer reviews and comments, please visit your ‘My Profile’ page.
+                </p>
+
+                <div id="review-comment-container"></div>
                     <!-- Review comments will be injected here by JavaScript -->
                 </div>
             </section>
