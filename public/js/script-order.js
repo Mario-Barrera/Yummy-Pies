@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let total = 0;
 
     const orderTotalEls = document.querySelectorAll(".order-total");
-    const orderListEl = document.getElementById("orderList");
+    const orderListEl = document.querySelector(".orderNow-list");
 
     // Date/time inputs
     const pickupDateInput = document.getElementById("pickup-date");
@@ -30,9 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- STEP NAVIGATION FUNCTIONS ----------------
     function showStep(step) {
+        const steps = document.querySelectorAll(".event-section");
         steps.forEach((section, index) => {
             section.style.display = index === step - 1 ? "block" : "none";
         });
+
+        // Initialize Autocomplete when Step 3 (delivery) is shown
+        if (step === 3) {
+            initDeliveryAutocomplete();
+        }
+
         currentStep = step;
     }
 
@@ -160,13 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const itemEl = document.createElement("div");
             itemEl.className = "order-item";
             itemEl.innerHTML = `
-              <img src="${item.imgSrc}" alt="${item.name}" class="order-img-small">
-              <span class="pie-name">${item.name}</span>
-              <span>Qty:</span>
-              <button class="qty-minus">−</button>
-              <input type="number" class="qty-input" value="${item.qty}" min="1">
-              <button class="qty-plus">+</button>
-              <button class="remove-item">🗑️</button>
+                <img src="${item.imgSrc}" alt="${item.name}" class="order-img-small">
+                <span class="pie-name">${item.name}</span>
+                <span>Qty:</span>
+                <button class="qty-minus">−</button>
+                <input type="number" class="qty-input" value="${item.qty}" min="1">
+                <button class="qty-plus">+</button>
+                <button class="remove-item">🗑️</button>
             `;
             itemEl.querySelector(".qty-minus").addEventListener("click", () => {
                 if (item.qty > 1) {
@@ -195,6 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         orderTotalEls.forEach(el => el.textContent = `Total: $${total.toFixed(2)}`);
     }
+
+    /* ------ ORDER SUMMARY ------ */
 
     function showOrderSummary() {
         const summaryEl = document.querySelector("#order-summary");
@@ -338,18 +347,30 @@ document.addEventListener("DOMContentLoaded", function () {
     disablePastTimeOptions(deliveryDateInput, deliveryTimeInput);
 });
 
-// Google Places Autocomplete
-window.initAutocomplete = function () {
+
+// ---------------- GOOGLE AUTOCOMPLETE FOR DELIVERY ----------------
+let deliveryAutocomplete;
+
+function initDeliveryAutocomplete() {
     const input = document.getElementById("delivery-address");
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-        componentRestrictions: { country: "us" },
-        fields: ["formatted_address", "geometry"]
+    if (!input || deliveryAutocomplete) return; // prevent multiple init
+
+    deliveryAutocomplete = new google.maps.places.PlaceAutocompleteElement({
+        element: input,
+        fields: ["formatted_address", "geometry"],
+        componentRestrictions: { country: "us" }
     });
 
-    autocomplete.addListener("place_changed", () => {
-        if (!autocomplete.getPlace().formatted_address.includes("TX")) {
+    deliveryAutocomplete.addEventListener("place_changed", () => {
+        const place = deliveryAutocomplete.getPlace();
+        if (!place.formatted_address.includes("TX")) {
             alert("Please select an address in Texas.");
             input.value = "";
         }
     });
-};
+}
+
+// Optional: If your script runs after the API loads, call this:
+if (document.getElementById("delivery-address")) {
+    initDeliveryAutocomplete();
+}
