@@ -1,5 +1,32 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    // Check if token exists
+    const token = localStorage.getItem('token');
+    console.log("Token:", token); // <-- log token to console
+    
+    if (!token) {
+        // Disable Step 1 radios (pickup/delivery)
+        const step1Radios = document.querySelectorAll('input[name="orderOption"]');
+        step1Radios.forEach(radio => radio.disabled = true);
+
+        // Disable the Continue button
+        const step1NextButton = document.querySelector("#go-button-step1");
+        if (step1NextButton) {
+            step1NextButton.disabled = true;
+        }
+
+        // Show a message to log in inside Step 1 container
+        const step1Container = document.querySelector("#step1");
+    
+        if (step1Container) {
+            const message = document.createElement("p");
+            message.style.color = "red";
+            message.textContent = "Please log in to place an order.";
+            step1Container.prepend(message);
+        }
+    }
+
     
     // Load saved cart or initialize empty
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -243,7 +270,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showStep(6);
         showOrderSummary();
-    };
+
+    // Add this here: Send order to backend after final validation
+    const formData = JSON.parse(localStorage.getItem("formState")) || {};
+
+    fetch("/api/orders/place", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token  // <-- send the token here
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Order placed successfully! Confirmation #: " + data.confirmationNumber);
+            localStorage.removeItem("formState"); // optional cleanup
+        } else {
+            alert("Error placing order: " + data.message);
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Failed to place order. Please try again.");
+    });
+};
+
+// -------------- RESET THE ORDER FORM ------------- */ 
+// clears cart and summary, and initializes date/time inputs for a new order
 
     window.startNewOrder = function () {
         cart = [];

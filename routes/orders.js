@@ -158,6 +158,33 @@ router.post('/', requireAuth, async (req, res, next) => {
 });
 
 
+// POST /api/orders/place
+router.post("/place", requireAuth, async (req, res) => {
+    const orderData = req.body;
+
+    try {
+        // TODO: Validate and process orderData
+        console.log("Received order:", orderData);
+
+        // Simulate confirmation number
+        const confirmationNumber = "CN" + Math.floor(100000 + Math.random() * 900000);
+
+        // Simulate success response
+        res.status(200).json({
+            success: true,
+            confirmationNumber
+        });
+
+    } catch (err) {
+        console.error("Order placement error:", err);
+        res.status(500).json({
+            success: false,
+            message: "Server error while placing order."
+        });
+    }
+});
+
+
 // PUT update order status (admin only)
 router.put('/:id/status', requireAdmin, async (req, res, next) => {
   const { id } = req.params;

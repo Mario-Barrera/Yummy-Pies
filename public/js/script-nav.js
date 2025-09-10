@@ -6,12 +6,23 @@ async function updateCartCount() {
     if (!res.ok) throw new Error('Could not fetch cart');
 
     const items = await res.json();
-    document.getElementById('cart-count').textContent = items.length;
+
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+      cartCountElement.textContent = items.length;
+    } else {
+      console.warn('Cart count element not found.');
+    }
+
   } catch (err) {
     console.warn('Cart count fetch failed:', err);
-    document.getElementById('cart-count').textContent = 0;
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+      cartCountElement.textContent = 0;
+    }
   }
 }
+
 
 async function updateUserUI() {
   try {
