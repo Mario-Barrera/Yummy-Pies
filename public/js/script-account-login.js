@@ -34,6 +34,7 @@ loginForm.addEventListener('submit', async (e) => {
     // Save token and user info in localStorage
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('userEmail', email);
 
     // Redirect to homepage
     window.location.href = 'index.html';

@@ -1,8 +1,14 @@
 async function updateCartCount() {
   try {
+    const token = localStorage.getItem('token'); // or however you store your JWT
+
     const res = await fetch('/api/cart-items', {
-      credentials: 'include',
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
+      credentials: 'include', // optional, depending on your backend setup
     });
+
     if (!res.ok) throw new Error('Could not fetch cart');
 
     const items = await res.json();

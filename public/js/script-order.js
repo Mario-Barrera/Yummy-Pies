@@ -27,14 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
+    let currentStep = 1;
+
     // Load saved cart or initialize empty
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     
     // Calculate total from saved cart
     let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-    let currentStep = 1;
 
     const orderTotalEls = document.querySelectorAll(".order-total");
     const orderListEl = document.querySelector(".orderNow-list");
@@ -45,6 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- SAVE FORM STATE ----------------
     function saveFormState() {
+        // 1. Assign userProfile.email to the input *once*, before saving form state
+        const emailInput = document.getElementById('email');
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (emailInput && user?.email) {
+            emailInput.value = user.email;
+        }
+
         const formState = {
             cart: cart,
             pickupChecked: document.getElementById("pickup")?.checked || false,
@@ -57,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             deliveryTime: deliveryTimeInput?.value || "",
             firstName: document.getElementById('first-name')?.value || "",
             lastName: document.getElementById('last-name')?.value || "",
+            email: emailInput ? emailInput.value : "",
             address1: document.getElementById('address1')?.value || "",
             address2: document.getElementById('address2')?.value || "",
             city: document.getElementById('city')?.value || "",
@@ -69,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             expYear: document.getElementById('exp-year')?.value || ""
         };
 
+        console.log("Saving formState with email:", formState.email);
         localStorage.setItem('formState', JSON.stringify(formState));
     }
 
@@ -94,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (deliveryTimeInput) deliveryTimeInput.value = saved.deliveryTime || "";
 
         // Restore customer info
-        ['first-name','last-name','address1','address2','city','state','zip','cc-type','cc-number','ccv','exp-month','exp-year'].forEach(id => {
+        ['first-name','last-name','email','address1','address2','city','state','zip','cc-type','cc-number','ccv','exp-month','exp-year'].forEach(id => {
             if (saved[id]) document.getElementById(id).value = saved[id];
         });
 
@@ -273,12 +282,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add this here: Send order to backend after final validation
     const formData = JSON.parse(localStorage.getItem("formState")) || {};
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    
+    // Ensure email is injected from the logged-in user
+    formData.email = user?.email || "";
+    
+    console.log("Submitting order:", formData);
 
     fetch("/api/orders/place", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + token  // <-- send the token here
+            "Authorization": `Bearer ${token}`  // <-- send the token here
         },
         body: JSON.stringify(formData)
     })
@@ -383,8 +398,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- RESTORE STATE ----------------
     loadFormState();
-    showStep(currentStep);
     updateCartDisplay();
+    showStep(currentStep);
 
 
     // ---------------- DATE/TIME LOGIC ----------------
@@ -499,4 +514,3 @@ window.initDeliveryAutocomplete = function() {
         }
     });
 };
-
