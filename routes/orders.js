@@ -272,17 +272,33 @@ router.post("/place", requireAuth, async (req, res) => {
       ]
     );
 
+
     // Insert items into order_items table
-    for (const item of form.cart) {
-      const { id: product_id, qty: quantity, price } = item;
+   for (const item of form.cart) {
+  console.log("💬 Received item:", item);
 
-      await pool.query(
-        `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
-         VALUES ($1, $2, $3, $4)`,
-        [order_id, product_id, quantity, price]
-      );
-    }
+  const { product_id, qty: quantity, price } = item;
 
+  console.log("product_id:", product_id);
+  console.log("quantity:", quantity);
+  console.log("price:", price);
+
+  if (product_id == null || quantity == null || price == null) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid item in cart: product_id, quantity, and price are required.",
+      item
+    });
+  }
+
+  await pool.query(
+    `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
+     VALUES ($1, $2, $3, $4)`,
+    [order_id, product_id, quantity, price]
+  );
+}
+
+    
     const confirmationNumber = "CN" + Math.floor(100000 + Math.random() * 900000);
 
     res.status(200).json({

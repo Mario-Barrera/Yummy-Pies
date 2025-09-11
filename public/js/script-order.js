@@ -335,26 +335,41 @@ document.addEventListener("DOMContentLoaded", function () {
     const orderButtons = document.querySelectorAll(".order-btn");
     orderButtons.forEach(btn => {
         btn.addEventListener("click", () => {
+            const product_id = btn.getAttribute("data-product-id");
             const pieText = btn.previousElementSibling.textContent.trim();
             const priceMatch = pieText.match(/\$([\d.]+)/);
             const name = pieText.replace(/\$\d+\.\d+/, "").trim();
             const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
             const imgSrc = btn.closest(".content")?.querySelector("img")?.src || "https://via.placeholder.com/50";
-            addToCart(name, price, imgSrc);
+            if (!product_id) {
+                console.warn("Missing data-product-id for item:", name);
+            }
+            
+            addToCart(product_id, name, price, imgSrc);
         });
     });
 
-    function addToCart(name, price, imgSrc) {
-        const existingItem = cart.find(i => i.name === name);
-        if (existingItem) existingItem.qty++;
-        else cart.push({ name, price, qty: 1, imgSrc });
+    function addToCart(product_id, name, price, imgSrc) {
+        const existingItem = cart.find(i => i.product_id === product_id);
+
+        if (existingItem) {
+            existingItem.qty++;
+        } else {
+            cart.push({ product_id, name, price, qty: 1, imgSrc });
+        }
+
         total += price;
         updateCartDisplay();
     }
 
     function updateCartDisplay() {
         orderListEl.innerHTML = "";
+
         cart.forEach(item => {
+            if (!item.product_id) {
+                console.error("❌ Missing product_id in item:", item);
+            }
+
             const itemEl = document.createElement("div");
             itemEl.className = "order-item";
             itemEl.innerHTML = `
