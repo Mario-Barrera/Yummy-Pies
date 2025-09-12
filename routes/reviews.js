@@ -9,7 +9,11 @@ router.get('/user', requireAuth, async (req, res) => {
   try {
     const userId = req.user.user_id;
     const { rows } = await pool.query(
-      `SELECT * FROM reviews WHERE user_id = $1 ORDER BY created_at DESC`, 
+      `SELECT r.*, p.name AS product_name
+       FROM reviews r
+       JOIN products p ON r.product_id = p.product_id
+       WHERE r.user_id = $1
+       ORDER BY r.created_at DESC`,
       [userId]
     );
     res.json(rows);
@@ -18,6 +22,7 @@ router.get('/user', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch reviews' });
   }
 });
+
 
 
 // PUT update a review (owner only, full update: rating and comment)

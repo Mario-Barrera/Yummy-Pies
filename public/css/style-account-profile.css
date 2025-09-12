@@ -197,6 +197,137 @@ html, body {
     align-items: center;
 }
 
+/* ---------- Order tables ------------ */
+#order-history {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+  padding: 2px;
+}
+
+/* Each order table */
+.order-table {
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  border-radius: 6px;
+  table-layout: fixed;        /* fixes column widths */
+  border-collapse: collapse;  /* clean grid lines */
+}
+
+/* Table header with order number */
+.order-table thead th {
+  background-color: #bbd6ff;
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Header labels row */
+.order-table tbody tr:first-child th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Data values row */
+.order-table tbody tr:nth-child(2) td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Items section header */
+.order-table tbody tr:nth-child(3) td {
+  padding: 10px 8px;
+  font-weight: 700;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Generic table cell styling */
+.order-table th,
+.order-table td {
+  white-space: normal;         /* allow wrapping inside cells */
+  overflow-wrap: break-word;
+  border: 1px solid #ccc;      /* grid lines */
+  padding: 6px 8px;            /* consistent padding */
+}
+
+/* Items sub-table */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+/* Items table headers */
+.items-table th {
+  background-color: #e9ecef;
+  font-weight: 600;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Items table data cells */
+.items-table td {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+}
+
+.items-table th:nth-child(1),
+.items-table th:nth-child(2) {
+  color: black;
+}
+
+.items-table tr:hover {
+  background-color: #f1f7ff;
+  cursor: default;
+}
+
+/* ------------ REVIEW TABLE ------------ */
+.user-reviews-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-reviews-table th,
+.user-reviews-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.user-reviews-table th {
+  background-color: #bbd6ff;
+  color: black;
+  font-weight: 600px;
+}
+
+.user-reviews-table tr:hover {
+  background-color: #f1f7ff;
+  cursor: default;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+
 /* ------ FOOTER ------  */
 .footer {
   width: 100%;

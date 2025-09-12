@@ -40,18 +40,48 @@ async function loadUserReviews() {
 
     container.innerHTML = ''; // Clear previous content
 
+    // Create table element
+    const table = document.createElement('table');
+    table.className = 'user-reviews-table'; // add class for styling if you want
+
+    // Create table header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr>
+        <th>Product</th>
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>Date Created</th>
+        <th>Updated</th>
+      </tr>
+    `;
+    table.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+
     reviews.forEach(review => {
-      const reviewDiv = document.createElement('div');
-      reviewDiv.className = 'review';
-      reviewDiv.innerHTML = `
-        <h4>Product ID: ${review.product_id}</h4>
-        <p>Rating: ${review.rating}</p>
-        <p>Comment: ${review.comment || 'No comment'}</p>
-        <p>Date: ${new Date(review.created_at).toLocaleDateString()}</p>
-      `;
-      container.appendChild(reviewDiv);
-    });
-  } catch (error) {
+  const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
+
+  const createdDate = new Date(review.created_at).toLocaleDateString();
+  const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
+  const showUpdated = updatedDate && updatedDate !== createdDate;
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${cleanProductName}</td>
+    <td>${review.rating}</td>
+    <td>${review.comment || 'No comment'}</td>
+    <td>${createdDate}</td>
+    <td>${showUpdated ? updatedDate : ''}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+  table.appendChild(tbody);
+  container.appendChild(table);
+  
+} catch (error) {
     console.error(error);
     container.innerHTML = '<p class="error">Error loading your reviews. Please try again later.</p>';
   }

@@ -47,17 +47,26 @@ router.get('/my-orders-with-items', requireAuth, async (req, res, next) => {
       SELECT
         o.order_id,
         o.order_date,
+        o.status,
+        o.total_amount,
+        o.fulfillment_method,
+        o.delivery_partner,
+        o.delivery_reference,
+        o.delivery_status,
+        o.estimated_delivery,
+        o.created_at,
+        u.email,
         oi.product_id,
         p.name AS product_name,
         oi.quantity
       FROM orders o
       JOIN order_items oi ON o.order_id = oi.order_id
       JOIN products p ON oi.product_id = p.product_id
+      JOIN users u ON o.user_id = u.user_id
       WHERE o.user_id = $1
       ORDER BY o.order_date DESC, o.order_id, oi.product_id
     `, [userId]);
 
-    // Group rows by order_id
     const ordersMap = new Map();
 
     rows.forEach(row => {
@@ -65,15 +74,28 @@ router.get('/my-orders-with-items', requireAuth, async (req, res, next) => {
         ordersMap.set(row.order_id, {
           order_id: row.order_id,
           order_date: row.order_date,
+          status: row.status,
+          total_amount: row.total_amount !== null && row.total_amount !== undefined
+            ? parseFloat(row.total_amount)
+            : 0,
+          fulfillment_method: row.fulfillment_method,
+          delivery_partner: row.delivery_partner,
+          delivery_reference: row.delivery_reference,
+          delivery_status: row.delivery_status,
+          estimated_delivery: row.estimated_delivery,
+          created_at: row.created_at,
+          email: row.email,
           items: []
         });
       }
+
       ordersMap.get(row.order_id).items.push({
         product_id: row.product_id,
         product_name: row.product_name,
         quantity: row.quantity
       });
     });
+
 
     const orders = Array.from(ordersMap.values());
 
@@ -84,6 +106,7 @@ router.get('/my-orders-with-items', requireAuth, async (req, res, next) => {
     next(err);
   }
 });
+
 
 
 // GET single order by ID (admin or owner)
