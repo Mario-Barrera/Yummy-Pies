@@ -111,23 +111,32 @@ html, body {
   margin: 5px auto;
 }
 
-/* ------ MAIN CONTENT ------ */
+/* ------ MAIN CONTAINER ------ */
 .profile-main {
-  display: flex;
-  flex-direction: column;       
-  gap: 20px;                 
-  justify-content: center;   		/* Center buttons inside nav */
-  width: 930px;
-  margin: 0 auto;            		/* Center nav block inside its parent */
+    max-width: 900px;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+/* ------ Section Headings ------ */
+.main-profile-heading {
+    font-size: 2rem;
+    color: rgb(246, 160, 48);
+    margin-bottom: 10px;
+}
+
+.heading {
+    font-size: 1.2rem;
+    color: rgb(246, 160, 48);
+    margin-bottom: 10px;
 }
 
 /* ------ Profile Info ------ */
 .profile-main {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
-.profile-reviews,
-.profile-comments {
+.profile-info p {
     font-size: 1rem;
     margin-bottom: 10px;
     color: #333;
@@ -137,22 +146,10 @@ html, body {
     color: rgb(85, 65, 52);
 }
 
-.main-profile-heading {
-    font-size: 2rem;
-    color: rgb(246, 160, 48);
-    margin-bottom: 5px;
-}
-
-.heading {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #333;
-}
-
 /* ------ Orders, Reviews, Comments ------ */
 .profile-reviews,
 .profile-comments {
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .reviews-list,
@@ -170,6 +167,117 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* ------------ REVIEW TABLE ------------ */
+.user-reviews-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-reviews-table th,
+.user-reviews-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.user-reviews-table th {
+  background-color: #bbd6ff;
+  color: black;
+  font-weight: 600px;
+}
+
+.user-reviews-table tr:hover {
+  background-color: #f1f7ff;
+  cursor: default;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+#no-reviewHistory-message {
+  text-align: left;
+  display: block;          /* p tags are block by default, but ensure this */
+  width: 100%;             /* makes sure it takes full container width */
+  margin: 0;               /* remove default margin if needed */
+  padding: 0;            
+}
+
+/* ---------- COMMENT TABLE ---------- */
+.horizontal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.horizontal-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px 0;
+  color: #000;
+}
+
+.horizontal-table th,
+.horizontal-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.horizontal-table th {
+  background-color: #bbd6ff;
+  color: black;
+  font-weight: 600px;
+}
+
+.horizontal-table tr:hover {
+ background-color: #f1f7ff;
+  cursor: default;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+#no-commentHistory-message {
+  text-align: left;
+  display: block;          /* p tags are block by default, but ensure this */
+  width: 100%;             /* makes sure it takes full container width */
+  margin: 0;               /* remove default margin if needed */
+  padding: 0;            
+}
+
+/* ---------- EDIT / DELETE BUTTONS ------------ */
+.user-reviews-table td:nth-child(6) {
+  text-align: center;
+}
+
+.user-reviews-table .edit-btn,
+.user-reviews-table .delete-btn {
+  margin: 0 5px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.user-reviews-table .edit-btn {
+  margin-bottom: 10px; /* creates space below the edit button */
 }
 
 /* ------ FOOTER ------  */
@@ -290,4 +398,3 @@ button[type="submit"]:focus {
   color: #f0a500;
   text-decoration: underline;
 }
-

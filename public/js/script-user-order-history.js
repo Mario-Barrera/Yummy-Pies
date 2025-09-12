@@ -8,7 +8,7 @@ async function loadOrderHistory() {
     container.innerHTML = ''; // Clear existing content
 
     if (orders.length === 0) {
-      container.innerHTML = '<p>No orders found.</p>';
+      container.innerHTML = '<p id="no-orderHistory-message">No orders found.</p>';
       return;
     }
 

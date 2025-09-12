@@ -36,21 +36,34 @@ router.post('/:reviewId', requireAuth, async (req, res, next) => {
 // Get all comments by the logged-in user
 router.get('/user', requireAuth, async (req, res, next) => {
   try {
+    const userId = req.user.user_id;
+
     const { rows } = await pool.query(
-      `SELECT c.*, u.name AS user_name
+      `SELECT
+         c.comment_id,
+         c.comment,
+         c.created_at,
+         r.updated_at,
+         c.user_id,
+         r.rating,
+         r.review_id,
+         p.product_id,
+         p.name AS product_name
        FROM review_comments c
-       JOIN users u ON c.user_id = u.user_id
+       LEFT JOIN reviews r ON c.review_id = r.review_id
+       LEFT JOIN products p ON r.product_id = p.product_id
        WHERE c.user_id = $1
        ORDER BY c.created_at DESC`,
-      [req.user.user_id]
+      [userId]
     );
 
+    console.log('User comments rows:', rows);  // Debug log
+
     res.json(rows);
+
   } catch (err) {
-    logger.error(`Failed to fetch user comments: ${err.message || err}`);
-    const error = new Error('Failed to fetch user comments');
-    error.status = 500;
-    return next(error);
+    console.error(`Failed to fetch user comments: ${err.message || err}`);
+    next(new Error('Failed to fetch user comments'));
   }
 });
 

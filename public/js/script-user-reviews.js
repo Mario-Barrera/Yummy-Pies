@@ -34,7 +34,7 @@ async function loadUserReviews() {
     const reviews = await response.json();
 
     if (reviews.length === 0) {
-      container.textContent = 'You have no reviews yet.';
+      container.innerHTML = '<p id="no-reviewHistory-message">You have no reviews yet.</p>';
       return;
     }
 
@@ -42,7 +42,7 @@ async function loadUserReviews() {
 
     // Create table element
     const table = document.createElement('table');
-    table.className = 'user-reviews-table'; // add class for styling if you want
+    table.className = 'user-reviews-table'; 
 
     // Create table header
     const thead = document.createElement('thead');
@@ -61,25 +61,25 @@ async function loadUserReviews() {
     const tbody = document.createElement('tbody');
 
     reviews.forEach(review => {
-  const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
+    const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
 
-  const createdDate = new Date(review.created_at).toLocaleDateString();
-  const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
-  const showUpdated = updatedDate && updatedDate !== createdDate;
+    const createdDate = new Date(review.created_at).toLocaleDateString();
+    const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
+    const showUpdated = updatedDate && updatedDate !== createdDate;
 
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td>${cleanProductName}</td>
-    <td>${review.rating}</td>
-    <td>${review.comment || 'No comment'}</td>
-    <td>${createdDate}</td>
-    <td>${showUpdated ? updatedDate : ''}</td>
-  `;
-  tbody.appendChild(tr);
-});
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${cleanProductName}</td>
+      <td>${review.rating}</td>
+      <td>${review.comment || 'No comment'}</td>
+      <td>${createdDate}</td>
+      <td>${showUpdated ? updatedDate : ''}</td>
+    `;
+    tbody.appendChild(tr);  
+  });
 
-  table.appendChild(tbody);
-  container.appendChild(table);
+    table.appendChild(tbody);
+    container.appendChild(table);
   
 } catch (error) {
     console.error(error);

@@ -293,6 +293,14 @@ html, body {
   cursor: default;
 }
 
+#no-orderHistory-message {
+  text-align: left;
+  display: block;          /* p tags are block by default, but ensure this */
+  width: 100%;             /* makes sure it takes full container width */
+  margin: 0;               /* remove default margin if needed */
+  padding: 18px;              
+}
+
 /* ------------ REVIEW TABLE ------------ */
 .user-reviews-table {
   width: 100%;
@@ -327,6 +335,64 @@ html, body {
   margin-top: 1rem;
 }
 
+#no-reviewHistory-message {
+  text-align: left;
+  display: block;          /* p tags are block by default, but ensure this */
+  width: 100%;             /* makes sure it takes full container width */
+  margin: 0;               /* remove default margin if needed */
+  padding: 0;            
+}
+
+/* ---------- COMMENT TABLE ---------- */
+.horizontal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.horizontal-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px 0;
+  color: #000;
+}
+
+.horizontal-table th,
+.horizontal-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.horizontal-table th {
+  background-color: #bbd6ff;
+  color: black;
+  font-weight: 600px;
+}
+
+.horizontal-table tr:hover {
+ background-color: #f1f7ff;
+  cursor: default;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+#no-commentHistory-message {
+  text-align: left;
+  display: block;          /* p tags are block by default, but ensure this */
+  width: 100%;             /* makes sure it takes full container width */
+  margin: 0;               /* remove default margin if needed */
+  padding: 0;            
+}
 
 /* ------ FOOTER ------  */
 .footer {
