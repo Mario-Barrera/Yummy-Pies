@@ -117,49 +117,57 @@ router.get('/', requireAuth, async (req, res, next) => {
 });
 
 
-// PUT update a comment (owner only)
 router.put('/:commentId', requireAuth, async (req, res, next) => {
-    const { commentId } = req.params;
-    const { comment } = req.body;
+  const { commentId } = req.params;
+  const { rating, comment } = req.body;
 
-    if (!comment) {
-        const err = new Error('Comment is required'); // create an error object
-        err.status = 400; // attach an HTTP status code
-        return next(err); // pass it to the error handler
+  if (comment == null || rating == null) {
+    const err = new Error('Both rating and comment are required');
+    err.status = 400;
+    return next(err);
+  }
+
+  if (isNaN(rating) || rating < 1 || rating > 5) {
+    const err = new Error('Rating must be a number between 1 and 5');
+    err.status = 400;
+    return next(err);
+  }
+
+  try {
+    // Verify ownership
+    const { rows: existingComment } = await pool.query(
+      'SELECT * FROM review_comments WHERE comment_id = $1 AND user_id = $2',
+      [commentId, req.user.user_id]
+    );
+
+    if (!existingComment.length) {
+      const error = new Error('Access denied or comment not found');
+      error.status = 403;
+      return next(error);
     }
 
-    try {
-        // Check if the comment belongs to the user
-        const { rows: existingComment } = await pool.query(
-            'SELECT * FROM review_comments WHERE comment_id = $1 AND user_id = $2',
-            [commentId, req.user.user_id]
-        );
+    const sanitizedComment = comment.trim();
 
-        if (!existingComment.length) {
-            const error = new Error('Access denied or comment not found');
-            error.status = 403;
-            return next(error);
-        }
+    // Update rating and comment, set updated_at
+    const { rows: updatedRows } = await pool.query(
+      `UPDATE review_comments
+       SET rating = $1,
+           comment = $2,
+           updated_at = CURRENT_TIMESTAMP
+       WHERE comment_id = $3
+       RETURNING *`,
+      [rating, sanitizedComment, commentId]
+    );
 
-        const sanitizedComment = comment.trim(); // Sanitize the input
-
-        // Update the comment
-        const { rows: updatedRows } = await pool.query(
-            `UPDATE review_comments
-             SET comment = $1
-             WHERE comment_id = $2
-             RETURNING *`,
-            [sanitizedComment, commentId]
-        );
-
-        res.json(updatedRows[0]);
-    } catch (err) {
-        logger.error(`Failed to update comment ${commentId}: ${err.message || err}`);
-        const error = new Error('Failed to update comments');
-        error.status = 500;
-        return next(error);
-    }
+    res.json(updatedRows[0]);
+  } catch (err) {
+    logger.error(`Failed to update comment ${commentId}: ${err.message || err}`);
+    const error = new Error('Failed to update comments');
+    error.status = 500;
+    return next(error);
+  }
 });
+
 
 // DELETE a comment (owner only)
 router.delete('/:commentId', requireAuth, async (req, res, next) => {

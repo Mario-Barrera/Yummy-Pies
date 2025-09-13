@@ -30,18 +30,15 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
   const { reviewId } = req.params;
   const { rating, comment } = req.body;
 
-  // Validate required fields
   if (rating === undefined || comment === undefined) {
     return res.status(400).json({ error: 'Both rating and comment are required' });
   }
 
-  // Validate rating range
   if (rating < 1 || rating > 5) {
     return res.status(400).json({ error: 'Rating must be between 1 and 5' });
   }
 
   try {
-    // Check if review belongs to the user
     const { rows: existing } = await pool.query(
       'SELECT * FROM reviews WHERE review_id = $1 AND user_id = $2',
       [reviewId, req.user.user_id]
@@ -53,16 +50,17 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
     const sanitizedComment = comment?.trim() || null;
 
-    // Update the review
+    // Updated SQL with updated_at
     const { rows: updatedRows } = await pool.query(
       `UPDATE reviews
-       SET rating = $1, comment = $2
+       SET rating = $1,
+           comment = $2,
+           updated_at = CURRENT_TIMESTAMP
        WHERE review_id = $3
        RETURNING *`,
       [rating, sanitizedComment, reviewId]
     );
 
-    // Update product rating after updating review  
     await updateProductRating(updatedRows[0].product_id);
 
     res.json(updatedRows[0]);
@@ -71,6 +69,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to update review' });
   }
 });
+
 
 
 // USER ROUTES
