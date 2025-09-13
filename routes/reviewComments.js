@@ -4,6 +4,7 @@ const pool = require('../db/client');
 const logger = require('../utils/logger');
 const { requireAuth } = require('../middleware/auth');
 
+
 // POST create a comment on a review
 router.post('/:reviewId', requireAuth, async (req, res, next) => {
     const { reviewId } = req.params;
@@ -43,7 +44,7 @@ router.get('/user', requireAuth, async (req, res, next) => {
          c.comment_id,
          c.comment,
          c.created_at,
-         r.updated_at,
+         c.updated_at,
          c.user_id,
          r.rating,
          r.review_id,
@@ -116,19 +117,13 @@ router.get('/', requireAuth, async (req, res, next) => {
   }
 });
 
-
+// Logged-in user edit comments
 router.put('/:commentId', requireAuth, async (req, res, next) => {
   const { commentId } = req.params;
-  const { rating, comment } = req.body;
+  const { comment } = req.body;
 
-  if (comment == null || rating == null) {
-    const err = new Error('Both rating and comment are required');
-    err.status = 400;
-    return next(err);
-  }
-
-  if (isNaN(rating) || rating < 1 || rating > 5) {
-    const err = new Error('Rating must be a number between 1 and 5');
+  if (comment == null) {
+    const err = new Error('Comment is required');
     err.status = 400;
     return next(err);
   }
@@ -148,15 +143,14 @@ router.put('/:commentId', requireAuth, async (req, res, next) => {
 
     const sanitizedComment = comment.trim();
 
-    // Update rating and comment, set updated_at
+    // Update comment and timestamp only
     const { rows: updatedRows } = await pool.query(
       `UPDATE review_comments
-       SET rating = $1,
-           comment = $2,
-           updated_at = CURRENT_TIMESTAMP
-       WHERE comment_id = $3
+       SET comment = $1,
+        updated_at = CURRENT_TIMESTAMP
+       WHERE comment_id = $2
        RETURNING *`,
-      [rating, sanitizedComment, commentId]
+      [sanitizedComment, commentId]
     );
 
     res.json(updatedRows[0]);

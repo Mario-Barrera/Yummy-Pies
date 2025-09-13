@@ -1,7 +1,7 @@
 function renderComments(comments) {
   comments.forEach(comment => {
     const createdAt = new Date(comment.created_at).toLocaleDateString();
-    const updatedAt = comment.updated_at ? new Date(comment.updated_at).toLocaleDateString() : 'N/A';
+    const updatedAt = comment.updated_at ? new Date(comment.updated_at).toLocaleDateString() : 'null';
     console.log(`Comment on ${comment.product_name} (Rating: ${comment.rating})`);
     console.log(`Created: ${createdAt}, Updated: ${updatedAt}`);
     console.log(comment.comment);
@@ -53,11 +53,12 @@ async function loadUserReviewComments() {
 
     comments.forEach(comment => {
       const createdAt = new Date(comment.created_at).toLocaleDateString();
-      const updatedAt = comment.updated_at ? new Date(comment.updated_at).toLocaleDateString() : 'N/A';
+      const updatedAt = comment.updated_at ? new Date(comment.updated_at).toLocaleDateString() : ' ';
+      const cleanProductName = comment.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
 
       html += `
         <tr>
-          <td>${comment.product_name}</td>
+          <td>${cleanProductName}</td>
           <td>${comment.rating}</td>
           <td>${comment.comment}</td>
           <td>${createdAt}</td>

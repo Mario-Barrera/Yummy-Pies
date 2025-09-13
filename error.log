@@ -24908,3 +24908,1634 @@
     at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
     at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
     at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T01:13:51.606Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T01:13:51.622Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T01:13:54.360Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T01:13:56.079Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T01:13:56.107Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T01:18:14.365Z [ERROR]: Failed to update comment 5: column "rating" of relation "review_comments" does not exist
+2025-09-13T01:18:14.366Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T01:18:27.463Z [ERROR]: Failed to update comment 5: column "rating" of relation "review_comments" does not exist
+2025-09-13T01:18:27.464Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T01:18:41.440Z [ERROR]: Failed to update comment 5: column "rating" of relation "review_comments" does not exist
+2025-09-13T01:18:41.441Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T01:20:09.383Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T01:20:09.384Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T04:46:42.072Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T04:46:42.072Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T04:46:57.081Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T04:46:57.082Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:165:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T04:47:26.613Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T04:47:26.628Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T04:47:28.683Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T04:47:30.780Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T04:47:30.790Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T04:48:06.597Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T04:48:06.598Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T04:48:19.020Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T04:48:19.020Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T04:49:20.671Z [ERROR]: Failed to update comment 10: column "rating" of relation "review_comments" does not exist
+2025-09-13T04:49:20.672Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T05:19:37.876Z [ERROR]: Failed to update comment 13: column "rating" of relation "review_comments" does not exist
+2025-09-13T05:19:37.876Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T05:20:01.937Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:20:17.678Z [ERROR]: Failed to update comment 13: column "rating" of relation "review_comments" does not exist
+2025-09-13T05:20:17.679Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T05:21:00.022Z [ERROR]: Failed to update comment 13: column "rating" of relation "review_comments" does not exist
+2025-09-13T05:21:00.023Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T05:21:10.420Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:21:18.996Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:21:22.324Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:21:23.456Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:21:24.145Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:21:54.063Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T05:22:38.015Z [ERROR]: Failed to update comment 20: column "rating" of relation "review_comments" does not exist
+2025-09-13T05:22:38.016Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T13:00:59.602Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:00:59.630Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T13:01:01.826Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T13:02:43.011Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:02:55.267Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:02:55.274Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:16:59.070Z [ERROR]: Failed to update comment 20: column "rating" of relation "review_comments" does not exist
+2025-09-13T13:16:59.071Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T13:17:42.621Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:17:42.646Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:17:45.489Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:17:47.531Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:17:47.553Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:18:26.036Z [ERROR]: Failed to update comment 20: column "rating" of relation "review_comments" does not exist
+2025-09-13T13:18:26.037Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T13:25:31.986Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:25:31.999Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:34.525Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:25:34.532Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:35.530Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:55.048Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:25:55.053Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:57.939Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:59.889Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:25:59.935Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:26:42.934Z [ERROR]: Failed to update comment 20: column "rating" of relation "review_comments" does not exist
+2025-09-13T13:26:42.935Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:166:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T13:37:00.092Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:37:00.099Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:37:01.923Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:37:36.577Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:37:36.597Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:37:38.397Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:37:39.935Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T13:37:39.957Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T13:38:23.075Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T13:45:03.393Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T13:49:38.887Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:01:10.086Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:02:07.366Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T14:02:07.380Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:02:14.905Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:02:16.866Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:02:16.873Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T14:02:46.785Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:08:47.994Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:10:15.979Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:11:24.438Z [ERROR]: Error: Both rating and comment are required
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:126:17
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:12:12)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T14:11:40.557Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T14:13:14.922Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T14:13:14.937Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:13:31.571Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T14:13:31.592Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:13:33.764Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:13:35.192Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T14:13:35.215Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T14:14:02.645Z [ERROR]: Failed to update comment 20: column "updated_at" of relation "review_comments" does not exist
+2025-09-13T14:14:02.645Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:08:39.530Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:08:39.542Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:08:41.770Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:09:21.963Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:09:22.007Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:34:00.818Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:34:00.842Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:34:02.647Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:34:05.377Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:34:05.408Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:34:09.138Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:34:09.158Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:47:18.478Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:47:18.485Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:47:21.966Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:47:47.967Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:47:49.719Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:47:49.726Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:48:22.700Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:48:27.204Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:48:27.205Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:48:48.337Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:48:52.737Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:48:52.738Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:49:39.334Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:49:42.056Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:49:42.056Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:49:49.393Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:49:53.554Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:49:53.555Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:52:27.231Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:52:27.231Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:52:34.169Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:52:34.177Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:53:06.969Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:53:08.605Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T15:53:08.619Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T15:54:00.827Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:54:18.205Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:54:18.208Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:56:46.283Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:59:06.587Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T15:59:10.486Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T15:59:10.487Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:00:50.857Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:04:42.942Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:04:49.453Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:04:49.453Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:04:55.595Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:04:56.439Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:04:56.439Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:26:53.373Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:26:55.446Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:27:37.615Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:27:44.831Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:27:44.832Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:28:03.991Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:28:09.449Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:28:09.455Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:36:12.583Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:38:58.960Z [ERROR]: ReferenceError: logger is not defined
+    at C:\Users\Goku\Yummy-Pies\routes\reviews.js:68:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:44:35.363Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:44:35.377Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:44:38.901Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:45:10.744Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:45:10.760Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:45:12.393Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:45:14.528Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:45:14.559Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:45:41.991Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:45:41.994Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:46:08.955Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:46:08.956Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:49:06.647Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:49:06.648Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T16:49:39.034Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:49:39.040Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:54:30.355Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:54:30.372Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:54:32.303Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T16:54:32.314Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T16:55:05.027Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T16:55:05.029Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T20:25:54.410Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T20:25:54.427Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T20:25:54.439Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T20:25:54.456Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T20:26:02.491Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T20:26:02.498Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T20:26:07.787Z [ERROR]: TokenExpiredError: Invalid token
+    at C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:190:21
+    at getSecret (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:101:10)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+2025-09-13T20:26:07.798Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T20:28:39.985Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T20:28:39.987Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T20:29:10.533Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T20:29:10.534Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T20:38:34.358Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T20:38:34.359Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T21:02:08.248Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T21:02:08.267Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T21:02:12.307Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T21:02:12.314Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T21:05:48.355Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T21:05:48.356Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T21:08:49.578Z [ERROR]: Failed to delete comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T21:08:49.580Z [ERROR]: Error: Failed to delete comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:192:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T21:35:03.044Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T21:35:03.045Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T21:35:27.217Z [ERROR]: Failed to update comment undefined: invalid input syntax for type integer: "undefined"
+2025-09-13T21:35:27.218Z [ERROR]: Error: Failed to update comments
+    at C:\Users\Goku\Yummy-Pies\routes\reviewComments.js:159:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-09-13T22:33:56.863Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T22:33:56.881Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T22:34:00.209Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T22:34:33.586Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T22:34:33.607Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T22:34:36.313Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T22:34:38.065Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T22:34:38.092Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T22:58:32.899Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T22:58:41.018Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)
+2025-09-13T23:00:02.259Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T23:00:04.087Z [ERROR]: JsonWebTokenError: Invalid token
+    at module.exports [as verify] (C:\Users\Goku\Yummy-Pies\node_modules\jsonwebtoken\verify.js:70:17)
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:31:25)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+2025-09-13T23:00:04.096Z [ERROR]: Error: Unauthorized: No token provided
+    at requireAuth (C:\Users\Goku\Yummy-Pies\middleware\auth.js:25:17)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Goku\Yummy-Pies\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:582:12)
+    at next (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Goku\Yummy-Pies\node_modules\router\index.js:186:3)

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/client');
+const logger = require('../utils/logger');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 const { updateProductRating } = require('../helpers/rating');
 
@@ -50,14 +51,13 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
     const sanitizedComment = comment?.trim() || null;
 
-    // Updated SQL with updated_at
     const { rows: updatedRows } = await pool.query(
       `UPDATE reviews
-       SET rating = $1,
-           comment = $2,
-           updated_at = CURRENT_TIMESTAMP
-       WHERE review_id = $3
-       RETURNING *`,
+        SET rating = $1,
+            comment = $2,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE review_id = $3
+        RETURNING *`,
       [rating, sanitizedComment, reviewId]
     );
 
@@ -69,7 +69,6 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to update review' });
   }
 });
-
 
 
 // USER ROUTES

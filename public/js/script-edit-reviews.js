@@ -1,4 +1,3 @@
-
 async function loadUserReviews() {
   const container = document.getElementById('user-reviews');
 
@@ -39,11 +38,9 @@ async function loadUserReviews() {
 
     container.innerHTML = ''; // Clear previous content
 
-    // Create table element
     const table = document.createElement('table');
-    table.className = 'user-reviews-table'; 
+    table.className = 'user-reviews-table';
 
-    // Create table header
     const thead = document.createElement('thead');
     thead.innerHTML = `
       <tr>
@@ -57,35 +54,38 @@ async function loadUserReviews() {
     `;
     table.appendChild(thead);
 
-    // Create table body
     const tbody = document.createElement('tbody');
 
     reviews.forEach(review => {
-    const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
-    const createdDate = new Date(review.created_at).toLocaleDateString();
-    const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
-    const showUpdated = updatedDate && updatedDate !== createdDate;
+      const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
+      const createdAt = new Date(review.created_at);
+      const updatedAt = new Date(review.updated_at);
+      const showUpdated = review.updated_at && updatedAt.getTime() !== createdAt.getTime();
 
-    const tr = document.createElement('tr');
+      const createdDate = createdAt.toLocaleDateString(); // display only
+      const updatedDate = updatedAt.toLocaleDateString(); // display only
 
-    const editBtn = `<button class="edit-btn" data-review-id="${review.review_id}">Edit</button>`;
-    const deleteBtn = `<button class="delete-btn" data-review-id="${review.review_id}">Delete</button>`;
 
-    tr.innerHTML = `
-      <td>${cleanProductName}</td>
-      <td>${review.rating}</td>
-      <td>${review.comment || 'No comment'}</td>
-      <td>${createdDate}</td>
-      <td>${showUpdated ? updatedDate : ''}</td>
-      <td>${editBtn} ${deleteBtn}</td>
-    `;
-    tbody.appendChild(tr);  
-  });
+      const tr = document.createElement('tr');
+
+      const editBtn = `<button class="edit-btn" data-review-id="${review.review_id}">Edit</button>`;
+      const deleteBtn = `<button class="delete-btn" data-review-id="${review.review_id}">Delete</button>`;
+
+      tr.innerHTML = `
+        <td>${cleanProductName}</td>
+        <td>${review.rating}</td>
+        <td>${review.comment || 'No comment'}</td>
+        <td>${createdDate}</td>
+        <td>${showUpdated ? updatedDate : ''}</td>
+        <td>${editBtn} ${deleteBtn}</td>
+      `;
+      tbody.appendChild(tr);
+    });
 
     table.appendChild(tbody);
     container.appendChild(table);
 
-    // Event listeners for delete buttons
+    // DELETE HANDLER — still okay here, because it targets fresh elements each time
     document.querySelectorAll('.delete-btn').forEach(button => {
       button.addEventListener('click', async (e) => {
         const reviewId = e.target.dataset.reviewId;
@@ -97,7 +97,7 @@ async function loadUserReviews() {
             });
             if (res.ok) {
               alert('Review deleted successfully');
-              loadUserReviews(); // reload reviews
+              loadUserReviews(); // refresh reviews
             } else {
               alert('Failed to delete review');
             }
@@ -109,52 +109,66 @@ async function loadUserReviews() {
       });
     });
 
-    document.querySelectorAll('.edit-btn').forEach(button => {
-      button.addEventListener('click', async (e) => {
-        const reviewId = e.target.dataset.reviewId;
-        const row = e.target.closest('tr');
-        const currentRating = row.children[1].textContent;
-        const currentComment = row.children[2].textContent;
-
-        const newRating = prompt('Edit review rating (1-5):', currentRating);
-        const newComment = prompt('Edit your customer review about the product:', currentComment);
-
-        if (newRating && newComment) {
-          try {
-            const res = await fetch(`/api/reviews/${reviewId}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                rating: parseInt(newRating),
-                comment: newComment.trim()
-              })
-            });
-
-            if (res.ok) {
-              alert('Review edited successfully');
-              loadUserReviews(); // Reload to reflect changes
-            } else {
-              alert('Failed to edit review');
-            }
-          } catch (err) {
-            console.error('Edit error:', err);
-            alert('An error occurred');
-          }
-        } else {
-          alert('Edit canceled or invalid input.');
-        }
-      });
-    });
-
-  
-    } catch (error) {
+  } catch (error) {
     console.error(error);
     container.innerHTML = '<p class="error">Error loading your reviews. Please try again later.</p>';
   }
 }
 
-// Call on page load
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('edit-btn')) {
+    const reviewId = e.target.dataset.reviewId;
+    const row = e.target.closest('tr');
+
+    // SAFER lookup using querySelector inside the row
+    const cells = row.querySelectorAll('td');
+    const currentRating = cells[1]?.textContent?.trim();
+    const currentComment = cells[2]?.textContent?.trim();
+
+    // Show prompts
+    const newRatingInput = prompt('Edit review rating (1-5):', currentRating);
+    if (newRatingInput === null) return; // Cancelled
+
+    const parsedRating = parseInt(newRatingInput, 10);
+    if (isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5) {
+      alert('Rating must be a number between 1 and 5.');
+      return;
+    }
+
+    const newComment = prompt('Edit your comment about the product:', currentComment);
+    if (newComment === null || newComment.trim() === '') {
+      alert('Comment cannot be empty.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          rating: parsedRating,
+          comment: newComment.trim()
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(`Failed to edit review: ${data.error || 'Unknown error'}`);
+      } else {
+        alert('Review edited successfully.');
+        loadUserReviews(); // refresh UI
+      }
+    } catch (err) {
+      console.error('Edit error:', err);
+      alert('An error occurred while editing.');
+    }
+  }
+});
+
+
+// Load on page
 loadUserReviews();
