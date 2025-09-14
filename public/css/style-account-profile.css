@@ -171,6 +171,18 @@ html, body {
     color: rgb(85, 65, 52);
 }
 
+#profile-name,
+#profile-email,
+#profile-phone,
+#profile-address {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+}
+
+.profile-info {
+  margin-bottom: 40px;
+}
+
 /* ------ Orders, Reviews, Comments ------ */
 .profile-orders,
 .profile-reviews,

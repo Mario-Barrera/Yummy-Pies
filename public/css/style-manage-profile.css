@@ -113,28 +113,47 @@ html, body {
 
 /* ------ MAIN CONTENT ------ */
 .manage-profile-main {
-    display: flex;
-  flex-direction: row;       
-  gap: 1rem;                 
-  justify-content: center;   		/* Center buttons inside nav */
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
   width: 930px;
-  margin: 30px auto;            		/* Center nav block inside its parent */
+  margin: 30px auto;
 }
 
 .manage-profile-form {
-  max-width: 480px;
+  width: 900px; 
   margin: 0 auto;
   padding: 1.5rem;
-  background-color: #fff; /* Or your site's form background */
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Two-column layout container */
+.form-columns {
+  display: flex;
+  gap: 40px; /* Space between left and right columns */
+  justify-content: space-between;
+  flex-wrap: wrap; /* Responsive for smaller screens */
+}
+
+/* Each column */
+.form-column {
+  flex: 1;
+  min-width: 250px; /* Ensures it doesn’t get too narrow */
+}
+
+/* Shared styles for form groups */
 .form-group {
   margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
+}
+
+.heading {
+  margin-bottom: 15px;
 }
 
 .form-group label {
@@ -151,34 +170,44 @@ html, body {
   font-size: 1rem;
   font-family: inherit;
   transition: border-color 0.3s ease;
+  width: 100%; /* Make inputs stretch full width of column */
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #ff6600; /* Your accent color */
+  border-color: #ff6600;
   outline: none;
 }
 
-.btn-link {
+.update-btn-link,
+.btn-cancel {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: #ff6600;
-  color: white;
-  border: none;
+  padding: 0.55rem 1rem;
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  font-weight: 700;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   text-align: center;
   text-decoration: none;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  box-sizing: border-box;
 }
 
-.btn-link:hover,
-.btn-link:focus {
-  background-color: #e05500;
+.update-btn-link:hover,
+.update-btn-link:focus,
+.btn-cancel:hover,
+.btn-cancel:focus {
+  background-color: #e4e4e4;
+  border-color: #bbb;
+  transform: scale(1.05);
   outline: none;
 }
+
 
 /* ------ FOOTER ------  */
 .footer {
@@ -261,7 +290,7 @@ footer form label {
   margin-bottom: 10px;
 }
 
-button[type="submit"] {
+.submit-btn {
   padding: 8px 16px;
   font-size: 16px;
   background-color: rgb(246, 160, 48);
@@ -272,8 +301,8 @@ button[type="submit"] {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
+.submit-btn:hover,
+.submit-btn:focus {
   background-color: #f0a500;
   transform: scale(1.05);
 }
