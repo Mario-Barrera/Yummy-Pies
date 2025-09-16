@@ -75,7 +75,7 @@ CREATE TABLE reviews (
     product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, product_id) -- One review per user per product
 );
 
@@ -85,7 +85,7 @@ CREATE TABLE review_comments (
     review_id INT NOT NULL REFERENCES reviews(review_id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     comment TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, review_id)  -- One review comment per user per product
 
 );

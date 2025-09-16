@@ -9,6 +9,9 @@ app.use(cookieParser());  // <-- This enables req.cookies
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+// Middleware to parse URL-encoded form data (from HTML forms)
+app.use(express.urlencoded({ extended: true }));
+
 // Serve static files from "public" BEFORE routes
 app.use(express.static('public'));
 

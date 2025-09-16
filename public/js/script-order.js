@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (step1Container) {
             const message = document.createElement("p");
             message.style.color = "red";
-            message.textContent = "Please log in to place an order.";
+            message.textContent = "Please log in to place an order";
             step1Container.prepend(message);
         }
     }

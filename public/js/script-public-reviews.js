@@ -31,6 +31,9 @@ async function loadAllReviews() {
       // Remove "Slice" and "Whole" from product_name
       const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
 
+      const createdDate = new Date(review.created_at).toLocaleDateString();
+      const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
+
       reviewDiv.innerHTML = `
         <h3>Product: ${cleanProductName}</h3>
 
@@ -47,7 +50,8 @@ async function loadAllReviews() {
         
         <p>Review: ${review.comment || 'No comment'}</p>
         
-        <p>Date: ${new Date(review.created_at).toLocaleDateString()}</p>
+        <p>Created: ${new Date(review.created_at).toLocaleDateString()}</p>
+        ${updatedDate ? `<p>Updated: ${updatedDate}</p>` : ''}
       `;
       container.appendChild(reviewDiv);
     });

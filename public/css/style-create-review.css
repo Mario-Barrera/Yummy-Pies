@@ -111,71 +111,74 @@ html, body {
   margin: 5px auto;
 }
 
-/* ------ MAIN CONTENT ------ */
-.manage-profile-main {
+/* ------------ MAIN CONTENT ------------ */
+.main-container {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  width: 930px;
-  margin: 30px auto;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .manage-profile-form {
-  width: 900px; 
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Two-column layout container */
-.form-columns {
-  display: flex;
-  gap: 40px; /* Space between left and right columns */
-  justify-content: space-between;
-  flex-wrap: wrap; /* Responsive for smaller screens */
-}
-
-/* Each column */
-.form-column {
-  flex: 1;
-  min-width: 250px; /* Ensures it doesn’t get too narrow */
-}
-
-/* Shared styles for form groups */
-.form-group {
-  margin-bottom: 1.25rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.heading {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.3s ease;
-  width: 100%; /* Make inputs stretch full width of column */
   box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.review-title {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+#product-select {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#rating {
+  display: block;
+  width: 25%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.textarea {
+  display: block;
+  width: 100%;                        /* Optional, to fill the container */
+  margin-bottom: 1rem;   
+  border: 1px solid #ccc;             
+  box-sizing: border-box;
+}
+
+#product-select:focus,
+#rating:focus,
+.textarea:focus {
   border-color: #ff6600;
   outline: none;
 }
@@ -207,7 +210,6 @@ html, body {
   transform: scale(1.05);
   outline: none;
 }
-
 
 /* ------ FOOTER ------  */
 .footer {

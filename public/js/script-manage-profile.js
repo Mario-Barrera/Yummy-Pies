@@ -75,16 +75,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle cancel button
   cancelBtn.addEventListener('click', () => {
+    console.log('Cancel button clicked');  // DEBUG LINE
+
     if (!window.originalUser) return;
 
-    const [firstName, ...rest] = (window.originalUser.name || '').split(' ');
-    const lastName = rest.join(' ');
+    const firstNameInput = document.getElementById('first-name');
+    const lastNameInput = document.getElementById('last-name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const addressInput = document.getElementById('address');
+    const passwordInput = document.getElementById('password');
 
-    document.getElementById('first-name').value = firstName || '';
-    document.getElementById('last-name').value = lastName || '';
-    document.getElementById('email').value = window.originalUser.email || '';
-    document.getElementById('phone').value = window.originalUser.phone || '';
-    document.getElementById('address').value = window.originalUser.address || '';
-    document.getElementById('password').value = '';
+    const [originalFirstName, ...rest] = (window.originalUser.name || '').split(' ');
+    const originalLastName = rest.join(' ');
+
+    const isModified =
+      firstNameInput.value !== (originalFirstName || '') ||
+      lastNameInput.value !== (originalLastName || '') ||
+      emailInput.value !== (window.originalUser.email || '') ||
+      phoneInput.value !== (window.originalUser.phone || '') ||
+      addressInput.value !== (window.originalUser.address || '') ||
+      passwordInput.value !== '';
+
+    if (isModified) {
+      // Revert changes
+      firstNameInput.value = originalFirstName || '';
+      lastNameInput.value = originalLastName || '';
+      emailInput.value = window.originalUser.email || '';
+      phoneInput.value = window.originalUser.phone || '';
+      addressInput.value = window.originalUser.address || '';
+      passwordInput.value = '';
+    }
+
+    // Clear any drafts
+    localStorage.removeItem('userProfileDraft');
+
+    // Redirect back to account profile
+    window.location.href = 'account-profile.html';
   });
 });
