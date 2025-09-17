@@ -31,28 +31,35 @@ async function loadAllReviews() {
       // Remove "Slice" and "Whole" from product_name
       const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
 
-      const createdDate = new Date(review.created_at).toLocaleDateString();
-      const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
+      const createdAt = new Date(review.created_at);
+      const updatedAt = review.updated_at ? new Date(review.updated_at) : null;
 
-      reviewDiv.innerHTML = `
-        <h3>Product: ${cleanProductName}</h3>
+      // Only show updated date if it's different from created date
+      const showUpdated = updatedAt && updatedAt.getTime() !== createdAt.getTime();
 
-        <p class="comment-container">
-          <a href="review-comments.html?reviewId=${review.review_id}">💬 Comments</a>
-        </p>
-        
-        <p>By: ${review.user_name}</p>
-         
-        <p class="rating">
-          <p class="rating">
-            <span class="filled-stars">${'★'.repeat(review.rating)}</span><span class="empty-stars">${'☆'.repeat(5 - review.rating)}</span>
-          </p>
-        
-        <p>Review: ${review.comment || 'No comment'}</p>
-        
-        <p>Created: ${new Date(review.created_at).toLocaleDateString()}</p>
-        ${updatedDate ? `<p>Updated: ${updatedDate}</p>` : ''}
-      `;
+    const createdDate = createdAt.toLocaleDateString();
+    const updatedDate = showUpdated ? updatedAt.toLocaleDateString() : null;
+
+    reviewDiv.innerHTML = `
+      <h3>Product: ${cleanProductName}</h3>
+
+      <p class="comment-container">
+      <a href="review-comments.html?reviewId=${review.review_id}">💬 Comments</a>
+      </p>
+  
+      <p>By: ${review.user_name}</p>
+   
+      <p class="rating">
+      <span class="filled-stars">${'★'.repeat(review.rating)}</span>
+      <span class="empty-stars">${'☆'.repeat(5 - review.rating)}</span>
+      </p>
+
+      <p>Review: ${review.comment || 'No comment'}</p>
+  
+      <p>Created: ${createdDate}</p>
+      ${updatedDate ? `<p>Updated: ${updatedDate}</p>` : ''}
+    `;
+
       container.appendChild(reviewDiv);
     });
 
