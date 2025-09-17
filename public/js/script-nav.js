@@ -82,7 +82,25 @@ async function updateUserUI() {
   }
 }
 
+function updateOrderOnlineLink() {
+    const link = document.getElementById("order-online-link");
+    if (!link) return;
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const formState = JSON.parse(localStorage.getItem("formState") || "{}");
+
+    const iconHTML = '<i class="fa-solid fa-cart-shopping"></i> ';
+
+    // Use innerHTML instead of textContent
+    link.innerHTML = iconHTML + "Order Online";
+
+    if (user && formState.cart && formState.cart.length > 0) {
+        link.innerHTML = iconHTML + `Order Online(${formState.cart.length})`;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   updateUserUI();
+  updateOrderOnlineLink();
 });

@@ -190,8 +190,8 @@ One of the key interactive features I implemented is a **dynamic shopping cart c
 
 This count reflects the number of items currently in the logged-in user's cart **that have not yet been checked out** (i.e., a persistent cart stored in `localStorage`).
 
-- For demonstration purposes, the user **Caitlyn Jenner** has a cart with preloaded items.
-- However, this feature is **not limited to her** — you can log in as **any user**, add items to the cart, and see the count update accordingly.
+- For demonstration purposes, the user **Bob Johnson** has a cart with preloaded items.
+- However, this feature is **not limited to him** — you can log in as **any user**, add items to the cart, and see the count update accordingly.
 - The count will automatically refresh on page load, thanks to JavaScript logic that checks for saved cart data.
 
 ---

@@ -331,9 +331,29 @@ document.addEventListener("DOMContentLoaded", function () {
         updateMinTime(deliveryDateInput, deliveryTimeInput);
         disablePastTimeOptions(pickupDateInput, pickupTimeInput);
         disablePastTimeOptions(deliveryDateInput, deliveryTimeInput);
+        updateOrderOnlineLink();
     };
 
 
+    // ---------------- NAV LINK UPDATE ----------------
+    function updateOrderOnlineLink() {
+        const link = document.getElementById("order-online-link");
+        if (!link) return;
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        const formState = JSON.parse(localStorage.getItem("formState") || "{}");
+
+        const iconHTML = '<i class="fa-solid fa-cart-shopping"></i>';
+
+        link.innerHTML = iconHTML + "Order Online";
+
+    // Show count if user has pending items
+        if (user && formState.cart && formState.cart.length > 0) {
+            link.innerHTML = iconHTML + `Order Online(${formState.cart.length})`;
+        }
+    }
+
+    
     // ---------------- CART LOGIC ----------------
     const orderButtons = document.querySelectorAll(".order-btn");
     orderButtons.forEach(btn => {
@@ -363,6 +383,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         total += price;
         updateCartDisplay();
+        updateOrderOnlineLink();
     }
 
     function updateCartDisplay() {
@@ -406,11 +427,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 total -= item.price * item.qty;
                 cart = cart.filter(c => c !== item);
                 updateCartDisplay();
+                updateOrderOnlineLink();
             });
             orderListEl.appendChild(itemEl);
         });
         orderTotalEls.forEach(el => el.textContent = `Total: $${total.toFixed(2)}`);
         saveFormState();
+        updateOrderOnlineLink();
     }
 
 
@@ -418,7 +441,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loadFormState();
     updateCartDisplay();
     showStep(currentStep);
-    showOrderSummary();  // << add this here
+    showOrderSummary();
+    updateOrderOnlineLink();
 
 
     // ---------------- DATE/TIME LOGIC ----------------
