@@ -218,7 +218,7 @@ ALTER USER
 
 > **Viewing SQL Help in PostgreSQL**
 
-To look up the syntax and usage for any SQL command — including `ALTER TABLE` and others I used while modifying my schema — you can use this built-in PostgreSQL command:
+To look up all the syntax and usage for any SQL command — including `ALTER TABLE` and others I used while modifying my schema — you can use this built-in PostgreSQL command:
 
 ```sql
 \h
