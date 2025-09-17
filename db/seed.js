@@ -38,7 +38,7 @@ async function seed() {
     const plainPasswords = [
       'Password1!','Password2!','Password3!','Password4!','Password5!',
       'Password6!','Password7!','Password8!','Password9!','Password10!',
-      'Password11!','Password12!','Password13!','Password14!'
+      'Password11!','Password12!'
     ];
     const hashedPasswords = await Promise.all(
       plainPasswords.map(pw => bcrypt.hash(pw, 10))
@@ -95,6 +95,7 @@ async function seed() {
       ['Ivy Green','ivy.green@example.com',hashedPasswords[8],'6060 Lemon Ct Round Rock TX 78664','512-555-8901','customer', null, null],
       ['Jack Black','jack.black@example.com',hashedPasswords[9],'7070 Pear Pkwy Buda TX 78610','737-555-9012','customer', null, null],
       ['Karen White','karen.white@example.com',hashedPasswords[10],'8080 Plum Ave Fort Worth TX 76101','682-555-0123','customer', null, null],
+      ['Caitlyn Jenner','jenner@example.com',hashedPasswords[11],'406 Buffalo Drive Plano TX 75002','214-675-8890','customer', null, null]
     ];
 
     const userIds = [];
@@ -216,29 +217,6 @@ async function seed() {
       );
     }
     console.log(`✅ Inserted ${orderItems.length} order items`);
-
-    // Cart items
-    const cartItems = [
-      [userIds[0], productIds[0], 2, 3.99],
-      [userIds[1], productIds[1], 1, 3.99],
-      [userIds[2], productIds[2], 3, 3.99],
-      [userIds[3], productIds[3], 1, 3.99],
-      [userIds[4], productIds[4], 4, 4.29],
-      [userIds[5], productIds[5], 2, 4.29],
-      [userIds[6], productIds[6], 1, 4.29],
-      [userIds[7], productIds[7], 3, 4.29],
-      [userIds[8], productIds[8], 2, 4.29],
-      [userIds[9], productIds[9], 1, 3.99],
-    ];
-
-    for (const ci of cartItems) {
-      await pool.query(
-        `INSERT INTO cart_items (user_id, product_id, quantity, price_at_purchase)
-        VALUES ($1, $2, $3, $4)`,
-        ci
-      );
-    }
-
 
     // Reviews - use userIds and productIds
     const reviews = [

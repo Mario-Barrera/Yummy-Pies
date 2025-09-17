@@ -16,7 +16,7 @@ async function updateCartCount() {
     const cartCountElement = document.getElementById('cart-count');
     if (!cartCountElement) {
       console.warn('Cart count element not found.');
-      return; // Exit early if the element doesn’t exist
+      return; 
     }
 
     cartCountElement.textContent = items.length;

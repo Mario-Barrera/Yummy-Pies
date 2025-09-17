@@ -298,16 +298,16 @@ router.post("/place", requireAuth, async (req, res) => {
 
     // Insert items into order_items table
    for (const item of form.cart) {
-  console.log("💬 Received item:", item);
+    console.log("Received item:", item);
 
-  const { product_id, qty: quantity, price } = item;
+    const { product_id, qty: quantity, price } = item;
 
-  console.log("product_id:", product_id);
-  console.log("quantity:", quantity);
-  console.log("price:", price);
+    console.log("product_id:", product_id);
+    console.log("quantity:", quantity);
+    console.log("price:", price);
 
-  if (product_id == null || quantity == null || price == null) {
-    return res.status(400).json({
+    if (product_id == null || quantity == null || price == null) {
+      return res.status(400).json({
       success: false,
       message: "Invalid item in cart: product_id, quantity, and price are required.",
       item
