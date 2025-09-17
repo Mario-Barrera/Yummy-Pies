@@ -32,10 +32,13 @@ async function seed() {
 
     
     // Pre-hash passwords
+    // For convenience, I have provided these plain-text passwords so you can easily access the fake users in the system. 
+    // I understand that in a real application, passwords should never be displayed or shared in plain text, and are always 
+    // securely hashed.
     const plainPasswords = [
-      'password1','password2','password3','password4','password5',
-      'password6','password7','password8','password9','password10',
-      'password11','password12','password13','password14', 'adminpassword'
+      'Password1!','Password2!','Password3!','Password4!','Password5!',
+      'Password6!','Password7!','Password8!','Password9!','Password10!',
+      'Password11!','Password12!','Password13!','Password14!'
     ];
     const hashedPasswords = await Promise.all(
       plainPasswords.map(pw => bcrypt.hash(pw, 10))
@@ -81,22 +84,17 @@ async function seed() {
     
     // Insert users
     const users = [
-      ['Alice Smith','alice@example.com',hashedPasswords[0],'123 Apple St','512-555-1234','customer', null, null],
-      ['Bob Johnson','bob@example.com',hashedPasswords[1],'456 Orange Ave','512-555-5678','customer', null, null],
-      ['Charlie Brown','charlie.brown@example.com',hashedPasswords[2],'789 Peach Blvd','512-555-2345','customer', null, null],
-      ['Dana White','dana.white@example.com',hashedPasswords[3],'1010 Grape St','512-555-3456','customer', null, null],
-      ['Evelyn King','evelyn.king@example.com',hashedPasswords[4],'2020 Banana Rd','512-555-4567','customer', null, null],
-      ['Frank Castle','frank.castle@example.com',hashedPasswords[5],'3030 Cherry Ln','512-555-5678','customer', null, null],
-      ['Grace Lee','grace.lee@example.com',hashedPasswords[6],'4040 Blueberry Dr','512-555-6789','customer', null, null],
-      ['Henry Ford','henry.ford@example.com',hashedPasswords[7],'5050 Pumpkin Way','512-555-7890','customer', null, null],
-      ['Ivy Green','ivy.green@example.com',hashedPasswords[8],'6060 Lemon Ct','512-555-8901','customer', null, null],
-      ['Jack Black','jack.black@example.com',hashedPasswords[9],'7070 Pear Pkwy','512-555-9012','customer', null, null],
-      ['Karen White','karen.white@example.com',hashedPasswords[10],'8080 Plum Ave','512-555-0123','customer', null, null],
-      ['Leo King','leo.king@example.com',hashedPasswords[11],'9090 Peach Blvd','512-555-1235','customer', null, null],
-      ['Mona Lisa','mona.lisa@example.com',hashedPasswords[12],'1111 Apple Rd','512-555-2346','customer', null, null],
-      ['Nina Simone','nina.simone@example.com',hashedPasswords[13],'1212 Cherry Ln','512-555-3457','customer', null, null],
-      ['Admin User','admin@example.com',hashedPasswords[14],'999 Admin Rd','512-555-9999','admin', null, null]
-
+      ['Alice Smith','alice@example.com',hashedPasswords[0],'123 Apple St Austin TX 78705','512-555-1234','customer', null, null],
+      ['Bob Johnson','bob@example.com',hashedPasswords[1],'456 Orange Ave Arlington TX 78613','682-555-5678','customer', null, null],
+      ['Charlie Brown','charlie.brown@example.com',hashedPasswords[2],'789 Peach Blvd Dallas TX 75201','214-555-2345','customer', null, null],
+      ['Dana White','dana.white@example.com',hashedPasswords[3],'1010 Grape St Lubbock TX 79401','806-555-3456','customer', null, null],
+      ['Evelyn King','evelyn.king@example.com',hashedPasswords[4],'2020 Banana Rd San Marcos TX 78666','512-555-4567','customer', null, null],
+      ['Frank Castle','frank.castle@example.com',hashedPasswords[5],'3030 Cherry Ln San Antonio TX 78282','210-555-5678','customer', null, null],
+      ['Grace Lee','grace.lee@example.com',hashedPasswords[6],'4040 Blueberry Dr Fredericksburg TX 78624','830-555-6789','customer', null, null],
+      ['Henry Ford','henry.ford@example.com',hashedPasswords[7],'5050 Pumpkin Way Galveston TX 77550','409-555-7890','customer', null, null],
+      ['Ivy Green','ivy.green@example.com',hashedPasswords[8],'6060 Lemon Ct Round Rock TX 78664','512-555-8901','customer', null, null],
+      ['Jack Black','jack.black@example.com',hashedPasswords[9],'7070 Pear Pkwy Buda TX 78610','737-555-9012','customer', null, null],
+      ['Karen White','karen.white@example.com',hashedPasswords[10],'8080 Plum Ave Fort Worth TX 76101','682-555-0123','customer', null, null],
     ];
 
     const userIds = [];
@@ -119,23 +117,23 @@ async function seed() {
 
     // Orders data
     const ordersData = [
-      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'UberEats', 'UE123456789', 'Delivered', daysFromNow(-28)],
-      [userIds[4], daysFromNow(-45), 'Completed', 11.97, 'Pickup', null, null, 'Not applicable', daysFromNow(-43)],
-      [userIds[5], daysFromNow(-60), 'Cancelled', 0.00, 'Delivery', 'DoorDash', 'DD0987654321', 'Cancelled', daysFromNow(-58)],
-      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'UberEats', 'UE654321987', 'Delivered', daysFromNow(-13)],
-      [userIds[7], daysFromNow(-25), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-23)],         
+      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'UberEats', 'UE123456789', 'Delivered', daysFromNow(-30)],
+      [userIds[4], daysFromNow(-45), 'Completed', 11.97, 'Pickup', null, null, 'Not applicable', daysFromNow(-45)],
+      [userIds[5], daysFromNow(-60), 'Cancelled', 0.00, 'Delivery', 'DoorDash', 'DD0987654321', 'Cancelled', daysFromNow(-60)],
+      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'UberEats', 'UE654321987', 'Delivered', daysFromNow(-15)],
+      [userIds[7], daysFromNow(-25), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-25)],         
       [userIds[8], daysFromNow(-5), 'Completed', 4.29, 'Delivery', 'Grubhub', 'GH1122334455', 'Delivered', daysFromNow(-3)], 
-      [userIds[9], daysFromNow(-3), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-1)],             
-      [userIds[0], daysFromNow(-10), 'Completed', 33.97, 'Delivery', 'DoorDash', 'DD5566778899', 'Delivered', daysFromNow(-8)],
-      [userIds[1], daysFromNow(-20), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-18)],
-      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE9988776655', 'Cancelled', daysFromNow(-6)],
-      [userIds[3], daysFromNow(-13), 'Completed', 29.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-11)],
+      [userIds[9], daysFromNow(-3), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-3)],             
+      [userIds[0], daysFromNow(-10), 'Completed', 33.97, 'Delivery', 'DoorDash', 'DD5566778899', 'Delivered', daysFromNow(-10)],
+      [userIds[1], daysFromNow(-20), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-20)],
+      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE9988776655', 'Cancelled', daysFromNow(-8)],
+      [userIds[3], daysFromNow(-13), 'Completed', 29.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-13)],
       [userIds[4], daysFromNow(-35), 'Completed', 16.99, 'Delivery', 'Grubhub', 'GH2233445566', 'Delivered', daysFromNow(-33)],
-      [userIds[5], daysFromNow(-22), 'Cancelled', 0.00, 'Pickup', null, null, 'Not applicable', daysFromNow(-20)],
-      [userIds[6], daysFromNow(-18), 'Completed', 33.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-16)],
+      [userIds[5], daysFromNow(-22), 'Cancelled', 0.00, 'Pickup', null, null, 'Not applicable', daysFromNow(-22)],
+      [userIds[6], daysFromNow(-18), 'Completed', 33.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-18)],
       [userIds[7], daysFromNow(-11), 'Completed', 16.99, 'Delivery', 'DoorDash', 'DD3344556677', 'Delivered', daysFromNow(-9)],
-      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE4455667788', 'Cancelled', daysFromNow(-2)],
-      [userIds[9], daysFromNow(-2), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-1)],
+      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE4455667788', 'Cancelled', daysFromNow(-4)],
+      [userIds[9], daysFromNow(-2), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-2)],
       [userIds[2], daysFromNow(-7), 'Completed', 7.98, 'Delivery', 'Grubhub', 'GH7788990011', 'Delivered', daysFromNow(-5)],
     ];
 
@@ -240,7 +238,6 @@ async function seed() {
         ci
       );
     }
-    console.log(`✅ Inserted ${cartItems.length} cart items`);
 
 
     // Reviews - use userIds and productIds

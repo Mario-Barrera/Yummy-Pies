@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Assuming you have this function somewhere to load product options:
+  // for loading product names into a dropdown
   async function loadProductNamesIntoDropdown() {
     try {
       const response = await fetch('/api/orders/my-orders-with-items', { credentials: 'include' });
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const res = await fetch('/api/review/', {
+      const res = await fetch('/api/reviews/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

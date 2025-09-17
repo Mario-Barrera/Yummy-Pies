@@ -320,43 +320,46 @@ select {
 
 /* Container for the summary section */
 .summary-container {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5rem;
-    max-width: 500px;
-    margin: 0 auto; /* center on page */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto; /* center on page */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Order summary list */
 #order-summary {
-    list-style: none;    /* remove bullet points */
-    padding-left: 0;     /* remove default indentation */
-    margin-bottom: 1.5rem;
+  border: 2px solid red;
+  min-height: 100px;
+  min-width: 300px;
+  padding: 10px;
+  background-color: #fefefe;
+  display: block; /* explicitly */
 }
 
 #order-summary li {
-    font-size: 16px;
-    line-height: 1.5;
-    border-bottom: 1px solid #eee; /* optional separation */
-    padding: 6px 0;
-    list-style: none;    
+  font-size: 16px;
+  line-height: 1.5;
+  border-bottom: 1px solid #eee; /* optional separation */
+  padding: 6px 0;
+  list-style: none;    
 }
 
 /* Start new order button */
 #startNew-order-btn {
-    display: block;
-    width: 100%;
-    padding: 0.6rem 1rem;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border: 1px solid #000;
-    border-radius: 6px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 #startNew-order-btn:hover {

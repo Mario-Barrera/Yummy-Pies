@@ -111,13 +111,6 @@ html, body {
   margin: 5px auto;
 }
 
-/* ------ MAIN CONTAINER ------ */
-.profile-main {
-    max-width: 900px;
-    padding: 20px;
-    margin-left: 20px;
-}
-
 /* ------ Section Headings ------ */
 .main-profile-heading {
     font-size: 2rem;
@@ -158,6 +151,9 @@ html, body {
 
 /* ------ Profile Info ------ */
 .profile-main {
+  max-width: 999px;
+  padding: 10px;
+  margin-left: 20px;
   margin-bottom: 40px;
 }
 
@@ -212,14 +208,17 @@ html, body {
 /* ---------- Order tables ------------ */
 #order-history {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
   gap: 20px;
-  padding: 2px;
+  padding: 0 2px;
 }
 
 /* Each order table */
 .order-table {
   width: 100%;
+  margin: 0 auto;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border: 1px solid #ccc;
   background-color: #fff;

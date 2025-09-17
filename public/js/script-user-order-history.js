@@ -55,7 +55,7 @@ function createOrderTable(order) {
     order.delivery_partner,
     order.delivery_reference,
     order.delivery_status,
-    formatDate(order.estimated_delivery),
+    order.fulfillment_method === "delivery" ? formatDate(order.estimated_delivery) : "N/A",
     formatDate(order.created_at),
     order.email
   ];

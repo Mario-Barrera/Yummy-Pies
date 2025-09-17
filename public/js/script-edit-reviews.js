@@ -62,6 +62,7 @@ async function loadUserReviews() {
       const updatedAt = new Date(review.updated_at);
       const showUpdated = review.updated_at && updatedAt.getTime() !== createdAt.getTime();
 
+
       const createdDate = createdAt.toLocaleDateString(); // display only
       const updatedDate = updatedAt.toLocaleDateString(); // display only
 

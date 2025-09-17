@@ -125,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }  
 
     /* ---------------- ORDER SUMMARY ---------------- */
-
     function showOrderSummary() {
         const summaryEl = document.querySelector("#order-summary");
         summaryEl.innerHTML = "";
@@ -161,6 +160,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function formatTime(str) {
+        if (!str || typeof str !== "string" || !str.includes(":")) return "N/A";
+
         const [h, m] = str.split(":").map(Number);
         const suffix = h >= 12 ? "PM" : "AM";
         const hour12 = h % 12 === 0 ? 12 : h % 12;
@@ -181,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return num;
     }
 
+    window.showOrderSummary = showOrderSummary;
 
     // ---------------- STEP NAVIGATION FUNCTIONS ----------------
     function showStep(step) {
@@ -280,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showStep(6);
         showOrderSummary();
 
-    // Add this here: Send order to backend after final validation
+    // Send order to backend after final validation
     const formData = JSON.parse(localStorage.getItem("formState")) || {};
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     
@@ -302,6 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.success) {
             alert("Order placed successfully! Confirmation #: " + data.confirmationNumber);
             localStorage.removeItem("formState"); // optional cleanup
+            window.location.reload();
         } else {
             alert("Error placing order: " + data.message);
         }
@@ -415,6 +418,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadFormState();
     updateCartDisplay();
     showStep(currentStep);
+    showOrderSummary();  // << add this here
 
 
     // ---------------- DATE/TIME LOGIC ----------------

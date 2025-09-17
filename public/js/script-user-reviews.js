@@ -60,11 +60,18 @@ async function loadUserReviews() {
     // Create table body
     const tbody = document.createElement('tbody');
 
+  
     reviews.forEach(review => {
     const cleanProductName = review.product_name.replace(/\b(Slice|Whole)\b/g, '').trim();
-    const createdDate = new Date(review.created_at).toLocaleDateString();
-    const updatedDate = review.updated_at ? new Date(review.updated_at).toLocaleDateString() : null;
-    const showUpdated = !!review.updated_at; // true if updated_at exists (not null/undefined)
+
+    const createdAt = new Date(review.created_at); // Date object
+    const updatedAt = review.updated_at ? new Date(review.updated_at) : null; // Date object or null
+
+    // Compare timestamps to see if the review was updated
+    const showUpdated = updatedAt && updatedAt.getTime() !== createdAt.getTime();
+
+    const createdDate = createdAt.toLocaleDateString();
+    const updatedDate = updatedAt ? updatedAt.toLocaleDateString() : null;
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -76,6 +83,7 @@ async function loadUserReviews() {
     `;
     tbody.appendChild(tr);  
   });
+
 
     table.appendChild(tbody);
     container.appendChild(table);

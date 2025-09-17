@@ -14,11 +14,12 @@ async function updateCartCount() {
     const items = await res.json();
 
     const cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
-      cartCountElement.textContent = items.length;
-    } else {
+    if (!cartCountElement) {
       console.warn('Cart count element not found.');
+      return; // Exit early if the element doesn’t exist
     }
+
+    cartCountElement.textContent = items.length;
 
   } catch (err) {
     console.warn('Cart count fetch failed:', err);
