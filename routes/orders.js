@@ -320,7 +320,6 @@ router.post("/place", requireAuth, async (req, res) => {
     [order_id, product_id, quantity, price]
   );
 }
-
     
     const confirmationNumber = "CN" + Math.floor(100000 + Math.random() * 900000);
 

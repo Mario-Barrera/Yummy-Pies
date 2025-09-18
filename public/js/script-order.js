@@ -27,7 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    let currentStep = 1;
+    let currentStep = 1; // default
+    const saved = JSON.parse(localStorage.getItem('formState') || '{}');
+    if (saved.currentStep) currentStep = saved.currentStep;
+
+    // Show only the current step
+    document.querySelectorAll('.event-section').forEach((step, index) => {
+        step.style.display = (index + 1 === currentStep) ? 'block' : 'none';
+    }); 
 
     // Load saved cart or initialize empty
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -44,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- SAVE FORM STATE ----------------
     function saveFormState() {
-        // 1. Assign userProfile.email to the input *once*, before saving form state
         const emailInput = document.getElementById('email');
         const user = JSON.parse(localStorage.getItem('user'));
 
@@ -54,17 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formState = {
             cart: cart,
-            pickupChecked: document.getElementById("pickup")?.checked || false,
-            deliveryChecked: document.getElementById("delivery")?.checked || false,
-            pickupLocation: document.querySelector('input[name="pickupOption"]:checked')?.value || null,
+            pickup: document.getElementById("pickup")?.checked || false,
+            delivery: document.getElementById("delivery")?.checked || false,
+            pickupOption: document.querySelector('input[name="pickupOption"]:checked')?.value || null,
             deliveryAddress: document.getElementById('delivery-address')?.value || "",
-            pickupDate: pickupDateInput?.value || "",
-            pickupTime: pickupTimeInput?.value || "",
-            deliveryDate: deliveryDateInput?.value || "",
-            deliveryTime: deliveryTimeInput?.value || "",
+            pickupDate: document.getElementById('pickup-date')?.value || "",
+            pickupTime: document.getElementById('pickup-time')?.value || "",
+            deliveryDate: document.getElementById('delivery-date')?.value || "",
+            deliveryTime: document.getElementById('delivery-time')?.value || "",
             firstName: document.getElementById('first-name')?.value || "",
             lastName: document.getElementById('last-name')?.value || "",
-            email: emailInput ? emailInput.value : "",
+            email: document.getElementById('email')?.value || "",
             address1: document.getElementById('address1')?.value || "",
             address2: document.getElementById('address2')?.value || "",
             city: document.getElementById('city')?.value || "",
@@ -84,30 +90,85 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadFormState() {
         const saved = JSON.parse(localStorage.getItem('formState') || '{}');
 
+        // Restore cart and total
         if (saved.cart) cart = saved.cart;
         total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
         // Restore Step 1 pickup/delivery selection
-        if (saved.pickupChecked) document.getElementById("pickup").checked = true;
-        if (saved.deliveryChecked) document.getElementById("delivery").checked = true;
+        if (saved.pickup) document.getElementById("pickup").checked = true;
+        if (saved.delivery) document.getElementById("delivery").checked = true;
 
-        if (saved.pickupLocation) {
-            const pickupOption = document.querySelector(`input[name="pickupOption"][value="${saved.pickupLocation}"]`);
+        // Restore pickup location
+        if (saved.pickupOption) {
+            const pickupOption = document.querySelector(`input[name="pickupOption"][value="${saved.pickupOption}"]`);
             if (pickupOption) pickupOption.checked = true;
         }
 
+        // Restore delivery address
         if (saved.deliveryAddress) document.getElementById('delivery-address').value = saved.deliveryAddress;
+
+        // Restore dates and times
         if (pickupDateInput) pickupDateInput.value = saved.pickupDate || "";
         if (pickupTimeInput) pickupTimeInput.value = saved.pickupTime || "";
         if (deliveryDateInput) deliveryDateInput.value = saved.deliveryDate || "";
         if (deliveryTimeInput) deliveryTimeInput.value = saved.deliveryTime || "";
 
         // Restore customer info
-        ['first-name','last-name','email','address1','address2','city','state','zip','cc-type','cc-number','ccv','exp-month','exp-year'].forEach(id => {
-            if (saved[id]) document.getElementById(id).value = saved[id];
-        });
+        document.getElementById('first-name').value = saved.firstName || "";
+        document.getElementById('last-name').value = saved.lastName || "";
+        document.getElementById('email').value = saved.email || "";
+        document.getElementById('address1').value = saved.address1 || "";
+        document.getElementById('address2').value = saved.address2 || "";
+        document.getElementById('city').value = saved.city || "";
+        document.getElementById('state').value = saved.state || "";
+        document.getElementById('zip').value = saved.zip || "";
+        document.getElementById('cc-type').value = saved.ccType || "";
+        document.getElementById('cc-number').value = saved.ccNumber || "";
+        document.getElementById('ccv').value = saved.ccv || "";
+        document.getElementById('exp-month').value = saved.expMonth || "";
+        document.getElementById('exp-year').value = saved.expYear || "";
 
+        // Restore current step if needed
         if (saved.currentStep) currentStep = saved.currentStep;
+    }
+
+    /* ---------------- GET ORDER DATA FROM FORM ---------------- */
+    function getOrderDataFromForm() {
+        const formState = JSON.parse(localStorage.getItem("formState") || '{}');
+        const user = JSON.parse(localStorage.getItem("user") || '{}');
+
+        // Normalize credit card type
+        let normalizedCcType = formState.ccType?.trim().toLowerCase();
+
+        // Determine fulfillment method
+        let fulfillment_method = null;
+        if (formState.pickup) fulfillment_method = "Pickup";
+        else if (formState.delivery) fulfillment_method = "Delivery";
+
+        return {
+            user_id: user.user_id || null,
+            email: user.email || '',
+            cart: formState.cart || [],
+            fulfillment_method: formState.pickup ? "Pickup" : "Delivery",
+            pickupOption: formState.pickupOption || null,
+            pickupDate: formState.pickupDate || null,
+            pickupTime: formState.pickupTime || null,
+            deliveryAddress: formState['delivery-address'] || null,
+            deliveryDate: formState.deliveryDate || null,
+            deliveryTime: formState.deliveryTime || null,
+            firstName: formState['first-name'] || '',
+            lastName: formState['last-name'] || '',
+            address1: formState.address1 || '',
+            address2: formState.address2 || '',
+            city: formState.city || '',
+            state: formState.state || '',
+            zip: formState.zip || '',
+            ccType: normalizedCcType,     
+            ccNumber: formState['cc-number'] || '',
+            ccv: formState.ccv || '',
+            expMonth: formState['exp-month'] || '',
+            expYear: formState['exp-year'] || ''
+        };
     }
 
 
@@ -283,21 +344,16 @@ document.addEventListener("DOMContentLoaded", function () {
         showOrderSummary();
 
     // Send order to backend after final validation
-    const formData = JSON.parse(localStorage.getItem("formState")) || {};
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    
-    // Ensure email is injected from the logged-in user
-    formData.email = user?.email || "";
-    
-    console.log("Submitting order:", formData);
+    const orderData = getOrderDataFromForm();
+    console.log("Submitting order:", orderData);
 
     fetch("/api/orders/place", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`  // <-- send the token here
+            "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(orderData)
     })
     .then(response => response.json())
     .then(data => {

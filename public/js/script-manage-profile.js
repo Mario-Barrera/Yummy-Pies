@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle cancel button
-  cancelBtn.addEventListener('click', () => {
-    console.log('Cancel button clicked');  // DEBUG LINE
-
+  cancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
     if (!window.originalUser) return;
 
     const firstNameInput = document.getElementById('first-name');

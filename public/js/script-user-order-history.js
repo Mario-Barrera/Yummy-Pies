@@ -46,16 +46,17 @@ function createOrderTable(order) {
   ];
 
   const formatDate = date => date ? new Date(date).toLocaleDateString() : 'N/A';
+  const fulfillment_method = order.fulfillment_method;
 
   const dataValues = [
     formatDate(order.order_date),
     order.status,
     typeof order.total_amount === 'number' ? `$${order.total_amount.toFixed(2)}` : 'N/A',
-    order.fulfillment_method,
+    fulfillment_method,
     order.delivery_partner,
     order.delivery_reference,
     order.delivery_status,
-    order.fulfillment_method === "delivery" ? formatDate(order.estimated_delivery) : "N/A",
+    order.fulfillment_method === "Delivery" ? formatDate(order.estimated_delivery) : "N/A",
     formatDate(order.created_at),
     order.email
   ];
