@@ -4,6 +4,8 @@ async function loadOrderHistory() {
     if (!response.ok) throw new Error('Failed to fetch orders');
 
     const orders = await response.json();
+
+    console.log('API Response:', orders); 
     const container = document.getElementById('order-history');
     container.innerHTML = ''; // Clear existing content
 
@@ -22,44 +24,75 @@ async function loadOrderHistory() {
   }
 }
 
+function formatTime(timeString) {
+  if (!timeString) return 'N/A';
+
+  const [hourStr, minuteStr] = timeString.split(':');
+  let hour = parseInt(hourStr, 10);
+  const minute = parseInt(minuteStr, 10);
+
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12 || 12; // Convert to 12-hour format
+  return `${hour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+}
+
+
 function createOrderTable(order) {
+  console.log('Order:', order);
+  const {
+    order_id,
+    order_date,
+    status,
+    total_amount,
+    fulfillment_method,
+    delivery_partner,
+    delivery_reference,
+    delivery_status,
+    estimated_delivery,
+    pickup_time,
+    email,
+    items = []
+  } = order;
+
   const table = document.createElement('table');
   table.classList.add('order-table');
 
-  // Table header with order number spanning all columns
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headerCell = document.createElement('th');
-  headerCell.colSpan = 10;  // Adjust to number of columns
-  headerCell.textContent = `Order #${order.order_id}`;
+  headerCell.colSpan = 10;  // Adjust if columns change
+  headerCell.textContent = `Order #${order_id}`;
   headerRow.appendChild(headerCell);
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
   const tbody = document.createElement('tbody');
 
-  // Define labels and corresponding values (horizontal layout)
   const headerLabels = [
     'Date', 'Status', 'Total Amount', 'Fulfillment Method', 'Delivery Partner',
     'Delivery Reference', 'Delivery Status', 'Estimated Delivery',
     'Pickup Time', 'Email'
   ];
 
-  const formatDate = date => date ? new Date(date).toLocaleDateString() : 'N/A';
-  const fulfillment_method = order.fulfillment_method;
+  const formatDate = date => {
+    if (!date) return 'N/A';
+    const d = new Date(date);
+    return isNaN(d) ? 'N/A' : d.toLocaleDateString();
+  };
 
   const dataValues = [
-    formatDate(order.order_date),
-    order.status,
-    typeof order.total_amount === 'number' ? `$${order.total_amount.toFixed(2)}` : 'N/A',
+    formatDate(order_date),
+    status,
+    typeof total_amount === 'number' ? `$${total_amount.toFixed(2)}` : 'N/A',
     fulfillment_method,
-    order.delivery_partner,
-    order.delivery_reference,
-    order.delivery_status,
-    order.fulfillment_method === "Delivery" ? formatDate(order.estimated_delivery) : "N/A",
-    order.pickupTime || 'N/A',
-    order.email,
-    order.ccType || 'N/A'
+    delivery_partner,
+    delivery_reference,
+    delivery_status,
+    fulfillment_method === "Delivery" ? formatDate(estimated_delivery) : "N/A",
+    fulfillment_method === "Pickup"
+      ? (pickup_time ? formatTime(pickup_time) : 'N/A')
+      : 'N/A',
+    email
   ];
 
   // Create header row with labels
@@ -83,7 +116,7 @@ function createOrderTable(order) {
   // Add Items sub-table header row
   const itemsHeaderRow = document.createElement('tr');
   const itemsHeaderCell = document.createElement('td');
-  itemsHeaderCell.colSpan = headerLabels.length; // span all columns
+  itemsHeaderCell.colSpan = headerLabels.length;
   itemsHeaderCell.innerHTML = '<strong>Items</strong>';
   itemsHeaderRow.appendChild(itemsHeaderCell);
   tbody.appendChild(itemsHeaderRow);
@@ -96,7 +129,6 @@ function createOrderTable(order) {
   const itemsTable = document.createElement('table');
   itemsTable.classList.add('items-table');
 
-  // Items header
   const itemsThead = document.createElement('thead');
   const itemsHeader = document.createElement('tr');
   ['Product Name', 'Quantity'].forEach(label => {
@@ -107,9 +139,8 @@ function createOrderTable(order) {
   itemsThead.appendChild(itemsHeader);
   itemsTable.appendChild(itemsThead);
 
-  // Items body
   const itemsTbody = document.createElement('tbody');
-  order.items.forEach(item => {
+  items.forEach(item => {
     const itemRow = document.createElement('tr');
     const nameTd = document.createElement('td');
     nameTd.textContent = item.product_name;

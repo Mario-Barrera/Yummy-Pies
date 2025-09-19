@@ -1,4 +1,3 @@
-// code you might need to add
 async function fetchPayments() {
   try {
     const response = await fetch('/api/payments');

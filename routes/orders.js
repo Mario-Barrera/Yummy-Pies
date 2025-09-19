@@ -54,7 +54,7 @@ router.get('/my-orders-with-items', requireAuth, async (req, res, next) => {
         o.delivery_reference,
         o.delivery_status,
         o.estimated_delivery,
-        o.created_at,
+        o.pickup_time,
         u.email,
         oi.product_id,
         p.name AS product_name,
@@ -83,7 +83,7 @@ router.get('/my-orders-with-items', requireAuth, async (req, res, next) => {
           delivery_reference: row.delivery_reference,
           delivery_status: row.delivery_status,
           estimated_delivery: row.estimated_delivery,
-          created_at: row.created_at,
+          pickup_time: row.pickup_time,
           email: row.email,
           items: []
         });
@@ -218,7 +218,7 @@ router.post("/place", requireAuth, async (req, res) => {
     const delivery_reference = fulfillment_method === "Delivery"
       ? "UE" + Math.floor(1000000000 + Math.random() * 9000000000)
       : null;
-    const delivery_status = fulfillment_method === "Delivery" ? "Out for delivery" : "Not applicable";
+    const delivery_status = fulfillment_method === "Delivery" ? "Out for delivery" : "N/A";
 
     const email = form.email?.trim(); // Add safety check
 
@@ -235,30 +235,34 @@ router.post("/place", requireAuth, async (req, res) => {
 
     const status = "Pending"; 
 
-    // Insert into orders table
+    const order_date = new Date();
+    const pickup_time = fulfillment_method === "Pickup" ? form.pickupTime : null;
+
     const orderResult = await pool.query(
       `INSERT INTO orders (
         user_id,
-        email,
+        order_date,
+        status,
         total_amount,
         fulfillment_method,
         delivery_partner,
         delivery_reference,
-        estimated_delivery,
         delivery_status,
-        status
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        estimated_delivery,
+        pickup_time
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
       RETURNING order_id`,
       [
         user_id,
-        email,
+        order_date,
+        status,
         total_amount,
         fulfillment_method,
         delivery_partner,
         delivery_reference,
-        estimated_delivery,
         delivery_status,
-        status
+        estimated_delivery,
+        pickup_time
       ]
     );
 

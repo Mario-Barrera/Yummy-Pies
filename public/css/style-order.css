@@ -331,7 +331,7 @@ select {
 
 /* Order summary list */
 #order-summary {
-  border: 2px solid red;
+  border: 1px solid black;
   min-height: 100px;
   min-width: 300px;
   padding: 10px;

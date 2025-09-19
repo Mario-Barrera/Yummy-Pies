@@ -118,24 +118,24 @@ async function seed() {
 
     // Orders data
     const ordersData = [
-      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'UberEats', 'UE123456789', 'Delivered', daysFromNow(-30)],
-      [userIds[4], daysFromNow(-45), 'Completed', 11.97, 'Pickup', null, null, 'Not applicable', daysFromNow(-45)],
-      [userIds[5], daysFromNow(-60), 'Cancelled', 0.00, 'Delivery', 'DoorDash', 'DD0987654321', 'Cancelled', daysFromNow(-60)],
-      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'UberEats', 'UE654321987', 'Delivered', daysFromNow(-15)],
-      [userIds[7], daysFromNow(-25), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-25)],         
-      [userIds[8], daysFromNow(-5), 'Completed', 4.29, 'Delivery', 'Grubhub', 'GH1122334455', 'Delivered', daysFromNow(-3)], 
-      [userIds[9], daysFromNow(-3), 'Completed', 8.58, 'Pickup', null, null, 'Not applicable', daysFromNow(-3)],             
-      [userIds[0], daysFromNow(-10), 'Completed', 33.97, 'Delivery', 'DoorDash', 'DD5566778899', 'Delivered', daysFromNow(-10)],
-      [userIds[1], daysFromNow(-20), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-20)],
-      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE9988776655', 'Cancelled', daysFromNow(-8)],
-      [userIds[3], daysFromNow(-13), 'Completed', 29.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-13)],
-      [userIds[4], daysFromNow(-35), 'Completed', 16.99, 'Delivery', 'Grubhub', 'GH2233445566', 'Delivered', daysFromNow(-33)],
-      [userIds[5], daysFromNow(-22), 'Cancelled', 0.00, 'Pickup', null, null, 'Not applicable', daysFromNow(-22)],
-      [userIds[6], daysFromNow(-18), 'Completed', 33.98, 'Pickup', null, null, 'Not applicable', daysFromNow(-18)],
-      [userIds[7], daysFromNow(-11), 'Completed', 16.99, 'Delivery', 'DoorDash', 'DD3344556677', 'Delivered', daysFromNow(-9)],
-      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE4455667788', 'Cancelled', daysFromNow(-4)],
-      [userIds[9], daysFromNow(-2), 'Completed', 14.99, 'Pickup', null, null, 'Not applicable', daysFromNow(-2)],
-      [userIds[2], daysFromNow(-7), 'Completed', 7.98, 'Delivery', 'Grubhub', 'GH7788990011', 'Delivered', daysFromNow(-5)],
+      [userIds[3], daysFromNow(-30), 'Completed', 11.97, 'Delivery', 'UberEats', 'UE123456789', 'Delivered', daysFromNow(-30), null],
+      [userIds[4], daysFromNow(-45), 'Completed', 11.97, 'Pickup', null, null, null, daysFromNow(-45), '12:30 PM'],
+      [userIds[5], daysFromNow(-60), 'Cancelled', 0.00, 'Delivery', 'DoorDash', 'DD0987654321', 'Cancelled', daysFromNow(-60), null],
+      [userIds[6], daysFromNow(-15), 'Completed', 12.57, 'Delivery', 'UberEats', 'UE654321987', 'Delivered', daysFromNow(-15), null],
+      [userIds[7], daysFromNow(-25), 'Completed', 8.58, 'Pickup', null, null, null, daysFromNow(-25), '1:00 PM'],         
+      [userIds[8], daysFromNow(-5), 'Completed', 4.29, 'Delivery', 'Grubhub', 'GH1122334455', 'Delivered', daysFromNow(-3), null], 
+      [userIds[9], daysFromNow(-3), 'Completed', 8.58, 'Pickup', null, null, null, daysFromNow(-3), '2:30 PM'],             
+      [userIds[0], daysFromNow(-10), 'Completed', 33.97, 'Delivery', 'DoorDash', 'DD5566778899', 'Delivered', daysFromNow(-10), null],
+      [userIds[1], daysFromNow(-20), 'Completed', 14.99, 'Pickup', null, null, null, daysFromNow(-20), '10:00 AM'],
+      [userIds[2], daysFromNow(-8), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE9988776655', 'Cancelled', daysFromNow(-8), null],
+      [userIds[3], daysFromNow(-13), 'Completed', 29.98, 'Pickup', null, null, null, daysFromNow(-13), '11:30 AM'],
+      [userIds[4], daysFromNow(-35), 'Completed', 16.99, 'Delivery', 'Grubhub', 'GH2233445566', 'Delivered', daysFromNow(-33), null],
+      [userIds[5], daysFromNow(-22), 'Cancelled', 0.00, 'Pickup', null, null, null, daysFromNow(-22), '11:30 AM'],
+      [userIds[6], daysFromNow(-18), 'Completed', 33.98, 'Pickup', null, null, null, daysFromNow(-18), '4:00 PM'],
+      [userIds[7], daysFromNow(-11), 'Completed', 16.99, 'Delivery', 'DoorDash', 'DD3344556677', 'Delivered', daysFromNow(-9), null],
+      [userIds[8], daysFromNow(-4), 'Cancelled', 0.00, 'Delivery', 'UberEats', 'UE4455667788', 'Cancelled', daysFromNow(-4), null],
+      [userIds[9], daysFromNow(-2), 'Completed', 14.99, 'Pickup', null, null, null, daysFromNow(-2), '3:30 PM'],
+      [userIds[2], daysFromNow(-7), 'Completed', 7.98, 'Delivery', 'Grubhub', 'GH7788990011', 'Delivered', daysFromNow(-5), null],
     ];
 
 
@@ -143,8 +143,8 @@ async function seed() {
     for (const o of ordersData) {
       const { rows } = await pool.query(
         `INSERT INTO orders (user_id,order_date,status,total_amount,fulfillment_method,
-          delivery_partner,delivery_reference,delivery_status,estimated_delivery)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+          delivery_partner,delivery_reference,delivery_status,estimated_delivery,pickup_time)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
          RETURNING order_id`,
         o
       );

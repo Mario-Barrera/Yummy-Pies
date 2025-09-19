@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Date/time inputs
     const pickupDateInput = document.getElementById("pickup-date");
     const deliveryDateInput = document.getElementById("delivery-date");
-    const pickupTimeInput = document.getElementById("pickup-time");
+    const pickupTimeInput = document.getElementById("pickupTime");
     const deliveryTimeInput = document.getElementById("delivery-time");
 
     loadFormState();
@@ -130,9 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---------------- STEP NAVIGATION FUNCTIONS ----------------
     function showStep(step) {
         steps.forEach((section, index) => {
-            if (section.id !== "order-summary") {  
-                section.style.display = index === step - 1 ? "block" : "none";
-            }
+            const displayValue = index === step - 1 ? "block" : "none";
+            section.style.display = displayValue;
         });
         currentStep = step;
         saveFormState();
@@ -180,7 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     window.validateStep5 = function (direction) {
-        console.log('validateStep5 called with direction:', direction);
         if (direction === "back") return showStep(4);
 
         const fields = [
@@ -203,13 +201,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const [ccNum, ccv, expMonth, expYear] = [fields[7], fields[8], fields[9], fields[10]];
+        const [ccNum, ccv, expMonth, expYear] = [fields[8], fields[9], fields[10], fields[11]];
 
-        if (!/^\d{13,19}$/.test(ccNum.value.trim())) {
+        const cleanedCCNum = ccNum.value.replace(/\D/g, ''); // Remove all non-digit chars (spaces, dashes, etc.)
+
+        if (!/^\d{13,19}$/.test(cleanedCCNum)) {
             alert("Invalid credit card number.");
             return;
         }
-
 
         if (!/^\d{3,4}$/.test(ccv.value.trim())) {
             alert("Invalid CCV.");
@@ -224,8 +223,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         showStep(6);
+        document.getElementById("step6").scrollIntoView({ behavior: "smooth" });
         showOrderSummary();
-    };
+    }
 
     window.startNewOrder = function () {
         cart = [];
@@ -324,6 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
         summaryEl.innerHTML = "";
         const confNum = generateConfirmationNumber();
         summaryEl.innerHTML += `<h3>Thank you!<br>Your confirmation number is: ${confNum}</h3>`;
+
         const details = document.createElement("div");
         details.className = "order-details";
 
