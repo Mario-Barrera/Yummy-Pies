@@ -19,7 +19,7 @@ async function updateCartCount() {
       return; 
     }
 
-    cartCountElement.textContent = items.length;
+    cartCountElement.textContent = itemCount > 0 ? `Order Online (${itemCount})` : "Order Online";
 
   } catch (err) {
     console.warn('Cart count fetch failed:', err);

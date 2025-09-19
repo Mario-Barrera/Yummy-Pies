@@ -42,7 +42,7 @@ function createOrderTable(order) {
   const headerLabels = [
     'Date', 'Status', 'Total Amount', 'Fulfillment Method', 'Delivery Partner',
     'Delivery Reference', 'Delivery Status', 'Estimated Delivery',
-    'Created At', 'Email'
+    'Pickup Time', 'Email'
   ];
 
   const formatDate = date => date ? new Date(date).toLocaleDateString() : 'N/A';
@@ -57,8 +57,9 @@ function createOrderTable(order) {
     order.delivery_reference,
     order.delivery_status,
     order.fulfillment_method === "Delivery" ? formatDate(order.estimated_delivery) : "N/A",
-    formatDate(order.created_at),
-    order.email
+    order.pickupTime || 'N/A',
+    order.email,
+    order.ccType || 'N/A'
   ];
 
   // Create header row with labels

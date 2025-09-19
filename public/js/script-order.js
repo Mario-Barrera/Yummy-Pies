@@ -1,10 +1,36 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+    const steps = document.querySelectorAll(".event-section");
+
+    // Load formState from localStorage
+    const saved = JSON.parse(localStorage.getItem('formState') || '{}');
+
+    // Initialize state from saved data
+    let cart = Array.isArray(saved.cart) ? saved.cart : [];
+    let currentStep = typeof saved.currentStep === "number" ? saved.currentStep : 1;
+
+    // Calculate total from cart
+    let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+    const orderTotalEls = document.querySelectorAll(".order-total");
+    const orderListEl = document.querySelector(".orderNow-list");
+
+    // Date/time inputs
+    const pickupDateInput = document.getElementById("pickup-date");
+    const deliveryDateInput = document.getElementById("delivery-date");
+    const pickupTimeInput = document.getElementById("pickup-time");
+    const deliveryTimeInput = document.getElementById("delivery-time");
+
+    loadFormState();
+
+    // Show only the current step
+    steps.forEach((step, index) => {
+        step.style.display = (index + 1 === currentStep) ? 'block' : 'none';
+    });
 
     // Check if token exists
     const token = localStorage.getItem('token');
-    console.log("Token:", token); // <-- log token to console
-    
+    console.log("Token:", token);
+
     if (!token) {
         // Disable Step 1 radios (pickup/delivery)
         const step1Radios = document.querySelectorAll('input[name="orderOption"]');
@@ -12,79 +38,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Disable the Continue button
         const step1NextButton = document.querySelector("#go-button-step1");
-        if (step1NextButton) {
-            step1NextButton.disabled = true;
-        }
+        if (step1NextButton) step1NextButton.disabled = true;
 
-        // Show a message to log in inside Step 1 container
+        // Show login message
         const step1Container = document.querySelector("#step1");
-    
         if (step1Container) {
             const message = document.createElement("p");
             message.style.color = "red";
             message.textContent = "Please log in to place an order";
             step1Container.prepend(message);
         }
+        
+        updateCartDisplay?.();
     }
 
-    let currentStep = 1; // default
-    const saved = JSON.parse(localStorage.getItem('formState') || '{}');
-    if (saved.currentStep) currentStep = saved.currentStep;
 
-    // Show only the current step
-    document.querySelectorAll('.event-section').forEach((step, index) => {
-        step.style.display = (index + 1 === currentStep) ? 'block' : 'none';
-    }); 
-
-    // Load saved cart or initialize empty
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    
-    // Calculate total from saved cart
-    let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-    const orderTotalEls = document.querySelectorAll(".order-total");
-    const orderListEl = document.querySelector(".orderNow-list");
-    const pickupDateInput = document.getElementById("pickup-date");
-    const deliveryDateInput = document.getElementById("delivery-date");
-    const pickupTimeInput = document.getElementById("pickup-time");
-    const deliveryTimeInput = document.getElementById("delivery-time");
-
-    // ---------------- SAVE FORM STATE ----------------
+    // ---------------- SAVE FORM STATE ---------------- //
     function saveFormState() {
-        const emailInput = document.getElementById('email');
-        const user = JSON.parse(localStorage.getItem('user'));
+        const formElements = document.querySelectorAll("input[data-key], select[data-key]");
+        const formState = { cart: cart || [] }; // keep cart as before
 
-        if (emailInput && user?.email) {
-            emailInput.value = user.email;
-        }
+        formElements.forEach(el => {
+            const key = el.getAttribute("data-key");
+            if (!key) return;
 
-        const formState = {
-            cart: cart,
-            pickup: document.getElementById("pickup")?.checked || false,
-            delivery: document.getElementById("delivery")?.checked || false,
-            pickupOption: document.querySelector('input[name="pickupOption"]:checked')?.value || null,
-            deliveryAddress: document.getElementById('delivery-address')?.value || "",
-            pickupDate: document.getElementById('pickup-date')?.value || "",
-            pickupTime: document.getElementById('pickup-time')?.value || "",
-            deliveryDate: document.getElementById('delivery-date')?.value || "",
-            deliveryTime: document.getElementById('delivery-time')?.value || "",
-            firstName: document.getElementById('first-name')?.value || "",
-            lastName: document.getElementById('last-name')?.value || "",
-            email: document.getElementById('email')?.value || "",
-            address1: document.getElementById('address1')?.value || "",
-            address2: document.getElementById('address2')?.value || "",
-            city: document.getElementById('city')?.value || "",
-            state: document.getElementById('state')?.value || "",
-            zip: document.getElementById('zip')?.value || "",
-            ccType: document.getElementById('cc-type')?.value || "",
-            ccNumber: document.getElementById('cc-number')?.value || "",
-            ccv: document.getElementById('ccv')?.value || "",
-            expMonth: document.getElementById('exp-month')?.value || "",
-            expYear: document.getElementById('exp-year')?.value || ""
-        };
+            if (el.type === "radio") {
+                if (el.checked) formState[key] = el.value;
+            } else {
+                formState[key] = el.value;
+            }
+        });
 
-        console.log("Saving formState with email:", formState.email);
-        localStorage.setItem('formState', JSON.stringify(formState));
+        console.log("Saving formState dynamically:", formState);
+        localStorage.setItem("formState", JSON.stringify(formState));
     }
 
     function loadFormState() {
@@ -92,84 +78,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Restore cart and total
         if (saved.cart) cart = saved.cart;
-        total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-        // Restore Step 1 pickup/delivery selection
-        if (saved.pickup) document.getElementById("pickup").checked = true;
-        if (saved.delivery) document.getElementById("delivery").checked = true;
+        // Restore form fields (inputs and selects only)
+        const formElements = document.querySelectorAll("input[data-key], select[data-key]");
 
-        // Restore pickup location
-        if (saved.pickupOption) {
-            const pickupOption = document.querySelector(`input[name="pickupOption"][value="${saved.pickupOption}"]`);
-            if (pickupOption) pickupOption.checked = true;
-        }
+        formElements.forEach(el => {
+            const key = el.getAttribute("data-key");
+            if (!key || !(key in saved)) return;
 
-        // Restore delivery address
-        if (saved.deliveryAddress) document.getElementById('delivery-address').value = saved.deliveryAddress;
+            if (el.type === "radio") {
+                if (el.value === saved[key]) el.checked = true;
+            } else {
+                el.value = saved[key];
+            }
+        });
 
-        // Restore dates and times
-        if (pickupDateInput) pickupDateInput.value = saved.pickupDate || "";
-        if (pickupTimeInput) pickupTimeInput.value = saved.pickupTime || "";
-        if (deliveryDateInput) deliveryDateInput.value = saved.deliveryDate || "";
-        if (deliveryTimeInput) deliveryTimeInput.value = saved.deliveryTime || "";
+        if (saved.currentStep !== undefined) currentStep = saved.currentStep;
 
-        // Restore customer info
-        document.getElementById('first-name').value = saved.firstName || "";
-        document.getElementById('last-name').value = saved.lastName || "";
-        document.getElementById('email').value = saved.email || "";
-        document.getElementById('address1').value = saved.address1 || "";
-        document.getElementById('address2').value = saved.address2 || "";
-        document.getElementById('city').value = saved.city || "";
-        document.getElementById('state').value = saved.state || "";
-        document.getElementById('zip').value = saved.zip || "";
-        document.getElementById('cc-type').value = saved.ccType || "";
-        document.getElementById('cc-number').value = saved.ccNumber || "";
-        document.getElementById('ccv').value = saved.ccv || "";
-        document.getElementById('exp-month').value = saved.expMonth || "";
-        document.getElementById('exp-year').value = saved.expYear || "";
-
-        // Restore current step if needed
-        if (saved.currentStep) currentStep = saved.currentStep;
+        updateCartCount();
+        updateCartDisplay();
     }
 
-    /* ---------------- GET ORDER DATA FROM FORM ---------------- */
-    function getOrderDataFromForm() {
-        const formState = JSON.parse(localStorage.getItem("formState") || '{}');
-        const user = JSON.parse(localStorage.getItem("user") || '{}');
+    // Call loadFormState on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        loadFormState();
+        showStep(currentStep || 1);
+    });
 
-        // Normalize credit card type
-        let normalizedCcType = formState.ccType?.trim().toLowerCase();
-
-        // Determine fulfillment method
-        let fulfillment_method = null;
-        if (formState.pickup) fulfillment_method = "Pickup";
-        else if (formState.delivery) fulfillment_method = "Delivery";
-
-        return {
-            user_id: user.user_id || null,
-            email: user.email || '',
-            cart: formState.cart || [],
-            fulfillment_method: formState.pickup ? "Pickup" : "Delivery",
-            pickupOption: formState.pickupOption || null,
-            pickupDate: formState.pickupDate || null,
-            pickupTime: formState.pickupTime || null,
-            deliveryAddress: formState['delivery-address'] || null,
-            deliveryDate: formState.deliveryDate || null,
-            deliveryTime: formState.deliveryTime || null,
-            firstName: formState['first-name'] || '',
-            lastName: formState['last-name'] || '',
-            address1: formState.address1 || '',
-            address2: formState.address2 || '',
-            city: formState.city || '',
-            state: formState.state || '',
-            zip: formState.zip || '',
-            ccType: normalizedCcType,     
-            ccNumber: formState['cc-number'] || '',
-            ccv: formState.ccv || '',
-            expMonth: formState['exp-month'] || '',
-            expYear: formState['exp-year'] || ''
-        };
-    }
+    // Add event listeners to save state when inputs change
+    document.querySelectorAll("input[data-key], select[data-key]").forEach(el => {
+        el.addEventListener("change", saveFormState);
+    });
 
 
     // -------- Helper functions for past time warning --------
@@ -182,81 +122,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const [hours, minutes] = time.split(":").map(Number);
         const selectedDateTime = new Date(date);
         selectedDateTime.setHours(hours, minutes, 0, 0);
-        return selectedDateTime < new Date(); // <-- always compares to now
-    }  
-
-    /* ---------------- ORDER SUMMARY ---------------- */
-    function showOrderSummary() {
-        const summaryEl = document.querySelector("#order-summary");
-        summaryEl.innerHTML = "";
-        const confNum = generateConfirmationNumber();
-        summaryEl.innerHTML += `<h3>Thank you!<br>Your confirmation number is: ${confNum}</h3>`;
-        const details = document.createElement("div");
-        details.className = "order-details";
-
-        if (document.getElementById("pickup").checked) {
-            const pickupInput = document.querySelector('input[name="pickupOption"]:checked');
-            const locationLabel = pickupInput?.closest("label")?.textContent.trim() || "(unknown)";
-            const date = new Date(pickupDateInput.value);
-            details.innerHTML += `
-                <p>Pickup at: ${locationLabel}</p>
-                <p>Date: ${date.toLocaleDateString()}</p>
-                <p>Time: ${formatTime(pickupTimeInput.value)}</p>
-            `;
-        } else {
-            const date = new Date(deliveryDateInput.value);
-            details.innerHTML += `
-                <p>Delivery to: ${document.getElementById("delivery-address").value}</p>
-                <p>Date: ${date.toLocaleDateString()}</p>
-                <p>Time: ${formatTime(deliveryTimeInput.value)}</p>
-            `;
-        }
-
-        const itemsList = document.createElement("ul");
-        cart.forEach(i => {
-            itemsList.innerHTML += `<li>${i.qty} × ${i.name} - $${(i.price * i.qty).toFixed(2)}</li>`;
-        });
-        details.appendChild(itemsList);
-        summaryEl.appendChild(details);
+        return selectedDateTime < new Date();
     }
 
-    function formatTime(str) {
-        if (!str || typeof str !== "string" || !str.includes(":")) return "N/A";
-
-        const [h, m] = str.split(":").map(Number);
-        const suffix = h >= 12 ? "PM" : "AM";
-        const hour12 = h % 12 === 0 ? 12 : h % 12;
-        return `${hour12}:${m.toString().padStart(2, "0")} ${suffix}`;
-    }
-
-    function generateConfirmationNumber() {
-        const now = new Date();
-        const mm = String(now.getMonth() + 1).padStart(2, "0");
-        const dd = String(now.getDate()).padStart(2, "0");
-        let used = JSON.parse(localStorage.getItem("usedConfirmations") || "[]");
-        let num;
-        do {
-            num = `${mm}${dd}${Math.floor(1000 + Math.random() * 9000)}`;
-        } while (used.includes(num));
-        used.push(num);
-        localStorage.setItem("usedConfirmations", JSON.stringify(used));
-        return num;
-    }
-
-    window.showOrderSummary = showOrderSummary;
+    showStep(1);
 
     // ---------------- STEP NAVIGATION FUNCTIONS ----------------
     function showStep(step) {
-        const steps = document.querySelectorAll(".event-section");
         steps.forEach((section, index) => {
-            section.style.display = index === step - 1 ? "block" : "none";
+            if (section.id !== "order-summary") {  
+                section.style.display = index === step - 1 ? "block" : "none";
+            }
         });
-
-        // Initialize Autocomplete when Step 3 (delivery) is shown
-        if (step === 3) {
-            initDeliveryAutocomplete();
-        }
-
         currentStep = step;
         saveFormState();
     }
@@ -303,11 +180,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     window.validateStep5 = function (direction) {
+        console.log('validateStep5 called with direction:', direction);
         if (direction === "back") return showStep(4);
+
         const fields = [
             'input[name="first-name"]',
             'input[name="last-name"]',
             'input[name="address1"]',
+            'input[name="address2"]',
             'input[name="city"]',
             'select[name="state"]',
             'input[name="zip"]',
@@ -324,10 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const [ccNum, ccv, expMonth, expYear] = [fields[7], fields[8], fields[9], fields[10]];
+
         if (!/^\d{13,19}$/.test(ccNum.value.trim())) {
             alert("Invalid credit card number.");
             return;
         }
+
+
         if (!/^\d{3,4}$/.test(ccv.value.trim())) {
             alert("Invalid CCV.");
             return;
@@ -342,42 +225,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showStep(6);
         showOrderSummary();
-
-    // Send order to backend after final validation
-    const orderData = getOrderDataFromForm();
-    console.log("Submitting order:", orderData);
-
-    fetch("/api/orders/place", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert("Order placed successfully! Confirmation #: " + data.confirmationNumber);
-            localStorage.removeItem("formState"); // optional cleanup
-            window.location.reload();
-        } else {
-            alert("Error placing order: " + data.message);
-        }
-    })
-    .catch(err => {
-        console.error("Error:", err);
-        alert("Failed to place order. Please try again.");
-    });
-};
-
-// -------------- RESET THE ORDER FORM ------------- */ 
-// clears cart and summary, and initializes date/time inputs for a new order
+    };
 
     window.startNewOrder = function () {
         cart = [];
         total = 0;
-        localStorage.removeItem('cart'); // ← clear saved cart
         updateCartDisplay();
         document.querySelector("form").reset();
         document.querySelector("#order-summary").innerHTML = "";
@@ -387,69 +239,39 @@ document.addEventListener("DOMContentLoaded", function () {
         updateMinTime(deliveryDateInput, deliveryTimeInput);
         disablePastTimeOptions(pickupDateInput, pickupTimeInput);
         disablePastTimeOptions(deliveryDateInput, deliveryTimeInput);
-        updateOrderOnlineLink();
     };
 
 
-    // ---------------- NAV LINK UPDATE ----------------
-    function updateOrderOnlineLink() {
-        const link = document.getElementById("order-online-link");
-        if (!link) return;
-
-        const user = JSON.parse(localStorage.getItem("user"));
-        const formState = JSON.parse(localStorage.getItem("formState") || "{}");
-
-        const iconHTML = '<i class="fa-solid fa-cart-shopping"></i>';
-
-        link.innerHTML = iconHTML + "Order Online";
-
-    // Show count if user has pending items
-        if (user && formState.cart && formState.cart.length > 0) {
-            link.innerHTML = iconHTML + `Order Online(${formState.cart.length})`;
-        }
-    }
-
-    
     // ---------------- CART LOGIC ----------------
     const orderButtons = document.querySelectorAll(".order-btn");
     orderButtons.forEach(btn => {
         btn.addEventListener("click", () => {
-            const product_id = btn.getAttribute("data-product-id");
             const pieText = btn.previousElementSibling.textContent.trim();
             const priceMatch = pieText.match(/\$([\d.]+)/);
             const name = pieText.replace(/\$\d+\.\d+/, "").trim();
             const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
             const imgSrc = btn.closest(".content")?.querySelector("img")?.src || "https://via.placeholder.com/50";
-            if (!product_id) {
-                console.warn("Missing data-product-id for item:", name);
-            }
-            
-            addToCart(product_id, name, price, imgSrc);
+            addToCart(name, price, imgSrc);
         });
     });
 
-    function addToCart(product_id, name, price, imgSrc) {
-        const existingItem = cart.find(i => i.product_id === product_id);
-
-        if (existingItem) {
-            existingItem.qty++;
-        } else {
-            cart.push({ product_id, name, price, qty: 1, imgSrc });
-        }
-
+    function addToCart(name, price, imgSrc) {
+        const existingItem = cart.find(i => i.name === name);
+        if (existingItem) existingItem.qty++;
+        else cart.push({ name, price, qty: 1, imgSrc });
         total += price;
+        saveFormState();
+        updateCartCount();
         updateCartDisplay();
-        updateOrderOnlineLink();
     }
 
     function updateCartDisplay() {
+        // Recalculate total for safety
+        total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
         orderListEl.innerHTML = "";
 
         cart.forEach(item => {
-            if (!item.product_id) {
-                console.error("❌ Missing product_id in item:", item);
-            }
-
             const itemEl = document.createElement("div");
             itemEl.className = "order-item";
             itemEl.innerHTML = `
@@ -461,45 +283,97 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button class="qty-plus">+</button>
                 <button class="remove-item">🗑️</button>
             `;
+
             itemEl.querySelector(".qty-minus").addEventListener("click", () => {
                 if (item.qty > 1) {
                     item.qty--;
-                    total -= item.price;
                     updateCartDisplay();
                 }
             });
+
             itemEl.querySelector(".qty-plus").addEventListener("click", () => {
                 item.qty++;
-                total += item.price;
                 updateCartDisplay();
             });
+
             itemEl.querySelector(".qty-input").addEventListener("change", e => {
                 const newQty = Math.max(1, parseInt(e.target.value) || 1);
-                total += (newQty - item.qty) * item.price;
+                e.target.value = newQty; // update input UI if invalid input
                 item.qty = newQty;
                 updateCartDisplay();
             });
+
             itemEl.querySelector(".remove-item").addEventListener("click", () => {
-                total -= item.price * item.qty;
                 cart = cart.filter(c => c !== item);
                 updateCartDisplay();
-                updateOrderOnlineLink();
             });
+
             orderListEl.appendChild(itemEl);
         });
+
         orderTotalEls.forEach(el => el.textContent = `Total: $${total.toFixed(2)}`);
+
         saveFormState();
+        updateCartCount();
         updateOrderOnlineLink();
     }
 
+    function showOrderSummary() {
+        const summaryEl = document.querySelector("#order-summary");
+        
+        summaryEl.innerHTML = "";
+        const confNum = generateConfirmationNumber();
+        summaryEl.innerHTML += `<h3>Thank you!<br>Your confirmation number is: ${confNum}</h3>`;
+        const details = document.createElement("div");
+        details.className = "order-details";
 
-    // ---------------- RESTORE STATE ----------------
-    loadFormState();
-    updateCartDisplay();
-    showStep(currentStep);
-    showOrderSummary();
-    updateOrderOnlineLink();
+        if (document.getElementById("pickup").checked) {
+            const pickupInput = document.querySelector('input[name="pickupOption"]:checked');
+            const locationLabel = pickupInput?.closest("label")?.textContent.trim() || "(unknown)";
+            const date = new Date(pickupDateInput.value);
+            details.innerHTML += `
+                <p>Pickup at: ${locationLabel}</p>
+                <p>Date: ${date.toLocaleDateString()}</p>
+                <p>Time: ${formatTime(pickupTimeInput.value)}</p>
+            `;
+        } else {
+            const date = new Date(deliveryDateInput.value);
+            details.innerHTML += `
+                <p>Delivery to: ${document.getElementById("delivery-address").value}</p>
+                <p>Date: ${date.toLocaleDateString()}</p>
+                <p>Time: ${formatTime(deliveryTimeInput.value)}</p>
+            `;
+        }
 
+        const itemsList = document.createElement("ul");
+        cart.forEach(i => {
+            itemsList.innerHTML += `<li>${i.qty} × ${i.name} - $${(i.price * i.qty).toFixed(2)}</li>`;
+        });
+        details.appendChild(itemsList);
+        summaryEl.appendChild(details);
+    }
+    
+
+    function formatTime(str) {
+        const [h, m] = str.split(":").map(Number);
+        const suffix = h >= 12 ? "PM" : "AM";
+        const hour12 = h % 12 === 0 ? 12 : h % 12;
+        return `${hour12}:${m.toString().padStart(2, "0")} ${suffix}`;
+    }
+
+    function generateConfirmationNumber() {
+        const today = new Date();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        let used = JSON.parse(localStorage.getItem("usedConfirmations") || "[]");
+        let num;
+        do {
+            num = `${mm}${dd}${Math.floor(1000 + Math.random() * 9000)}`;
+        } while (used.includes(num));
+        used.push(num);
+        localStorage.setItem("usedConfirmations", JSON.stringify(used));
+        return num;
+    }
 
     // ---------------- DATE/TIME LOGIC ----------------
     function setMinDates() {
@@ -552,7 +426,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
     // ---------------- INITIALIZATION ----------------
     if (pickupDateInput && pickupTimeInput) {
         pickupDateInput.addEventListener("change", () => {
@@ -588,7 +461,6 @@ document.addEventListener("DOMContentLoaded", function () {
     disablePastTimeOptions(pickupDateInput, pickupTimeInput);
     disablePastTimeOptions(deliveryDateInput, deliveryTimeInput);
 });
-
 
 // ---------------- GOOGLE AUTOCOMPLETE FOR DELIVERY ----------------
 let deliveryAutocomplete;

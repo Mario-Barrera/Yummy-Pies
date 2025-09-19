@@ -336,7 +336,7 @@ select {
   min-width: 300px;
   padding: 10px;
   background-color: #fefefe;
-  display: block; /* explicitly */
+  display: block; 
 }
 
 #order-summary li {

@@ -190,7 +190,7 @@ router.post("/place", requireAuth, async (req, res) => {
     const name = `${form.firstName} ${form.lastName}`.trim();
     const address = `${form.address1} ${form.address2}`.trim();
 
-    const rawCardType = form.ccType?.trim().toLowerCase();
+    const rawCardType = form.ccType?.trim().trim();
     
     // Normalize card brand to method type
     const brandToMethodMap = {
