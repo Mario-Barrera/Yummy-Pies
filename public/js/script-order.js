@@ -223,10 +223,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         showStep(6);
-        document.getElementById("step6").scrollIntoView({ behavior: "smooth" });
         showOrderSummary();
     }
 
+    // ------------ START NEW ORDER BUTTON ------------ //
     window.startNewOrder = function () {
         cart = [];
         total = 0;
