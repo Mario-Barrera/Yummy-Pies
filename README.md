@@ -11,6 +11,7 @@ This project includes the following pre-seeded data:
 - 🧾 22 Order Items
 - ⭐ 19 Reviews  
 - 💬 53 Review Comments  
+- 🚧 Known Issues / Incomplete Features
 
 ---
 
@@ -122,12 +123,6 @@ These updates will reflect immediately in:
 - If a user **leaves the site before completing checkout**, the data will still be there when they return.
 - This allows users to resume where they left off and complete their purchase later.
 
-### Order History
-- Once an order is successfully placed:
-  - The order will appear in the **user’s account profile page**
-  - It becomes part of their **order history**
-  - The related products are then eligible for **reviews** (per-user)
-
 ---
 
 ## 🗺️ Delivery Location Limitations (Google Maps API)
@@ -222,7 +217,13 @@ To look up all the syntax and usage for any SQL command — including `ALTER TAB
 
 ```sql
 \h
+```
 
---
+## 🚧 Known Issues / Incomplete Features
 
-If you have any questions or would like a walkthrough of specific functionality, I’d be happy to explain further.
+**Order Form and Order History Integration**  
+Due to time constraints, I was unable to complete the functionality where a user’s order created through the order form is saved in the database and then reflected in their recent order history on the account profile page. This feature is planned but not yet implemented.
+
+**Forgot Password**  
+The "Forgot Password" feature is currently not working. When a user enters their email address to receive a password reset link, the system does not send the reset email, and the password reset process is not functional yet.
+

@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Track and manage your pie orders on Yummy Pies. View your order status, details, and history.">
+    <meta name="description"content="Track and manage your pie orders on Yummy Pies. View your order status, details, and history.">
     <meta name="keywords" content="order history, pie orders, Yummy Pies, track orders, order summary">
 
-  
+
     <meta property="og:title" content="Yummy Pies | Your Orders">
     <meta property="og:site_name" content="Yummy Pies">
     <meta property="og:description" content="Check your order status and review past orders with Yummy Pies.">
@@ -28,17 +28,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBjj6mibetKvTTm2NeLvLz7UbIxYYotlo&libraries=places&callback=initDeliveryAutocomplete"
-      async
-      defer
-    ></script>
     <script src="js/script-auth.js" defer></script>
     <script src="js/script-order.js" defer></script>
     <script src="js/script-nav.js" defer></script>
     <script src="js/script-user-status.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
+
+    <script>
+        let deliveryAutocomplete;
+
+        window.initDeliveryAutocomplete = function () {
+            const input = document.getElementById("delivery-address");
+            if (!input || deliveryAutocomplete) return;
+
+            deliveryAutocomplete = new google.maps.places.Autocomplete(input, {
+                fields: ["formatted_address", "geometry"],
+                componentRestrictions: { country: "us" }
+            });
+
+            deliveryAutocomplete.addListener("place_changed", () => {
+                const place = deliveryAutocomplete.getPlace();
+
+                if (!place.formatted_address) {
+                    alert("Please select a valid address from the dropdown.");
+                    input.value = "";
+                    return;
+                }
+
+                console.log("Selected address:", place.formatted_address);
+
+                const addressUpper = place.formatted_address.toUpperCase();
+                if (!addressUpper.includes("TX") && !addressUpper.includes("TEXAS")) {
+                    alert("Please select an address in Texas.");
+                    input.value = "";
+                }
+            });
+        };
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBjj6mibetKvTTm2NeLvLz7UbIxYYotlo&libraries=places&callback=initDeliveryAutocomplete"
+        async defer></script>
 </head>
+
 <body>
     <div class="layout">
         <aside class="sidebar">
@@ -54,13 +85,15 @@
 
             <ul class="nav-links" aria-label="Main navigation">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
-                <li><a id="order-online-link" href="order.html"><i class="fa-solid fa-cart-shopping"></i>Order Online(<span id="cart-count">0</span>)</a></li>
+                <li><a id="order-online-link" href="order.html"><i class="fa-solid fa-cart-shopping"></i>Order
+                        Online(<span id="cart-count">0</span>)</a></li>
                 <li><a href="catering.html"><i class="fa-solid fa-utensils"></i>Catering</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
                 <li><a href="faq.html"><i class="fa-solid fa-question"></i>FAQs</a></li>
                 <li><a href="deliveryPolicy.html"><i class="fa-solid fa-truck"></i>Delivery Policy</a></li>
                 <li><a href="store-locator.html"><i class="fa-solid fa-map-location-dot"></i>Store Locator</a></li>
-                <li><a id="account-login-link" href="account-login.html"><i class="fa-solid fa-circle-user"></i>Login</a></li>
+                <li><a id="account-login-link" href="account-login.html"><i
+                            class="fa-solid fa-circle-user"></i>Login</a></li>
                 <li><a href="reviews.html"><i class="fa-solid fa-star"></i>Customer Reviews</a></li>
             </ul>
 
@@ -68,36 +101,28 @@
                 <p>Connect with us</p>
                 <ul class="social-links">
                     <li>
-                        <a href="https://www.facebook.com/profile.php?id=61575033907078" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            aria-label="Visit Yummy Pies on Facebook">
+                        <a href="https://www.facebook.com/profile.php?id=61575033907078" target="_blank"
+                            rel="noopener noreferrer" aria-label="Visit Yummy Pies on Facebook">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://www.instagram.com/yummypies1" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
+                        <a href="https://www.instagram.com/yummypies1" target="_blank" rel="noopener noreferrer"
                             aria-label="Visit Yummy Pies on Instagram">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://twitter.com/YummyPies1" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
+                        <a href="https://twitter.com/YummyPies1" target="_blank" rel="noopener noreferrer"
                             aria-label="Visit Yummy Pies on Twitter">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://pin.it/1QToiyfc0" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
+                        <a href="https://pin.it/1QToiyfc0" target="_blank" rel="noopener noreferrer"
                             aria-label="Visit Yummy Pies on Pinterest">
                             <i class="fa-brands fa-pinterest"></i>
                         </a>
@@ -143,7 +168,8 @@
                 </div>
 
                 <div class="content">
-                    <img src="images/chocolateCream-slice-menu-item.jpg" class="order-img6" alt="Slice of chocolate cream pie">
+                    <img src="images/chocolateCream-slice-menu-item.jpg" class="order-img6"
+                        alt="Slice of chocolate cream pie">
                     <p class="pie-text">Chocolate Cream Slice $4.29</p>
                     <button type="button" class="order-btn" data-product-id="6">Add to Cart</button>
                 </div>
@@ -155,13 +181,15 @@
                 </div>
 
                 <div class="content">
-                    <img src="images/bananaCream-slice-menu-item.jpg" class="order-img8" alt="Slice of banana cream pie">
+                    <img src="images/bananaCream-slice-menu-item.jpg" class="order-img8"
+                        alt="Slice of banana cream pie">
                     <p class="pie-text">Banana Cream Slice $4.29</p>
                     <button type="button" class="order-btn" data-product-id="8">Add to Cart</button>
                 </div>
 
                 <div class="content">
-                    <img src="images/coconutCream-slice-menu-item.jpg" class="order-img9" alt="Slice of coconut cream pie">
+                    <img src="images/coconutCream-slice-menu-item.jpg" class="order-img9"
+                        alt="Slice of coconut cream pie">
                     <p class="pie-text">Coconut Cream Slice $4.29</p>
                     <button type="button" class="order-btn" data-product-id="9">Add to Cart</button>
                 </div>
@@ -200,7 +228,7 @@
                     <p class="pie-text">Pumpkin Whole Pie $14.99</p>
                     <button type="button" class="order-btn" data-product-id="14">Add to Cart</button>
                 </div>
-                
+
                 <div class="content">
                     <img src="images/pecan-wholePie-menu-item.jpg" class="order-img15" alt="Whole pecan pie" />
                     <p class="pie-text">Pecan Whole Pie $16.99</p>
@@ -208,7 +236,8 @@
                 </div>
 
                 <div class="content">
-                    <img src="images/chocolateCream-wholePie-menu-item.jpg" class="order-img16" alt="Whole chocolate cream pie" />
+                    <img src="images/chocolateCream-wholePie-menu-item.jpg" class="order-img16"
+                        alt="Whole chocolate cream pie" />
                     <p class="pie-text">Chocolate Cream Whole Pie $16.99</p>
                     <button type="button" class="order-btn" data-product-id="16">Add to Cart</button>
                 </div>
@@ -220,13 +249,15 @@
                 </div>
 
                 <div class="content">
-                    <img src="images/bananaCream-wholePie-menu-item.jpg" class="order-img18" alt="Whole banana cream pie" />
+                    <img src="images/bananaCream-wholePie-menu-item.jpg" class="order-img18"
+                        alt="Whole banana cream pie" />
                     <p class="pie-text">Banana Cream Whole Pie $16.99</p>
                     <button type="button" class="order-btn" data-product-id="18">Add to Cart</button>
                 </div>
 
                 <div class="content">
-                    <img src="images/coconutCream-wholePie-menu-item.jpg" class="order-img19" alt="Whole coconut cream pie" />
+                    <img src="images/coconutCream-wholePie-menu-item.jpg" class="order-img19"
+                        alt="Whole coconut cream pie" />
                     <p class="pie-text">Coconut Cream Whole Pie $16.99</p>
                     <button type="button" class="order-btn" data-product-id="19">Add to Cart</button>
                 </div>
@@ -240,9 +271,9 @@
         </main>
 
         <aside class="order-form-panel">
-            <form>       
+            <form id="order-form">
                 <h2 class="order-title">Place an Online Order</h2>
-                
+
                 <div class="event-section event-section1" id="step1">
                     <p class="section-heading">Select An Option:</p>
                     <label for="pickup">
@@ -250,48 +281,48 @@
                         Pickup
                     </label>
 
-				    <label for="delivery">
+                    <label for="delivery">
                         <input type="radio" id="delivery" name="orderOption" value="delivery" data-key="Delivery">
                         Delivery
-                    </label>                           
-                
+                    </label>
+
                     <button type="button" id="go-button-step1" onclick="validateStep1('continue')">Continue</button>
-                </div>   
-                            
+                </div>
+
                 <div class="event-section event-section2" id="step2">
-			        <p class="section-heading">Pickup Location</p>
+                    <p class="section-heading">Pickup Location</p>
 
                     <label for="burnet">
-                        <input type="radio" id="burnet" name="pickupOption" value="burnet" data-key="Burnet">
+                        <input type="radio" id="burnet" name="pickupOption" value="burnet" data-key="pickupOption">
                         4678 Burnet Rd, Ste. 210
                         Austin, TX 78756
                     </label>
 
                     <label for="n-lamar">
-                        <input type="radio" id="n-lamar" name="pickupOption" value="n-lamar" data-key="North Lamar">
+                        <input type="radio" id="n-lamar" name="pickupOption" value="n-lamar" data-key="pickupOption">
                         10300 N. Lamar Blvd, Ste. 105
                         Austin, TX 78753
                     </label>
 
                     <label for="6-st">
-                        <input type="radio" id="6-st" name="pickupOption" value="6-st" data-key="6th Street">
+                        <input type="radio" id="6-st" name="pickupOption" value="6-st" data-key="pickupOption">
                         220 E. 6th St
                         Austin, TX 78701
                     </label>
 
                     <label for="s-lamar">
-                        <input type="radio" id="s-lamar" name="pickupOption" value="s-lamar" data-key="South Lamar">
+                        <input type="radio" id="s-lamar" name="pickupOption" value="s-lamar" data-key="pickupOption">
                         2315 S. Lamar Blvd
                         Austin, TX 78704
                     </label>
 
                     <label for="pickup-date">
                         Pickup date:
-                        <input type="date" id="pickup-date" name="pickup-date" required data-key="Pickup Date">
+                        <input type="date" id="pickup-date" name="pickup-date" data-key="pickupDate" required>
                     </label>
 
                     <label for="pickupTime">Pickup time:
-                        <select name="pickupTime" id="pickupTime" data-key="Pickup Time">
+                        <select name="pickupTime" id="pickupTime" data-key="pickup-time">
                             <option value="" disabled selected hidden></option>
                             <option value="10:30">10:30 am</option>
                             <option value="11:00">11:00 am</option>
@@ -308,86 +339,81 @@
                             <option value="16:30">4:30 pm</option>
                         </select>
                     </label>
-                         
+
                     <button type="button" id="back-button-step2" onclick="validateStep2('back')">Back</button>
                     <button type="button" id="go-button-step2" onclick="validateStep2('continue')">Continue</button>
                 </div>
-						
-                <div class="event-section event-section3" id="step3">                      
+
+                <div class="event-section event-section3" id="step3">
                     <label for="delivery-address">
                         Delivery Address:
-                        <input 
-                            type="text" 
-                            id="delivery-address" 
-                            name="delivery-address" 
-                            placeholder="Enter your delivery address" 
-                            autocomplete="off"
-                            required
-                            data-key="Delivery Address"
-                        />
+                        <input type="text" id="delivery-address" name="delivery-address"
+                            placeholder="Enter your delivery address" autocomplete="off" required
+                            data-key="deliveryAddress" />
                     </label>
 
                     <label for="delivery-date">
                         Delivery date:
-                    <input type="date" id="delivery-date" name="delivery-date" data-key="Delivery Date" required>
+                        <input type="date" id="delivery-date" name="delivery-date" data-key="deliveryDate" required>
                     </label>
 
                     <label for="delivery-time">Delivery time:
-                    <select name="delivery-time" id="delivery-time" data-key="Delivery Time">
-                        <option value="" disabled selected hidden></option>
-                        <option value="" disabled selected hidden></option>
-                        <option value="10:30">10:30 am</option>
-                        <option value="11:00">11:00 am</option>
-                        <option value="11:30">11:30 am</option>
-                        <option value="12:00">12:00 pm</option>
-                        <option value="12:30">12:30 pm</option>
-                        <option value="13:00">1:00 pm</option>
-                        <option value="13:30">1:30 pm</option>
-                        <option value="14:00">2:00 pm</option>
-                        <option value="14:30">2:30 pm</option>
-                        <option value="15:00">3:00 pm</option>
-                        <option value="15:30">3:30 pm</option>
-                        <option value="16:00">4:00 pm</option>
-                        <option value="16:30">4:30 pm</option>
-                    </select>
+                        <select name="delivery-time" id="delivery-time" data-key="deliveryTime">
+                            <option value="" disabled selected hidden></option>
+                            <option value="" disabled selected hidden></option>
+                            <option value="10:30">10:30 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="11:30">11:30 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="12:30">12:30 pm</option>
+                            <option value="13:00">1:00 pm</option>
+                            <option value="13:30">1:30 pm</option>
+                            <option value="14:00">2:00 pm</option>
+                            <option value="14:30">2:30 pm</option>
+                            <option value="15:00">3:00 pm</option>
+                            <option value="15:30">3:30 pm</option>
+                            <option value="16:00">4:00 pm</option>
+                            <option value="16:30">4:30 pm</option>
+                        </select>
                     </label>
-                    
+
                     <button type="button" id="back-button-step3" onclick="validateStep3('back')">Back</button>
                     <button type="button" id="go-button-step3" onclick="validateStep3('continue')">Continue</button>
                 </div>
-     
+
                 <div class="event-section event-section4" id="step4">
                     <div class="orderNow-container">
-          	            <div class="order-total">Total: $0.00</div>
-                        <div class="orderNow-list"></div>                                                                    
-                         	    
+                        <div class="order-total">Total: $0.00</div>
+                        <div class="orderNow-list"></div>
+
                         <button type="button" id="back-button-step4" onclick="validateStep4('back')">Back</button>
                         <button type="button" id="go-button-step4" onclick="validateStep4('continue')">Continue</button>
                     </div>
-	            </div>
+                </div>
 
                 <div class="event-section event-section5" id="step5">
                     <h2 class="payment-info">Enter Payment Information</h2>
-                    
+
                     <div class="Payment-container">
 
                         <label for="first-name">First Name:</label>
-                        <input type="text" id="first-name" name="first-name" required>
+                        <input type="text" id="first-name" name="first-name" data-key="firstName" required>
 
                         <label for="last-name">Last Name:</label>
-                        <input type="text" id="last-name" name="last-name" required>
+                        <input type="text" id="last-name" name="last-name" data-key="lastName" required>
 
                         <label for="address1">Street Address 1:</label>
-                        <input type="text" id="address1" name="address1" required>
+                        <input type="text" id="address1" name="address1" data-key="address1" required>
 
                         <label for="address2">Street Address 2:</label>
-                        <input type="text" id="address2" name="address2" placeholder="Apartment, suite, unit, etc.">
+                        <input type="text" id="address2" name="address2" placeholder="Apartment, suite, unit, etc."
+                            data-key="address2">
 
                         <label for="city">City:</label>
-                        <input type="text" id="city" name="city" required>
+                        <input type="text" id="city" name="city" data-key="city" required>
 
                         <label for="state">State:</label>
-                        <select id="state" name="state" required>
+                        <select id="state" name="state" data-key="State" required>
                             <option value="" disabled selected>Select a state</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -442,10 +468,10 @@
                         </select>
 
                         <label for="zip">Zip Code:</label>
-                        <input type="text" id="zip" name="zip" pattern="\d{5}(-\d{4})?" required>
+                        <input type="text" id="zip" name="zip" pattern="\d{5}(-\d{4})?" data-key="zipCode" required>
 
                         <label for="cc-type">Credit Card Type:</label>
-                        <select id="cc-type" name="cc-type" required>
+                        <select id="cc-type" name="cc-type" data-key="ccType" required>
                             <option value="" disabled selected>Select type</option>
                             <option value="visa">Visa</option>
                             <option value="mastercard">Mastercard</option>
@@ -454,13 +480,15 @@
                         </select>
 
                         <label for="cc-number">Credit Card Number:</label>
-                        <input type="text" id="cc-number" name="cc-number" inputmode="numeric" pattern="\d{13,19}" autocomplete="cc-number" data-key="CC Type" required>  
+                        <input type="text" id="cc-number" name="cc-number" inputmode="numeric" pattern="\d{13,19}"
+                            autocomplete="cc-number" data-key="ccNumber" required>
 
                         <label for="ccv">CCV:</label>
-                        <input type="text" id="ccv" name="ccv" inputmode="numeric" pattern="\d{3,4}" required >
+                        <input type="text" id="ccv" name="ccv" inputmode="numeric" pattern="\d{3,4}" data-key="CCV"
+                            required>
 
                         <label for="exp-month">Expiration Month:</label>
-                        <select id="exp-month" name="exp-month" required>
+                        <select id="exp-month" name="exp-month" data-key="expMonth" required>
                             <option value="" disabled selected>Select month</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -477,7 +505,7 @@
                         </select>
 
                         <label for="exp-year">Expiration Year:</label>
-                        <select id="exp-year" name="exp-year" required>
+                        <select id="exp-year" name="exp-year" data-key="expYear" required>
                             <option value="" disabled selected>Select year</option>
                             <option value="2025">2025</option>
                             <option value="2026">2026</option>
@@ -488,20 +516,20 @@
                         </select>
 
                         <div class="order-total-container">
-                            <div class="order-total">Total: $0.00</div>
-          
+                            <div class="order-total" data-type="grand-total">Total: $0.00</div>
+
                             <button type="button" id="back-button-step5" onclick="validateStep5('back')">Back</button>
-                            <button type="button" id="go-button-step5" onclick="validateStep5('continue')">Place Order</button>
+                            <button type="button" id="go-button-step5" onclick=" validateStep5('continue')">Place Order</button>
                         </div>
-                    </div> 
-                </div>               
-                    
+                    </div>
+                </div>
+
                 <div class="event-section event-section6" id="step6">
                     <div class="summary-container">
                         <div id="order-summary"></div>
                         <button type="button" id="startNew-order-btn" onclick="startNewOrder()">Start New Order</button>
                     </div>
-                </div>                
+                </div>
             </form>
         </aside>
     </div>
@@ -512,7 +540,8 @@
             <fieldset>
                 <legend>
                     Join our mailing list:
-                    <i class="fa-solid fa-circle-info" title="Sign up to receive exclusive discounts, recipes, and free treats!"></i>
+                    <i class="fa-solid fa-circle-info"
+                        title="Sign up to receive exclusive discounts, recipes, and free treats!"></i>
                 </legend>
                 <label for="footer-email" class="visually-hidden">Email address</label>
                 <input type="email" id="footer-email" name="email" placeholder="Enter your email" required>
@@ -526,4 +555,5 @@
         </nav>
     </footer>
 </body>
+
 </html>

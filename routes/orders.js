@@ -1,6 +1,6 @@
 const express = require('express');
-const pool = require('../db/client');   
-const logger = require('../utils/logger');       
+const pool = require('../db/client');
+const logger = require('../utils/logger');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 
 const router = express.Router();
@@ -133,7 +133,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
 // POST create a new order
 router.post('/', requireAuth, async (req, res, next) => {
-  const { items, fulfillment_method, delivery_partner } = req.body; 
+  const { items, fulfillment_method, delivery_partner } = req.body;
   // items = [{ product_id, quantity, price_at_purchase }]
 
   if (!items || !Array.isArray(items) || items.length === 0) {
@@ -186,12 +186,11 @@ router.post("/place", requireAuth, async (req, res) => {
   const form = req.body;
 
   try {
-    // Build values
     const name = `${form.firstName} ${form.lastName}`.trim();
     const address = `${form.address1} ${form.address2}`.trim();
 
-    const rawCardType = form.ccType?.trim().trim();
-    
+    const rawCardType = form.ccType?.trim();
+
     // Normalize card brand to method type
     const brandToMethodMap = {
       visa: "Credit",
@@ -205,14 +204,14 @@ router.post("/place", requireAuth, async (req, res) => {
 
     if (!method) {
       return res.status(400).json({
-      success: false,
-      message: "Invalid payment method. Must be a recognized credit or debit card brand."
-    });
-  }
+        success: false,
+        message: "Invalid payment method. Must be a recognized credit or debit card brand."
+      });
+    }
 
     const fulfillment_method = form.pickupChecked ? "Pickup" : "Delivery";
 
-    const total_amount = form.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const total_amount = Array.isArray(form.cart) ? form.cart.reduce((sum, item) => sum + item.price * item.qty, 0) : 0;
     const estimated_delivery = fulfillment_method === "Delivery" ? form.deliveryDate : form.pickupDate;
     const delivery_partner = fulfillment_method === "Delivery" ? "UberEats" : null;
     const delivery_reference = fulfillment_method === "Delivery"
@@ -220,20 +219,19 @@ router.post("/place", requireAuth, async (req, res) => {
       : null;
     const delivery_status = fulfillment_method === "Delivery" ? "Out for delivery" : "N/A";
 
-    const email = form.email?.trim(); // Add safety check
+    const user = req.session.user || {};
+    const email = user.email;
+    const user_id = user.id;
 
     if (!email) {
-      return res.status(400).json({ success: false, message: "Email is required." });
+      return res.status(400).json({ success: false, message: "Email missing from user session." });
     }
-
-    const user = req.session.user || {}; // or pull from JWT if needed
-    const user_id = user.user_id;
 
     if (!user_id) {
       return res.status(400).json({ success: false, message: "User ID is missing from session." });
-    }   
+    }
 
-    const status = "Pending"; 
+    const status = "Pending";
 
     const order_date = new Date();
     const pickup_time = fulfillment_method === "Pickup" ? form.pickupTime : null;
@@ -301,30 +299,30 @@ router.post("/place", requireAuth, async (req, res) => {
 
 
     // Insert items into order_items table
-   for (const item of form.cart) {
-    console.log("Received item:", item);
+    for (const item of form.cart) {
+      console.log("Received item:", item);
 
-    const { product_id, qty: quantity, price } = item;
+      const { product_id, qty: quantity, price } = item;
 
-    console.log("product_id:", product_id);
-    console.log("quantity:", quantity);
-    console.log("price:", price);
+      console.log("product_id:", product_id);
+      console.log("quantity:", quantity);
+      console.log("price:", price);
 
-    if (product_id == null || quantity == null || price == null) {
-      return res.status(400).json({
-      success: false,
-      message: "Invalid item in cart: product_id, quantity, and price are required.",
-      item
-    });
-  }
+      if (product_id == null || quantity == null || price == null) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid item in cart: product_id, quantity, and price are required.",
+          item
+        });
+      }
 
-  await pool.query(
-    `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
+      await pool.query(
+        `INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)
      VALUES ($1, $2, $3, $4)`,
-    [order_id, product_id, quantity, price]
-  );
-}
-    
+        [order_id, product_id, quantity, price]
+      );
+    }
+
     const confirmationNumber = "CN" + Math.floor(100000 + Math.random() * 900000);
 
     res.status(200).json({
@@ -335,16 +333,16 @@ router.post("/place", requireAuth, async (req, res) => {
 
   } catch (err) {
     console.error("Order placement error caught:", {
-        message: err.message,
-        stack: err.stack,
-        code: err.code,
-        detail: err.detail,
-        constraint: err.constraint,
+      message: err.message,
+      stack: err.stack,
+      code: err.code,
+      detail: err.detail,
+      constraint: err.constraint,
     });
 
     res.status(500).json({
-        success: false,
-        message: "Server error while placing order."
+      success: false,
+      message: "Server error while placing order."
     });
   }
 });

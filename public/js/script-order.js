@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             message.textContent = "Please log in to place an order";
             step1Container.prepend(message);
         }
-        
+
         updateCartDisplay?.();
     }
 
@@ -56,7 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---------------- SAVE FORM STATE ---------------- //
     function saveFormState() {
         const formElements = document.querySelectorAll("input[data-key], select[data-key]");
-        const formState = { cart: cart || [] }; // keep cart as before
+        const formState = {
+            cart: cart || [],
+        };
 
         formElements.forEach(el => {
             const key = el.getAttribute("data-key");
@@ -78,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Restore cart and total
         if (saved.cart) cart = saved.cart;
+
         total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
         // Restore form fields (inputs and selects only)
@@ -164,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         showStep(4);
     };
-
+    
     window.validateStep4 = function (direction) {
         if (direction === "back") {
             const pickupChecked = document.getElementById("pickup").checked;
@@ -180,12 +183,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.validateStep5 = function (direction) {
         if (direction === "back") return showStep(4);
-
         const fields = [
             'input[name="first-name"]',
             'input[name="last-name"]',
             'input[name="address1"]',
-            'input[name="address2"]',
             'input[name="city"]',
             'select[name="state"]',
             'input[name="zip"]',
@@ -201,15 +202,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const [ccNum, ccv, expMonth, expYear] = [fields[8], fields[9], fields[10], fields[11]];
-
-        const cleanedCCNum = ccNum.value.replace(/\D/g, ''); // Remove all non-digit chars (spaces, dashes, etc.)
-
-        if (!/^\d{13,19}$/.test(cleanedCCNum)) {
+        const [ccNum, ccv, expMonth, expYear] = [fields[7], fields[8], fields[9], fields[10]];
+        if (!/^\d{13,19}$/.test(ccNum.value.trim())) {
             alert("Invalid credit card number.");
             return;
         }
-
         if (!/^\d{3,4}$/.test(ccv.value.trim())) {
             alert("Invalid CCV.");
             return;
@@ -224,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showStep(6);
         showOrderSummary();
-    }
+    };
 
     // ------------ START NEW ORDER BUTTON ------------ //
     window.startNewOrder = function () {
@@ -320,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showOrderSummary() {
         const summaryEl = document.querySelector("#order-summary");
-        
         summaryEl.innerHTML = "";
         const confNum = generateConfirmationNumber();
         summaryEl.innerHTML += `<h3>Thank you!<br>Your confirmation number is: ${confNum}</h3>`;
@@ -353,8 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
         details.appendChild(itemsList);
         summaryEl.appendChild(details);
     }
-    
 
+
+    /* ------------ HELPER FUNCTIONS ------------ */
     function formatTime(str) {
         const [h, m] = str.split(":").map(Number);
         const suffix = h >= 12 ? "PM" : "AM";
@@ -407,8 +404,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function isSameDate(d1, d2) {
         return d1.getFullYear() === d2.getFullYear() &&
-               d1.getMonth() === d2.getMonth() &&
-               d1.getDate() === d2.getDate();
+            d1.getMonth() === d2.getMonth() &&
+            d1.getDate() === d2.getDate();
     }
 
     function disablePastTimeOptions(dateInput, timeSelect) {
@@ -462,27 +459,3 @@ document.addEventListener("DOMContentLoaded", function () {
     disablePastTimeOptions(pickupDateInput, pickupTimeInput);
     disablePastTimeOptions(deliveryDateInput, deliveryTimeInput);
 });
-
-// ---------------- GOOGLE AUTOCOMPLETE FOR DELIVERY ----------------
-let deliveryAutocomplete;
-
-window.initDeliveryAutocomplete = function() {
-    const input = document.getElementById("delivery-address");
-    if (!input || deliveryAutocomplete) return; // prevent multiple init
-
-    deliveryAutocomplete = new google.maps.places.Autocomplete(input, {
-        fields: ["formatted_address", "geometry"],
-        componentRestrictions: { country: "us" }
-    });
-
-    deliveryAutocomplete.addListener("place_changed", () => {
-        const place = deliveryAutocomplete.getPlace();
-        console.log("Selected address:", place.formatted_address);
-
-        // Restrict to Texas
-        if (!place.formatted_address.toUpperCase().includes("TX")) {
-            alert("Please select an address in Texas.");
-            input.value = "";
-        }
-    });
-};

@@ -64,7 +64,7 @@ router.put('/me', requireAuth, async (req, res, next) => {
     if (name) {
       if (typeof name !== 'string' || name.length < 4 || name.length > 100) {
         return res.status(400).json({ error: 'Name must be between 4 and 100 characters.' });
-}
+      }
       updates.push(`name = $${idx++}`);
       values.push(name);
     }
@@ -93,16 +93,17 @@ router.put('/me', requireAuth, async (req, res, next) => {
       values.push(phone);
     }
 
-    if (password) {
+    if (typeof password === 'string' && password.trim() !== '') {
       const passwordError = validatePassword(password);
-    if (passwordError) {
-      return res.status(400).json({ error: passwordError });
-    }
+      if (passwordError) {
+        return res.status(400).json({ error: passwordError });
+      }
 
       const hashedPassword = await bcrypt.hash(password, 10);
       updates.push(`password = $${idx++}`);
-      values.push(hashedPassword);  
+      values.push(hashedPassword);
     }
+
 
     if (updates.length === 0) {
       return res.status(400).json({ error: 'No valid fields to update' });
