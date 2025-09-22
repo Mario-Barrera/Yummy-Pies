@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Fetch user and populate form
+  // Clear password input on page load
+  const passwordInput = document.getElementById('password');
+  if (passwordInput) passwordInput.value = '';
+
+  // Fetch user data
   fetch('/api/users/me', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -18,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(user => {
       if (!user) return;
 
-      // Store original user data for cancel
       window.originalUser = { ...user };
 
       const [firstName, ...rest] = (user.name || '').split(' ');
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('name').value = user.name || '';
     });
 
-  // Handle form submission
+  // Prevent update if nothing has changed
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -40,43 +43,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastName = form.querySelector('#last-name').value.trim();
     const name = `${firstName} ${lastName}`.trim();
 
-    const updateData = {
-      name,
-      email: form.querySelector('#email').value.trim(),
-      phone: form.querySelector('#phone').value.trim(),
-      address: form.querySelector('#address').value.trim()
-    };
-
+    const email = form.querySelector('#email').value.trim();
+    const phone = form.querySelector('#phone').value.trim();
+    const address = form.querySelector('#address').value.trim();
     const password = form.querySelector('#password').value.trim();
-    if (password) {
-      updateData.password = password;
+
+    const [originalFirstName, ...rest] = (window.originalUser.name || '').split(' ');
+    const originalLastName = rest.join(' ');
+
+    const hasChanges =
+      firstName !== (originalFirstName || '') ||
+      lastName !== (originalLastName || '') ||
+      email !== (window.originalUser.email || '') ||
+      phone !== (window.originalUser.phone || '') ||
+      address !== (window.originalUser.address || '') ||
+      password !== '';
+
+    if (!hasChanges) {
+      alert('No changes made, unable to update profile.');
+      return;
     }
+
+    const updateData = { name, email, phone, address };
+    if (password) updateData.password = password;
 
     try {
       const res = await fetch('/api/users/me', {
-        method: 'PUT',                                // This is the database update trigger
+        method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updateData)              // This sends the updated data to the server
+        body: JSON.stringify(updateData)
       });
 
-      if (!res.ok) throw new Error('Failed to update profile.');
+      if (!res.ok) throw new Error('Update failed');
 
-      const updatedUser = await res.json();
       alert('Profile updated successfully!');
       window.location.href = '/account-profile.html';
     } catch (err) {
-      console.error('Error updating profile:', err);
+      console.error('Error:', err);
       alert('Failed to update profile. Please try again.');
     }
   });
 
-  // Handle cancel button
+  // Handle Cancel
   cancelBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    
+
     if (!window.originalUser) return;
 
     const firstNameInput = document.getElementById('first-name');
@@ -85,32 +99,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const phoneInput = document.getElementById('phone');
     const addressInput = document.getElementById('address');
     const passwordInput = document.getElementById('password');
+    const passwordMessageDiv = document.getElementById('password-requirements');
+
+    // Clear password field and any validation messages
+    passwordInput.value = '';
+    if (passwordMessageDiv) passwordMessageDiv.innerHTML = '';
 
     const [originalFirstName, ...rest] = (window.originalUser.name || '').split(' ');
     const originalLastName = rest.join(' ');
 
-    const isModified =
-      firstNameInput.value !== (originalFirstName || '') ||
-      lastNameInput.value !== (originalLastName || '') ||
-      emailInput.value !== (window.originalUser.email || '') ||
-      phoneInput.value !== (window.originalUser.phone || '') ||
-      addressInput.value !== (window.originalUser.address || '') ||
-      passwordInput.value !== '';
+    firstNameInput.value = originalFirstName || '';
+    lastNameInput.value = originalLastName || '';
+    emailInput.value = window.originalUser.email || '';
+    phoneInput.value = window.originalUser.phone || '';
+    addressInput.value = window.originalUser.address || '';
 
-    if (isModified) {
-      // Revert changes
-      firstNameInput.value = originalFirstName || '';
-      lastNameInput.value = originalLastName || '';
-      emailInput.value = window.originalUser.email || '';
-      phoneInput.value = window.originalUser.phone || '';
-      addressInput.value = window.originalUser.address || '';
-      passwordInput.value = '';
-    }
-
-    // Clear any drafts
     localStorage.removeItem('userProfileDraft');
 
-    // Redirect back to account profile
     window.location.href = 'account-profile.html';
   });
 });

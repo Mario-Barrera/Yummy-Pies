@@ -348,6 +348,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         details.appendChild(itemsList);
         summaryEl.appendChild(details);
+
+        // This line helps to scroll to the summary in view
+        summaryEl.scrollIntoView({ behavior: "smooth" });
     }
 
 
