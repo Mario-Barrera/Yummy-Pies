@@ -30,7 +30,7 @@ const authRoutes = require('./routes/auth');
 const productsRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
 const orderItemsRouter = require('./routes/order-Items');
-const cartItemsRouter = require('./routes/cart-items');
+const cartItemsRouter = require('./routes/cart-Items');
 const paymentsRouter = require('./routes/payments');
 const reviewsRouter = require('./routes/reviews');
 const reviewCommentsRouter = require('./routes/reviewComments');
@@ -64,6 +64,7 @@ app.get('/api/user-status', (req, res) => {
     res.json({ loggedIn: false });
   }
 });
+
 
 // Health check route
 // Verifies that your backend server is running and reachable
