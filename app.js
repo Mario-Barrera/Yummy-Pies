@@ -41,7 +41,7 @@ const cateringRoutes = require('./routes/catering');
 
 // Mount routes
 // api/ prefix (optional, but recommended)
-// frontend file must call the correct backend URL (for example, fetch('/api/review-comments')
+// frontend file must call the correct backend URL
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/orders', ordersRoutes);
@@ -49,7 +49,7 @@ app.use('/api/order-items', orderItemsRouter);
 app.use('/api/cart-items', cartItemsRouter);
 app.use('/api/payments', paymentsRouter);
 app.use('/api/reviews', reviewsRouter);
-app.use('/api/review-comments', reviewCommentsRouter);
+app.use('/api/reviewComments', reviewCommentsRouter);
 app.use('/api/reset-password', resetPasswordRouter);
 app.use('/api/users', userRoutes);
 app.use('/api', cateringRoutes);
