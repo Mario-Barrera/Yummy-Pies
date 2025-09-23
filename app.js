@@ -49,7 +49,7 @@ app.use('/api/order-items', orderItemsRouter);
 app.use('/api/cart-items', cartItemsRouter);
 app.use('/api/payments', paymentsRouter);
 app.use('/api/reviews', reviewsRouter);
-app.use('/api/review-comments', require('./routes/reviewComments'));
+app.use('/api/review-comments', reviewCommentsRouter);
 app.use('/api/reset-password', resetPasswordRouter);
 app.use('/api/users', userRoutes);
 app.use('/api', cateringRoutes);
