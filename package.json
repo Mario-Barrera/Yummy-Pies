@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "vitest",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "build": "npm install && npm run seed"
   },
   "repository": {
     "type": "git",
