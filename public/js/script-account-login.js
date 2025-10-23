@@ -1,20 +1,21 @@
-// Select the login form
+// === Select the login form ===
 const loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault(); // Prevent default form submission
 
-  // Get form values
+  // === Get form values ===
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
-  // Basic front-end validation
+  // === Basic front-end validation ===
   if (!email || !password) {
     alert('Please enter both email and password.');
     return;
   }
 
   try {
+    // === Send login request ===
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
@@ -23,24 +24,40 @@ loginForm.addEventListener('submit', async (e) => {
       body: JSON.stringify({ email, password })
     });
 
-    const data = await response.json();
+    // === Try to safely parse JSON ===
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseErr) {
+      console.warn('Response not valid JSON or empty:', parseErr);
+      data = null;
+    }
 
+    // === Handle server errors ===
     if (!response.ok) {
-      // Show error returned by server
-      alert(data.error || 'Login failed. Please try again.');
+      const errorMsg = data?.error || `Login failed (status ${response.status}).`;
+      alert(errorMsg);
+      console.error('Login error:', errorMsg, data);
       return;
     }
 
-    // Save token and user info in localStorage
+    // === Handle missing or malformed server data ===
+    if (!data || !data.token || !data.user) {
+      alert('Unexpected server response. Please try again later.');
+      console.error('Invalid response:', data);
+      return;
+    }
+
+    // === Save token and user info in localStorage ===
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
     localStorage.setItem('userEmail', email);
 
-    // Redirect to homepage
+    // === Redirect to homepage ===
     window.location.href = 'index.html';
 
   } catch (err) {
-    console.error('Login error:', err);
+    console.error('Network or unexpected login error:', err);
     alert('An unexpected error occurred. Please try again later.');
   }
 });
