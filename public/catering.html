@@ -62,7 +62,7 @@
             <div class="connect">
                 <p>Connect with us</p>
                 <ul class="social-links">
-                    <li>
+                    <li>    <!-- rel="noopener noreferrer" provides security and protection -->
                         <a href="https://www.facebook.com/profile.php?id=61575033907078" 
                             target="_blank" 
                             rel="noopener noreferrer"
@@ -116,6 +116,7 @@
                 </section>
 
                 <!-- Gallery Section -->
+                <!-- loading="lazy"  means:  Load the image when it enters view-->
                 <section class="image-gallery" aria-label="Catering Photo Gallery">
                     <img src="images/wedding1-catering.jpg" class="catering-img1" alt="Elegant wedding pie display with flowers" loading="lazy">
                     <img src="images/celebration1-catering.jpg" class="catering-img3" alt="Party pies on a buffet table" loading="lazy">
@@ -135,14 +136,22 @@
                         <fieldset class="event-section" id="step1">
                             <legend>What kind of event do you need catering for?</legend>
                             <ul class="event-list">
-                                <li><input type="radio" id="event-anniversary" name="event-type" value="Anniversary" required><label for="event-anniversary">Anniversary</label></li>
-                                <li><input type="radio" id="event-babyshower" name="event-type" value="Baby Shower"><label for="event-babyshower">Baby Shower</label></li>
-                                <li><input type="radio" id="event-barmitzvah" name="event-type" value="Bar Mitzvah / Bat Mitzvah"><label for="event-barmitzvah">Bar Mitzvah / Bat Mitzvah</label></li>
-                                <li><input type="radio" id="event-christening" name="event-type" value="Christening / Communion"><label for="event-christening">Christening / Communion</label></li>
-                                <li><input type="radio" id="event-corporate" name="event-type" value="Corporate Event"><label for="event-corporate">Corporate Event</label></li>
-                                <li><input type="radio" id="event-funeral" name="event-type" value="Funeral / Wake"><label for="event-funeral">Funeral / Wake</label></li>
-                                <li><input type="radio" id="event-celebration" name="event-type" value="Celebration - other"><label for="event-celebration">Celebration - other</label></li>
-                                <li><input type="radio" id="event-wedding" name="event-type" value="Wedding"><label for="event-wedding">Wedding</label></li>
+                                <li><input type="radio" id="event-anniversary" name="event-type" value="Anniversary" required>
+                                    <label for="event-anniversary">Anniversary</label></li>
+                                <li><input type="radio" id="event-babyshower" name="event-type" value="Baby Shower">
+                                    <label for="event-babyshower">Baby Shower</label></li>
+                                <li><input type="radio" id="event-barmitzvah" name="event-type" value="Bar Mitzvah / Bat Mitzvah">
+                                    <label for="event-barmitzvah">Bar Mitzvah / Bat Mitzvah</label></li>
+                                <li><input type="radio" id="event-christening" name="event-type" value="Christening / Communion">
+                                    <label for="event-christening">Christening / Communion</label></li>
+                                <li><input type="radio" id="event-corporate" name="event-type" value="Corporate Event">
+                                    <label for="event-corporate">Corporate Event</label></li>
+                                <li><input type="radio" id="event-funeral" name="event-type" value="Funeral / Wake">
+                                    <label for="event-funeral">Funeral / Wake</label></li>
+                                <li><input type="radio" id="event-celebration" name="event-type" value="Celebration - other">
+                                    <label for="event-celebration">Celebration - other</label></li>
+                                <li><input type="radio" id="event-wedding" name="event-type" value="Wedding">
+                                    <label for="event-wedding">Wedding</label></li>
                             </ul>
                             <button type="button" onclick="validateStep1()">Continue</button>
                         </fieldset>
@@ -151,15 +160,24 @@
                         <fieldset class="event-section" id="step2">
                             <legend>What kind of pies would you like?</legend>
                             <ul class="pie-types">
-                                <li><input type="checkbox" id="pie-apple" name="pie-types" value="Apple"><label for="pie-apple">Apple</label></li>
-                                <li><input type="checkbox" id="pie-blueberry" name="pie-types" value="Blueberry"><label for="pie-blueberry">Blueberry</label></li>
-                                <li><input type="checkbox" id="pie-cherry" name="pie-types" value="Cherry"><label for="pie-cherry">Cherry</label></li>
-                                <li><input type="checkbox" id="pie-banana" name="pie-types" value="Banana Cream"><label for="pie-banana">Banana Cream</label></li>
-                                <li><input type="checkbox" id="pie-chocolate" name="pie-types" value="Chocolate Cream"><label for="pie-chocolate">Chocolate Cream</label></li>
-                                <li><input type="checkbox" id="pie-coconut" name="pie-types" value="Coconut Cream"><label for="pie-coconut">Coconut Cream</label></li>
-                                <li><input type="checkbox" id="pie-pecan" name="pie-types" value="Pecan"><label for="pie-pecan">Pecan</label></li>
-                                <li><input type="checkbox" id="pie-pumpkin" name="pie-types" value="Pumpkin"><label for="pie-pumpkin">Pumpkin</label></li>
-                                <li><input type="checkbox" id="pie-keylime" name="pie-types" value="Key Lime"><label for="pie-keylime">Key Lime</label></li>
+                                <li><input type="checkbox" id="pie-apple" name="pie-types" value="Apple">
+                                    <label for="pie-apple">Apple</label></li>
+                                <li><input type="checkbox" id="pie-blueberry" name="pie-types" value="Blueberry">
+                                    <label for="pie-blueberry">Blueberry</label></li>
+                                <li><input type="checkbox" id="pie-cherry" name="pie-types" value="Cherry">
+                                    <label for="pie-cherry">Cherry</label></li>
+                                <li><input type="checkbox" id="pie-banana" name="pie-types" value="Banana Cream">
+                                    <label for="pie-banana">Banana Cream</label></li>
+                                <li><input type="checkbox" id="pie-chocolate" name="pie-types" value="Chocolate Cream">
+                                    <label for="pie-chocolate">Chocolate Cream</label></li>
+                                <li><input type="checkbox" id="pie-coconut" name="pie-types" value="Coconut Cream">
+                                    <label for="pie-coconut">Coconut Cream</label></li>
+                                <li><input type="checkbox" id="pie-pecan" name="pie-types" value="Pecan">
+                                    <label for="pie-pecan">Pecan</label></li>
+                                <li><input type="checkbox" id="pie-pumpkin" name="pie-types" value="Pumpkin">
+                                    <label for="pie-pumpkin">Pumpkin</label></li>
+                                <li><input type="checkbox" id="pie-keylime" name="pie-types" value="Key Lime">
+                                    <label for="pie-keylime">Key Lime</label></li>
                             </ul>
                             <button type="button" onclick="goToStep('step1')">Back</button>
                             <button type="button" onclick="validateStep2()">Continue</button>
@@ -169,13 +187,20 @@
                         <fieldset class="event-section" id="step3">
                             <legend>Roughly how many guests will you need catering for?</legend>
                             <ul class="guest-count">
-                                <li><input type="radio" id="guest-10" name="guest-count" value="10 guest" required><label for="guest-10">10 guest</label></li>
-                                <li><input type="radio" id="guest-10-30" name="guest-count" value="10 - 30 guest"><label for="guest-10-30">10 - 30 guest</label></li>
-                                <li><input type="radio" id="guest-30-50" name="guest-count" value="30 - 50 guest"><label for="guest-30-50">30 - 50 guest</label></li>
-                                <li><input type="radio" id="guest-50-70" name="guest-count" value="50 - 70 guest"><label for="guest-50-70">50 - 70 guest</label></li>
-                                <li><input type="radio" id="guest-70-90" name="guest-count" value="70 - 90 guest"><label for="guest-70-90">70 - 90 guest</label></li>
-                                <li><input type="radio" id="guest-90-110" name="guest-count" value="90 - 110 guest"><label for="guest-90-110">90 - 110 guest</label></li>
-                                <li><input type="radio" id="guest-110plus" name="guest-count" value="More than 110 guest"><label for="guest-110plus">More than 110 guest</label></li>
+                                <li><input type="radio" id="guest-10" name="guest-count" value="10 guest" required>
+                                    <label for="guest-10">10 guest</label></li>
+                                <li><input type="radio" id="guest-10-30" name="guest-count" value="10 - 30 guest">
+                                    <label for="guest-10-30">10 - 30 guest</label></li>
+                                <li><input type="radio" id="guest-30-50" name="guest-count" value="30 - 50 guest">
+                                    <label for="guest-30-50">30 - 50 guest</label></li>
+                                <li><input type="radio" id="guest-50-70" name="guest-count" value="50 - 70 guest">
+                                    <label for="guest-50-70">50 - 70 guest</label></li>
+                                <li><input type="radio" id="guest-70-90" name="guest-count" value="70 - 90 guest">
+                                    <label for="guest-70-90">70 - 90 guest</label></li>
+                                <li><input type="radio" id="guest-90-110" name="guest-count" value="90 - 110 guest">
+                                    <label for="guest-90-110">90 - 110 guest</label></li>
+                                <li><input type="radio" id="guest-110plus" name="guest-count" value="More than 110 guest">
+                                    <label for="guest-110plus">More than 110 guest</label></li>
                             </ul>
                             <button type="button" onclick="goToStep('step2')">Back</button>
                             <button type="button" onclick="validateStep3()">Continue</button>
@@ -184,8 +209,11 @@
                         <!-- Step 4: Pie Bar Signage -->
                         <fieldset class="event-section" id="step4">
                             <legend>Would you like pie bar signage to match your theme?</legend>
-                            <input type="radio" id="signage-yes" name="signage-idea" value="Yes" required><label for="signage-yes">Yes</label>
-                            <input type="radio" id="signage-no" name="signage-idea" value="No"><label for="signage-no">No</label>
+                            <input type="radio" id="signage-yes" name="signage-idea" value="Yes" required>
+                                <label for="signage-yes">Yes</label>
+                            <input type="radio" id="signage-no" name="signage-idea" value="No">
+                                <label for="signage-no">No</label>
+
                             <button type="button" class="back-btn" onclick="goToStep('step3')">Back</button>
                             <button type="button" onclick="validateStep4()">Continue</button>
                         </fieldset>
@@ -194,6 +222,7 @@
                         <fieldset class="event-section" id="step5">
                             <legend>Proposed date of the event</legend>
                             <input type="date" id="event-date" name="event-date" required>
+                            
                             <button type="button" onclick="goToStep('step4')">Back</button>
                             <button type="button" onclick="validateStep5()">Continue</button>
                         </fieldset>

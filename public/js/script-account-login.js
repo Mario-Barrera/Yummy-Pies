@@ -1,8 +1,8 @@
 // === Select the login form ===
 const loginForm = document.getElementById('login-form');
 
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault(); // Prevent default form submission
+loginForm.addEventListener('submit', async function(event) {
+  event.preventDefault(); // Prevent default form submission
 
   // === Get form values ===
   const email = document.getElementById('email').value.trim();
@@ -43,7 +43,7 @@ loginForm.addEventListener('submit', async (e) => {
 
     // === Handle missing or malformed server data ===
     if (!data || !data.token || !data.user) {
-      alert('Unexpected server response. Please try again later.');
+      alert('Unexpected server response. Please try again.');
       console.error('Invalid response:', data);
       return;
     }
@@ -58,6 +58,6 @@ loginForm.addEventListener('submit', async (e) => {
 
   } catch (err) {
     console.error('Network or unexpected login error:', err);
-    alert('An unexpected error occurred. Please try again later.');
+    alert('An unexpected error occurred. Please try again.');
   }
 });
