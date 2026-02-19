@@ -36,6 +36,8 @@
   <script src="js/script-auth.js" defer></script>
   <script src="js/script-user-status.js" defer></script>
   <script src="js/user-greeting.js" defer></script>
+  <!-- JSON-LD (linked data) structured data using Schema.org vocabulary-->
+  <!-- It helps search engines understand: Your business, Your locations, Your hours, Your contact info, Your organization structure-->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -205,7 +207,7 @@
       <div class="connect">
         <p>Connect with us</p>
         <ul class="social-links">
-          <li>
+          <li>  <!-- rel="noopener noreferrer" provides security and protection -->
             <a href="https://www.facebook.com/profile.php?id=61575033907078" 
               target="_blank" 
               rel="noopener noreferrer"

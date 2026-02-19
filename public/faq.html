@@ -55,7 +55,7 @@
             <div class="connect">
                 <p>Connect with us</p>
                 <ul class="social-links">
-                    <li>
+                    <li>     <!-- rel="noopener noreferrer" provides security and protection -->
                         <a href="https://www.facebook.com/profile.php?id=61575033907078" 
                             target="_blank" 
                             rel="noopener noreferrer"
@@ -99,13 +99,18 @@
 
             <div class="accordion-container">
                 <div class="accordion">
-                    <button id="faq1-button" class="accordion-header" 
+                    <!-- aria-expanded="false"  means: This tells assistive technologies the content controlled by this button is currently collapsed-->
+                    <!-- aria-controls="faq1" references the id="faq1" of the element that the button controls.-->
+                    <button id="faq1-button" class="accordion-header"
                             aria-expanded="false" 
                             aria-controls="faq1">
                         Can you safely accommodate for food allergies?
                         <span class="toggle-icon">+</span>
                     </button>
 
+                    <!-- role="region"  means: it tells assistive technologies this is a significant section of content.”-->
+                    <!-- aria-labelledby="faq1-button"   means: This region is labeled by the element whose ID is faq1-button-->
+                    <!-- hidden is a native HTML boolean attribute -->
                     <div id="faq1" class="accordion-content" hidden
                             role="region" 
                             aria-labelledby="faq1-button">
