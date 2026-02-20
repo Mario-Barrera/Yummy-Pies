@@ -281,6 +281,8 @@
             <form id="order-form">
                 <h2 class="order-title">Place an Online Order</h2>
 
+                <!-- "data-key"  is a custom data attribute-->
+                <!-- Attach custom data called key with the value Pickup to the <input> tag-->
                 <div class="event-section event-section1" id="step1">
                     <p class="section-heading">Select An Option:</p>
                     <label for="pickup">
@@ -351,6 +353,7 @@
                     <button type="button" id="go-button-step2" onclick="validateStep2('continue')">Continue</button>
                 </div>
 
+                <!-- autocomplete   means: Do NOT show saved address suggestions and do NOT auto-fill this field-->
                 <div class="event-section event-section3" id="step3">
                     <label for="delivery-address">
                         Delivery Address:
@@ -366,7 +369,6 @@
 
                     <label for="delivery-time">Delivery time:
                         <select name="delivery-time" id="delivery-time" data-key="deliveryTime">
-                            <option value="" disabled selected hidden></option>
                             <option value="" disabled selected hidden></option>
                             <option value="10:30">10:30 am</option>
                             <option value="11:00">11:00 am</option>
@@ -474,6 +476,8 @@
                             <option value="WY">Wyoming</option>
                         </select>
 
+                        <!-- "\d{5}(-\d{4})?" is a regex, valid inputs:  78728 or 78728-2534-->
+                        <!-- the use of "?" makes the hyphen and last four digits optional-->
                         <label for="zip">Zip Code:</label>
                         <input type="text" id="zip" name="zip" pattern="\d{5}(-\d{4})?" data-key="zipCode" required>
 
