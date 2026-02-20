@@ -1,17 +1,21 @@
+// DOMContentLoaded only initializes the first state
+document.addEventListener("DOMContentLoaded", function () {
+  goToStep("step1");
+});
 
 // Data that will eventually be submitted
 const formData = {
-    eventType: "",
-    pieTypes: [],
-    guestCount: "",
-    signageIdea: "",
-    eventDate: "",
-    customerInfo: {
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: ""
-    }
+  eventType: "",
+  pieTypes: [],
+  guestCount: "",
+  signageIdea: "",
+  eventDate: "",
+  customerInfo: {
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+  },
 };
 
 // Select all form steps
@@ -21,124 +25,146 @@ const steps = document.querySelectorAll(".event-section");
 const stepIndicator = document.getElementById("step-indicator");
 
 // define the navigation function
+// goToStep = Switch steps safely
 function goToStep(stepId) {
-    steps.forEach(function (step) {
-        step.style.display = "none";
-    });
+  steps.forEach(function (step) {
+    step.style.display = "none";
+  });
 
-    const activeStep = document.getElementById(stepId);
+  const activeStep = document.getElementById(stepId);
 
-    // the function exist safely and the app does not crash
-    if (!activeStep) {
-        console.error(`Step with id ${stepId} not found.`);
-        return;
-    }
+  // the function exist safely and the app does not crash
+  if (!activeStep) {
+    console.error(`Step with id ${stepId} not found.`);
+    return;
+  }
 
-    activeStep.style.display = "block";
+  activeStep.style.display = "block";
 
-    const stepNumber = stepId.replace("step", "");
+  const stepNumber = stepId.replace("step", "");
 
-    stepIndicator.textContent = `Step ${stepNumber} of 6`;
+  stepIndicator.textContent = `Step ${stepNumber} of 6`;
 }
 
 // Step 1: Event Type (radio)
 // [name="event-type"] is a CSS Attribute Selector
 // :checked is a CSS pseudo-class selector that matches elements in a specific state.
 function validateStep1() {
-    const selected = document.querySelector('input[name="event-type"]:checked');
+  const selected = document.querySelector('input[name="event-type"]:checked');
 
-    if (!selected) {
-        alert("Please select an event type to continue");
-        return;
-    }
+  if (!selected) {
+    alert("Please select an event type to continue");
+    return;
+  }
 
-    formData.eventType = selected.value;
-    goToStep("step2");
+  formData.eventType = selected.value;
+  goToStep("step2");
 }
 
 // Step 2: Pie Types (checkboxes)
 // Array.from() converts a NodeList to an Array and is a static method of the Array constructor
 function validateStep2() {
-    const selected = document.querySelectorAll('input[name="pie-types"]:checked');
+  const selected = document.querySelectorAll('input[name="pie-types"]:checked');
 
-    if (selected.length === 0) {
-        alert("Please select at least one type of pie to continue");
-        return;
-    }
+  if (selected.length === 0) {
+    alert("Please select at least one type of pie to continue");
+    return;
+  }
 
-    formData.pieTypes = Array.from(selected, function(checkbox) {
-        return checkbox.value;
-    });
+  formData.pieTypes = Array.from(selected, function (checkbox) {
+    return checkbox.value;
+  });
 
-    goToStep("step3");
+  goToStep("step3");
 }
 
 // Step 3: Guest Count (radio)
 function validateStep3() {
-    const selected = document.querySelector('input[name="guest-count"]:checked');
+  const selected = document.querySelector('input[name="guest-count"]:checked');
 
-    if (!selected) {
-        alert("Please select the number of guests to continue");
-        return;
-    }
+  if (!selected) {
+    alert("Please select the number of guests to continue");
+    return;
+  }
 
-    formData.guestCount = selected.value;
-    goToStep("step4");
+  formData.guestCount = selected.value;
+  goToStep("step4");
 }
 
 // Step 4: Pie Bar Signage (radio)
 function validateStep4() {
-    const selected = document.querySelector('input[name="signage-idea"]:checked');
+  const selected = document.querySelector('input[name="signage-idea"]:checked');
 
-    if (!selected) {
-        alert("Please choose Yes or No to continue");
-        return;
-    }
+  if (!selected) {
+    alert("Please choose Yes or No to continue");
+    return;
+  }
 
-    formData.signageIdea = selected.value;
-    goToStep("step5");
+  formData.signageIdea = selected.value;
+  goToStep("step5");
 }
 
 // Step 5: Event Date (Date Picker)
 function validateStep5() {
-    const dateInput = document.getElementById("event-date");
-    const selectedDate = dateInput.value;
+  const dateInput = document.getElementById("event-date");
+  const selectedDate = dateInput.value;
 
-    if (!selectedDate) {
-        alert("Please select a proposed date to continue");
-        return;
-    }
+  if (!selectedDate) {
+    alert("Please select a proposed date to continue");
+    return;
+  }
 
-    formData.eventDate = selectedDate;
-    goToStep("step6");
+  formData.eventDate = selectedDate;
+  goToStep("step6");
 }
 
 // Step 6: Customer Contact Info
 function validateStep6(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    // Grab the inputs
-    const firstNameInput = document.getElementById('first-name');
-    const lastNameInput = document.getElementById('last-name');
-    const phoneInput = document.getElementById('phone');
-    const emailInput = document.getElementById('email');
+  // Grab the inputs
+  const firstNameInput = document.getElementById("first-name");
+  const lastNameInput = document.getElementById("last-name");
+  const phoneInput = document.getElementById("phone");
+  const emailInput = document.getElementById("email");
 
-    // trim the data
-    const firstName = firstNameInput.value.trim();
-    const lastName = lastNameInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const email = emailInput.value.trim();
+  // trim the data
+  const firstName = firstNameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const email = emailInput.value.trim();
 
-    if (!firstName || !lastName || !phone || !email) {
-        alert("Please fill out the form completely before submitting");
-        return;
-    }
+  if (!firstName || !lastName || !phone || !email) {
+    alert("Please fill out the form completely before submitting");
+    return;
+  }
 
-    // Save data into state
-    formData.customerInfo.firstName = firstName;
-    formData.customerInfo.lastName = lastName;
-    formData.customerInfo.phone = phone;
-    formData.customerInfo.email = email;
+  // Save data into state
+  formData.customerInfo.firstName = firstName;
+  formData.customerInfo.lastName = lastName;
+  formData.customerInfo.phone = phone;
+  formData.customerInfo.email = email;
 
-    alert("Form submitted successfully!");
+  alert("Form submitted successfully!");
+
+  setTimeout(function () {
+    // The browser restores all form controls to their initial values
+    // ".reset()" is a built-in DOM method.
+    document.querySelector("form").reset();
+
+    // reset the state object
+    formData.eventType = "";
+    formData.pieTypes = [];
+    formData.guestCount = "";
+    formData.signageIdea = "";
+    formData.eventDate = "";
+    formData.customerInfo = {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+    };
+
+    goToStep("step1");
+  }, 3000);
 }
