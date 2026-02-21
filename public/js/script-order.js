@@ -50,7 +50,7 @@ const steps = document.querySelectorAll(".event-section");
 
 // define the navigation function
 function goToStep(stepId) {
-    step.forEach(function (step) {
+    steps.forEach(function (step) {
         step.style.display = "none";
     });
 
@@ -59,11 +59,6 @@ function goToStep(stepId) {
     // the function exist safely and the app does not crash
     if (!activeStep) {
         console.log(`Step with id ${stepId} not found.`);
-        return;
-    }
-
-    if (direction === "back") {
-        goToStep(stepId);
         return;
     }
 
@@ -89,10 +84,12 @@ function validateStep1() {
 
 function validateStep2(direction) {
 
+    // Each validation function handles its own navigation logic
     if (direction === "back") {
         goToStep("step1");
         return;
     }
+
     const selectedPickupLocation = document.querySelector('input[name="pickupOption"]:checked');
     const selectedPickupDate = document.getElementById("pickup-date");
     const selectedPickupTime = document.getElementById("pickup-time");
@@ -252,7 +249,7 @@ function validateStep5(direction) {
     }
 
     if (!selectedExpirationYear.value) {
-        alert("Please enter the credit card expiration year");
+        alert("Please select the credit card expiration year");
         return;
     }
 
@@ -280,13 +277,128 @@ function validateStep6(direction) {
         return;
     }
 
+    const orderSummary = document.getElementById("order-summary");
 
+    if (!orderSummary){
+        alert("Missing order summary");
+        return;
+    }
 
+    if (orderFormData.orderOption === "pickup") {
+        const pickup = orderFormData.pickupInfo;
 
+        // '!pickup' is used if pickup is undefined
+        if (!pickup || !pickup.pickupOption || !pickup.pickupDate || !pickup.pickupTime) {
+            alert("Pickup details are incomplete");
+            goToStep("step2");
+            return;
+        } 
+        
+    } else if (orderFormData.orderOption === "delivery") {
+        const delivery = orderFormData.deliveryInfo;
 
+        // '!delivery' is used if pickup is undefined
+        if (!delivery || !delivery.deliveryAddress || !delivery.deliveryDate || !delivery.deliveryTime) {
+            alert("Delivery details are incomplete");
+            goToStep("step3");
+            return;
+        }
+    }
 
+    // '.isArray()' is a method and means: if orderNowList is NOT an array
+    if (!Array.isArray(orderFormData.orderNowList) || orderFormData.orderNowList.length === 0) {
+        alert("Your cart is empty, please add at least one item");
+        goToStep("step4");
+        return;
+    }
 
+    // '?.' is Optional Chaining
+    const name = orderFormData.customerName;
+    if (!name || !name.firstName.trim() || !name.lastName?.trim()) {
+        alert("Customer name is missing");
+        goToStep("step5");
+        return;
+    }
+
+    const address = orderFormData.addressInfo;
+    if (
+        !address ||
+        !address.address1?.trim() || 
+        !address.city?.trim() || 
+        !address.state?.trim() || 
+        !address.zip?.trim()
+    ) {
+        alert("Billing address is incomplete");
+        goToStep("step5");
+        return;
+    }
+
+    const payment = orderFormData.paymentInfo;
+    if (
+        !payment ||
+        !payment.ccNumber?.trim() || 
+        !payment.ccType || 
+        !payment.ccv?.trim() || 
+        !payment.expMonth || 
+        !payment.expYear
+    ) {
+        alert("Payment information is incomplete");
+        goToStep("step5");
+        return;
+    }
+
+    //Building HTML Order Summary
+    // Fulfillment line (Pickup vs Delivery)
+    let fullfillmentLine = "";
+
+    if (orderFormData.orderOption === "pickup") {
+        const p = orderFormData.pickupInfo;
+        fullfillmentLine = `Pickup: ${p.pickupDate} at ${p.pickupTime}`;
+    } else if (orderFormData.orderOption === "delivery") {
+        const d = orderFormData.deliveryInfo;
+        fullfillmentLine = `Delivery: ${d.deliveryAddress} on ${d.deliveryDate} at ${d.deliveryTime}`;
+    }
+
+    // Customer name and Billing
+    // '?.' is Optional Chaining
+    const fullName = `${orderFormData.customerName.firstName} ${orderFormData.customerName.lastName}`;
+
+    const summaryAddress =  orderFormData.addressInfo;
+    let billing = `${summaryAddress.address1}`;
+
+    if (summaryAddress.address2?.trim()) {
+        billing += `<br>${summaryAddress.address2.trim()}`;
+    }
+
+    billing += `<br>${summaryAddress.city}, ${summaryAddress.state} ${summaryAddress.zip}`;
+
+    // Payment Info
+    // (/\s+/g, "") is a regex literal
+    const paymentType = orderFormData.paymentInfo.ccType;
+    const paymentExp = `${orderFormData.paymentInfo.expMonth}/${orderFormData.paymentInfo.expYear}`;
+    const ccLast4 = String(orderFormData.paymentInfo.ccNumber).replace(/\s+/g, "").slice(-4);
+
+    // Rendering Order Summary
+    orderSummary.innerHTML = `
+    <h2> Order Summary</h2>
+
+    <p>Fullfillment: ${fullfillmentLine}</p>
+
+    <h3>Customer</h3>
+    <p>${fullName}</p>
+
+    <h3>Billing Address</h3>
+    <p>${billing}</p>
+
+    <h3>Payment</h3>
+    <p>
+        Type: ${paymentType}<br>
+        Card: ${ccLast4}<br>
+        Exp: ${paymentExp}
+    </p>    
+    `;
 }
+
 
 
 
