@@ -1,3 +1,321 @@
+// DOMContentLoaded only initializes the first state
+document.addEventListener("DOMContentLoaded", function () {
+    goToStep("step1");
+});
+
+// Data that will eventually be submitted
+const orderFormData = {
+    orderOption: "",
+
+    pickupInfo: {
+        pickupOption: "",
+        pickupDate: "",
+        pickupTime: ""
+    },
+
+    deliveryInfo: {
+        deliveryAddress: "",
+        deliveryDate: "",
+        deliveryTime: ""
+    },
+
+    orderNowList: [],
+
+    customerName: {
+        firstName: "",
+        lastName: ""
+    },
+
+    addressInfo: {
+        address1: "",
+        address2: "",
+        city: "",
+        state: "",
+        zip: ""
+    },
+
+    paymentInfo: {
+        ccNumber: "",
+        ccType: "",
+        ccv: "",
+        expMonth: "",
+        expYear: ""
+    },
+
+    orderTotal: ""
+};
+
+// Select all order form steps
+const steps = document.querySelectorAll(".event-section");
+
+// define the navigation function
+function goToStep(stepId) {
+    step.forEach(function (step) {
+        step.style.display = "none";
+    });
+
+    const activeStep = document.getElementById(stepId);
+
+    // the function exist safely and the app does not crash
+    if (!activeStep) {
+        console.log(`Step with id ${stepId} not found.`);
+        return;
+    }
+
+    if (direction === "back") {
+        goToStep(stepId);
+        return;
+    }
+
+    activeStep.style.display = "block";
+}
+
+function validateStep1() {
+    const selectedOrderOption = document.querySelector('input[name="orderOption"]:checked');
+
+    if (!selectedOrderOption) {
+        alert("Please make a choice: pickup or delivery");
+        return;
+    }
+
+    orderFormData.orderOption = selectedOrderOption.value;
+
+    if (selectedOrderOption.value === "pickup") {
+        goToStep("step2");
+    } else if (selectedOrderOption.value === "delivery") {
+        goToStep("step3");
+    }
+}
+
+function validateStep2(direction) {
+
+    if (direction === "back") {
+        goToStep("step1");
+        return;
+    }
+    const selectedPickupLocation = document.querySelector('input[name="pickupOption"]:checked');
+    const selectedPickupDate = document.getElementById("pickup-date");
+    const selectedPickupTime = document.getElementById("pickup-time");
+
+    if (!selectedPickupLocation) {
+        alert("Please choose a location for pickup");
+        return;
+    }
+
+    if (!selectedPickupDate.value) {
+        alert("Please select a pickup date");
+        return;
+    }
+
+    if (!selectedPickupTime.value) {
+        alert("Please select a pickup time");
+        return;
+    }
+
+    orderFormData.pickupInfo.pickupOption = selectedPickupLocation.value;
+    orderFormData.pickupInfo.pickupDate = selectedPickupDate.value;
+    orderFormData.pickupInfo.pickupTime = selectedPickupTime.value;
+
+    goToStep("step4");
+}
+
+function validateStep3(direction) {
+
+    if (direction === "back") {
+        goToStep("step1");
+        return;
+    }
+    const deliveryAddressInput = document.getElementById("delivery-address");
+    const selectedDeliveryDate = document.getElementById("delivery-date");
+    const selectedDeliveryTime = document.getElementById("delivery-time");
+
+    const deliveryAddress = deliveryAddressInput.value.trim();
+
+    if (!deliveryAddress) {
+        alert("Please enter an address for delivery");
+        return;
+    }
+
+    if (!selectedDeliveryDate.value) {
+        alert("Please select a date for delivery");
+        return;
+    }
+    
+    if (!selectedDeliveryTime.value) {
+        alert("Please select a delivery time");
+        return;
+    }
+
+    orderFormData.deliveryInfo.deliveryAddress = deliveryAddress;
+    orderFormData.deliveryInfo.deliveryDate = selectedDeliveryDate.value;
+    orderFormData.deliveryInfo.deliveryTime = selectedDeliveryTime.value;
+
+    goToStep("step4");
+}
+
+function validateStep4(direction) {
+
+    if (direction === "back") {
+
+        if (orderFormData.orderOption === "pickup") {
+            goToStep("step2");
+        } else if (orderFormData.orderOption === "delivery") {
+            goToStep("step3");
+        }
+
+        return;
+    }
+
+    if (orderFormData.orderNowList.length === 0) {
+        alert("Please add at least one item to your cart");
+        return;
+    }
+
+    goToStep("step5");
+}
+
+function validateStep5(direction) {
+
+    if (direction === "back") {
+        goToStep("step4");
+        return;
+    }
+
+    const firstNameInput = document.getElementById("first-name");
+    const lastNameInput = document.getElementById("last-name");
+    const address1Input = document.getElementById("address1");
+    const cityInput = document.getElementById("city");
+    const selectedState = document.getElementById("state");
+    const zipInput = document.getElementById("zip");
+    const creditCardInput = document.getElementById("cc-number");
+    const selectedCCType = document.getElementById("cc-type");
+    const securityCodeInput = document.getElementById("ccv");
+    const selectedExpirationMonth = document.getElementById("exp-month");
+    const selectedExpirationYear = document.getElementById("exp-year");
+
+    const firstName = firstNameInput.value.trim();
+    const lastName = lastNameInput.value.trim();
+    const address1 = address1Input.value.trim();
+    const city = cityInput.value.trim();
+    const zipCode = zipInput.value.trim();
+    const creditCard = creditCardInput.value.trim();
+    const securityCode = securityCodeInput.value.trim();
+
+    if (!firstName) {
+        alert("Please enter your first name");
+        return;
+    }
+
+    if (!lastName) {
+        alert("Please enter your last name");
+        return;
+    }
+
+    if (!address1) {
+        alert("Please enter the billing address");
+        return;
+    }
+
+    if (!city) {
+        alert("Please enter the city on your billing address");
+        return;
+    }
+
+    if (!selectedState.value) {
+        alert("Please select the state on your billing address");
+        return;
+    }
+
+    if (!zipCode) {
+        alert("Please enter the zip code on your billing address");
+        return;
+    }
+
+    if (!selectedCCType.value) {
+        alert("Please select the type of credit card");
+        return;
+    }
+
+    if (!creditCard) {
+        alert("Please enter the credit card number");
+        return;
+    }
+
+    if (!securityCode) {
+        alert("Please enter the credit card security code");
+        return;
+    }
+
+    if (!selectedExpirationMonth.value) {
+        alert("Please enter the credit card expiration month");
+        return;
+    }
+
+    if (!selectedExpirationYear.value) {
+        alert("Please enter the credit card expiration year");
+        return;
+    }
+
+    orderFormData.customerName.firstName = firstName;
+    orderFormData.customerName.lastName = lastName;
+
+    orderFormData.addressInfo.address1 = address1;
+    orderFormData.addressInfo.city = city;
+    orderFormData.addressInfo.state = selectedState.value;
+    orderFormData.addressInfo.zip = zipCode;
+
+    orderFormData.paymentInfo.ccNumber = creditCard;
+    orderFormData.paymentInfo.ccType = selectedCCType.value;
+    orderFormData.paymentInfo.ccv = securityCode;
+    orderFormData.paymentInfo.expMonth = selectedExpirationMonth.value;
+    orderFormData.paymentInfo.expYear = selectedExpirationYear.value;
+
+    goToStep("step6");
+}
+
+function validateStep6(direction) {
+
+    if (direction === "back") {
+        goToStep("step5");
+        return;
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const steps = document.querySelectorAll(".event-section");
 
