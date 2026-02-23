@@ -30,6 +30,7 @@
 
     <script src="js/script-auth.js" defer></script>
     <script src="js/script-order.js" defer></script>
+    <script src="js/script-cart-items.js" defer></script>
     <script src="js/script-nav.js" defer></script>
     <script src="js/script-user-status.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
@@ -65,9 +66,12 @@
             });
         };
     </script>
+    
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBjj6mibetKvTTm2NeLvLz7UbIxYYotlo&libraries=places&callback=initDeliveryAutocomplete"
-        async defer></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBjj6mibetKvTTm2NeLvLz7UbIxYYotlo&libraries=places&callback=initDeliveryAutocomplete&loading=async"
+        async
+        defer
+    ></script>
 </head>
 
 <body>
@@ -358,8 +362,7 @@
                     <label for="delivery-address">
                         Delivery Address:
                         <input type="text" id="delivery-address" name="deliveryAddress"
-                            placeholder="Enter your delivery address" autocomplete="off" required
-                            data-key="deliveryAddress" />
+                            placeholder="Enter your delivery address" autocomplete="off" data-key="deliveryAddress" />
                     </label>
 
                     <label for="delivery-date">
@@ -526,9 +529,7 @@
                             <option value="2030">2030</option>
                         </select>
 
-                        <div class="order-total-container">
-                            <div class="order-total" data-type="grand-total">Total: $0.00</div>
-
+                        <div class="button-container">
                             <button type="button" id="back-button-step5" onclick="validateStep5('back')">Back</button>
                             <button type="button" id="go-button-step5" onclick=" validateStep5('continue')">Place Order</button>
                         </div>

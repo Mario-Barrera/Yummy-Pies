@@ -45,84 +45,14 @@ const orderFormData = {
   orderTotal: "",
 };
 
-// When the HTML page finishes loading, run this setup code
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll(".order-btn");
-
-    buttons.forEach(function (button) {
-
-        // When this specific button is clicked, run this code.
-        button.addEventListener("click", function () {
-            const card = button.closest(".content");            // finds the nearest parent .content div
-            const textEl = card.querySelector(".pie-text");     // Selects the <p> element containing the product name and price
-            const imgEl = card.querySelector("img");            // Selects the product image inside this menu card
-
-            const id = button.dataset.productId;                    // Returns the data-product-id value as a string
-            const pieText = textEl.textContent.trim();              // extracts the text inside the element to return the name of the product and its price
-            const priceMatch = pieText.match(/\$([\d.]+)/);         // regex, matches a dollar sign followed by a numeric price (e.g., $3.99)
-            const price = priceMatch ? Number(priceMatch[1]) : 0;   // Extracts the numeric price from the regex match (e.g., "3.99")
-            const name = pieText.replace(/\$[\d.]+/, "").trim();    // Remove the dollar sign and price, leaving only the product name.
-
-            const imgSrc = imgEl ? imgEl.src : "";         // Use image URL if available, otherwise fallback to empty string
-
-            addToCart(id, name, price, imgSrc);
-        });
-    });
-});
-
-function addToCart(id, name, price, imgSrc) {
-    const cart = orderFormData.orderNowList || (orderFormData.orderNowList = []);
-    const existing = cart.find(function (item) {
-        return item.id === id;
-    });
-
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({imgSrc: imgSrc, id: id, name: name, price: price, qty: 1});      // Default quantity is 1 for a newly added item
-    }
-
-    updateCartUI();
-}
-
-function calculateTotal() {
-    const total = orderFormData.orderNowList.reduce(function (sum, item) {
-        return sum + item.price * item.qty;
-    }, 0);    // 0 is the inital value
-
-    orderFormData.orderTotal = total;
-    return total;
-}
-
-function updateCartUI() {
-    const listEl = document.getElementById("order-list");
-    const totalEl = document.getElementById("order-total");
-
-    if (!listEl || !totalEl) return;
-
-    // Prevents duplicate items
-    listEl.innerHTML = "";
-
-    orderFormData.orderNowList.forEach(function (item) {
-
-        // creates a new empty <div> element in memory
-        const row = document.createElement("div");
-
-        row.textContent = `${item.name} x ${item.qty} $${(item.price * item.qty).toFixed(2)}`;
-
-        // inserts the newly created <div> inside your cart container
-        listEl.appendChild(row);
-    });
-
-    const total = calculateTotal();
-    totalEl.textContent = `Total: $${total.toFixed(2)}`;
-}
-
 // Select all order form steps
 const steps = document.querySelectorAll(".event-section");
 
 // define the navigation function
 function goToStep(stepId) {
+  const steps = document.querySelectorAll(".event-section");
+  if (!steps.length) return;
+
   steps.forEach(function (step) {
     step.style.display = "none";
   });
@@ -139,9 +69,7 @@ function goToStep(stepId) {
 }
 
 function validateStep1() {
-  const selectedOrderOption = document.querySelector(
-    'input[name="orderOption"]:checked',
-  );
+  const selectedOrderOption = document.querySelector('input[name="orderOption"]:checked');
 
   if (!selectedOrderOption) {
     alert("Please make a choice: pickup or delivery");
@@ -338,9 +266,12 @@ function validateStep5(direction) {
   orderFormData.paymentInfo.expYear = selectedExpirationYear.value;
 
   goToStep("step6");
+  validateStep6("continue"); 
 }
 
+
 function validateStep6(direction) {
+  console.log("✅ validateStep6 CALLED with:", direction);
   if (direction === "back") {
     goToStep("step5");
     return;
@@ -432,12 +363,23 @@ function validateStep6(direction) {
   // Fulfillment line (Pickup vs Delivery)
   let fullfillmentLine = "";
 
+  console.log("✅ orderOption:", orderFormData.orderOption);
+console.log("✅ pickupInfo:", orderFormData.pickupInfo);
+
   if (orderFormData.orderOption === "pickup") {
     const p = orderFormData.pickupInfo;
-    fullfillmentLine = `Pickup: ${p.pickupDate} at ${p.pickupTime}`;
+    fullfillmentLine = `
+      Pickup: ${p.pickupOption}<br>
+      Date: ${p.pickupDate}<br>
+      Time: ${p.pickupTime}
+      `;
   } else if (orderFormData.orderOption === "delivery") {
     const d = orderFormData.deliveryInfo;
-    fullfillmentLine = `Delivery: ${d.deliveryAddress} on ${d.deliveryDate} at ${d.deliveryTime}`;
+    fullfillmentLine = `
+      Delivery: ${d.deliveryAddress}<br>
+      Date: ${d.deliveryDate}<br>
+      Time: ${d.deliveryTime}
+      `;
   }
 
   // Customer name and Billing
@@ -457,15 +399,19 @@ function validateStep6(direction) {
   // (/\s+/g, "") is a regex literal
   const paymentType = orderFormData.paymentInfo.ccType;
   const paymentExp = `${orderFormData.paymentInfo.expMonth}/${orderFormData.paymentInfo.expYear}`;
-  const ccLast4 = String(orderFormData.paymentInfo.ccNumber)
-    .replace(/\s+/g, "")
-    .slice(-4);
+  const ccLast4 = String(orderFormData.paymentInfo.ccNumber).replace(/\s+/g, "").slice(-4);
+  const total = orderFormData.orderNowList.reduce(function (sum, item) {
+    return sum + item.price * item.qty;
+   }, 0);
+
+  orderFormData.orderTotal = total;
 
   // Rendering Order Summary
   orderSummary.innerHTML = `
     <h2> Order Summary</h2>
 
-    <p>Fullfillment: ${fullfillmentLine}</p>
+    <h3>Fullfillment</h3> 
+    <p>${fullfillmentLine}</p>
 
     <h3>Customer</h3>
     <p>${fullName}</p>
@@ -479,8 +425,12 @@ function validateStep6(direction) {
         Card: ${ccLast4}<br>
         Exp: ${paymentExp}
     </p>    
+
+    <h3>Order Total</h3>
+    <p>$${total.toFixed(2)}</p>
     `;
 }
+
 
 function startNewOrder() {
 
