@@ -9,6 +9,7 @@ const orderFormData = {
 
   pickupInfo: {
     pickupOption: "",
+    pickupAddress: "",
     pickupDate: "",
     pickupTime: "",
   },
@@ -92,11 +93,11 @@ function validateStep2(direction) {
     return;
   }
 
-  const selectedPickupLocation = document.querySelector('input[name="pickupOption"]:checked');
+  const selectedPickupInput = document.querySelector('input[name="pickupOption"]:checked');
   const selectedPickupDate = document.getElementById("pickup-date");
   const selectedPickupTime = document.getElementById("pickup-time");
 
-  if (!selectedPickupLocation) {
+  if (!selectedPickupInput) {
     alert("Please choose a location for pickup");
     return;
   }
@@ -111,7 +112,13 @@ function validateStep2(direction) {
     return;
   }
 
-  orderFormData.pickupInfo.pickupOption = selectedPickupLocation.value;
+  orderFormData.pickupInfo.pickupOption = selectedPickupInput.value;
+
+  const selectedPickupLabel = selectedPickupInput.closest("label");
+  orderFormData.pickupInfo.pickupAddress = selectedPickupLabel
+    ? selectedPickupLabel.textContent.replace(/\s+/g, " ").trim()       // regex used to normalize whitespace in a string
+    : selectedPickupInput.value;
+
   orderFormData.pickupInfo.pickupDate = selectedPickupDate.value;
   orderFormData.pickupInfo.pickupTime = selectedPickupTime.value;
 
@@ -290,6 +297,7 @@ function validateStep6(direction) {
     if (
       !pickup ||
       !pickup.pickupOption ||
+      !pickup.pickupAddress ||
       !pickup.pickupDate ||
       !pickup.pickupTime
     ) {
@@ -300,7 +308,7 @@ function validateStep6(direction) {
   } else if (orderFormData.orderOption === "delivery") {
     const delivery = orderFormData.deliveryInfo;
 
-    // '!delivery' is used if pickup is undefined
+    // '!delivery' is used if delivery is undefined
     if (
       !delivery ||
       !delivery.deliveryAddress ||
@@ -365,7 +373,7 @@ function validateStep6(direction) {
   if (orderFormData.orderOption === "pickup") {
     const p = orderFormData.pickupInfo;
     fullfillmentLine = `
-      Pickup: ${p.pickupOption}<br>
+      Pickup: ${p.pickupAddress}<br>
       Date: ${p.pickupDate}<br>
       Time: ${p.pickupTime}
       `;
@@ -440,6 +448,7 @@ function startNewOrder() {
 
     orderFormData.pickupInfo = {
       pickupOption: "",
+      pickupAddress: "",
       pickupDate: "",
       pickupTime: "",
     };
