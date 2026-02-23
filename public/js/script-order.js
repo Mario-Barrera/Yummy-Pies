@@ -271,7 +271,6 @@ function validateStep5(direction) {
 
 
 function validateStep6(direction) {
-  console.log("✅ validateStep6 CALLED with:", direction);
   if (direction === "back") {
     goToStep("step5");
     return;
@@ -362,9 +361,6 @@ function validateStep6(direction) {
   //Building HTML Order Summary
   // Fulfillment line (Pickup vs Delivery)
   let fullfillmentLine = "";
-
-  console.log("✅ orderOption:", orderFormData.orderOption);
-console.log("✅ pickupInfo:", orderFormData.pickupInfo);
 
   if (orderFormData.orderOption === "pickup") {
     const p = orderFormData.pickupInfo;
