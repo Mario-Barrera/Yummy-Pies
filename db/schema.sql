@@ -1,6 +1,5 @@
 -- Users table (registered accounts)
 -- 255 is standard for storing hashed passwords (like bcrypt hashes)
--- Make sure your backend logic clears expired tokens and validates expiration correctly
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL CHECK (char_length(name) BETWEEN 4 AND 100),
@@ -9,39 +8,33 @@ CREATE TABLE users (
     address VARCHAR(100),
     phone VARCHAR(20),
     role VARCHAR(20) CHECK (role IN ('customer', 'admin')) DEFAULT 'customer',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    reset_token VARCHAR(255),
-    reset_expires TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Products table
--- line code 26, will store average rating
--- storing might need updates when reviews change
+--(8,2) means: up to 8 total digits, and 2 after the decimal
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     price DECIMAL(8,2) NOT NULL,
-    stock_quantity INT DEFAULT 0 CHECK (stock_quantity >= 0),
-    category VARCHAR(50),
     image_key VARCHAR(255),
     star_rating DECIMAL(2,1) DEFAULT 0 CHECK (star_rating >= 0 AND star_rating <= 5),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Orders table
--- since there is statuses for Cancelled and Refunded, ensure your backend logic updates related fields properly
+-- ON DELETE CASCADE means: if a user is deleted, all their orders are automatically deleted too
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(50) NOT NULL CHECK (
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending' CHECK (
         status IN ('Pending','Confirmed','Preparing','Ready for Pickup','Out for Delivery','Completed','Cancelled','Refunded')
     ),
     total_amount DECIMAL(8,2) NOT NULL DEFAULT 0,
     fulfillment_method VARCHAR(20) NOT NULL CHECK (fulfillment_method IN ('Pickup','Delivery')),
     delivery_partner VARCHAR(20) CHECK (delivery_partner IS NULL OR delivery_partner IN ('UberEats','DoorDash','Grubhub')),
     delivery_reference VARCHAR(100),
-    delivery_status VARCHAR(50) CHECK (
+    delivery_status VARCHAR(50) DEFAULT 'Not applicable' CHECK (
         delivery_status IN ('Picked up by driver','Out for delivery','Delivered','Cancelled','Not applicable')
     ),
     estimated_delivery TIMESTAMP,
@@ -53,6 +46,7 @@ CREATE TABLE orders (
 CREATE INDEX idx_orders_user_id ON orders(user_id);
 
 -- Order items table
+-- Creates a table to store individual items inside an order
 CREATE TABLE order_items (
     order_item_id SERIAL PRIMARY KEY,
     order_id INT NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
@@ -74,7 +68,7 @@ CREATE TABLE reviews (
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT,
+    comment TEXT NOT NULL CHECK (char_length(comment) <= 1000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, product_id) -- One review per user per product
 );
@@ -84,10 +78,9 @@ CREATE TABLE review_comments (
     comment_id SERIAL PRIMARY KEY,
     review_id INT NOT NULL REFERENCES reviews(review_id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    comment TEXT NOT NULL,
+    comment TEXT NOT NULL CHECK (char_length(comment) <= 1000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (user_id, review_id)  -- One review comment per user per product
-
+    UNIQUE (user_id, review_id)  -- One comment per user per review
 );
 
 -- To fetch all comments for a specific review
@@ -96,32 +89,19 @@ CREATE INDEX idx_review_comments_review_id ON review_comments(review_id);
 -- To fetch all comments made by a specific user (e.g., user profile)
 CREATE INDEX idx_review_comments_user_id ON review_comments(user_id);
 
-
--- Cart items table
-CREATE TABLE cart_items (
-    cart_item_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
-    quantity INT NOT NULL CHECK (quantity > 0),
-    price_at_purchase NUMERIC(10,2) NOT NULL DEFAULT 0,
-    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(user_id, product_id)
-);
-
 CREATE TABLE catering_requests (
     request_id SERIAL PRIMARY KEY,
-    event_type VARCHAR(50),
+    event_type VARCHAR(50) NOT NULL,
     pie_types TEXT[], -- use array to store multiple pie types
     guest_count VARCHAR(50),
     signage_idea VARCHAR(10),
-    event_date DATE,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
+    event_date DATE NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     phone VARCHAR(20),
-    email VARCHAR(150),
+    email VARCHAR(150) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 -- Payments table: stores payment details for each order
 CREATE TABLE payments (
@@ -134,7 +114,7 @@ CREATE TABLE payments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Token blacklist table: stores revoked JWT tokens to prevent reuse
+-- This table stores: JWT tokens that have been revoked so they cannot be used again
 CREATE TABLE IF NOT EXISTS token_blacklist (
     id SERIAL PRIMARY KEY,
     token TEXT UNIQUE NOT NULL,
