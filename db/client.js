@@ -1,26 +1,24 @@
-// Important tips for me to remember:
-// client.js just connects to the database; it doesn’t define tables.
-// Ensure environment variables from .env match your local PostgreSQL setup,
-// and confirm they're correctly loaded and used in the code (e.g., DB_USER, DB_NAME, etc.)
+// To create and export a single database connection (or connection pool) that the entire application can reuse
 
-
-const { Pool } = require('pg');
+const { Pool } = require('pg');                      // connection pool is: A managed collection of reusable database connections
 require('dotenv').config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST,        
-  port: process.env.DB_PORT,        
-  database: process.env.DB_NAME,    
-  user: process.env.DB_USER,        
-  password: process.env.DB_PASSWORD
+const pool = new Pool({                 // Creates a connection pool object
+
+  // this block defines the configuration object
+  host: process.env.DB_HOST,            // host → tells PostgreSQL where the database server is running
+  port: Number(process.env.DB_PORT),    // port → which port PostgreSQL listens on (usually 5432)
+  database: process.env.DB_NAME,        // database → which database to connect to
+  user: process.env.DB_USER,            // user → database username
+  password: process.env.DB_PASSWORD     // password → database password
 });
 
-// Listen for pool errors
-pool.on('error', (err) => {
+// Listen for database connection errors and terminate the app if one occurs
+pool.on('error', function (err) {
   console.error('Unexpected error on idle client', err);
   process.exit(-1);
 });
 
-console.log('Connected to DB (pool created)');
+console.log('Database pool initialized');      // Log that the database pool has been initialized
 
-module.exports = pool;
+module.exports = pool;                  // Exports the pool object so other files can use it
