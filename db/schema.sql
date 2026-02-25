@@ -8,7 +8,7 @@ CREATE TABLE users (
     address VARCHAR(100),
     phone VARCHAR(20),
     role VARCHAR(20) CHECK (role IN ('customer', 'admin')) DEFAULT 'customer',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP     -- postgreSQL automatically generates the timestamp
 );
 
 -- Products table

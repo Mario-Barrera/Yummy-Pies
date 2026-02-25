@@ -1,6 +1,7 @@
-const bcrypt = require('bcrypt');
-require('dotenv').config();
-const { Pool } = require('pg');
+const bcrypt = require('bcrypt');               // imports the bcrypt library used for password hashing 
+
+require('dotenv').config();                     // dotenv is the library, that reads the .env file, and Inject them into Node’s runtime environment
+const { Pool } = require('pg');                 // imports PostgreSQL’s connection pool    pg is the Node.js PostgreSQL client library installed from npm
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -11,13 +12,14 @@ const pool = new Pool({
 });
 
 async function seed() {
+  const client = await pool.connect();
+
   try {
-    await pool.connect();
-    await pool.query('BEGIN');
+    await client.query('BEGIN');                // pool gives you one dedicated connection
     console.log('Connected to DB');
 
-    // Clear all tables before seeding
-    await pool.query(`
+    // performs a full database reset before inserting new seed data
+    await client.query(`
       TRUNCATE TABLE
         review_comments,
         reviews,
@@ -27,54 +29,67 @@ async function seed() {
         orders,
         products,
         users
-      RESTART IDENTITY CASCADE;
+      RESTART IDENTITY                    -- resets auto-increment IDs back to the beginning
+      CASCADE;                            -- lets PostgreSQL delete data from related tables that depend on each other
     `)
 
-    
-    // Pre-hash passwords
-    // For convenience, I have provided these plain-text passwords so you can easily access the fake users in the system. 
-    // I understand that in a real application, passwords should never be displayed or shared in plain text, and are always 
-    // securely hashed.
+    // Development-only demo passwords for seeded users
+    // Passwords are hashed before insertion into the database
     const plainPasswords = [
-      'Password1!','Password2!','Password3!','Password4!','Password5!',
-      'Password6!','Password7!','Password8!','Password9!','Password10!',
-      'Password11!','Password12!'
+      'Password1!',
+      'Password2!',
+      'Password3!',
+      'Password4!',
+      'Password5!',
+      'Password6!',
+      'Password7!',
+      'Password8!',
+      'Password9!',
+      'Password10!',
+      'Password11!',
+      'Password12!'
     ];
-    const hashedPasswords = await Promise.all(
-      plainPasswords.map(pw => bcrypt.hash(pw, 10))
-    );
+    const hashedPasswords = await Promise.all (                 // bcrypt hashes each password
+      plainPasswords.map(function (plainPassword) {
+      return bcrypt.hash(plainPassword, 10)
+    }));
 
     // Insert products
     const products = [
-      ['Apple Slice',3.99,20,'Slice','appleSlice',4.6],
-      ['Cherry Slice',3.99,20,'Slice','cherrySlice',4.7],
-      ['Blueberry Slice',3.99,20,'Slice','blueberrySlice',4.5],
-      ['Pumpkin Slice',3.99,20,'Slice','pumpkinSlice',4.4],
-      ['Pecan Slice',4.29,20,'Slice','pecanSlice',4.8],
-      ['Chocolate Cream Slice',4.29,20,'Slice','chocolateCreamSlice',4.6],
-      ['Key Lime Slice',4.29,20,'Slice','keyLimeSlice',4.5],
-      ['Banana Cream Slice',4.29,20,'Slice','bananaCreamSlice',4.6],
-      ['Coconut Cream Slice',4.29,20,'Slice','coconutCreamSlice',4.5],
-      ['Peach Slice',3.99,20,'Slice','peachSlice',4.4],
+      ['Apple Slice',3.99,'Slice','appleSlice',4.6],
+      ['Cherry Slice',3.99,'Slice','cherrySlice',4.7],
+      ['Blueberry Slice',3.99,'Slice','blueberrySlice',4.5],
+      ['Pumpkin Slice',3.99,'Slice','pumpkinSlice',4.4],
+      ['Pecan Slice',4.29,'Slice','pecanSlice',4.8],
+      ['Chocolate Cream Slice',4.29,'Slice','chocolateCreamSlice',4.6],
+      ['Key Lime Slice',4.29,'Slice','keyLimeSlice',4.5],
+      ['Banana Cream Slice',4.29,'Slice','bananaCreamSlice',4.6],
+      ['Coconut Cream Slice',4.29,'Slice','coconutCreamSlice',4.5],
+      ['Peach Slice',3.99,'Slice','peachSlice',4.4],
 
-      ['Apple Whole Pie',14.99,10,'Whole Pie','appleWhole',4.7],
-      ['Cherry Whole Pie',14.99,10,'Whole Pie','cherryWhole',4.8],
-      ['Blueberry Whole Pie',14.99,10,'Whole Pie','blueberryWhole',4.6],
-      ['Pumpkin Whole Pie',14.99,10,'Whole Pie','pumpkinWhole',4.5],
-      ['Pecan Whole Pie',16.99,10,'Whole Pie','pecanWhole',4.9],
-      ['Chocolate Cream Whole Pie',16.99,10,'Whole Pie','chocolateCreamWhole',4.7],
-      ['Key Lime Whole Pie',16.99,10,'Whole Pie','keyLimeWhole',4.6],
-      ['Banana Cream Whole Pie',16.99,10,'Whole Pie','bananaCreamWhole',4.7],
-      ['Coconut Cream Whole Pie',16.99,10,'Whole Pie','coconutCreamWhole',4.6],
-      ['Peach Whole Pie',14.99,10,'Whole Pie','peachWhole',4.5],
+      ['Apple Whole Pie',14.99,'Whole Pie','appleWhole',4.7],
+      ['Cherry Whole Pie',14.99,'Whole Pie','cherryWhole',4.8],
+      ['Blueberry Whole Pie',14.99,'Whole Pie','blueberryWhole',4.6],
+      ['Pumpkin Whole Pie',14.99,'Whole Pie','pumpkinWhole',4.5],
+      ['Pecan Whole Pie',16.99,'Whole Pie','pecanWhole',4.9],
+      ['Chocolate Cream Whole Pie',16.99,'Whole Pie','chocolateCreamWhole',4.7],
+      ['Key Lime Whole Pie',16.99,'Whole Pie','keyLimeWhole',4.6],
+      ['Banana Cream Whole Pie',16.99,'Whole Pie','bananaCreamWhole',4.7],
+      ['Coconut Cream Whole Pie',16.99,'Whole Pie','coconutCreamWhole',4.6],
+      ['Peach Whole Pie',14.99,'Whole Pie','peachWhole',4.5],
     ];
 
-    const productIds = [];
-    for (const p of products) {
-      const { rows } = await pool.query(
-        `INSERT INTO products (name, price, stock_quantity, category, image_key, star_rating)
-         VALUES ($1,$2,$3,$4,$5,$6)
-         RETURNING product_id`,
+    // Insert product into database using parameterized query
+    // RETURNING - PostgreSQL returns the new product_id so Node.js can track the product that was just inserted
+    // each p is one product row
+    // { row } is object destructuring in JS
+    // $1 is a parameterized query placeholders that prevent SQL injections
+    const productIds = [];                                                    
+    for (const p of products) {                                               
+      const { rows } = await client.query(                                    
+        `INSERT INTO products (name, price, image_key, star_rating)           
+         VALUES ($1,$2,$3,$4)                                                 
+         RETURNING product_id`,                                               
         p
       );
       productIds.push(rows[0].product_id);
@@ -337,13 +352,14 @@ async function seed() {
     
     console.log(`✅ Inserted ${reviewComments.length} review comments`);
 
-    await pool.query('COMMIT');
+    await client.query('COMMIT');
     console.log('🌱 Seed successful!');
 
   } catch (error) {
-    await pool.query('ROLLBACK');
+    await client.query('ROLLBACK');
     console.error('Seed failed:', error);
   } finally {
+    client.release();                   // returns the database connection back to the pool so it can be reused
     await pool.end();
     console.log('🔌 Disconnected from DB');
   }
