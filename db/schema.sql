@@ -26,6 +26,7 @@ CREATE TABLE products (
 -- ON DELETE CASCADE means: if a user is deleted, all their orders are automatically deleted too
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     status VARCHAR(50) NOT NULL DEFAULT 'Pending' CHECK (
         status IN ('Pending','Confirmed','Preparing','Ready for Pickup','Out for Delivery','Completed','Cancelled','Refunded')
@@ -38,6 +39,7 @@ CREATE TABLE orders (
         delivery_status IN ('Picked up by driver','Out for delivery','Delivered','Cancelled','Not applicable')
     ),
     estimated_delivery TIMESTAMP,
+    pickup_time VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -74,7 +76,7 @@ CREATE TABLE reviews (
 );
 
 -- Review comments table
-CREATE TABLE review_comments (
+CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     review_id INT NOT NULL REFERENCES reviews(review_id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
