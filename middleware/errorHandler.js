@@ -3,7 +3,6 @@
 // Sends a JSON response to the client with: The HTTP status code (err.status or default 500 for server errors)
 // Or a JSON error message (err.message or a generic 'Internal server error').
 
-
 const logger = require('../utils/logger');
 
 // Centralized error handler middleware
