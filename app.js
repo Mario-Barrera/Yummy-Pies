@@ -1,12 +1,12 @@
 require('dotenv').config();                                // Loads environment variables from .env
 const express = require('express');                        // Loads the Express library
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
+const session = require('express-session');                // get the express-session package from node_modules 
+const cookieParser = require('cookie-parser');             // Load the cookie-parser package so this app can read and format cookies sent by the browser
 const app = express();                                    // Initializes an Express application
 
-app.use(cookieParser());  // <-- This enables req.cookies
+app.use(cookieParser());                                  // This enables req.cookies
 
-// Middleware to parse JSON request bodies
+// Converts JSON request body into a JavaScript object (req.body)
 app.use(express.json());
 
 // Middleware to parse URL-encoded form data (from HTML forms)
@@ -17,12 +17,15 @@ app.use(express.static('public'));
 
 // This sets up the session middleware properly
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
+  secret: process.env.SESSION_SECRET,                               // Secret used to sign session ID cookie
+  resave: false,                                                    // Prevent unnecessary session rewrites
+  saveUninitialized: false,                                         // A session that was created but has no data stored in it
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',                  // HTTPS-only in production
+    httpOnly: true,                                                 // JS can’t read cookie
+    sameSite: 'lax'                                                 // Basic CSRF protection, (Cross-Site Request Forgery) attacks
+  }
 }));
-
 
 // Import routes
 // Must exactly match the file path and file name
@@ -33,7 +36,7 @@ const orderItemsRouter = require('./routes/order-Items');
 const cartItemsRouter = require('./routes/cart-Items');
 const paymentsRouter = require('./routes/payments');
 const reviewsRouter = require('./routes/reviews');
-const reviewCommentsRouter = require('./routes/reviewComments');
+const reviewCommentsRouter = require('./routes/comments');
 const resetPasswordRouter = require('./routes/reset-password');
 const userRoutes = require('./routes/users');
 const errorHandler = require('./middleware/errorHandler');
