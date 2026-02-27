@@ -1,10 +1,30 @@
-require('dotenv').config();                                // Loads environment variables from .env
-const express = require('express');                        // Loads the Express library
-const session = require('express-session');                // get the express-session package from node_modules 
-const cookieParser = require('cookie-parser');             // Load the cookie-parser package so this app can read and format cookies sent by the browser
-const app = express();                                    // Initializes an Express application
+require('dotenv').config();                               // loads the dotenv library, which then loads the environment variables from the .env file into the process.env  process.env is a global configuration object provided by Node
 
-app.use(cookieParser());                                  // This enables req.cookies
+const express = require('express');                        // Loads the Express package from node_modules
+const session = require('express-session');                // Session middleware for server-side authentication, Imported from node_modules/express-session/
+
+// Import route modules from the routes directory
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+const orderRoutes = require('./routes/orders');
+const orderItemRoutes = require('./routes/order-Items');
+const cartItemRoutes = require('./routes/cart-Items');
+const paymentRoutes = require('./routes/payments');
+const reviewRoutes = require('./routes/reviews');
+const commentRoutes = require('./routes/comments');
+const userRoutes = require('./routes/users');
+const cateringRoutes = require('./routes/catering');
+
+// Import middleware
+const errorHandler = require('./middleware/errorHandler');
+
+const app = express();                                    // Initializes an Express application, Calling the exported function,
+/* So app becomes a function that handles HTTP requests, with methods attached like:
+    app.use
+    app.get
+    app.post
+    app.listen
+*/
 
 // Converts JSON request body into a JavaScript object (req.body)
 app.use(express.json());
@@ -15,48 +35,32 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from "public" BEFORE routes
 app.use(express.static('public'));
 
-// This sets up the session middleware properly
+// Configure and register session middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET,                               // Secret used to sign session ID cookie
+  secret: process.env.SESSION_SECRET,                               // Secret used to sign and verify the session ID cookie
+  name: 'sid',                                                      // Cookie name that stores the session ID (instead of default "connect.sid")
   resave: false,                                                    // Prevent unnecessary session rewrites
-  saveUninitialized: false,                                         // A session that was created but has no data stored in it
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',                  // HTTPS-only in production
-    httpOnly: true,                                                 // JS can’t read cookie
-    sameSite: 'lax'                                                 // Basic CSRF protection, (Cross-Site Request Forgery) attacks
+  saveUninitialized: false,                                         // Do not create session until something is stored in it
+  cookie: {                                                     
+    secure: process.env.NODE_ENV === 'production',                  // Send cookie only over HTTPS in production      
+    httpOnly: true,                                                 // Prevent client-side JavaScript from accessing the cookie
+    sameSite: 'lax'                                                 // Helps protect against CSRF (Cross-Site Request Forgery) attacks
   }
 }));
 
-// Import routes
-// Must exactly match the file path and file name
-const authRoutes = require('./routes/auth');
-const productsRoutes = require('./routes/products');
-const ordersRoutes = require('./routes/orders');
-const orderItemsRouter = require('./routes/order-Items');
-const cartItemsRouter = require('./routes/cart-Items');
-const paymentsRouter = require('./routes/payments');
-const reviewsRouter = require('./routes/reviews');
-const reviewCommentsRouter = require('./routes/comments');
-const resetPasswordRouter = require('./routes/reset-password');
-const userRoutes = require('./routes/users');
-const errorHandler = require('./middleware/errorHandler');
-const cateringRoutes = require('./routes/catering');
-
-// Mount routes
+// Mount routes, meaning: connects route modules into the main app
 // api/ prefix (optional, but recommended)
 // frontend file must call the correct backend URL
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productsRoutes);
-app.use('/api/orders', ordersRoutes);
-app.use('/api/order-items', orderItemsRouter);
-app.use('/api/cart-items', cartItemsRouter);
-app.use('/api/payments', paymentsRouter);
-app.use('/api/reviews', reviewsRouter);
-app.use('/api/reviewComments', reviewCommentsRouter);
-app.use('/api/reset-password', resetPasswordRouter);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/order-Items', orderItemRoutes);
+app.use('/api/cart-Items', cartItemRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api', cateringRoutes);
-
+app.use('/api/catering', cateringRoutes);
 
 // Route to check session status
 // But does not create or set a session
