@@ -7,6 +7,48 @@ const validatePassword = require('../utils/passwordValidator');  // Import valid
 
 const router = express.Router();
 
+/*
+
+install this:  npm i bcrypt
+const bcrypt = require('bcrypt');
+const validatePassword = require('../utils/passwordValidator');
+const db = require('../db/client'); // your Pool wrapper
+
+const SALT_ROUNDS = 12;
+
+async function registerUser(req, res, next) {
+  try {
+    const { name, email, password } = req.body;
+
+    const errorMsg = validatePassword(password);
+    if (errorMsg) {
+      const err = new Error(errorMsg);
+      err.status = 400;
+      return next(err);
+    }
+
+    // ✅ bcrypt added here
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
+    const result = await db.query(
+      `INSERT INTO users (name, email, password)
+       VALUES ($1, $2, $3)
+       RETURNING user_id, name, email, role, created_at`,
+      [name, email.toLowerCase(), passwordHash]
+    );
+
+    return res.status(201).json({ user: result.rows[0] });
+  } catch (err) {
+    // Duplicate email (unique violation)
+    if (err.code === '23505') {
+      err.status = 409;
+      err.message = 'Email already registered';
+    }
+    return next(err);
+  }
+}
+*/
+
 // POST /login
 router.post('/login', async (req, res, next) => {
   let { email, password } = req.body;

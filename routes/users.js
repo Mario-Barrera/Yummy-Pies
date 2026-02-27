@@ -23,6 +23,45 @@ router.get('/me', requireAuth, async (req, res, next) => {
   }
 });
 
+/* 
+add bycrpty to login users
+async function loginUser(req, res, next) {
+  try {
+    const { email, password } = req.body;
+
+    const result = await db.query(
+      `SELECT user_id, name, email, password, role
+       FROM users
+       WHERE email = $1`,
+      [email.toLowerCase()]
+    );
+
+    const user = result.rows[0];
+
+    // Use generic message so you don't leak whether email exists
+    if (!user) {
+      const err = new Error('Invalid email or password');
+      err.status = 401;
+      return next(err);
+    }
+
+    // ✅ bcrypt added here
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok) {
+      const err = new Error('Invalid email or password');
+      err.status = 401;
+      return next(err);
+    }
+
+    // Never send password hash back
+    delete user.password;
+
+    return res.json({ user });
+  } catch (err) {
+    return next(err);
+  }
+}
+*/
 
 // Get user profile by ID (admin or owner only)
 router.get('/:id', requireAuth, async (req, res, next) => {
