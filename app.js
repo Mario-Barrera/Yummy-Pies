@@ -62,37 +62,40 @@ app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/catering', cateringRoutes);
 
-// Route to check session status
-// But does not create or set a session
-app.get('/api/user-status', (req, res) => {
+// Registers a GET route
+// This code only reads the session state
+// It does NOT: create a session, login the user, validate a password, refresh tokens
+// In other words, it answers: Is this request already associated with a logged-in session?
+// It's a form of verification, but it’s not the login process
+// The path portion of a URL:  /api/user-status
+app.get('/api/user-status', function (req, res) {
   if (req.session && req.session.user) {
-    res.json({ loggedIn: true, user: req.session.user });
+    res.json({ 
+      loggedIn: true, 
+      user: req.session.user 
+    });
   } else {
-    res.json({ loggedIn: false });
+    res.json({ 
+      loggedIn: false 
+    });
   }
 });
 
-
 // Health check route
 // Verifies that your backend server is running and reachable
-// Temporarily to test server
-app.get('/', (req, res) => res.json({ message: 'API running' }));
-
+app.get('/api/health', function (req, res) {
+  res.json({ 
+    status: 'ok' 
+  });
+});
 
 // 404 handler for unknown routes
-// If no routes are matched before this point, return a proper 404 JSON response
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+app.use(function (req, res, next) {
+  const err = new Error('Route not found');
+  err.status = 404;
+  next(err);
 });
 
-
-// Centralized error handler must come last
 app.use(errorHandler);
-
-// Start the server on a port
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
 
 module.exports = app;
