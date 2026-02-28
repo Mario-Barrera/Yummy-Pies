@@ -1,7 +1,6 @@
 require('dotenv').config();                               // loads the dotenv library, which then loads the environment variables from the .env file into the process.env  process.env is a global configuration object provided by Node
 
 const express = require('express');                        // Loads the Express package from node_modules
-const session = require('express-session');                // Session middleware for server-side authentication, Imported from node_modules/express-session/
 
 // Import route modules from the routes directory
 const authRoutes = require('./routes/auth');
@@ -35,51 +34,19 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from "public" BEFORE routes
 app.use(express.static('public'));
 
-// Configure and register session middleware
-app.use(session({
-  secret: process.env.SESSION_SECRET,                               // Secret used to sign and verify the session ID cookie
-  name: 'sid',                                                      // Cookie name that stores the session ID (instead of default "connect.sid")
-  resave: false,                                                    // Prevent unnecessary session rewrites
-  saveUninitialized: false,                                         // Do not create session until something is stored in it
-  cookie: {                                                     
-    secure: process.env.NODE_ENV === 'production',                  // Send cookie only over HTTPS in production      
-    httpOnly: true,                                                 // Prevent client-side JavaScript from accessing the cookie
-    sameSite: 'lax'                                                 // Helps protect against CSRF (Cross-Site Request Forgery) attacks
-  }
-}));
-
 // Mount routes, meaning: connects route modules into the main app
 // api/ prefix (optional, but recommended)
 // frontend file must call the correct backend URL
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
-app.use('/api/order-Items', orderItemRoutes);
-app.use('/api/cart-Items', cartItemRoutes);
+app.use('/api/order-items', orderItemRoutes);
+app.use('/api/cart-items', cartItemRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/catering', cateringRoutes);
-
-// Registers a GET route
-// This code only reads the session state
-// It does NOT: create a session, login the user, validate a password, refresh tokens
-// In other words, it answers: Is this request already associated with a logged-in session?
-// It's a form of verification, but it’s not the login process
-// The path portion of a URL:  /api/user-status
-app.get('/api/user-status', function (req, res) {
-  if (req.session && req.session.user) {
-    res.json({ 
-      loggedIn: true, 
-      user: req.session.user 
-    });
-  } else {
-    res.json({ 
-      loggedIn: false 
-    });
-  }
-});
 
 // Health check route
 // Verifies that your backend server is running and reachable
