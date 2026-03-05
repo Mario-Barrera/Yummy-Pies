@@ -86,10 +86,10 @@ CREATE TABLE comments (
 );
 
 -- To fetch all comments for a specific review
-CREATE INDEX idx_review_comments_review_id ON review_comments(review_id);
+CREATE INDEX idx_comments_review_id ON comments(review_id);
 
 -- To fetch all comments made by a specific user (e.g., user profile)
-CREATE INDEX idx_review_comments_user_id ON review_comments(user_id);
+CREATE INDEX idx_comments_user_id ON comments(user_id);
 
 CREATE TABLE catering_requests (
     request_id SERIAL PRIMARY KEY,

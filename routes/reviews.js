@@ -1,8 +1,6 @@
 const express = require('express');
 const db = require('../db/client');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
-const { updateProductRating } = require('../helpers/rating');
-const { b } = require('vitest/dist/chunks/suite.d.FvehnV49.js');
 
 const router = express.Router();
 
@@ -116,7 +114,7 @@ router.post('/', requireAuth, async function createReview(req, res, next) {
       const { rows } = await db.query(sql, params);                                         // Execute insert and handle duplicate review (UNIQUE constraint)
       return res.status(201).json({ review: rows[0] });
     } catch (dbError) {
-      if (dbError.code === '23505') {
+      if (dbError.code === '23505') {                                                         // 23505 is Unique constraint violation
         throw badRequest("You already reviewed this product");
       }
       throw dbError;
