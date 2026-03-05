@@ -70,7 +70,7 @@ CREATE TABLE reviews (
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT NOT NULL CHECK (char_length(comment) <= 1000),
+    review TEXT NOT NULL CHECK (char_length(review) BETWEEN 1 AND 1000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, product_id) -- One review per user per product
 );

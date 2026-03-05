@@ -206,16 +206,3 @@ router.delete('/:id', requireAuth, requireAdmin, async function (req, res, next)
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
