@@ -1,49 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const registerForm = document.getElementById('register-form');
+// safely convert a server response into a JavaScript object without crashing the program
+function safeJson(response) {
+  return response.text().then(function (text) {           // response.text()   retrieves the server's response body and returns it as a string.
+    if (!text) return null;                               // .then(function (text) { ... })   When the Promise finishes and returns a result, run this function with that result
+    try {
+      return JSON.parse(text);
+    } catch {
+      return null;
+    }
+  });
+}
 
-  registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // prevent default form submission
+function saveAuth({ token, user }) {
+  localStorage.setItem("token", token);                           // localStorage.setItem() requires two arguments: "token" (key) and token (value)
+  localStorage.setItem("user", JSON.stringify(user));             // "user" (key) and JSON.stringify(user) converts the object into a string (which becomes the actual value)
+}
 
-    // Collect input values
-    const firstName = document.getElementById('first-name').value.trim();
-    const lastName = document.getElementById('last-name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
-    const address = document.getElementById('address') ? document.getElementById('address').value.trim() : '';
-    const phone = document.getElementById('phone') ? document.getElementById('phone').value.trim() : '';
+const registerForm = document.getElementById("register-form");
 
-    // Basic validation
-    if (password !== confirmPassword) {
-      alert("Passwords don't match!");
+if (registerForm) {
+  registerForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const addressInput = document.getElementById("address");
+    const phoneInput = document.getElementById("phone");
+
+    const name = nameInput?.value.trim();
+    const email = emailInput?.value.trim();
+    const password = passwordInput?.value.trim();
+    const address = addressInput?.value.trim();
+    const phone = phoneInput?.value.trim();
+
+    if (!name || !email || !password || !address || !phone) {
+      alert("Please fill out all required fields");
       return;
     }
 
     try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          name: `${firstName} ${lastName}`, 
-          email, 
-          password, 
-          address, 
-          phone 
-        })
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, address, phone }),
       });
 
-      const data = await res.json();
+      const data = await safeJson(response);
 
-      if (res.ok) {
-        alert('Registration successful! You can now log in.');
-        window.location.href = 'account-login.html';
-      } else {
-        alert(data.error || 'Registration failed');
+      if (!response.ok) {
+        const message = data?.error || `Registration failed (status: ${response.status}).`;
+        alert(message);
+        console.error("Registration failed:", message, data);
+        return;
       }
 
+      if (!data?.token || !data?.user) {
+        alert("Unexpected server response. Please try again");
+        console.error("Invalid register response:", data);
+        return;
+      }
+
+      // Save token + user in browser storage
+      saveAuth({ token: data.token, user: data.user });
+
+      // Redirect after successful registration
+      window.location.href = "index.html";
+
     } catch (err) {
-      console.error('Error:', err);
-      alert('Something went wrong. Try again.');
+      console.error("Network/unexpected register error:", err);
+      alert("Network error, please try again.");
     }
   });
-});
+}

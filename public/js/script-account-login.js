@@ -58,6 +58,7 @@ if (loginForm) {
 
       saveAuth({ token: data.token, user: data.user });                               // login was successful, and the authentication data will now be saved in the browser
 
+      // Redirect after successful registration
       window.location.href = "index.html";
 
     } catch (err) {
