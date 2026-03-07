@@ -1,39 +1,116 @@
-const token = localStorage.getItem('token');
+async function loadUserProfile() {
+  const token = getToken();
 
-fetch('/api/users/me', {
-  headers: {
-    'Authorization': `Bearer ${token}`
+  if (!token) {
+    console.error("No token found. User is not logged in.");
+    window.location.href = "login.html";
+    return;
   }
-})
-  .then(res => res.json())
-  .then(user => {
-    // Populate account-profile.html if elements exist
-    const profileName = document.getElementById('profile-name');
-    const profileEmail = document.getElementById('profile-email');
-    const profilePhone = document.getElementById('profile-phone');
-    const profileAddress = document.getElementById('profile-address');
 
-    if (profileName) profileName.textContent = user.name || '';
-    if (profileEmail) profileEmail.textContent = user.email || '';
-    if (profilePhone) profilePhone.textContent = user.phone || '';
-    if (profileAddress) profileAddress.textContent = user.address || '';
+  try {
+    const response = await fetch("/api/auth/me", {                        // associated code: routes/auth.js  lines 122 - 135
+      method: "GET",
+      headers: getAuthHeaders()
+    });
 
-    // Populate manage-profile.html form if form exists
-    const manageForm = document.getElementById('manageProfileForm');
-    if (manageForm) {
-      // Split full name into first and last name safely
-      const [firstName, ...rest] = (user.name || '').split(' ');
-      const lastName = rest.join(' '); // join any remaining parts as last name
+    const data = await safeJson(response);
 
-      document.getElementById('first-name').value = firstName || '';
-      document.getElementById('last-name').value = lastName || '';
-      document.getElementById('email').value = user.email || '';
-      document.getElementById('phone').value = user.phone || '';
-      document.getElementById('address').value = user.address || '';
-      document.getElementById('name').value = user.name || '';
+    if (!response.ok) {
+      const message = data?.error || `Failed to load profile (status ${response.status}).`;
+      console.error("Profile load failured:", message, data);
+
+      if (response.status === 400) {
+        alert("Your session has expired. Please log in again.");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "login.html";
+        return;
+      }
+
+      alert(message);
+      return;
     }
-  })
-  .catch(err => {
-    console.error('Failed to load user profile:', err);
-    // Optionally show an error message to user here
-  });
+
+    const user = data?.user;
+
+    if (!user) {
+      console.error("Profile response missing user object:", data);
+      alert("Unexpected user response. Please try again.");
+      return;
+    }
+
+    populateProfileDisplay(user);
+    populateProfileForm(user);
+
+  } catch (err) {
+    console.error("Failed to load user profile:", err);
+    alert("Network error. Please try again.");
+  }
+}
+
+function populateProfileDisplay(user) {
+  const profileName = document.getElementById("profile-name");
+  const profileEmail = document.getElementById("profile-email");
+  const profilePhone = document.getElementById("profile-phone");
+  const profileAddress = document.getElementById("profile-address");
+  
+  // empty string "" is used as a fallback value so the page does not display undefined, null, 
+  // or another unwanted value if user.name is missing.
+  if (profileName) {
+    profileName.textContent = user.name || "";
+  }
+
+  if (profileEmail) {
+    profileEmail.textContent = user.email || "";
+  }
+
+  if (profilePhone) {
+    profilePhone.getElementById = user.phone || "";
+  }
+
+  if (profileAddress) {
+    profileAddress.getElementById = user.address || "";
+  }
+}
+
+function populateProfileForm(user) {
+  const manageForm = document.getElementById("manageProfileForm");
+
+  if (!manageForm) {
+    return;
+  }
+
+  // firstName is first element
+  // ...rest is the remaining elements
+  // rest operator collects all remaining elements from an array into a new array
+  const [firstName, ...rest] = (user.name || "").trim().split(" ");
+  const lastName = rest.join(" ");
+
+  const firstNameInput = document.getElementById("first-name");
+  const lastNameInput = document.getElementById("last-name");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  const addressInput = document.getElementById("address");
+
+  if (firstNameInput) {
+    firstNameInput.value = firstName || "";
+  }
+
+  if (lastNameInput) {
+    lastNameInput.value = lastName || "";
+  }
+
+  if (emailInput) {
+    emailInput.value = user.email || "";
+  }
+
+  if (phoneInput) {
+    phoneInput.value = user.phone || "";
+  }
+
+  if (addressInput) {
+    addressInput.value = user.address || "";
+  }
+}
+
+loadUserProfile();
