@@ -127,7 +127,7 @@ router.get('/:id', requireAuth, requireAdmin, async function (req, res, next) {
         address,
         phone,
         role,
-        creatred_at
+        created_at
       FROM users
       WHERE user_id = $1`,
       [id]

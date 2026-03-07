@@ -65,11 +65,11 @@ function populateProfileDisplay(user) {
   }
 
   if (profilePhone) {
-    profilePhone.getElementById = user.phone || "";
+    profilePhone.textContent = user.phone || "";
   }
 
   if (profileAddress) {
-    profileAddress.getElementById = user.address || "";
+    profileAddress.textContent = user.address || "";
   }
 }
 
@@ -111,6 +111,44 @@ function populateProfileForm(user) {
   if (addressInput) {
     addressInput.value = user.address || "";
   }
+}
+
+async function changePassword(event) {
+  event.preventDefault();
+
+  const currentPassword = document.getElementById("current-password").value;
+  const newPassword = document.getElementById("new-password").value;
+
+  try {
+    const response = await fetch("/api/users/me/password", {
+      method: "PATCH",
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        currentPassword,
+        newPassword
+      })
+    });
+    
+    const data = await safeJson(response);
+    
+    if (!response.ok) {
+      const message = data?.error || "Failed to update password";
+      alert(message);
+      return;
+    }
+
+    alert("Password updated successfully");
+
+  } catch (err) {
+    console.error("Password update failed:", err);
+    alert("Network error. Please try again.");
+  }
+}
+
+const changePasswordForm = document.getElementById("changePasswordForm");
+  
+if (changePasswordForm) {
+    changePasswordForm.addEventListener("submit", changePassword);
 }
 
 loadUserProfile();
