@@ -121,9 +121,15 @@
                     To create, edit, or delete customer reviews and comments, please visit your ‘My Profile’ page.
                 </p>
 
+                <form id="commentForm" class="commentForm">
+                    <label for="commentForm">Leave a comment:</label>
+                    <textarea for="comment" name="comment" class="textarea" rows="4" placeholder="Write your comment here..." required></textarea>
+
+                    <button type="submit" class="update-btn-link">Post Comment</button>
+                </form>
+
                 <div id="review-comment-container"></div>
                     <!-- Review comments will be injected here by JavaScript -->
-                </div>
             </section>
         </main>
     </div>

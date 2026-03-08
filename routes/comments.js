@@ -96,19 +96,19 @@ router.post('/', requireAuth, async function createComment(req, res, next) {
     }
 
     const sql = `
-    INSERT INTO comments (revies_id, user_id, commment)
+    INSERT INTO comments (review_id, user_id, commment)
     VALUES ($1, $2, $3)
     RETURNING comment_id, review_id, user_id, comment, created_at;
     `;
 
-    const params = [review_id, userId, comment.trim()];
+    const params = [reviewid, userId, comment.trim()];
 
     try {
       const { rows } = await db.query(sql, params);
-      return res.status(210).json({ comment: rows[0] });
+      return res.status(201).json({ comment: rows[0] });
 
     } catch (dbError) {
-      if (dbError === '23505') {                                              // 23505 is Unique constraint violation
+      if (dbError.code === '23505') {                                              // 23505 is Unique constraint violation
         throw badRequest("You already commented on this review");
       }
       throw dbError
@@ -151,14 +151,14 @@ router.patch('/:id', requireAuth, async function updateComment(req, res, next) {
     const { comment } = req.body;
 
     if (!isValidComment(comment)) {
-      throw badRequest("Commment must be 1 - 1000 characters");
+      throw badRequest("Comment must be 1 - 1000 characters");
     }
 
     const sql = `
       UPDATE comments
       SET comment = $1
       WHERE comment_id = $2
-      RETURNING comment_id, review_id, user_id, comment, created_at:
+      RETURNING comment_id, review_id, user_id, comment, created_at;
     `;
 
     const { rows } = await db.query(sql, [comment.trim(), id]);
@@ -180,7 +180,7 @@ router.delete('/:id', requireAuth, async function deleteComment(req, res, next) 
     }
 
     const { rows: foundRows } = await db.query(
-      `SELECT commment_id, user_id
+      `SELECT comment_id, user_id
       FROM comments
       WHERE comment_id = $1`,
       [id]
