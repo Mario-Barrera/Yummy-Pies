@@ -4,15 +4,9 @@ const express = require('express');                        // Loads the Express 
 
 // Import route modules from the routes directory
 const authRoutes = require('./routes/auth');
-const productRoutes = require('./routes/products');
-const orderRoutes = require('./routes/orders');
-const orderItemRoutes = require('./routes/order-Items');
-const cartItemRoutes = require('./routes/cart-Items');
-const paymentRoutes = require('./routes/payments');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
 const userRoutes = require('./routes/users');
-const cateringRoutes = require('./routes/catering');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -38,15 +32,9 @@ app.use(express.static('public'));
 // api/ prefix (optional, but recommended)
 // frontend file must call the correct backend URL
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/order-items', orderItemRoutes);
-app.use('/api/cart-items', cartItemRoutes);
-app.use('/api/payments', paymentRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/catering', cateringRoutes);
 
 // Health check route
 // Verifies that your backend server is running and reachable
