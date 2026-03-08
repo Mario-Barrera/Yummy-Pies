@@ -15,9 +15,54 @@ function saveAuth({ token, user }) {
   localStorage.setItem("user", JSON.stringify(user));             // "user" (key) and JSON.stringify(user) converts the object into a string (which becomes the actual value)
 }
 
+// Show live password requirement feedback
+function setupPasswordRequirements() {
+  const passwordInput = document.getElementById("password");
+  const messageDiv = document.getElementById("password-requirements");
+
+  if (!passwordInput || !messageDiv) return;
+
+  passwordInput.addEventListener("input", function () {
+    const password = passwordInput.value;
+
+    const failedMessages = [];
+
+    if (password.length < 10) {
+      failedMessages.push("Password must be at least 10 characters long.");
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      failedMessages.push("Password must contain at least one capital letter.");
+    }
+
+    if (!/[0-9]/.test(password)) {
+      failedMessages.push("Password must contain at least one number.");
+    }
+
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      failedMessages.push("Password must contain at least one special character.");
+    }
+
+    if (password.length === 0) {
+      messageDiv.innerHTML = "";
+    } else if (failedMessages.length > 0) {
+      messageDiv.innerHTML = failedMessages
+        .map(function (msg) {
+          return `<div>• ${msg}</div>`;
+        })
+        .join("");
+      } else {
+        messageDiv.innerHTML =
+        '<div style="color: green;">Password meets all requirements.</div>';
+      }
+  });
+}
+
 const registerForm = document.getElementById("register-form");
 
 if (registerForm) {
+  setupPasswordRequirements();
+
   registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
