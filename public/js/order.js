@@ -114,12 +114,16 @@ function validateStep2(direction) {
 
   orderFormData.pickupInfo.pickupOption = selectedPickupInput.value;
 
+  const pickupDateValue = selectedPickupDate.value;
+  const parts = pickupDateValue.split("-");
+  const formattedPickupDate = `${Number(parts[1])}-${Number(parts[2])}-${parts[0]}`;
+
   const selectedPickupLabel = selectedPickupInput.closest("label");
   orderFormData.pickupInfo.pickupAddress = selectedPickupLabel
     ? selectedPickupLabel.textContent.replace(/\s+/g, " ").trim()       // regex used to normalize whitespace in a string
     : selectedPickupInput.value;
 
-  orderFormData.pickupInfo.pickupDate = selectedPickupDate.value;
+  orderFormData.pickupInfo.pickupDate = formattedPickupDate;
   orderFormData.pickupInfo.pickupTime = selectedPickupTime.value;
 
   goToStep("step4");
@@ -151,8 +155,12 @@ function validateStep3(direction) {
     return;
   }
 
+  const dateValue = selectedDeliveryDate.value;
+  const parts = dateValue.split("-");
+  const formattedDeliveryDate = `${Number(parts[1])}-${Number(parts[2])}-${parts[0]}`;
+
   orderFormData.deliveryInfo.deliveryAddress = deliveryAddress;
-  orderFormData.deliveryInfo.deliveryDate = selectedDeliveryDate.value;
+  orderFormData.deliveryInfo.deliveryDate = formattedDeliveryDate;
   orderFormData.deliveryInfo.deliveryTime = selectedDeliveryTime.value;
 
   goToStep("step4");

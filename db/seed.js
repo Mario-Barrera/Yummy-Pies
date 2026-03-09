@@ -19,13 +19,14 @@ async function seed() {
     console.log('Connected to DB');
 
     // performs a full database reset before inserting new seed data
+    // these items need to match schema
     await client.query(`
       TRUNCATE TABLE
-        review_comments,
+        comments,
         reviews,
         order_items,
         payments,
-        cart_items,
+        catering_requests,
         orders,
         products,
         users
@@ -180,10 +181,10 @@ async function seed() {
       [orderIds[9],'TXN100010',0.00,'Cancelled','Debit'],
       [orderIds[10],'TXN100011',29.98,'Completed','Credit'], 
       [orderIds[11],'TXN100012',16.99,'Completed','Debit'],  
-      [orderIds[13],'TXN100014',33.98,'Completed','Credit'], 
-      [orderIds[14],'TXN100015',16.99,'Completed','Debit'], 
-      [orderIds[16],'TXN100017',14.99,'Completed','Debit'], 
-      [orderIds[17],'TXN100018',7.98,'Completed','Credit'],
+      [orderIds[12],'TXN100014',33.98,'Completed','Credit'], 
+      [orderIds[13],'TXN100015',16.99,'Completed','Debit'], 
+      [orderIds[14],'TXN100017',14.99,'Completed','Debit'], 
+      [orderIds[15],'TXN100018',3.99,'Completed','Credit'],
     ];
 
     for (const pay of payments) {
@@ -213,10 +214,10 @@ async function seed() {
       [orderIds[9], productIds[12], 1, 14.99],  // Blueberry Whole Pie (cancelled)
       [orderIds[10], productIds[13], 2, 14.99], // Pumpkin Whole Pie
       [orderIds[11], productIds[14], 1, 16.99], // Pecan Whole Pie
-      [orderIds[13], productIds[16], 2, 16.99], // Key Lime Whole Pie
-      [orderIds[14], productIds[17], 1, 16.99], // Banana Cream Whole Pie
-      [orderIds[16], productIds[19], 1, 14.99], // Peach Whole Pie
-      [orderIds[17], productIds[0], 2, 3.99],   // Apple Slice
+      [orderIds[12], productIds[16], 2, 16.99], // Key Lime Whole Pie
+      [orderIds[13], productIds[17], 1, 16.99], // Banana Cream Whole Pie
+      [orderIds[14], productIds[11], 1, 14.99], // Cherry Whole Pie
+      [orderIds[15], productIds[2], 1, 3.99]  // Blueberry Slice
     ];
 
     for (const orderItem of orderItems) {
@@ -251,7 +252,7 @@ async function seed() {
     const reviewIds = [];
     for (const review of reviews) {
       const { rows } = await client.query(
-        `INSERT INTO reviews (user_id, product_id, rating, comment)
+        `INSERT INTO reviews (user_id, product_id, rating, review)
          VALUES ($1,$2,$3,$4)
          RETURNING review_id`,
         review
@@ -316,15 +317,6 @@ async function seed() {
 
       [reviewIds[15], userIds[2], 'Perfectly said!'],
       [reviewIds[15], userIds[1], 'I completely agree!'],
-  
-      [reviewIds[16], userIds[4], 'Totally agree with your thoughts.'],
-      [reviewIds[16], userIds[0], 'Helpful comment!'],
-      [reviewIds[16], userIds[2], 'Great perspective.'],
-      [reviewIds[16], userIds[3], 'Nice insight.'],
-
-      [reviewIds[17], userIds[5], 'Couldn’t have put it better myself.'],
-      [reviewIds[17], userIds[1], 'Very helpful!'],
-      [reviewIds[17], userIds[0], 'Absolutely agree.'],
     ];
 
     for (const comment of comments) {
@@ -334,7 +326,7 @@ async function seed() {
         comment
       );  
     }    
-    console.log(`✅ Inserted ${reviewComments.length} review comments`);
+    console.log(`✅ Inserted ${comments.length} review comments`);
 
     await client.query('COMMIT');
     console.log('🌱 Seed successful!');
