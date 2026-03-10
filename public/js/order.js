@@ -443,7 +443,6 @@ function validateStep6(direction) {
     `;
 }
 
-
 function startNewOrder() {
 
     const form = document.querySelector("form");
@@ -497,6 +496,16 @@ function startNewOrder() {
     if (orderSummary !== null) {
         orderSummary.innerHTML = "";
     };
+
+    const orderListContainer = document.querySelector(".orderNow-list");
+    if (orderListContainer !== null) {
+      orderListContainer.innerHTML = "";
+    }
+
+    const orderTotalContainer = document.querySelector(".order-total");
+    if (orderTotalContainer !== null) {
+      orderTotalContainer.innerHTML = "Total: $0.00";
+    }
 
     goToStep("step1");
   }
