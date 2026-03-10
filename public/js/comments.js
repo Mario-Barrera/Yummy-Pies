@@ -39,9 +39,12 @@ async function loadComments() {
       const createdDate = new Date(comment.created_at).toLocaleDateString();
 
       div.innerHTML = `
-        <p><strong>${comment.user_name}</strong></p>
-        <p>${comment.comment}</p>
-        <small>${createdDate}</small>
+      <h3>Comment</h3>
+
+      <p>By: ${comment.user_name}</p>
+      
+      <p>${comment.comment}</p>
+      <p>Created: ${createdDate}</p>
       `;
 
       container.appendChild(div);
