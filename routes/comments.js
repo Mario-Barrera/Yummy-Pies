@@ -37,7 +37,7 @@ function isValidComment(value) {
 // GET /api/comments
 router.get('/', async function listComments(req, res, next) {
   try {
-    const { review_id } = req.body;
+    const { review_id } = req.query;
 
     const params = [];
     const where = [];
@@ -45,7 +45,7 @@ router.get('/', async function listComments(req, res, next) {
     if (review_id !== undefined) {
       const reviewid = Number(review_id);
 
-      if (!Number.isInteger(reviewid || reviewid <= 0)) {
+      if (!Number.isInteger(reviewid) || reviewid <= 0) {
         throw badRequest("Invalid review id");
       }
 

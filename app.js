@@ -44,9 +44,14 @@ app.get('/api/health', function (req, res) {
   });
 });
 
-// 404 handler for unknown routes
 app.use(function (req, res, next) {
-  const err = new Error('Route not found');
+  if (req.originalUrl.startsWith("/.well-known/")) {
+    return res.status(404).end();
+  }
+
+  console.log("UNMATCHED REQUEST:", req.method, req.originalUrl);
+
+  const err = new Error("Route not found");
   err.status = 404;
   next(err);
 });

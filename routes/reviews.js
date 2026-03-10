@@ -62,11 +62,13 @@ router.get('/', async function listReviews(req, res, next) {
         r.user_id,
         u.name AS user_name,                      -- u is an alias for users, this line of code also get renamed to user_name
         r.product_id,
+        p.name AS product_name,                   -- products table
         r.rating,
         r.review,
         r.created_at
       FROM reviews r
       JOIN users u ON u.user_id = r.user_id                   -- Join users table to reviews using matching user_id
+      JOIN products p ON p.product_id = r.product_id            -- 'p.product_id = r.product_id' is how to match rows between the two tables.
       ${where.length ? `WHERE ${where.join(' AND ')}` : ''}             -- Add WHERE clause only if conditions exist
       ORDER BY r.created_at DESC;
     `;
