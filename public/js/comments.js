@@ -41,10 +41,10 @@ async function loadComments() {
       div.innerHTML = `
       <h3>Comment</h3>
 
-      <p>By: ${comment.user_name}</p>
+      <p id="divName">By: ${comment.user_name}</p>
       
-      <p>${comment.comment}</p>
-      <p>Created: ${createdDate}</p>
+      <p class="divBody">${comment.comment}</p>
+      <p class="divBody">Created: ${createdDate}</p>
       `;
 
       container.appendChild(div);

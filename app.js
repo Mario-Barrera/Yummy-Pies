@@ -4,6 +4,7 @@ const express = require('express');                        // Loads the Express 
 
 // Import route modules from the routes directory
 const authRoutes = require('./routes/auth');
+const statusRoutes = require('./routes/user-status');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
 const userRoutes = require('./routes/users');
@@ -32,6 +33,7 @@ app.use(express.static('public'));
 // api/ prefix (optional, but recommended)
 // frontend file must call the correct backend URL
 app.use('/api/auth', authRoutes);
+app.use('/api/user-status', statusRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
