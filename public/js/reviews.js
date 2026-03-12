@@ -149,7 +149,7 @@ async function updateReview(reviewId, rating, review) {
   try {
     const response = await fetch(`/api/reviews/${id}`, {                              // associated code routes/reviews.js  lines 128 - 197
       method: "PATCH",
-      header: getAuthHeaders(),
+      headers: getAuthHeaders(),
       body: JSON.stringify(body)
     });
 
@@ -176,7 +176,7 @@ async function deleteReview(reviewId) {
   try {
     const response = await fetch(`/api/reviews/${reviewId}`, {                              // associated code: routes/reviews.js   lines 199 - 232
       method: "DELETE",
-      header: getAuthHeaders(),
+      headers: getAuthHeaders(),
     });
   
     const data = await safeJson(response);

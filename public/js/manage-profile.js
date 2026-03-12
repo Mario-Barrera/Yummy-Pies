@@ -1,3 +1,34 @@
+// Password validation function
+function validatePassword(password) {
+  const minLength = 8;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasDigit = /\d/.test(password);
+  const hasSpecialChar = /[\W_]/.test(password); // non-word character or underscore
+
+  if (password.length < minLength) {
+    return `Password must be at least ${minLength} characters long.`;
+  }
+
+  if (!hasUpperCase) {
+    return 'Password must contain at least one uppercase letter.';
+  }
+
+  if (!hasLowerCase) {
+    return 'Password must contain at least one lowercase letter.';
+  }
+
+  if (!hasDigit) {
+    return 'Password must contain at least one digit.';
+  }
+  
+  if (!hasSpecialChar) {
+    return 'Password must contain at least one special character.';
+  }
+
+  return null; // valid password
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const form = document.getElementById("manageProfileForm");
   const cancelBtn = document.getElementById("cancelButton");
@@ -36,17 +67,59 @@ document.addEventListener("DOMContentLoaded", async function () {
   function fillForm(user) {
     const { firstName, lastName } = splitName(user.name);
 
-    firstNameInput.value = firstName;
-    lastNameInput.value = lastName;
-    emailInput.value = user.email || "";
-    phoneInput.value = user.phone || "";
-    addressInput.value = user.address || "";
-    nameInput.value = user.name || "";
-    passwordInput.value = "";                         // clear password for security and user experience reasons
-  
-    if (passwordMessageDiv) {
+    if (firstNameInput) {
+      firstNameInput.value = firstName;
+    }
+
+    if (lastNameInput) {
+      lastNameInput.value = lastName;
+    }
+
+    if (emailInput) {
+      emailInput.value = user.email || "";
+    }
+
+    if (phoneInput) {
+      phoneInput.value = user.phone || "";
+    }
+
+    if (addressInput) {
+      addressInput.value = user.address || "";
+    }
+
+    if (nameInput) {                                        // this represents the full namne combinded
+      nameInput.value = user.name || "";
+    }
+
+    if (passwordInput) {
+      passwordInput.value = "";
+    }
+   
+    if (passwordMessageDiv) {                                   // associated code:  manage-profile.html   line 135
       passwordMessageDiv.textContent = "";
     }
+  }
+
+  if (passwordInput && passwordMessageDiv) {
+    passwordInput.addEventListener("input", function () {
+      const password = passwordInput.value.trim();
+
+      if (!password) {
+        passwordMessageDiv.textContent = "";
+        passwordMessageDiv.style.color = "red";
+        return;
+      }
+
+      const errorMessage = validatePassword(password);
+
+      if (errorMessage) {
+        passwordMessageDiv.textContent = errorMessage;
+        passwordMessageDiv.style.color = "red";
+      } else {
+        passwordMessageDiv.textContent = "Password looks good.";
+        passwordMessageDiv.style.color = "green";
+      }
+    });
   }
 
   try {
@@ -56,14 +129,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     });
 
-    const user = await response.json();
+    const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(user?.error || "Failed to load profile");
+      throw new Error(data?.error || "Failed to load profile");
     }
 
-    originalUser = user;
-    fillForm(user);
+    originalUser = data.user;
+    fillForm(data.user);
     
   } catch (err) {
     console.error("Error loading profile:", err);

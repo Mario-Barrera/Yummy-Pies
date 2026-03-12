@@ -93,6 +93,31 @@ router.patch('/me/password', requireAuth, async function (req, res, next) {
   }
 });
 
+// GET /api/me
+router.get("/me", requireAuth, async function (req, res, next) {
+  try {
+    const userId = req.user.user_id;
+
+    const { rows } = await db.query(
+      `SELECT name, email, phone, address
+      FROM users
+      WHERE user_id = $1`,
+      [userId]
+    );
+
+    if (!rows[0]) {
+      const err = new Error("User not found");
+      err.status = 404;
+      throw err;
+    }
+
+    return res.json({ user: rows[0] });
+
+  } catch (err) {
+    return next (err);
+  }
+});
+
 // GET /api/users — Admin only
 // get all users
 router.get('/', requireAuth, requireAdmin, async function (req, res, next) {                        //  '/' represents the root path of this router

@@ -37,7 +37,7 @@ function isValidReview(value) {
 
 // -------------------- ROUTES --------------------
 
-// GET /api/reviews
+// GET /api/reviews - all reviews on Customer Reviews Page
 router.get('/', async function listReviews(req, res, next) {
   try {
     const { product_id } = req.query;                         // Get product_id from request query
@@ -74,6 +74,37 @@ router.get('/', async function listReviews(req, res, next) {
     `;
 
     const { rows } = await db.query(sql, params);                       // executes the SQL query and extracts the returned rows from the database result
+    return res.json({ items: rows });
+
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// GET /api/reviews/me - fetch reviews and comments for individual users logged-in
+router.get("/me", requireAuth, async function (req, res, next) {
+  try {
+    const userId = req.user.user_id;
+
+    const { rows } = await db.query(
+      `SELECT
+        r.review_id,
+        r.user_id,
+        u.name AS user_name,
+        r.product_id,
+        p.name AS product_name,
+        r.rating,
+        r.review,
+        r.created_at
+      FROM reviews r
+      JOIN users u ON u.user_id = r.user_id
+      JOIN products p ON p.product_id = r.product_id
+      WHERE r.user_id = $1
+      ORDER BY r.created_at DESC
+      `,
+      [userId]
+    );
+
     return res.json({ items: rows });
 
   } catch (err) {
