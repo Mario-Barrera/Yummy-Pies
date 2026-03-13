@@ -1,5 +1,9 @@
 // passes the value of data.user into the function by using the parameter 'user'
 function populateProfileDisplay(user) {
+  if (!user) {
+    return;
+  }
+
   const profileName = document.getElementById("profile-name");
   const profileEmail = document.getElementById("profile-email");
   const profilePhone = document.getElementById("profile-phone");
@@ -25,6 +29,10 @@ function populateProfileDisplay(user) {
 }
 
 function populateProfileForm(user) {
+  if (!user) {
+    return;
+  }
+
   const manageForm = document.getElementById("manageProfileForm");
 
   if (!manageForm) {
@@ -85,7 +93,7 @@ async function loadUserProfile() {
       const message = data?.error || `Failed to load profile (status ${response.status}).`;
       console.error("Profile load failured:", message, data);
 
-      if (response.status === 400) {
+      if (response.status === 401) {                                              // 401 — Unauthorized
         alert("Your session has expired. Please log in again.");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -116,7 +124,7 @@ async function loadUserProfile() {
 
 async function loadUserReviews() {
   const container = document.getElementById("profile-reviews");
-  const token = localStorage.getItem("token");
+  const token = getToken();
 
   if (!container) {
     return;
@@ -128,13 +136,12 @@ async function loadUserReviews() {
 
   try {
     const response = await fetch("/api/reviews/me", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      method: "GET",
+      headers: getAuthHeaders()
     });
 
-    const data = await response.json();
-    const reviews = data.items || [];
+    const data = await safeJson(response);
+    const reviews = data?.items || [];
 
     if (!response.ok) {
       throw new Error(data?.error || "Failed to load your reviews.");
@@ -151,18 +158,25 @@ async function loadUserReviews() {
       const reviewDiv = document.createElement("div");
       reviewDiv.className = "review";
 
+      // performing data sanitization and validation
+      const rating = Number(review.rating) || 0;
+      const safeRating = Math.max(0, Math.min(5, rating));
+
       const createdAt = review.created_at ? new Date(review.created_at) : null;
-      const createdDate = createdAt ? createdAt.toLocaleDateString() : "Unknown date";
+      const createdDate = 
+        createdAt && !Number.isNaN(createdAt.getTime())                                   // check if createdAt is a valid data
+          ? createdAt.toLocaleDateString()
+          : "Unknown date";
 
       reviewDiv.innerHTML = `
         <h3>Product: ${review.product_name || "Unknown product"}</h3>
         <p>
-          <span class="filled-stars">${"★".repeat(review.rating || 0)}</span>
-          <span class="empty-stars">${"☆".repeat(5 - (review.rating || 0))}</span>
+          <span class="filled-stars">${"★".repeat(safeRating || 0)}</span>
+          <span class="empty-stars">${"☆".repeat(5 - (safeRating || 0))}</span>
         </p>
         <p>${review.review || "No review provided."}</p>
         <p>Created: ${createdDate}</p>
-        <p><a href="comments.html?reviewId=${review.review_id}">💬 View Comments</a></p>
+        <p><a href="comments.html?reviewId=${review.review_id}">View Comments</a></p>
       `;
 
       container.appendChild(reviewDiv);
@@ -177,8 +191,11 @@ async function loadUserReviews() {
 async function changePassword(event) {
   event.preventDefault();
 
-  const currentPassword = document.getElementById("current-password").value;
-  const newPassword = document.getElementById("new-password").value;
+  const currentPasswordInput = document.getElementById("current-password");
+  const newPasswordInput = document.getElementById("new-password");
+
+  const currentPassword = currentPasswordInput ? currentPasswordInput.value : "";
+  const newPassword = newPasswordInput ? newPasswordInput.value : "";
 
   try {
     const response = await fetch("/api/users/me/password", {
@@ -200,6 +217,14 @@ async function changePassword(event) {
 
     alert("Password updated successfully");
 
+    if (currentPasswordInput) {
+      currentPasswordInput.value = "";
+    } 
+
+    if (newPasswordInput) {
+      newPasswordInput.value = "";
+    }
+
   } catch (err) {
     console.error("Password update failed:", err);
     alert("Network error. Please try again.");
@@ -208,28 +233,13 @@ async function changePassword(event) {
 
 // fetches the user data from the backend, this data is displayed on the account profile page
 document.addEventListener("DOMContentLoaded", async function() {
-  try {
-    const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/users/me", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  loadUserProfile();
+  loadUserReviews();
+  
+  const changePasswordForm = document.getElementById("changePasswordForm");
 
-    const data = await response.json();
-
-    populateProfileDisplay(data.user);                      // data.user extracts the user object
-    populateProfileForm(data.user);
-    loadUserProfile();
-
-  } catch (err) {
-    console.error("Error loading profile:", err);
+  if (changePasswordForm) {
+    changePasswordForm.addEventListener("submit", changePassword);
   }
 });
-
-const changePasswordForm = document.getElementById("changePasswordForm");
-  
-if (changePasswordForm) {
-    changePasswordForm.addEventListener("submit", changePassword);
-}
