@@ -45,26 +45,26 @@ async function loadAllReviews() {
       const updatedDate = showUpdated ? updatedAt.toLocaleDateString() : null;
 
       reviewDiv.innerHTML = `
-      <h3>Product: ${cleanProductName}</h3>
+        <h3>Product: ${cleanProductName}</h3>
 
-      <p class="comment-container">
-        <a href="comments.html?reviewId=${review.review_id}">💬 Comments</a>
-        <!-- ? separates the page path from the query parameters -->       
-      </p>
+        <p class="comment-container">
+          <a href="comments.html?reviewId=${review.review_id}">💬 Comments</a>
+          <!-- ? separates the page path from the query parameters -->       
+        </p>
   
-      <p>By: ${review.user_name || "Anonymous"}</p>
+        <p>By: ${review.user_name || "Anonymous"}</p>
    
-      <p class="rating">
-      <span class="filled-stars">${'★'.repeat(review.rating || 0)}</span>
-      <span class="empty-stars">${'☆'.repeat(5 - (review.rating || 0))}</span>
-      <!-- 5 represents the maximum number of stars in the rating system -->
-      </p>
+        <p class="rating">
+          <span class="filled-stars">${'★'.repeat(review.rating || 0)}</span>
+          <span class="empty-stars">${'☆'.repeat(5 - (review.rating || 0))}</span>
+          <!-- 5 represents the maximum number of stars in the rating system -->
+        </p>
 
-      <p>Review: ${review.review || "No review provided"}</p>
+        <p>Review: ${review.review || "No review provided"}</p>
   
-      <p>Created: ${createdDate}</p>
-      ${updatedDate ? `<p>Updated: ${updatedDate}</p>` : ""}
-    `;
+        <p>Created: ${createdDate}</p>
+          ${updatedDate ? `<p>Updated: ${updatedDate}</p>` : ""}
+      `;
 
       container.appendChild(reviewDiv);
     });

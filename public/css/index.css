@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* default font for all text, vertical spacing */
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
@@ -18,22 +19,18 @@ body {
   height: 100vh;
   border-right: 1px solid #a19d9d;
   background-color: beige;
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-  padding-bottom: 20px;
 }
 
 .img-logo {
   display: block;
-  max-height: 120px;
+  max-height: 160px;
   width: auto;
   margin: 5px auto;
 }
 
 /* Navigation Links */
 .nav-links {
-  padding-left: 0;
+  padding-left: 10px;
   margin-top: 20px;
 }
 
@@ -46,9 +43,6 @@ body {
   text-decoration: none;
   padding-left: 10px;
   color: rgb(246, 160, 48);
-  display: inline-flex;
-  align-items: center;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
 .nav-links li a:hover,
@@ -69,7 +63,7 @@ body {
 }
 
 .connect p {
-  margin-bottom: 10px;
+  margin-top: 80px;
   font-weight: bold;
 }
 
@@ -89,15 +83,27 @@ body {
   transition: transform 0.2s;
 }
 
-.social-links i:hover {
+.social-links i:hover,
+.social-links i:focus {
   transform: scale(1.2);
 }
 
 /* Social Icon Colors */
-.fa-facebook { color: #4066b1; }
-.fa-instagram { color: #ea4490; }
-.fa-twitter { color: #029ef5; }
-.fa-pinterest { color: #cb1f27; }
+.fa-facebook { 
+  color: #4066b1; 
+}
+
+.fa-instagram { 
+  color: #ea4490; 
+}
+
+.fa-twitter { 
+  color: #029ef5; 
+}
+
+.fa-pinterest { 
+  color: #cb1f27; 
+}
 
 /* Layout */
 .layout {
@@ -109,7 +115,7 @@ body {
 .grid-container {
   display: grid;
   flex: 1;
-  grid-template-columns: 2fr 1fr; /* fixed comma issue */
+  grid-template-columns: 2fr 1fr; 
   grid-template-rows: repeat(2, 1fr);
   gap: 5px;
   padding: 5px;

@@ -11,12 +11,6 @@ body {
   background-color: #fff;
 }
 
-html, body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Sidebar & Logo */
 .sidebar {
   width: 100%;
@@ -24,10 +18,13 @@ html, body {
   height: 100vh;
   border-right: 1px solid #a19d9d;
   background-color: beige;
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-  padding-bottom: 20px;
+}
+
+.img-logo {
+  display: block;
+  max-height: 160px;
+  width: auto;
+  margin: 5px auto;
 }
 
 /* Navigation Links */
@@ -45,9 +42,6 @@ html, body {
   text-decoration: none;
   padding-left: 10px;
   color: rgb(246, 160, 48);
-  display: inline-flex;
-  align-items: center;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
 .nav-links li a:hover,
@@ -68,7 +62,7 @@ html, body {
 }
 
 .connect p {
-  margin-bottom: 10px;
+  margin-top: 80px;
   font-weight: bold;
 }
 
@@ -88,27 +82,32 @@ html, body {
   transition: transform 0.2s;
 }
 
-.social-links i:hover {
+.social-links i:hover,
+.social-links i:focus {
   transform: scale(1.2);
 }
 
 /* Social Icon Colors */
-.fa-facebook { color: #4066b1; }
-.fa-instagram { color: #ea4490; }
-.fa-twitter { color: #029ef5; }
-.fa-pinterest { color: #cb1f27; }
+.fa-facebook { 
+  color: #4066b1; 
+}
+
+.fa-instagram { 
+  color: #ea4490; 
+}
+
+.fa-twitter { 
+  color: #029ef5; 
+}
+
+.fa-pinterest { 
+  color: #cb1f27; 
+}
 
 /* Layout */
 .layout {
   flex: 1;
   display: flex;
-}
-
-.img-logo {
-  display: block;
-  max-height: 120px;
-  width: auto;
-  margin: 5px auto;
 }
 
 /* ------ MAIN CONTENT ------ */
@@ -139,7 +138,7 @@ html, body {
 }
 
 /* Login Instruction Text */
-.login-section p {
+.login-instructions {
     margin-bottom: 25px;
     color: #333;
     font-size: 1rem;
@@ -188,27 +187,28 @@ button[type="submit"] {
 button[type="submit"]:hover,
 button[type="submit"]:focus {
     background-color: #f0a500;
-    transform: translateY(-2px);
+    transform: translateY(-2px);                    /* slightly lifts the button on hover/focus */
 }
 
-form p {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 0.95rem;
-    color: #555;
+.signup-prompt {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
 }
 
-form p a {
-    color: rgb(246, 160, 48);
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
+.signup-prompt a {
+  color: rgb(246, 160, 48);
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: color 0.3s ease;
 }
 
-form p a:hover,
-form p a:focus {
-    text-decoration: underline;
-    color: #f0a500;
+.signup-prompt a:hover,
+.signup-prompt a:focus {
+  text-decoration: underline;
+  color: #f0a500;
 }
 
 /* Accessibility helper */
@@ -234,7 +234,7 @@ form p a:focus {
 #forgot-password:hover,
 #forgot-password:focus {     
     text-decoration: underline;
-    transform: translateY(-2px) scale(1.05);   
+    transform: scale(1.05);   
 }
 
 /* ------ FOOTER ------  */
@@ -251,52 +251,36 @@ form p a:focus {
 }
 
 /* Footer Form */
-footer form {
+.footer form {
   display: flex;
   flex-direction: column;
-  align-items: center;           /* center form elements horizontally */
-  flex: 0 1 auto;                /* form won’t grow too large */
+  align-items: center;         
+  flex: 0 1 auto;
 }
 
-footer form fieldset {
+.footer form fieldset {
   border: none;
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-footer form legend {     
+.footer form legend {     
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-footer form label {
-  display: none;                /* visually hidden for screen readers */
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
+  opacity: 0;
   width: 220px;
   background-color: #333;
   color: #fff;
   text-align: left;
   padding: 6px 10px;
   border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* above the icon */
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
   transition: opacity 0.3s;
-  font-size: 13px;
 }
 
 .tooltip:hover .tooltiptext {
@@ -305,7 +289,7 @@ footer form label {
 }
 
 .fa-circle-info { 
-    color: #f0a500;
+    color: #f0a500; 
 }
 
 #footer-email {
@@ -335,7 +319,6 @@ button[type="submit"]:focus {
   transform: scale(1.05);
 }
 
-/* Footer Links */
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -355,4 +338,3 @@ button[type="submit"]:focus {
   color: #f0a500;
   text-decoration: underline;
 }
-

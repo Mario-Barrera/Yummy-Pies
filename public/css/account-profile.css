@@ -11,28 +11,24 @@ body {
   background-color: #fff;
 }
 
-html, body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Sidebar & Logo */
 .sidebar {
   width: 100%;
   max-width: 225px;
-  height: 100vh;
   border-right: 1px solid #a19d9d;
   background-color: beige;
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-  padding-bottom: 20px;
+}
+
+.img-logo {
+  display: block;
+  max-height: 160px;
+  width: auto;
+  margin: 5px auto;
 }
 
 /* Navigation Links */
 .nav-links {
-  padding-left: 0;
+  padding-left: 10px;
   margin-top: 20px;
 }
 
@@ -45,9 +41,6 @@ html, body {
   text-decoration: none;
   padding-left: 10px;
   color: rgb(246, 160, 48);
-  display: inline-flex;
-  align-items: center;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
 .nav-links li a:hover,
@@ -68,7 +61,7 @@ html, body {
 }
 
 .connect p {
-  margin-bottom: 10px;
+  margin-top: 80px;
   font-weight: bold;
 }
 
@@ -88,15 +81,27 @@ html, body {
   transition: transform 0.2s;
 }
 
-.social-links i:hover {
+.social-links i:hover,
+.social-links i:focus {
   transform: scale(1.2);
 }
 
 /* Social Icon Colors */
-.fa-facebook { color: #4066b1; }
-.fa-instagram { color: #ea4490; }
-.fa-twitter { color: #029ef5; }
-.fa-pinterest { color: #cb1f27; }
+.fa-facebook { 
+  color: #4066b1; 
+}
+
+.fa-instagram { 
+  color: #ea4490; 
+}
+
+.fa-twitter { 
+  color: #029ef5; 
+}
+
+.fa-pinterest { 
+  color: #cb1f27; 
+}
 
 /* Layout */
 .layout {
@@ -104,54 +109,9 @@ html, body {
   display: flex;
 }
 
-.img-logo {
-  display: block;
-  max-height: 120px;
-  width: auto;
-  margin: 5px auto;
-}
-
-/* ------ Section Headings ------ */
-.main-profile-heading {
-    font-size: 2rem;
-    color: rgb(246, 160, 48);
-    margin-bottom: 10px;
-}
-
-.heading {
-    font-size: 1.2rem;
-    color: rgb(246, 160, 48);
-    margin-bottom: 10px;
-}
-
-/* ------ Navigation links ------ */
-.profile-navigation {
-  display: flex;
-  flex-direction: row;       
-  gap: 1rem;                 
-  justify-content: center;   		/* Center buttons inside nav */
-  width: 930px;
-  margin: 0 auto;            		/* Center nav block inside its parent */
-}
-
-.btn-link {
-  display: inline-block;
-  padding: 8px 15px;
-  background-color: #fff8f0;
-  color: #554134;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn-link:hover,
-.btn-link:focus {
-  background-color: #ffe6cc;
-}
-
 /* ------ Profile Info ------ */
 .profile-main {
-  max-width: 999px;
+  max-width: 62.5rem;
   padding: 10px;
   margin-left: 20px;
   margin-bottom: 40px;
@@ -159,7 +119,7 @@ html, body {
 
 .profile-info p {
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom:8px;
     color: #333;
 }
 
@@ -179,230 +139,59 @@ html, body {
   margin-bottom: 40px;
 }
 
-/* ------ Orders, Reviews, Comments ------ */
-.profile-orders,
-.profile-reviews,
-.profile-comments {
-    margin-top: 30px;
+/* ------ Navigation links ------ */
+.profile-navigation {
+  display: flex;
+  flex-direction: row;       
+  gap: 1rem;                 
+  width: 930px;
 }
 
-.orders-list,
-.reviews-list,
-.comments-list {
-    list-style: none;
+.btn-link {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: rgb(246, 160, 48);
+  color: black;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.orders-list,
-.reviews-list,
-.comments-list {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.btn-link:hover,
+.btn-link:focus {
+  background-color: #ffe6cc;
 }
 
-/* ---------- Order tables ------------ */
-#order-history {
+/* ------ Section Headings ------ */
+.main-profile-heading {
+  font-size: 2rem;
+  color: rgb(246, 160, 48);
+  margin-bottom: 10px;
+}
+
+.heading {
+  font-size: 1.2rem;
+  color: rgb(246, 160, 48);
+  margin-top: 30px;
+}
+
+/* ------ Order History, Written Reviews ------ */
+.profile-reviews-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-  gap: 20px;
-  padding: 0 2px;
 }
 
-/* Each order table */
-.order-table {
-  width: 100%;
-  margin: 0 auto;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border: 1px solid #ccc;
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  overflow: hidden;
-  border-radius: 6px;
-  table-layout: fixed;        /* fixes column widths */
-  border-collapse: collapse;  /* clean grid lines */
-}
-
-/* Table header with order number */
-.order-table thead th {
-  background-color: #bbd6ff;
-  color: black;
-  font-weight: bold;
-  padding: 10px;
-  text-align: center;
-}
-
-/* Header labels row */
-.order-table tbody tr:first-child th {
-  background-color: #f0f0f0;
-  font-weight: 600;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-/* Data values row */
-.order-table tbody tr:nth-child(2) td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-/* Items section header */
-.order-table tbody tr:nth-child(3) td {
-  padding: 10px 8px;
-  font-weight: 700;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Generic table cell styling */
-.order-table th,
-.order-table td {
-  white-space: normal;         /* allow wrapping inside cells */
-  overflow-wrap: break-word;
-  border: 1px solid #ccc;      /* grid lines */
-  padding: 6px 8px;            /* consistent padding */
-}
-
-/* Items sub-table */
-.items-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-}
-
-/* Items table headers */
-.items-table th {
-  background-color: #e9ecef;
-  font-weight: 600;
-  padding: 6px 8px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-/* Items table data cells */
-.items-table td {
-  padding: 6px 8px;
-  border: 1px solid #ddd;
-}
-
-.items-table th:nth-child(1),
-.items-table th:nth-child(2) {
-  color: black;
-}
-
-.items-table tr:hover {
-  background-color: #f1f7ff;
-  cursor: default;
-}
-
-#no-orderHistory-message {
-  text-align: left;
-  display: block;          /* p tags are block by default, but ensure this */
-  width: 100%;             /* makes sure it takes full container width */
-  margin: 0;               /* remove default margin if needed */
-  padding: 18px;              
-}
-
-/* ------------ REVIEW TABLE ------------ */
-.user-reviews-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #333;
-}
-
-.user-reviews-table th,
-.user-reviews-table td {
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  text-align: left;
-}
-
-.user-reviews-table th {
-  background-color: #bbd6ff;
-  color: black;
-  font-weight: 600px;
-}
-
-.user-reviews-table tr:hover {
-  background-color: #f1f7ff;
-  cursor: default;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-#no-reviewHistory-message {
-  text-align: left;
-  display: block;          /* p tags are block by default, but ensure this */
-  width: 100%;             /* makes sure it takes full container width */
-  margin: 0;               /* remove default margin if needed */
-  padding: 0;            
-}
-
-/* ---------- COMMENT TABLE ---------- */
-.horizontal-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #333;
-}
-
-.horizontal-table caption {
-  caption-side: top;
-  text-align: left;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 8px 0;
-  color: #000;
-}
-
-.horizontal-table th,
-.horizontal-table td {
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  text-align: left;
-}
-
-.horizontal-table th {
-  background-color: #bbd6ff;
-  color: black;
-  font-weight: 600px;
-}
-
-.horizontal-table tr:hover {
- background-color: #f1f7ff;
-  cursor: default;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-#no-commentHistory-message {
-  text-align: left;
-  display: block;          /* p tags are block by default, but ensure this */
-  width: 100%;             /* makes sure it takes full container width */
-  margin: 0;               /* remove default margin if needed */
-  padding: 0;            
+.orders-list,
+.reviews-list {
+  background-color: #fff8f0;
+  border: 1px solid #f0e6de;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* ------ FOOTER ------  */
@@ -419,52 +208,36 @@ html, body {
 }
 
 /* Footer Form */
-footer form {
+.footer form {
   display: flex;
   flex-direction: column;
-  align-items: center;           /* center form elements horizontally */
-  flex: 0 1 auto;                /* form won’t grow too large */
+  align-items: center;         
+  flex: 0 1 auto;
 }
 
-footer form fieldset {
+.footer form fieldset {
   border: none;
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-footer form legend {     
+.footer form legend {     
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-footer form label {
-  display: none;                /* visually hidden for screen readers */
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
+  opacity: 0;
   width: 220px;
   background-color: #333;
   color: #fff;
   text-align: left;
   padding: 6px 10px;
   border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* above the icon */
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
   transition: opacity 0.3s;
-  font-size: 13px;
 }
 
 .tooltip:hover .tooltiptext {
@@ -503,7 +276,6 @@ button[type="submit"]:focus {
   transform: scale(1.05);
 }
 
-/* Footer Links */
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -523,3 +295,4 @@ button[type="submit"]:focus {
   color: #f0a500;
   text-decoration: underline;
 }
+
