@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Toggle visibility of content
       content.hidden = isExpanded;
 
-      icon.textContent = isExpanded ? "+" : "-";
+      icon.textContent = isExpanded ? "+" : "x";
     });
 
   });
