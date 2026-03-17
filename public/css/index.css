@@ -28,6 +28,10 @@ body {
   margin: 5px auto;
 }
 
+.user-name {
+  margin-left: 10px;
+}
+
 /* Navigation Links */
 .nav-links {
   padding-left: 10px;

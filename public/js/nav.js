@@ -1,34 +1,48 @@
-async function renderGreeting() {
-  const greeting = document.getElementById("user-greeting");
+async function renderReviewInstructions() {
+  const reviewMessage = document.getElementById("review-message");
+  const loginMessage = document.getElementById("login-message");
+  const reviewGuidance = document.getElementById("review-guidance");
 
-  if (!greeting) return;
-
-  const nameElement = greeting.querySelector(".user-name");
+  if (!reviewMessage || !loginMessage || !reviewGuidance) {
+    return;
+  }
 
   try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("No token found");
+    }
+
     const response = await fetch("/api/user-status", {
-      credentials: "include",                                           // ensure auth cookies are sent with the request
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!response.ok) {
-      throw new Error("Unable to fetch user status")
+      throw new Error("Unable to fetch user status");
     }
 
     const data = await response.json();
 
-    if (!data.loggedIn) {                                       // loggedIn is a property of the data object
+    if (!data.loggedIn) {
       throw new Error("User not logged in");
     }
 
-    // Insert user name
-    if (nameElement) {
-      nameElement.textContent = `Welcome, ${data.user?.name || "User"}`;
-    }
+    reviewMessage.textContent = "We value our customers’ feedback. Read what they have to say about our products and services.";
 
-    greeting.style.display = "block";
+    loginMessage.style.display = "none";
+    reviewGuidance.style.display = "none";
 
   } catch (err) {
-    greeting.style.display = "none";
+    console.error("Render Review Instructions Error:", err);
+
+    reviewMessage.textContent =
+      "We value our customers’ feedback. Read what they have to say about our products and services. If you’re a registered user, feel free to share your own experience.";
+
+    loginMessage.style.display = "block";
+    reviewGuidance.style.display = "block";
   }
 }
 
@@ -43,3 +57,8 @@ function setupLogout() {
     localStorage.removeItem("user");
   });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderReviewInstructions();
+  setupLogout();
+});
