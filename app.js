@@ -8,7 +8,7 @@ const statusRoutes = require('./routes/user-status');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
 const userRoutes = require('./routes/users');
-const orderRoutes = require('/routes/orders');
+const orderRoutes = require('./routes/orders');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');

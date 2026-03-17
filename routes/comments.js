@@ -34,7 +34,7 @@ function isValidComment(value) {
 
 // -------------------- ROUTES --------------------
 
-// GET /api/comments
+// GET /api/comments - returns all comments
 router.get('/', async function listComments(req, res, next) {
   try {
     const { review_id } = req.query;
@@ -69,6 +69,38 @@ router.get('/', async function listComments(req, res, next) {
 
     const { rows } = await db.query(sql, params);
     return res.json({ items: rows });
+
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// GET /api/comments/me - fetch comments for logged-in user
+router.get("/me", requireAuth, async function (req, res, next) {
+  try {
+    const userId = req.user.user_id;
+
+    const { rows } = await db.query(
+      `SELECT
+        c.comment_id,
+        c.review_id,
+        c.user_id,
+        u.name AS user_name,
+        c.comment,
+        c.created_at,
+        r.review AS review_text,
+        p.name AS product_name
+      FROM comments c
+      JOIN users u ON u.user_id = c.user_id
+      JOIN reviews r ON r.review_id = c.review_id
+      JOIN products p ON p.product_id = r.product_id
+      WHERE c.user_id = $1
+      ORDER BY c.created_at DESC;
+    `,
+    [userId]
+  );
+
+  return res.json({ items: rows });
 
   } catch (err) {
     return next(err);

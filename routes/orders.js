@@ -32,7 +32,7 @@ function groupOrders(rows) {
         orders.set(row.order_id, order);                                   // adds the order object into Map
        }
 
-       if (row.order_item_id) {                                           // if the row contains a valid order item, add it to the order's item array
+       if (row.order_item_id !== null) {                                           // if the row contains a valid order item, add it to the order's item array
         order.items.push({
             order_item_id: row.order_item_id,
             product_id: row.product_id,

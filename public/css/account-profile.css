@@ -198,6 +198,11 @@ body {
   gap: 1.5rem;
 }
 
+.order-items {
+  list-style: none;
+  margin-left: 10px;
+}
+
 /* ------ FOOTER ------  */
 .footer {
   width: 100%;

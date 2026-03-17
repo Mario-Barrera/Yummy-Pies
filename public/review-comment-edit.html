@@ -25,7 +25,7 @@
     <meta name="twitter:site" content="@YummyPies1">
 
     <link rel="canonical" href="https://www.yummypies.com/edit-reviews-comments.html">
-    <link rel="stylesheet" type="text/css" href="css/review-edit.css">
+    <link rel="stylesheet" type="text/css" href="css/review-comment-edit.css">
     <link rel="stylesheet" type="text/css" href="css/user-greeting.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,6 +34,7 @@
     <script src="js/comments.js" defer></script>
     <script src="js/cart-items.js" defer></script>
     <script src="js/order.js" defer></script>
+    <script src="js/order-history.js" defer></script>
     <script src="js/nav.js" defer></script> 
     <script src="js/auth.js" defer></script>
     <script src="js/user-greeting.js" defer></script>
@@ -111,14 +112,14 @@
             <h2 class="main-profile-heading">Edit Reviews and Comments</h2>
             <section class="profile-reviews">
                 <h2 class="heading">Reviews</h2>
-                <ul id="user-reviews" class="reviews-list">
+                <div id="edit-reviews" class="reviews-list">
                     <!-- Reviews will be populated dynamically -->
-                </ul>
+                </div>
             </section>
 
             <section class="profile-comments">
                 <h2 class="heading">Comments</h2>
-                <div id="user-comments" class="comments-list">
+                <div id="edit-comments" class="comments-list">
                     <!-- Comments will be populated dynamically -->
                 </div>
             </section>
