@@ -8,6 +8,7 @@ const statusRoutes = require('./routes/user-status');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
 const userRoutes = require('./routes/users');
+const orderRoutes = require('/routes/orders');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -37,6 +38,7 @@ app.use('/api/user-status', statusRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Health check route
 // Verifies that your backend server is running and reachable
