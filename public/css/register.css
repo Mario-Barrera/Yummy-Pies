@@ -5,34 +5,36 @@
   box-sizing: border-box;
 }
 
+/* default font for all text, vertical spacing */
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   background-color: #fff;
 }
 
-html, body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Sidebar & Logo */
+/* Sidebar */
 .sidebar {
   width: 100%;
   max-width: 225px;
   height: 100vh;
   border-right: 1px solid #a19d9d;
   background-color: beige;
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-  padding-bottom: 20px;
+}
+
+.img-logo {
+  display: block;
+  max-height: 160px;
+  width: auto;
+  margin: 5px auto;
+}
+
+.user-name {
+  margin-left: 10px;
 }
 
 /* Navigation Links */
 .nav-links {
-  padding-left: 0;
+  padding-left: 10px;
   margin-top: 20px;
 }
 
@@ -45,9 +47,6 @@ html, body {
   text-decoration: none;
   padding-left: 10px;
   color: rgb(246, 160, 48);
-  display: inline-flex;
-  align-items: center;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
 .nav-links li a:hover,
@@ -68,7 +67,7 @@ html, body {
 }
 
 .connect p {
-  margin-bottom: 10px;
+  margin-top: 80px;
   font-weight: bold;
 }
 
@@ -88,15 +87,27 @@ html, body {
   transition: transform 0.2s;
 }
 
-.social-links i:hover {
+.social-links i:hover,
+.social-links i:focus {
   transform: scale(1.2);
 }
 
 /* Social Icon Colors */
-.fa-facebook { color: #4066b1; }
-.fa-instagram { color: #ea4490; }
-.fa-twitter { color: #029ef5; }
-.fa-pinterest { color: #cb1f27; }
+.fa-facebook { 
+  color: #4066b1; 
+}
+
+.fa-instagram { 
+  color: #ea4490; 
+}
+
+.fa-twitter { 
+  color: #029ef5; 
+}
+
+.fa-pinterest {
+  color: #cb1f27; 
+}
 
 /* Layout */
 .layout {
@@ -104,11 +115,15 @@ html, body {
   display: flex;
 }
 
-.img-logo {
-  display: block;
-  max-height: 120px;
-  width: auto;
-  margin: 5px auto;
+
+/* ------ MAIN CONTENT ------ */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: #fff6f0; 
+  display: flex;
+  justify-content: center;                /* center login form horizontally */
+  align-items: center;                    /* center login form vertically */
 }
 
 .heading {
@@ -119,49 +134,38 @@ html, body {
   text-align: center;
 }
 
-/* ------ MAIN CONTENT ------ */
-.main-content {
-    flex: 1;
-    padding: 40px;
-    background-color: #fff6f0; 
-    display: flex;
-    justify-content: center;                /* center login form horizontally */
-    align-items: center;                    /* center login form vertically */
-    min-height: calc(100vh - 40px);         /* ensures vertical centering on tall screens */
-}
-
 .register-section {
-    width: 100%;
-    max-width: 400px;
-    background-color: #ffffff;
-    padding: 35px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    text-align: center;
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .register-title {
-    font-size: 2rem;
-    color: rgb(246, 160, 48); 
-    margin-bottom: 20px;
+  font-size: 2rem;
+  color: rgb(246, 160, 48); 
+  margin-bottom: 20px;
 }
 
 /* Login Instruction Text */
 .register-section p {
-    margin-bottom: 25px;
-    color: #333;
-    font-size: 1rem;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1rem;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #first-name,
@@ -169,12 +173,12 @@ form {
 #email,
 #password,
 #confirm-password {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #first-name:focus,
@@ -182,59 +186,46 @@ form {
 #email:focus,
 #password:focus,
 #confirm-password:focus {
-    border-color: rgb(246, 160, 48);
-    box-shadow: 0 0 5px rgba(246, 160, 48, 0.5);
-    outline: none;
+  border-color: rgb(246, 160, 48);
+  box-shadow: 0 0 5px rgba(246, 160, 48, 0.5);
+  outline: none;
 }
 
-button[type="submit"] {
-    background-color: rgb(246, 160, 48);
-    color: #fff;
-    padding: 12px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+form button[type="submit"] {
+  background-color: rgb(246, 160, 48);
+  color: #fff;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
-    background-color: #f0a500;
-    transform: translateY(-2px);
+form button[type="submit"]:hover,
+form button[type="submit"]:focus {
+  background-color: #f0a500;
+  transform: scale(1.05);
 }
 
 form p {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 0.95rem;
-    color: #555;
+  margin-top: 15px;
+  text-align: center;
+  color: #555;
 }
 
 form p a {
-    color: rgb(246, 160, 48);
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: rgb(246, 160, 48);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 form p a:hover,
 form p a:focus {
-    text-decoration: underline;
-    color: #f0a500;
-}
-
-/* Accessibility helper */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  text-decoration: underline;
+  color: #f0a500;
 }
 
 /* ------ FOOTER ------  */
@@ -251,52 +242,36 @@ form p a:focus {
 }
 
 /* Footer Form */
-footer form {
+.footer form {
   display: flex;
   flex-direction: column;
-  align-items: center;           /* center form elements horizontally */
-  flex: 0 1 auto;                /* form won’t grow too large */
+  align-items: center;         
+  flex: 0 1 auto;
 }
 
-footer form fieldset {
+.footer form fieldset {
   border: none;
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-footer form legend {     
+.footer form legend {     
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-footer form label {
-  display: none;                /* visually hidden for screen readers */
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
+  opacity: 0;
   width: 220px;
   background-color: #333;
   color: #fff;
   text-align: left;
   padding: 6px 10px;
   border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* above the icon */
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
   transition: opacity 0.3s;
-  font-size: 13px;
 }
 
 .tooltip:hover .tooltiptext {
@@ -318,7 +293,7 @@ footer form label {
   margin-bottom: 10px;
 }
 
-button[type="submit"] {
+footer button[type="submit"] {
   padding: 8px 16px;
   font-size: 16px;
   background-color: rgb(246, 160, 48);
@@ -329,13 +304,12 @@ button[type="submit"] {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
+footer button[type="submit"]:hover,
+footer button[type="submit"]:focus {
   background-color: #f0a500;
   transform: scale(1.05);
 }
 
-/* Footer Links */
 .footer-links {
   display: flex;
   flex-direction: column;
