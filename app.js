@@ -1,9 +1,11 @@
-require('dotenv').config();                               // loads the dotenv library, which then loads the environment variables from the .env file into the process.env  process.env is a global configuration object provided by Node
+//This file builds our entire backend server. It doesn’t do the business logic itself—it connects all the pieces together: routes, middleware, and error handling.
 
-const express = require('express');                        // Loads the Express package from node_modules
+require('dotenv').config();                               // Environment setup (configuration)
+
+const express = require('express');                        // Loads the Express package from node_modules, Importing Express (the server engine)
 
 // Import route modules from the routes directory
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth');                   // From this file’s folder, go into routes, then load auth.js
 const statusRoutes = require('./routes/user-status');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
@@ -11,15 +13,9 @@ const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
 
 // Import middleware
-const errorHandler = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');         // Middleware import (error handling system)
 
-const app = express();                                    // Initializes an Express application, Calling the exported function,
-/* So app becomes a function that handles HTTP requests, with methods attached like:
-    app.use
-    app.get
-    app.post
-    app.listen
-*/
+const app = express();                                    // Initializes an Express application, Calling the exported function
 
 // Converts JSON request body into a JavaScript object (req.body)
 app.use(express.json());
@@ -48,9 +44,10 @@ app.get('/api/health', function (req, res) {
   });
 });
 
+// To catch requests that did not match any route and forward a 404 error to the centralized error handler
 app.use(function (req, res, next) {
   if (req.originalUrl.startsWith("/.well-known/")) {
-    return res.status(404).end();
+    return res.status(404);
   }
 
   console.log("UNMATCHED REQUEST:", req.method, req.originalUrl);
@@ -60,6 +57,8 @@ app.use(function (req, res, next) {
   next(err);
 });
 
+// Register (aka: activate) the imported function as Express middleware.
+// When an error happens, send it to the errorHandler middleware.
 app.use(errorHandler);
 
 module.exports = app;

@@ -21,3 +21,4 @@ export const images = {
   coconutCreamWhole: "https://tse3.mm.bing.net/th?id=OIP.9K9yvuUGyCZ1l_zrbAciGwHaE8&pid=Api&P=0",
   peachWhole: "https://i.pinimg.com/736x/01/82/ed/0182edd0e04c68c825822fe4581d294a.jpg",
 };
+// storing external URLs
