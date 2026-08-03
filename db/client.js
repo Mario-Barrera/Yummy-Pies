@@ -16,7 +16,7 @@ const pool = new Pool({                 // Creates a connection pool object
 // Listen for database connection errors and terminate the app if one occurs
 pool.on('error', function (err) {
   console.error('Unexpected error on idle client', err);
-  process.exit(-1);
+  process.exit(-1);                    // (-1) is the actual exit code
 });
 
 console.log('Database pool initialized');      // Log that the database pool has been initialized

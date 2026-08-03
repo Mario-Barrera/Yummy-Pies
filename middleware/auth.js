@@ -1,22 +1,15 @@
 // loads the jsonwebtoken library into your Node.js file.
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');                              // Go find the jsonwebtoken package inside node_modules and make it available to this file.
 
 // Middleware to require any logged-in user
 function requireAuth(req, res, next) {
 
-  if (req.session?.user) {
-    req.user = req.session.user;                // Check whether there is a session, and whether that session contains a user
-    return next();
-  }
-
   const authHeader = req.headers.authorization;           // Get the authorization information that the client sent with this request
   let token;
 
-  if (authHeader?.startsWith('Bearer')) {                         // If the request contains a Bearer token in the Authorization header, extract it
+  if (authHeader?.startsWith('Bearer ')) {                         // If the request contains a Bearer token in the Authorization header, extract it
     token = authHeader.split(' ')[1];                             // Otherwise, if there’s a token stored in cookies, use that instead
-  } else if (req.cookies?.token) {
-    token = req.cookies.token;
-  }
+  } 
 
   if (!token) {                                                     // 'return next(err) means - Stop normal processing and jump to the error-handling middleware
     const err = new Error('Unauthorized: No token provided');
@@ -50,7 +43,7 @@ function requireAdmin(req, res, next) {
     error.status = 403;
     return next(error);
   }
-  next();   // will continue to the routes
+  next();   // will continue to the routes or more middleware. It all depends on the middleware chain
 };
 
 module.exports = { requireAuth, requireAdmin };
