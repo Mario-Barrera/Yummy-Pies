@@ -1,233 +1,443 @@
-const express = require('express');                                   // loads the dotenv library, which then loads the environment variables from the .env file into the process.env  process.env is a global configuration object provided by Node
-const bcrypt = require('bcrypt');                                     // imports the bcrypt library used for password hashing
-const db = require('../db/client');                                   // creates and exports the database connection pool
-const { requireAuth, requireAdmin } = require('../middleware/auth');                // Import JWT authentication middleware
-const validatePassword = require('../utils/passwordValidator');       // Import password validation utility
+const express = require("express");
+const bcrypt = require("bcrypt");
+const db = require("../db/client");
+const { requireAuth, requireAdmin } = require("../middleware/auth");
+const validatePassword = require("../utils/passwordValidator");
 
 const router = express.Router();
 
-// PATCH /api/users/me — update profile information
-// JWT protection required
-router.patch('/me', requireAuth, async function (req, res, next) {
-  try{ 
-    const userId = req.user.user_id;                                  // req.user was set from JWT payload in middleware/auth.js
-    const {
-      name,
-      address,
-      phone
-    } = req.body;
+/**
+ * PATCH /api/users/me
+ * Update the logged-in user's profile.
+ */
+// requireAuth is authentication middleware that protects the route
+router.patch("/me", requireAuth, async function (req, res, next) {
+  try {
+    const userId = req.user.user_id;
+    const { name, address, phone } = req.body;
 
+    // values array stores the actual data submitted by the user:
+    const updates = [];
+    const values = [];
+
+    // Add only the fields provided by the user.
+    if (name !== undefined) {
+      if (
+        typeof name !== "string" || 
+        !name.trim() ||
+        name.trim().length > 100
+      ) {
+        const err = new Error("Name must be between 1 and 100 characters.");
+        err.status = 400;
+        return next(err);
+      }
+
+      values.push(name.trim());
+
+      // PostgreSQL parameter placeholder that points to the first item in values
+      updates.push(`name = $${values.length}`);
+    }
+
+    if (address !== undefined) {
+      if (typeof address !== "string" || !address.trim()) {
+        const err = new Error("Address must be a nonempty string.");
+        err.status = 400;
+        return next(err);
+      }
+
+      values.push(address.trim());
+
+      // PostgreSQL parameter placeholder that points to the first item in values
+      updates.push(`address = $${values.length}`);
+    }
+
+    if (phone !== undefined) {
+      if (typeof phone !== "string" || !phone.trim()) {
+        const err = new Error("Phone must be a nonempty string.");
+        err.status = 400;
+        return next(err);
+      }
+
+      values.push(phone.trim());
+
+      // PostgreSQL parameter placeholder that points to the first item in values
+      updates.push(`phone = $${values.length}`);
+    }
+
+    // Require at least one profile field.
+    if (updates.length === 0) {
+      const err = new Error(
+        "Provide at least one field: name, address, or phone.",
+      );
+      err.status = 400;
+      return next(err);
+    }
+
+    // Add the user ID as the final SQL parameter.
+    values.push(userId);
+
+    // this actually sends and executes the SQL query against your PostgreSQL database
+    // Extract only the returned rows from the query result.
+    // SET specifies which columns should change and their new values; the clause is built dynamically.
     const { rows } = await db.query(
-      `UPDATE users
-      SET name = $1, address = $2, phone = $3
-      WHERE user_id = $4
-      RETURNING user_id, name, email, address, phone, role, created_at`,
-      [name, address, phone, userId]
+      `
+        UPDATE users
+        SET ${updates.join(", ")}
+        WHERE user_id = $${values.length}
+        RETURNING
+          user_id,
+          name,
+          email,
+          address,
+          phone,
+          role,
+          created_at;
+      `,
+      values,
     );
 
-    return res.json({ user: rows[0] });
+    const user = rows[0];
 
+    if (!user) {
+      const err = new Error("User not found.");
+      err.status = 404;
+      return next(err);
+    }
+
+    return res.status(200).json({
+      message: "Profile updated successfully.",
+      user,
+    });
   } catch (err) {
     return next(err);
   }
 });
 
-// PATCH /api/users/me/password
-// JWT protection required
-router.patch('/me/password', requireAuth, async function (req, res, next) {
+/**
+ * PATCH /api/users/me/password
+ * Change the logged-in user's password.
+ */
+// requireAuth is authentication middleware that protects the route
+router.patch("/me/password", requireAuth, async function (req, res, next) {
   try {
-    const {
-      currentPassword,
-      newPassword
-    } = req.body;
-
-    if (!currentPassword || !newPassword) {
-      const err = new Error("Current password and new password are required");
-      err.status = 400;
-      return next(err);
-    }
-
-    //Validate new password strength
-    if (!validatePassword(newPassword)) {
-      const err = new Error("New password does not meet requirements");
-      err.status = 400;
-      return next(err);
-    }
-
     const userId = req.user.user_id;
+    const { currentPassword, newPassword } = req.body;
 
-    // Fetch current hashed password
+    // Validate required password fields.
+    if (
+      typeof currentPassword !== "string" ||
+      typeof newPassword !== "string" ||
+      !currentPassword ||
+      !newPassword
+    ) {
+      const err = new Error("Current password and new password are required.");
+      err.status = 400;
+      return next(err);
+    }
+
+    // Validate the strength of the new password.
+    // newPassword is an argument.
+    if (!validatePassword(newPassword)) {
+      const err = new Error(
+        "New password does not meet the password requirements.",
+      );
+      err.status = 400;
+      return next(err);
+    }
+
+    // Retrieve the user's stored password hash.
+    // Extract only the returned rows from the query result.
     const { rows } = await db.query(
-      `SELECT password FROM users WHERE user_id = $1`,
-      [userId]
+      `
+        SELECT user_id, password
+        FROM users
+        WHERE user_id = $1
+        LIMIT 1;
+      `,
+      [userId],
     );
 
     const userRow = rows[0];
+
     if (!userRow) {
-      const err = new Error("User not found");
-      err.status = 404;                                         // 404 Not found
+      const err = new Error("User not found.");
+      err.status = 404;
       return next(err);
     }
 
-    // Verify current password
-    const ok = await bcrypt.compare(currentPassword, userRow.password);
-    if (!ok) {
-      const err = new Error("Current password is incorrect");
-      err.status = 401;                                                         // 401 Unauthorized
-      return next(err);
-    }
-
-    // Hash new password
-    const hashed = await bcrypt.hash(newPassword, 12);
-
-    // No variable assignment needed — we only need the update to execute
-    await db.query(
-      `UPDATE users SET password = $1 WHERE user_id = $2`,
-      [hashed, userId]
+    // Verify the user's current password.
+    const currentPasswordMatches = await bcrypt.compare(
+      currentPassword,
+      userRow.password,
     );
 
-    return res.json({ ok: true });                                            // simple confirmation
-    
+    if (!currentPasswordMatches) {
+      const err = new Error("Current password is incorrect.");
+      err.status = 401;
+      return next(err);
+    }
+
+    // Prevent the user from reusing the current password.
+    // .compare() is a method provided by bcrypty
+    const samePassword = await bcrypt.compare(newPassword, userRow.password);
+
+    if (samePassword) {
+      const err = new Error(
+        "New password must be different from the current password.",
+      );
+      err.status = 400;
+      return next(err);
+    }
+
+    // Hash and save the new password.
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+   // Update the password; no returned rows are needed, so no variable is required.
+   // SET specifies which column should change and what its new value should be.
+   // Change the password column to the value represented by $1
+    await db.query(
+      `
+        UPDATE users
+        SET password = $1
+        WHERE user_id = $2;
+      `,
+      [hashedPassword, userId],
+    );
+
+    return res.status(200).json({
+      message: "Password updated successfully.",
+    });
   } catch (err) {
     return next(err);
   }
 });
 
-// GET /api/me
+/**
+ * GET /api/users/me
+ * Get the logged-in user's profile.
+ */
+// requireAuth is authentication middleware that protects the route
 router.get("/me", requireAuth, async function (req, res, next) {
   try {
     const userId = req.user.user_id;
 
+    // Extract only the returned rows from the query result.
     const { rows } = await db.query(
-      `SELECT name, email, phone, address
-      FROM users
-      WHERE user_id = $1`,
-      [userId]
+      `
+        SELECT
+          user_id,
+          name,
+          email,
+          phone,
+          address,
+          role,
+          created_at
+        FROM users
+        WHERE user_id = $1
+        LIMIT 1;
+      `,
+      [userId],
     );
 
-    if (!rows[0]) {
-      const err = new Error("User not found");
+    const user = rows[0];
+
+    if (!user) {
+      const err = new Error("User not found.");
       err.status = 404;
-      throw err;
+      return next(err);
     }
 
-    return res.json({ user: rows[0] });
-
-  } catch (err) {
-    return next (err);
-  }
-});
-
-// GET /api/users — Admin only
-// get all users
-router.get('/', requireAuth, requireAdmin, async function (req, res, next) {                        //  '/' represents the root path of this router
-  try {
-    const { rows } = await db.query(
-      `SELECT user_id, name, email, address, phone, role, created_at FROM users                     // FROM users: this SQL statement fetches all rows from the users table
-      ORDER BY created_at DESC`                                                                     // 'DESC' SQL keyword meaning descending sort order
-    );
-
-    return res.json({ users: rows});
-
+    // uses { user } to send the user’s data back to the client as JSON.
+    return res.status(200).json({ user });
   } catch (err) {
     return next(err);
   }
 });
 
-// GET /api/users/:id - Admin only
-router.get('/:id', requireAuth, requireAdmin, async function (req, res, next) {
+/**
+ * GET /api/users
+ * Get all users. Admin only.
+ */
+// Authentication and admin-authorization middleware protect this route.
+router.get("/", requireAuth, requireAdmin, async function (req, res, next) {
+  try {
+    // Extract only the returned rows from the query result.
+    const { rows } = await db.query(`
+        SELECT
+          user_id,
+          name,
+          email,
+          address,
+          phone,
+          role,
+          is_active,
+          created_at
+        FROM users
+        ORDER BY created_at DESC;
+      `);
+
+    return res.status(200).json({
+      users: rows,
+    });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/**
+ * GET /api/users/:id
+ * Get one user by ID. Admin only.
+ */
+// Authentication and admin-authorization middleware protect this route.
+// ":id" is a dynamic route parameter containing the user's ID.
+router.get("/:id", requireAuth, requireAdmin, async function (req, res, next) {
   try {
     const id = Number(req.params.id);
+
+    // Validate the route parameter.
     if (!Number.isInteger(id) || id <= 0) {
-      const error = new Error("Invalid user id");
-      error.status = 400;
-      throw error;
+      const err = new Error("Invalid user ID.");
+      err.status = 400;
+      return next(err);
     }
 
+    // Extract only the returned rows from the query result.
     const { rows } = await db.query(
-      `SELECT
-        user_id,
-        name,
-        email,
-        address,
-        phone,
-        role,
-        created_at
-      FROM users
-      WHERE user_id = $1`,
-      [id]
+      `
+          SELECT
+            user_id,
+            name,
+            email,
+            address,
+            phone,
+            role,
+            is_active,
+            created_at
+          FROM users
+          WHERE user_id = $1
+          LIMIT 1;
+        `,
+      [id],
     );
 
-    if (!rows[0]) {
-      const error = new Error("User not found");
-      error.status = 404;
-      throw error;
-    }
+    const user = rows[0];
 
-    return res.json({ user: rows[0]});
-
-  } catch (err) {
-    return next(err);
-  }
-});
-
-// PATCH /api/users/:id/role
-router.patch('/:id/role', requireAuth, requireAdmin, async function (req, res, next) {
-  try {
-    const id = Number(req.params.id);
-    const { row } = req.body;
-
-    if (!['user', 'admin'].includes(role)) {                          // checks if the role is NOT user and NOT admin
-      const error = new Error("Invalid role");
-      error.status = 400;
-      throw error;
-    }
-
-    const { rows } =  await db.query(
-      `UPDATE users
-      SET role = $1
-      WHERE user_id = $2
-      RETURNING user_id, name, email, role`,
-      [role, id]
-    );
-
-    if (!rows[0]) {
-      const error = new Error("User not foud");
-      error.status = 404                                            // 404 Not found
-      throw error;
-    }
-
-    return res.json({ user: rows[0] });
-
-  } catch (err) {
-    return next(err);
-  }
-});
-
-// DELETE /api/users/:id - Admin only
-router.delete('/:id', requireAuth, requireAdmin, async function (req, res, next) {
-  try {
-    const id = Number(req.params.id);
-
-    const { rows } = await db.query(
-      `UPDATE users
-      SET is_active = false
-      WHERE user_id = $1
-      RETURNING user_id`,
-      [id]
-    );
-
-    if (!rows[0]) {
-      const err = new Error('User not found');
+    if (!user) {
+      const err = new Error("User not found.");
       err.status = 404;
-      throw err;
+      return next(err);
     }
 
-    return res.json({ deactivated: true });
-
+    return res.status(200).json({ user });
   } catch (err) {
     return next(err);
   }
 });
+
+/**
+ * PATCH /api/users/:id/role
+ * Change a user's role. Admin only.
+ */
+// Authentication and admin-authorization middleware protect this route.
+router.patch("/:id/role", requireAuth, requireAdmin, async function (req, res, next) {
+    try {
+      const id = Number(req.params.id);
+      const { role } = req.body;
+
+      // Validate the route parameter.
+      if (!Number.isInteger(id) || id <= 0) {
+        const err = new Error("Invalid user ID.");
+        err.status = 400;
+        return next(err);
+      }
+
+      // Allow only supported roles.
+      // .includes(role) method checks whether the role value exists inside that array
+      if (!["customer", "admin"].includes(role)) {
+        const err = new Error('Role must be either "customer" or "admin".');
+        err.status = 400;
+        return next(err);
+      }
+
+      // Extract only the returned rows from the query result.
+      // SET specifies which column should change and what its new value should be.
+      const { rows } = await db.query(
+        `
+          UPDATE users
+          SET role = $1
+          WHERE user_id = $2
+          RETURNING
+            user_id,
+            name,
+            email,
+            role,
+            is_active;
+        `,
+        [role, id],
+      );
+
+      const user = rows[0];
+
+      if (!user) {
+        const err = new Error("User not found.");
+        err.status = 404;
+        return next(err);
+      }
+
+      return res.status(200).json({
+        message: "User role updated successfully.",
+        user,
+      });
+    } catch (err) {
+      return next(err);
+    }
+  },
+);
+
+/**
+ * DELETE /api/users/:id
+ * Soft-delete a user by deactivating the account. Admin only.
+ */
+// Authentication and admin-authorization middleware protect this route.
+router.delete("/:id", requireAuth, requireAdmin, async function (req, res, next) {
+    try {
+      const id = Number(req.params.id);
+
+      // Validate the route parameter.
+      if (!Number.isInteger(id) || id <= 0) {
+        const err = new Error("Invalid user ID.");
+        err.status = 400;
+        return next(err);
+      }
+
+      // Extract only the returned rows from the query result.
+      // SET specifies which column should change and what its new value should be.
+      const { rows } = await db.query(
+        `
+          UPDATE users
+          SET is_active = false
+          WHERE user_id = $1
+          RETURNING user_id, name, email, role, is_active;
+        `,
+        [id],
+      );
+
+      const user = rows[0];
+
+      if (!user) {
+        const err = new Error("User not found.");
+        err.status = 404;
+        return next(err);
+      }
+
+      return res.status(200).json({
+        message: "User deactivated successfully.",
+        user,
+      });
+    } catch (err) {
+      return next(err);
+    }
+  },
+);
 
 module.exports = router;

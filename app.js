@@ -1,50 +1,41 @@
-//This file builds our entire backend server. It doesn’t do the business logic itself—it connects all the pieces together: routes, middleware, and error handling.
+require('dotenv').config();                               
 
-require('dotenv').config();                               // Environment setup (configuration)
+const express = require('express');                        
 
-const express = require('express');                        // Loads the Express package from node_modules, Importing Express (the server engine)
-
-// Import route modules from the routes directory
-const authRoutes = require('./routes/auth');                   // From this file’s folder, go into routes, then load auth.js
-const statusRoutes = require('./routes/user-status');
+const authRoutes = require('./routes/auth');   
+const commentRoutes = require('./routes/comments');  
+const orderRoutes = require('./routes/orders');              
 const reviewRoutes = require('./routes/reviews');
-const commentRoutes = require('./routes/comments');
 const userRoutes = require('./routes/users');
-const orderRoutes = require('./routes/orders');
 
-// Import middleware
-const errorHandler = require('./middleware/errorHandler');         // Middleware import (error handling system)
+const errorHandler = require('./middleware/errorHandler');         
 
-const app = express();                                    // Initializes an Express application, Calling the exported function
+const app = express(); 
 
-// Converts JSON request body into a JavaScript object (req.body)
+// Parse incoming JSON request bodies.
 app.use(express.json());
 
-// Middleware to parse URL-encoded form data (from HTML forms)
+// Parse URL-encoded form data.
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from "public" BEFORE routes
+// Serve static files from the public folder.
 app.use(express.static('public'));
 
-// Mount routes, meaning: connects route modules into the main app
-// api/ prefix (optional, but recommended)
-// frontend file must call the correct backend URL
+// Mount API routes.
 app.use('/api/auth', authRoutes);
-app.use('/api/user-status', statusRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Health check route
-// Verifies that your backend server is running and reachable
+// Health-check endpoint.
 app.get('/api/health', function (req, res) {
   res.json({ 
     status: 'ok' 
   });
 });
 
-// To catch requests that did not match any route and forward a 404 error to the centralized error handler
+// Handle requests that do not match an existing route.
 app.use(function (req, res, next) {
   if (req.originalUrl.startsWith("/.well-known/")) {
     return res.status(404);
@@ -57,8 +48,7 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// Register (aka: activate) the imported function as Express middleware.
-// When an error happens, send it to the errorHandler middleware.
+// Centralized error handler.
 app.use(errorHandler);
 
 module.exports = app;

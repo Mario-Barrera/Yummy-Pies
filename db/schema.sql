@@ -1,14 +1,14 @@
 -- Users table (registered accounts)
--- 255 is standard for storing hashed passwords (like bcrypt hashes)
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL CHECK (char_length(name) BETWEEN 4 AND 100),
+    name VARCHAR(100) NOT NULL CHECK (char_length(TRIM(name)) BETWEEN 1 AND 100),
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    address VARCHAR(100),
-    phone VARCHAR(20),
-    role VARCHAR(20) CHECK (role IN ('customer', 'admin')) DEFAULT 'customer',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP     -- postgreSQL automatically generates the timestamp
+    address TEXT NOT NULL CHECK (char_length(TRIM(address)) >= 1),
+    phone TEXT NOT NULL CHECK (char_length(TRIM(phone)) >= 1),
+    role VARCHAR(20) NOT NULL CHECK (role IN ('customer', 'admin')) DEFAULT 'customer',
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP     -- postgreSQL automatically generates the timestamp
 );
 
 -- Products table
@@ -62,7 +62,6 @@ CREATE TABLE order_items (
 -- Create index to improve performance when querying by product (e.g., sales stats or inventory tracking)
 CREATE INDEX idx_order_items_order_id ON order_items(order_id);
 CREATE INDEX idx_order_items_product_id ON order_items(product_id);
-
 
 -- Reviews table
 CREATE TABLE reviews (

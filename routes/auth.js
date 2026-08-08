@@ -10,8 +10,10 @@ const router = express.Router();
 // Public route: no JWT protection required (user does not have a token yet)
 router.post("/register", async function (req, res, next) {
   try {
+    // Get registration data from the request body.
     const { name, email, password, address, phone } = req.body;
 
+    // Confirm that all required fields were provided.
     if (!name || !email || !password || !address || !phone) {
       const err = new Error(
         "Name, email, password, address, and phone are required.",
@@ -20,82 +22,148 @@ router.post("/register", async function (req, res, next) {
       return next(err);
     }
 
-    // check if email already exist
+    // Standardize the email before searching or storing it.
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Check whether the email is already registered.
     const existing = await db.query(
-      `SELECT user_id FROM users WHERE email = $1`,
-      [email],
+      `
+        SELECT user_id
+        FROM users
+        WHERE email = $1;
+      `,
+      [normalizedEmail],
     );
 
     if (existing.rows.length > 0) {
-      const err = new Error("Email is already registered");
+      const err = new Error("Email is already registered.");
       err.status = 409;
       return next(err);
     }
 
-    const hashed = await bcrypt.hash(password, 12);
-    // A salt is a random string added to a password before hashing
-    // This line converts the user’s plain-text password into a secure bcrypt hash before storing it in the database
+    // Hash the password before storing it.
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Add a new row to the users table
-    // This code builds the SQL instruction and stores it as a string in insertSQL. By itself, it does not communicate with the database.
+    // Create the new customer and return safe user fields.
     const insertSQL = `
-      INSERT INTO users (name, email, password, address, phone, role)         
+      INSERT INTO users (
+        name,
+        email,
+        password,
+        address,
+        phone,
+        role
+      )
       VALUES ($1, $2, $3, $4, $5, 'customer')
-      RETURNING user_id, name, email, address, phone, role, created_at;    
+      RETURNING
+        user_id,
+        name,
+        email,
+        address,
+        phone,
+        role,
+        created_at;
     `;
 
+    // Execute the INSERT query.
     const { rows } = await db.query(insertSQL, [
-      name,
-      email,
-      hashed,
-      address,
-      phone,
+      name.trim(),
+      normalizedEmail,
+      hashedPassword,
+      address.trim(),
+      phone.trim(),
     ]);
-    const user = rows[0];
-    // These two lines execute the SQL command and retrieve the newly created user
 
-    // This code creates a JSON Web Token (JWT) for the newly registered or logged-in user and stores it in the variable token.
+    const user = rows[0];
+
+    // Confirm that the JWT secret is configured.
+    if (!process.env.JWT_SECRET) {
+      const err = new Error("JWT_SECRET is not configured.");
+      err.status = 500;
+      return next(err);
+    }
+
+    // Create a token for the newly registered user.
     const token = jwt.sign(
-      { user_id: user.user_id, role: user.role, email: user.email },
+      {
+        user_id: user.user_id,
+        role: user.role,
+      },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" },
+      {
+        expiresIn: "1h",
+      },
     );
 
-    return res.status(201).json({ user, token });
-    // This line sends a successful response back to the frontend after the new user has been registered.
+    // Send the new user and token to the frontend.
+    return res.status(201).json({
+      message: "Account created successfully.",
+      user,
+      token,
+    });
   } catch (err) {
+    // Forward unexpected errors to the error handler.
     return next(err);
-    // passes that error to Express’s error-handling middleware, such as your errorHandler.js
   }
 });
+
 
 // POST /api/auth/login
 // Public route: no JWT protection required (user does not have a token yet)
 router.post("/login", async function (req, res, next) {
   try {
+    // Get login credentials.
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      const err = new Error("Email and password are required");
+    // Validate the required fields and their data types.
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email.trim() ||
+      !password
+    ) {
+      const err = new Error("Email and password are required.");
       err.status = 400;
       return next(err);
     }
 
-    // password will be hashed
+    // Match the email format used during registration.
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Retrieve the user and stored password hash.
     const { rows } = await db.query(
-      `SELECT user_id, name, email, password, role, address, phone FROM users WHERE email = $1`,
-      [email],
+      `
+        SELECT
+          user_id,
+          name,
+          email,
+          password,
+          role,
+          address,
+          phone
+        FROM users
+        WHERE email = $1
+          AND is_active = true
+        LIMIT 1;
+      `,
+      [normalizedEmail],
     );
 
+    // Get the first user returned by the database query.
     const userRow = rows[0];
+
+    // Use the same message whether the email or password is incorrect.
     if (!userRow) {
-      const err = new Error("Invalid email or password");
+      const err = new Error("Invalid email or password.");
       err.status = 401;
       return next(err);
     }
 
-    // Compare the submitted password with the stored password hash
-    const passwordMatches = await bcrypt.compare(password, userRow.password);
+    // Compare the submitted password with the stored bcrypt hash.
+    const passwordMatches = await bcrypt.compare(
+      password,                   // plain-text password the user just entered in the login form
+      userRow.password,           // bcrypt password hash stored in the database
+    );
 
     if (!passwordMatches) {
       const err = new Error("Invalid email or password.");
@@ -103,51 +171,87 @@ router.post("/login", async function (req, res, next) {
       return next(err);
     }
 
-   // Create a safe user object without the password
-    const { password: storedPassword, ...safeUser } = userRow;
-    // takes the password property from userRow and places its value into a new variable named storedPassword
-    // Since password was already taken out and placed into storedPassword, it is not included in safeUser
+    // Create a response object that excludes the password hash.
+    const safeUser = {
+      user_id: userRow.user_id,
+      name: userRow.name,
+      email: userRow.email,
+      role: userRow.role,
+      address: userRow.address,
+      phone: userRow.phone,
+    };
 
-    // Make sure JWT_SECRET is configured
-    // The JWT secret must be configured because your server uses it to sign and verify tokens.
+    // Confirm that the JWT signing secret exists.
     if (!process.env.JWT_SECRET) {
       const err = new Error("JWT_SECRET is not configured.");
       err.status = 500;
       return next(err);
     }
 
-    // Create a token for the authenticated user
+    // Create an authentication token.
     const token = jwt.sign(
       {
         user_id: safeUser.user_id,
         role: safeUser.role,
-        email: safeUser.email,
       },
       process.env.JWT_SECRET,
       {
         expiresIn: "1h",
-      }
+      },
     );
 
-    return res.json({ user: safeUser, token });
+    // Return the authenticated user and token.
+    return res.status(200).json({
+      message: "Login successful.",
+      user: safeUser,
+      token,
+    });
   } catch (err) {
+    // Forward unexpected errors to the error handler.
     return next(err);
   }
 });
 
+
 // GET /api/auth/me  — current user's profile (admin or customer)
 // JWT protection required
+// requireAuth is authentication middleware that protects the route
 router.get("/me", requireAuth, async function (req, res, next) {
   try {
+    // Get the authenticated user's ID from the verified JWT.
     const userId = req.user.user_id;
 
+    // Retrieve the currently logged-in user's safe account information.
     const { rows } = await db.query(
-      "SELECT user_id, name, email, address, phone, role, created_at FROM users WHERE user_id = $1",
+      `
+        SELECT
+          user_id,
+          name,
+          email,
+          address,
+          phone,
+          role,
+          created_at
+        FROM users
+        WHERE user_id = $1
+          AND is_active = true
+        LIMIT 1;
+      `,
       [userId],
     );
-    // Execute the SQL query and retrieve the currently logged-in user's information
 
-    return res.json({ user: rows[0] });
+    // Get the first user returned by the database query.
+    const user = rows[0];
+
+    // Handle a valid token that belongs to a deleted or missing user.
+    if (!user) {
+      const err = new Error("User not found.");
+      err.status = 404;
+      return next(err);
+    }
+
+    // Return the currently authenticated user.
+    return res.status(200).json({ user });
   } catch (err) {
     return next(err);
   }
